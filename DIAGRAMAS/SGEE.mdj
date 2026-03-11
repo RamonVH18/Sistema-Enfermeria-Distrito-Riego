@@ -13806,7 +13806,7 @@
 													"top": 1070,
 													"width": 98.5126953125,
 													"height": 13,
-													"text": "fechaRegistro",
+													"text": "fechaCreacion",
 													"horizontalAlignment": 0
 												},
 												{
@@ -20410,8 +20410,7 @@
 									"_parent": {
 										"$ref": "AAAAAAGcwXhdl99vVko="
 									},
-									"name": "fechaRegistro",
-									"type": ""
+									"name": "fechaCreacion"
 								},
 								{
 									"_type": "UMLAttribute",
@@ -25098,7 +25097,7 @@
 																	"top": 1402,
 																	"width": 223.60595703125,
 																	"height": 13,
-																	"text": "-fechaRegistro: Date",
+																	"text": "-fechaCreacion: DateTime",
 																	"horizontalAlignment": 0
 																},
 																{
@@ -25219,13 +25218,47 @@
 																	"height": 13,
 																	"text": "-diagnostico: Diagnostico",
 																	"horizontalAlignment": 0
+																},
+																{
+																	"_type": "UMLAttributeView",
+																	"_id": "AAAAAAGc2/4QSxeQyBA=",
+																	"_parent": {
+																		"$ref": "AAAAAAGcuNy/SiSMBgg="
+																	},
+																	"model": {
+																		"$ref": "AAAAAAGc2/4QRBd+2Zo="
+																	},
+																	"font": "Arial;13;0",
+																	"left": 1517,
+																	"top": 1522,
+																	"width": 223.60595703125,
+																	"height": 13,
+																	"text": "-enfermero: Enfermero",
+																	"horizontalAlignment": 0
+																},
+																{
+																	"_type": "UMLAttributeView",
+																	"_id": "AAAAAAGc2/4yCBjtcrs=",
+																	"_parent": {
+																		"$ref": "AAAAAAGcuNy/SiSMBgg="
+																	},
+																	"model": {
+																		"$ref": "AAAAAAGc2/4yAxjb/1M="
+																	},
+																	"font": "Arial;13;0",
+																	"left": 1517,
+																	"top": 1537,
+																	"width": 223.60595703125,
+																	"height": 13,
+																	"text": "-perfil: PerfilMedico",
+																	"horizontalAlignment": 0
 																}
 															],
 															"font": "Arial;13;0",
 															"left": 1512,
 															"top": 1382,
 															"width": 233.60595703125,
-															"height": 143
+															"height": 173
 														},
 														{
 															"_type": "UMLOperationCompartmentView",
@@ -25248,7 +25281,7 @@
 																	},
 																	"font": "Arial;13;0",
 																	"left": 1517,
-																	"top": 1530,
+																	"top": 1560,
 																	"width": 223.60595703125,
 																	"height": 13,
 																	"text": "+getters()",
@@ -25265,7 +25298,7 @@
 																	},
 																	"font": "Arial;13;0",
 																	"left": 1517,
-																	"top": 1545,
+																	"top": 1575,
 																	"width": 223.60595703125,
 																	"height": 13,
 																	"text": "+setters()",
@@ -25274,7 +25307,7 @@
 															],
 															"font": "Arial;13;0",
 															"left": 1512,
-															"top": 1525,
+															"top": 1555,
 															"width": 233.60595703125,
 															"height": 38
 														},
@@ -25316,7 +25349,7 @@
 													"left": 1512,
 													"top": 1344,
 													"width": 232.60595703125,
-													"height": 219,
+													"height": 249,
 													"nameCompartment": {
 														"$ref": "AAAAAAGcuNy/SiSH27w="
 													},
@@ -29789,7 +29822,7 @@
 																	"top": 1090,
 																	"width": 224.9833984375,
 																	"height": 13,
-																	"text": "-numeroSeguridadSocial: String",
+																	"text": "-numeroSeguridadSocial: int",
 																	"horizontalAlignment": 0
 																},
 																{
@@ -31248,7 +31281,7 @@
 															"visible": false,
 															"font": "Arial;13;0",
 															"left": 1497,
-															"top": 1582,
+															"top": 1612,
 															"height": 13,
 															"alpha": -0.5235987755982988,
 															"distance": 30,
@@ -31268,7 +31301,7 @@
 															"visible": false,
 															"font": "Arial;13;0",
 															"left": 1483,
-															"top": 1585,
+															"top": 1615,
 															"height": 13,
 															"alpha": -0.7853981633974483,
 															"distance": 40,
@@ -31287,7 +31320,7 @@
 															},
 															"font": "Arial;13;0",
 															"left": 1521,
-															"top": 1578,
+															"top": 1608,
 															"width": 7.22998046875,
 															"height": 13,
 															"alpha": 0.5235987755982988,
@@ -31337,7 +31370,7 @@
 													"tail": {
 														"$ref": "AAAAAAGc203yM8iJQbU="
 													},
-													"points": "1403:1632;1512:1632;1512:1563",
+													"points": "1403:1632;1512:1632;1512:1593",
 													"showVisibility": true,
 													"nameLabel": {
 														"$ref": "AAAAAAGc206w1tjZEeU="
@@ -32220,7 +32253,7 @@
 															"visible": false,
 															"font": "Arial;13;0",
 															"left": 1612,
-															"top": 1622,
+															"top": 1637,
 															"height": 13,
 															"alpha": 1.5707963267948966,
 															"distance": 15,
@@ -32241,7 +32274,7 @@
 															"visible": null,
 															"font": "Arial;13;0",
 															"left": 1597,
-															"top": 1622,
+															"top": 1637,
 															"height": 13,
 															"alpha": 1.5707963267948966,
 															"distance": 30,
@@ -32262,7 +32295,7 @@
 															"visible": false,
 															"font": "Arial;13;0",
 															"left": 1641,
-															"top": 1623,
+															"top": 1638,
 															"height": 13,
 															"alpha": -1.5707963267948966,
 															"distance": 15,
@@ -32347,7 +32380,7 @@
 															"visible": false,
 															"font": "Arial;13;0",
 															"left": 1612,
-															"top": 1582,
+															"top": 1612,
 															"height": 13,
 															"alpha": -0.5235987755982988,
 															"distance": 30,
@@ -32367,7 +32400,7 @@
 															"visible": false,
 															"font": "Arial;13;0",
 															"left": 1598,
-															"top": 1585,
+															"top": 1615,
 															"height": 13,
 															"alpha": -0.7853981633974483,
 															"distance": 40,
@@ -32386,7 +32419,7 @@
 															},
 															"font": "Arial;13;0",
 															"left": 1636,
-															"top": 1578,
+															"top": 1608,
 															"width": 7.22998046875,
 															"height": 13,
 															"alpha": 0.5235987755982988,
@@ -32436,7 +32469,7 @@
 													"tail": {
 														"$ref": "AAAAAAGc21KzL5ZJGTM="
 													},
-													"points": "1627:1696;1627:1563",
+													"points": "1627:1696;1627:1593",
 													"showVisibility": true,
 													"nameLabel": {
 														"$ref": "AAAAAAGc21Pg3r3HXMc="
@@ -33239,9 +33272,9 @@
 													"_parent": {
 														"$ref": "AAAAAAGcuNy/SSSEx/c="
 													},
-													"name": "fechaRegistro",
+													"name": "fechaCreacion",
 													"visibility": "private",
-													"type": "Date"
+													"type": "DateTime"
 												},
 												{
 													"_type": "UMLAttribute",
@@ -33315,6 +33348,30 @@
 													"visibility": "private",
 													"type": {
 														"$ref": "AAAAAAGc21KzL5ZH/qM="
+													}
+												},
+												{
+													"_type": "UMLAttribute",
+													"_id": "AAAAAAGc2/4QRBd+2Zo=",
+													"_parent": {
+														"$ref": "AAAAAAGcuNy/SSSEx/c="
+													},
+													"name": "enfermero",
+													"visibility": "private",
+													"type": {
+														"$ref": "AAAAAAGcrHZ5MyPKJPs="
+													}
+												},
+												{
+													"_type": "UMLAttribute",
+													"_id": "AAAAAAGc2/4yAxjb/1M=",
+													"_parent": {
+														"$ref": "AAAAAAGcuNy/SSSEx/c="
+													},
+													"name": "perfil",
+													"visibility": "private",
+													"type": {
+														"$ref": "AAAAAAGc2z+Bur8wPmI="
 													}
 												}
 											],
@@ -33767,7 +33824,7 @@
 													},
 													"name": "numeroSeguridadSocial",
 													"visibility": "private",
-													"type": "String"
+													"type": "int"
 												},
 												{
 													"_type": "UMLAttribute",
