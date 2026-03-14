@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.distritoRiego</groupId>
-	<artifactId>ServiciosEnfermeria</artifactId>
+	<artifactId>ApiEnfermeria</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>ServiciosEnfermeria</name>
+	<name>ApiEnfermeria</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
 	<licenses>
