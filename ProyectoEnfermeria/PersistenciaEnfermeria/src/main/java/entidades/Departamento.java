@@ -18,14 +18,59 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "Departamento")
 public class Departamento {
-    
+
     @Id
-    @Column
+    @Column(name = "id_departamento")
     private Integer id;
-    
+
     @Column(name = "nombre", nullable = false)
     private String nombre;
+
+    @OneToOne
+    @JoinColumn(name = "id_jefe_departamento")
+    private JefeDepartamento jefeDepartamento;
+
+    public Departamento() {
+    }
+
+    public Departamento(Integer id, String nombre, JefeDepartamento jefeDepartamento) {
+        this.id = id;
+        this.nombre = nombre;
+        this.jefeDepartamento = jefeDepartamento;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public JefeDepartamento getJefeDepartamento() {
+        return jefeDepartamento;
+    }
+
+    public void setJefeDepartamento(JefeDepartamento jefeDepartamento) {
+        this.jefeDepartamento = jefeDepartamento;
+    }
+
+    @Override
+    public String toString() {
+        return "Departamento{" + 
+                "id=" + id + 
+                ", nombre=" + nombre + 
+                ", jefeDepartamento=" + jefeDepartamento + 
+                '}';
+    }
+
     
-    @OneToOne(mappedBy = "departamento")
-    private JefeDepartamento jefe;
 }

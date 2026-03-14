@@ -38,7 +38,73 @@ public class DireccionEmpleado {
     public DireccionEmpleado() {
     }
 
-    
-    
+    public DireccionEmpleado(Integer id, int numero, String calle, String municipio, int cp, String ciudad) {
+        this.id = id;
+        this.numero = numero;
+        this.calle = calle;
+        this.municipio = municipio;
+        this.cp = cp;
+        this.ciudad = ciudad;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public int getNumero() {
+        return numero;
+    }
+
+    public void setNumero(int numero) {
+        this.numero = numero;
+    }
+
+    public String getCalle() {
+        return calle;
+    }
+
+    public void setCalle(String calle) {
+        this.calle = calle;
+    }
+
+    public String getMunicipio() {
+        return municipio;
+    }
+
+    public void setMunicipio(String municipio) {
+        this.municipio = municipio;
+    }
+
+    public int getCp() {
+        return cp;
+    }
+
+    public void setCp(int cp) {
+        this.cp = cp;
+    }
+
+    public String getCiudad() {
+        return ciudad;
+    }
+
+    public void setCiudad(String ciudad) {
+        this.ciudad = ciudad;
+    }
+
+    @Override
+    public String toString() {
+        return "DireccionEmpleado{" + 
+                "id=" + id + 
+                ", numero=" + numero + 
+                ", calle=" + calle + 
+                ", municipio=" + municipio + 
+                ", cp=" + cp + 
+                ", ciudad=" + ciudad + 
+                '}';
+    }
     
 }
