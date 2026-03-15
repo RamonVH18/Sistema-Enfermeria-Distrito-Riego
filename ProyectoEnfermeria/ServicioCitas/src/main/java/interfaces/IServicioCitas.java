@@ -7,7 +7,7 @@ import request.CrearCitaRequest;
 
 /**
  *
- * @author PC WHITE WOLF
+ * @author Leonardo Flores Leyva - 252390
  */
 public interface IServicioCitas {
     

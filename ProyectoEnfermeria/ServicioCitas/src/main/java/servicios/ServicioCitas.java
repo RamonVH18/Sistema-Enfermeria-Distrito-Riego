@@ -9,14 +9,15 @@ import request.CrearCitaRequest;
 
 /**
  *
- * @author Leonardo Flores Leyva
+ * @author Leonardo Flores Leyva - 252390
  */
 @Service
 public class ServicioCitas implements IServicioCitas{
 
     @Override
     public CitaDTO guardarCita(CrearCitaRequest request) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        
+        return null;
     }
 
     @Override

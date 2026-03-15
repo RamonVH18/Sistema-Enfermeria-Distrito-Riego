@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package dtos;
 
 import enums.EstadoCita;
@@ -10,6 +6,7 @@ import java.time.LocalDateTime;
 /**
  *
  * @author Ramon Valencia
+ * @author Leonardo Flores Leyva - 252390
  */
 public class CitaDTO {
 
@@ -24,13 +21,19 @@ public class CitaDTO {
     private Integer idEmpleado;
     private Integer idEnfermero;
 
-    public CitaDTO() {
-    }
+    public CitaDTO() {}
 
     // Constructor completo para mapeos desde la Entidad
-    public CitaDTO(Integer idCita, LocalDateTime fechaHora, Integer duracionMin,
-            EstadoCita estado, String motivo, Integer idSerie,
-            Integer idEmpleado, Integer idEnfermero) {
+    public CitaDTO(
+            Integer idCita, 
+            LocalDateTime fechaHora, 
+            Integer duracionMin,
+            EstadoCita estado, 
+            String motivo, 
+            Integer idSerie,
+            Integer idEmpleado, 
+            Integer idEnfermero
+    ) {
         this.idCita = idCita;
         this.fechaHora = fechaHora;
         this.duracionMin = duracionMin;
@@ -42,69 +45,37 @@ public class CitaDTO {
     }
 
     // Getters y Setters
-    public Integer getIdCita() {
-        return idCita;
-    }
+    public Integer getIdCita() {return idCita;}
 
-    public void setIdCita(Integer idCita) {
-        this.idCita = idCita;
-    }
+    public void setIdCita(Integer idCita) {this.idCita = idCita;}
 
-    public LocalDateTime getFechaHora() {
-        return fechaHora;
-    }
+    public LocalDateTime getFechaHora() {return fechaHora;}
 
-    public void setFechaHora(LocalDateTime fechaHora) {
-        this.fechaHora = fechaHora;
-    }
+    public void setFechaHora(LocalDateTime fechaHora) {this.fechaHora = fechaHora;}
 
-    public Integer getDuracionMin() {
-        return duracionMin;
-    }
+    public Integer getDuracionMin() {return duracionMin;}
 
-    public void setDuracionMin(Integer duracionMin) {
-        this.duracionMin = duracionMin;
-    }
+    public void setDuracionMin(Integer duracionMin) {this.duracionMin = duracionMin;}
 
-    public EstadoCita getEstado() {
-        return estado;
-    }
+    public EstadoCita getEstado() {return estado;}
 
-    public void setEstado(EstadoCita estado) {
-        this.estado = estado;
-    }
+    public void setEstado(EstadoCita estado) {this.estado = estado;}
 
-    public String getMotivo() {
-        return motivo;
-    }
+    public String getMotivo() {return motivo;}
 
-    public void setMotivo(String motivo) {
-        this.motivo = motivo;
-    }
+    public void setMotivo(String motivo) {this.motivo = motivo;}
 
-    public Integer getIdSerie() {
-        return idSerie;
-    }
+    public Integer getIdSerie() {return idSerie;}
 
-    public void setIdSerie(Integer idSerie) {
-        this.idSerie = idSerie;
-    }
+    public void setIdSerie(Integer idSerie) {this.idSerie = idSerie;}
 
-    public Integer getIdEmpleado() {
-        return idEmpleado;
-    }
+    public Integer getIdEmpleado() {return idEmpleado;}
 
-    public void setIdEmpleado(Integer idEmpleado) {
-        this.idEmpleado = idEmpleado;
-    }
+    public void setIdEmpleado(Integer idEmpleado) {this.idEmpleado = idEmpleado;}
 
-    public Integer getIdEnfermero() {
-        return idEnfermero;
-    }
+    public Integer getIdEnfermero() {return idEnfermero;}
 
-    public void setIdEnfermero(Integer idEnfermero) {
-        this.idEnfermero = idEnfermero;
-    }
+    public void setIdEnfermero(Integer idEnfermero) {this.idEnfermero = idEnfermero;}
 
     @Override
     public String toString() {
