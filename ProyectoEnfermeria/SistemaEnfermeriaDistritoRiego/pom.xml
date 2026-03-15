@@ -9,6 +9,7 @@
         <module>../PresentacionEnfermeria</module>
         <module>../ApiEnfermeria</module>
         <module>../DominioEnfermeria</module>
+        <module>../PersistenciaEnfermeria</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
