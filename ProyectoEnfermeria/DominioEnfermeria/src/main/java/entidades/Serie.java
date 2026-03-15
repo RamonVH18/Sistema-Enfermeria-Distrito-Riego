@@ -4,8 +4,11 @@
  */
 package entidades;
 
+import enums.PeriodoCita;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import java.time.LocalDate;
@@ -16,29 +19,36 @@ import java.time.LocalTime;
  * @author Ramon Valencia
  */
 @Entity
-@Table(name = "Serie")
+@Table(name = "series")
 public class Serie {
-    
+
     @Id
-    @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    
+
     @Column(name = "periodo", nullable = false)
-    private String periodo;
-    
+    private PeriodoCita periodo;
+
     @Column(name = "fecha_inicio", nullable = false)
     private LocalDate fechaInicio;
-    
+
     @Column(name = "fecha_fin", nullable = false)
     private LocalDate fechaFin;
-    
+
     @Column(name = "hora", nullable = false)
     private LocalTime hora;
 
     public Serie() {
     }
 
-    public Serie(Integer id, String periodo, LocalDate fechaInicio, LocalDate fechaFin, LocalTime hora) {
+    public Serie(PeriodoCita periodo, LocalDate fechaInicio, LocalDate fechaFin, LocalTime hora) {
+        this.periodo = periodo;
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
+        this.hora = hora;
+    }
+
+    public Serie(Integer id, PeriodoCita periodo, LocalDate fechaInicio, LocalDate fechaFin, LocalTime hora) {
         this.id = id;
         this.periodo = periodo;
         this.fechaInicio = fechaInicio;
@@ -54,11 +64,11 @@ public class Serie {
         this.id = id;
     }
 
-    public String getPeriodo() {
+    public PeriodoCita getPeriodo() {
         return periodo;
     }
 
-    public void setPeriodo(String periodo) {
+    public void setPeriodo(PeriodoCita periodo) {
         this.periodo = periodo;
     }
 
@@ -88,14 +98,13 @@ public class Serie {
 
     @Override
     public String toString() {
-        return "Serie{" + 
-                "id=" + id + 
-                ", periodo=" + periodo + 
-                ", fechaInicio=" + fechaInicio + 
-                ", fechaFin=" + fechaFin + 
-                ", hora=" + hora + 
-                '}';
+        return "Serie{"
+                + "id=" + id
+                + ", periodo=" + periodo
+                + ", fechaInicio=" + fechaInicio
+                + ", fechaFin=" + fechaFin
+                + ", hora=" + hora
+                + '}';
     }
-    
-    
+
 }

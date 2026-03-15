@@ -7,6 +7,8 @@ package entidades;
 import enums.EstadoCita;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -18,22 +20,25 @@ import java.time.LocalDateTime;
  * @author Ramon Valencia
  */
 @Entity
-@Table(name = "Cita")
+@Table(name = "citas")
 public class Cita {
-    
+
     @Id
-    @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id_cita;
-    
+
     @Column(name = "fecha_hora", nullable = false)
     private LocalDateTime fecha_hora;
-    
+
+    @Column(name = "duracionMin", nullable = false)
+    private Integer duracionMin;
+
     @Column(name = "estado", nullable = false)
     private EstadoCita estado;
-    
+
     @Column(name = "motivo", nullable = false)
     private String motivo;
-    
+
     @ManyToOne
     @JoinColumn(name = "id_serie")
     private Serie serie;
@@ -49,9 +54,20 @@ public class Cita {
     public Cita() {
     }
 
-    public Cita(Integer id_cita, LocalDateTime fecha_hora, EstadoCita estado, String motivo, Serie serie, Empleado empleado, Enfermero enfermero) {
+    public Cita(LocalDateTime fecha_hora, Integer duracionMin, EstadoCita estado, String motivo, Serie serie, Empleado empleado, Enfermero enfermero) {
+        this.fecha_hora = fecha_hora;
+        this.duracionMin = duracionMin;
+        this.estado = estado;
+        this.motivo = motivo;
+        this.serie = serie;
+        this.empleado = empleado;
+        this.enfermero = enfermero;
+    }
+
+    public Cita(Integer id_cita, LocalDateTime fecha_hora, Integer duracionMin, EstadoCita estado, String motivo, Serie serie, Empleado empleado, Enfermero enfermero) {
         this.id_cita = id_cita;
         this.fecha_hora = fecha_hora;
+        this.duracionMin = duracionMin;
         this.estado = estado;
         this.motivo = motivo;
         this.serie = serie;
@@ -73,6 +89,14 @@ public class Cita {
 
     public void setFecha_hora(LocalDateTime fecha_hora) {
         this.fecha_hora = fecha_hora;
+    }
+
+    public Integer getDuracionMin() {
+        return duracionMin;
+    }
+
+    public void setDuracionMin(Integer duracionMin) {
+        this.duracionMin = duracionMin;
     }
 
     public EstadoCita getEstado() {
@@ -117,16 +141,16 @@ public class Cita {
 
     @Override
     public String toString() {
-        return "Cita{" + 
-                "id_cita=" + id_cita + 
-                ", fecha_hora=" + fecha_hora + 
-                ", estado=" + estado + 
-                ", motivo=" + motivo + 
-                ", serie=" + serie + 
-                ", empleado=" + empleado + 
-                ", enfermero=" + enfermero + 
-                '}';
+        return "Cita{"
+                + "id_cita=" + id_cita
+                + ", fecha_hora=" + fecha_hora
+                + ", duracionMin=" + duracionMin
+                + ", estado=" + estado
+                + ", motivo=" + motivo
+                + ", serie=" + serie
+                + ", empleado=" + empleado
+                + ", enfermero=" + enfermero
+                + '}';
     }
-    
-    
+
 }

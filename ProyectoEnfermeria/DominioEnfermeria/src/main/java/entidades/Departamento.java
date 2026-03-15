@@ -6,6 +6,8 @@ package entidades;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
@@ -16,11 +18,11 @@ import jakarta.persistence.Table;
  * @author Ramon Valencia
  */
 @Entity
-@Table(name = "Departamento")
+@Table(name = "departamentos")
 public class Departamento {
 
     @Id
-    @Column(name = "id_departamento")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = "nombre", nullable = false)
@@ -31,6 +33,11 @@ public class Departamento {
     private JefeDepartamento jefeDepartamento;
 
     public Departamento() {
+    }
+
+    public Departamento(String nombre, JefeDepartamento jefeDepartamento) {
+        this.nombre = nombre;
+        this.jefeDepartamento = jefeDepartamento;
     }
 
     public Departamento(Integer id, String nombre, JefeDepartamento jefeDepartamento) {
@@ -65,12 +72,11 @@ public class Departamento {
 
     @Override
     public String toString() {
-        return "Departamento{" + 
-                "id=" + id + 
-                ", nombre=" + nombre + 
-                ", jefeDepartamento=" + jefeDepartamento + 
-                '}';
+        return "Departamento{"
+                + "id=" + id
+                + ", nombre=" + nombre
+                + ", jefeDepartamento=" + jefeDepartamento
+                + '}';
     }
 
-    
 }

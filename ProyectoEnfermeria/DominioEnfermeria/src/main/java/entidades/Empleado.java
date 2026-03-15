@@ -6,6 +6,8 @@ package entidades;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -20,11 +22,11 @@ import java.util.List;
  * @author Ramon Valencia
  */
 @Entity
-@Table(name = "Empleado")
+@Table(name = "empleados")
 public class Empleado {
 
     @Id
-    @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = "nombres", nullable = false)
@@ -66,6 +68,21 @@ public class Empleado {
     private List<Cita> citas;
 
     public Empleado() {
+    }
+
+    public Empleado(String nombres, String apellidoPaterno, String apellidoMaterno, LocalDate fechaNacimiento, String telefono, String curp, String unidadTrabajo, String genero, String estado, Departamento departamento, DireccionEmpleado direccion, List<Cita> citas) {
+        this.nombres = nombres;
+        this.apellidoPaterno = apellidoPaterno;
+        this.apellidoMaterno = apellidoMaterno;
+        this.fechaNacimiento = fechaNacimiento;
+        this.telefono = telefono;
+        this.curp = curp;
+        this.unidadTrabajo = unidadTrabajo;
+        this.genero = genero;
+        this.estado = estado;
+        this.departamento = departamento;
+        this.direccion = direccion;
+        this.citas = citas;
     }
 
     public Empleado(Integer id, String nombres, String apellidoPaterno, String apellidoMaterno, LocalDate fechaNacimiento, String telefono, String curp, String unidadTrabajo, String genero, String estado, Departamento departamento, DireccionEmpleado direccion) {
@@ -177,6 +194,25 @@ public class Empleado {
 
     public void setDireccion(DireccionEmpleado direccion) {
         this.direccion = direccion;
+    }
+
+    @Override
+    public String toString() {
+        return "Empleado{"
+                + "id=" + id
+                + ", nombres=" + nombres
+                + ", apellidoPaterno=" + apellidoPaterno
+                + ", apellidoMaterno=" + apellidoMaterno
+                + ", fechaNacimiento=" + fechaNacimiento
+                + ", telefono=" + telefono
+                + ", curp=" + curp
+                + ", unidadTrabajo=" + unidadTrabajo
+                + ", genero=" + genero
+                + ", estado=" + estado
+                + ", departamento=" + departamento
+                + ", direccion=" + direccion
+                + ", citas=" + citas
+                + '}';
     }
 
 }

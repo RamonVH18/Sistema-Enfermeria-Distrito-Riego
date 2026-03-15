@@ -6,6 +6,8 @@ package entidades;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -14,28 +16,37 @@ import jakarta.persistence.Table;
  * @author Ramon Valencia
  */
 @Entity
-@Table(name = "DireccionEmpleado")
+@Table(name = "direcciones_Empleado")
 public class DireccionEmpleado {
+
     @Id
-    @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    
-    @Column (name = "numero", nullable = false)
+
+    @Column(name = "numero", nullable = false)
     private int numero;
-    
-    @Column (name = "calle", nullable = false)
+
+    @Column(name = "calle", nullable = false)
     private String calle;
-    
-    @Column (name = "municipio", nullable = false)
+
+    @Column(name = "municipio", nullable = false)
     private String municipio;
-    
-    @Column (name = "codigo_postal", nullable = false)
+
+    @Column(name = "codigo_postal", nullable = false)
     private int cp;
-    
-    @Column (name = "ciudad", nullable = false)
+
+    @Column(name = "ciudad", nullable = false)
     private String ciudad;
 
     public DireccionEmpleado() {
+    }
+
+    public DireccionEmpleado(int numero, String calle, String municipio, int cp, String ciudad) {
+        this.numero = numero;
+        this.calle = calle;
+        this.municipio = municipio;
+        this.cp = cp;
+        this.ciudad = ciudad;
     }
 
     public DireccionEmpleado(Integer id, int numero, String calle, String municipio, int cp, String ciudad) {
@@ -97,14 +108,14 @@ public class DireccionEmpleado {
 
     @Override
     public String toString() {
-        return "DireccionEmpleado{" + 
-                "id=" + id + 
-                ", numero=" + numero + 
-                ", calle=" + calle + 
-                ", municipio=" + municipio + 
-                ", cp=" + cp + 
-                ", ciudad=" + ciudad + 
-                '}';
+        return "DireccionEmpleado{"
+                + "id=" + id
+                + ", numero=" + numero
+                + ", calle=" + calle
+                + ", municipio=" + municipio
+                + ", cp=" + cp
+                + ", ciudad=" + ciudad
+                + '}';
     }
-    
+
 }
