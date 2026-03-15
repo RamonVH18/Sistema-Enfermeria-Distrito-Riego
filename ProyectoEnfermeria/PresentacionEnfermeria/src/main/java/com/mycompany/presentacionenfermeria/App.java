@@ -16,8 +16,13 @@ public class App extends Application {
     private static Scene scene;
 
     @Override
-    public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("primary"), 640, 480);
+    public void start(Stage stage) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("/vistas/citas.fxml"));
+        Scene scene = new Scene(root);
+
+        // Vinculamos el CSS
+        scene.getStylesheets().add(getClass().getResource("/styles/style.css").toExternalForm());
+
         stage.setScene(scene);
         stage.show();
     }

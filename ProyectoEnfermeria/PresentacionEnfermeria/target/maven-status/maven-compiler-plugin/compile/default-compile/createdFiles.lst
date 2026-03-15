@@ -1,4 +1,5 @@
 com\mycompany\presentacionenfermeria\PrimaryController.class
+module-info.class
 com\mycompany\presentacionenfermeria\App.class
 com\mycompany\presentacionenfermeria\SecondaryController.class
-module-info.class
+com\mycompany\presentacionenfermeria\Main.class
