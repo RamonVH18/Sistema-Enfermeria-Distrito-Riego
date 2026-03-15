@@ -27,7 +27,8 @@ public class Empleado {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @Column(name = "id_empleado")
+    private Integer idEmpleado;
 
     @Column(name = "nombres", nullable = false)
     private String nombres;
@@ -86,7 +87,7 @@ public class Empleado {
     }
 
     public Empleado(Integer id, String nombres, String apellidoPaterno, String apellidoMaterno, LocalDate fechaNacimiento, String telefono, String curp, String unidadTrabajo, String genero, String estado, Departamento departamento, DireccionEmpleado direccion) {
-        this.id = id;
+        this.idEmpleado = id;
         this.nombres = nombres;
         this.apellidoPaterno = apellidoPaterno;
         this.apellidoMaterno = apellidoMaterno;
@@ -101,11 +102,11 @@ public class Empleado {
     }
 
     public Integer getId() {
-        return id;
+        return idEmpleado;
     }
 
     public void setId(Integer id) {
-        this.id = id;
+        this.idEmpleado = id;
     }
 
     public String getNombres() {
@@ -199,7 +200,7 @@ public class Empleado {
     @Override
     public String toString() {
         return "Empleado{"
-                + "id=" + id
+                + "id=" + idEmpleado
                 + ", nombres=" + nombres
                 + ", apellidoPaterno=" + apellidoPaterno
                 + ", apellidoMaterno=" + apellidoMaterno

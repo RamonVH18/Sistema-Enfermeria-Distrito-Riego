@@ -4,6 +4,7 @@
  */
 package entidades;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,7 +23,8 @@ public class JefeDepartamento {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @Column(name = "id_jefe")
+    private Integer idJefe;
 
     @OneToOne
     @JoinColumn(name = "id_empleado", nullable = false, unique = true)
@@ -36,16 +38,16 @@ public class JefeDepartamento {
     }
 
     public JefeDepartamento(Integer id, Empleado empleado) {
-        this.id = id;
+        this.idJefe = id;
         this.empleado = empleado;
     }
 
     public Integer getId() {
-        return id;
+        return idJefe;
     }
 
     public void setId(Integer id) {
-        this.id = id;
+        this.idJefe = id;
     }
 
     public Empleado getEmpleado() {
@@ -59,7 +61,7 @@ public class JefeDepartamento {
     @Override
     public String toString() {
         return "JefeDepartamento{"
-                + "id=" + id
+                + "id=" + idJefe
                 + ", empleado=" + empleado
                 + '}';
     }

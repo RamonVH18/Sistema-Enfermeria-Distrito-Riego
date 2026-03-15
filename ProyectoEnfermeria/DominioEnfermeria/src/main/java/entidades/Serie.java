@@ -7,6 +7,8 @@ package entidades;
 import enums.PeriodoCita;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -24,8 +26,10 @@ public class Serie {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @Column(name = "idSerie")
+    private Integer idSerie;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "periodo", nullable = false)
     private PeriodoCita periodo;
 
@@ -49,7 +53,7 @@ public class Serie {
     }
 
     public Serie(Integer id, PeriodoCita periodo, LocalDate fechaInicio, LocalDate fechaFin, LocalTime hora) {
-        this.id = id;
+        this.idSerie = id;
         this.periodo = periodo;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
@@ -57,11 +61,11 @@ public class Serie {
     }
 
     public Integer getId() {
-        return id;
+        return idSerie;
     }
 
     public void setId(Integer id) {
-        this.id = id;
+        this.idSerie = id;
     }
 
     public PeriodoCita getPeriodo() {
@@ -99,7 +103,7 @@ public class Serie {
     @Override
     public String toString() {
         return "Serie{"
-                + "id=" + id
+                + "id=" + idSerie
                 + ", periodo=" + periodo
                 + ", fechaInicio=" + fechaInicio
                 + ", fechaFin=" + fechaFin

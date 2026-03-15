@@ -7,6 +7,8 @@ package entidades;
 import enums.EstadoCita;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -25,14 +27,16 @@ public class Cita {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_cita;
+    @Column(name = "id_cita")
+    private Integer idCita;
 
     @Column(name = "fecha_hora", nullable = false)
-    private LocalDateTime fecha_hora;
+    private LocalDateTime fechaHora;
 
-    @Column(name = "duracionMin", nullable = false)
+    @Column(name = "duracion_min", nullable = false)
     private Integer duracionMin;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "estado", nullable = false)
     private EstadoCita estado;
 
@@ -54,8 +58,8 @@ public class Cita {
     public Cita() {
     }
 
-    public Cita(LocalDateTime fecha_hora, Integer duracionMin, EstadoCita estado, String motivo, Serie serie, Empleado empleado, Enfermero enfermero) {
-        this.fecha_hora = fecha_hora;
+    public Cita(LocalDateTime fechaHora, Integer duracionMin, EstadoCita estado, String motivo, Serie serie, Empleado empleado, Enfermero enfermero) {
+        this.fechaHora = fechaHora;
         this.duracionMin = duracionMin;
         this.estado = estado;
         this.motivo = motivo;
@@ -64,9 +68,9 @@ public class Cita {
         this.enfermero = enfermero;
     }
 
-    public Cita(Integer id_cita, LocalDateTime fecha_hora, Integer duracionMin, EstadoCita estado, String motivo, Serie serie, Empleado empleado, Enfermero enfermero) {
-        this.id_cita = id_cita;
-        this.fecha_hora = fecha_hora;
+    public Cita(Integer idCita, LocalDateTime fechaHora, Integer duracionMin, EstadoCita estado, String motivo, Serie serie, Empleado empleado, Enfermero enfermero) {
+        this.idCita = idCita;
+        this.fechaHora = fechaHora;
         this.duracionMin = duracionMin;
         this.estado = estado;
         this.motivo = motivo;
@@ -75,20 +79,20 @@ public class Cita {
         this.enfermero = enfermero;
     }
 
-    public Integer getId_cita() {
-        return id_cita;
+    public Integer getIdCita() {
+        return idCita;
     }
 
-    public void setId_cita(Integer id_cita) {
-        this.id_cita = id_cita;
+    public void setIdCita(Integer idCita) {
+        this.idCita = idCita;
     }
 
-    public LocalDateTime getFecha_hora() {
-        return fecha_hora;
+    public LocalDateTime getFechaHora() {
+        return fechaHora;
     }
 
-    public void setFecha_hora(LocalDateTime fecha_hora) {
-        this.fecha_hora = fecha_hora;
+    public void setFechaHora(LocalDateTime fechaHora) {
+        this.fechaHora = fechaHora;
     }
 
     public Integer getDuracionMin() {
@@ -142,8 +146,8 @@ public class Cita {
     @Override
     public String toString() {
         return "Cita{"
-                + "id_cita=" + id_cita
-                + ", fecha_hora=" + fecha_hora
+                + "id_cita=" + idCita
+                + ", fecha_hora=" + fechaHora
                 + ", duracionMin=" + duracionMin
                 + ", estado=" + estado
                 + ", motivo=" + motivo

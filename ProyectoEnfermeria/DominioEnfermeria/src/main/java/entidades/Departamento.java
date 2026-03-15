@@ -23,7 +23,8 @@ public class Departamento {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @Column(name = "id_departamento")
+    private Integer idDepartamento;
 
     @Column(name = "nombre", nullable = false)
     private String nombre;
@@ -41,17 +42,17 @@ public class Departamento {
     }
 
     public Departamento(Integer id, String nombre, JefeDepartamento jefeDepartamento) {
-        this.id = id;
+        this.idDepartamento = id;
         this.nombre = nombre;
         this.jefeDepartamento = jefeDepartamento;
     }
 
     public Integer getId() {
-        return id;
+        return idDepartamento;
     }
 
     public void setId(Integer id) {
-        this.id = id;
+        this.idDepartamento = id;
     }
 
     public String getNombre() {
@@ -73,7 +74,7 @@ public class Departamento {
     @Override
     public String toString() {
         return "Departamento{"
-                + "id=" + id
+                + "id=" + idDepartamento
                 + ", nombre=" + nombre
                 + ", jefeDepartamento=" + jefeDepartamento
                 + '}';

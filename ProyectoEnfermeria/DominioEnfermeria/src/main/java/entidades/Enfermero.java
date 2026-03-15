@@ -25,7 +25,8 @@ public class Enfermero {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @Column(name = "id_enfermero")
+    private Integer idEnfermero;
 
     @OneToOne
     @JoinColumn(name = "id_empleado", nullable = false, unique = true)
@@ -43,17 +44,17 @@ public class Enfermero {
     }
 
     public Enfermero(Integer id, Empleado empleado, List<Cita> citas) {
-        this.id = id;
+        this.idEnfermero = id;
         this.empleado = empleado;
         this.citas = citas;
     }
 
     public Integer getId() {
-        return id;
+        return idEnfermero;
     }
 
     public void setId(Integer id) {
-        this.id = id;
+        this.idEnfermero = id;
     }
 
     public Empleado getEmpleado() {
@@ -75,7 +76,7 @@ public class Enfermero {
     @Override
     public String toString() {
         return "Enfermero{"
-                + "id=" + id
+                + "id=" + idEnfermero
                 + ", empleado=" + empleado
                 + ", citas=" + citas
                 + '}';

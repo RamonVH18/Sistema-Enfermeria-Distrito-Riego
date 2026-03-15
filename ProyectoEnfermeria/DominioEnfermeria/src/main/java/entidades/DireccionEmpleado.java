@@ -16,12 +16,13 @@ import jakarta.persistence.Table;
  * @author Ramon Valencia
  */
 @Entity
-@Table(name = "direcciones_Empleado")
+@Table(name = "direcciones_empleado")
 public class DireccionEmpleado {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @Column(name = "id_dir_empl")
+    private Integer idDireccion;
 
     @Column(name = "numero", nullable = false)
     private int numero;
@@ -50,7 +51,7 @@ public class DireccionEmpleado {
     }
 
     public DireccionEmpleado(Integer id, int numero, String calle, String municipio, int cp, String ciudad) {
-        this.id = id;
+        this.idDireccion = id;
         this.numero = numero;
         this.calle = calle;
         this.municipio = municipio;
@@ -59,11 +60,11 @@ public class DireccionEmpleado {
     }
 
     public Integer getId() {
-        return id;
+        return idDireccion;
     }
 
     public void setId(Integer id) {
-        this.id = id;
+        this.idDireccion = id;
     }
 
     public int getNumero() {
@@ -109,7 +110,7 @@ public class DireccionEmpleado {
     @Override
     public String toString() {
         return "DireccionEmpleado{"
-                + "id=" + id
+                + "id=" + idDireccion
                 + ", numero=" + numero
                 + ", calle=" + calle
                 + ", municipio=" + municipio
