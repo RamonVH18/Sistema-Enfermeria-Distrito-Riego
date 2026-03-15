@@ -35,6 +35,11 @@
             <artifactId>jboss-logging</artifactId>
             <version>3.5.0.Final</version>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>EnfermeriaCommon</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
     <name>DominioEnfermeria</name>
 </project>

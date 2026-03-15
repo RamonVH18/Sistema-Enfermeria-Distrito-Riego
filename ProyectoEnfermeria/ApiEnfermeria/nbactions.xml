@@ -10,7 +10,7 @@
         </goals>
         <properties>
             <run.jvmArguments>-noverify -XX:TieredStopAtLevel=1 </run.jvmArguments>
-            <run.mainClass>com.distritoRiego.ServiciosEnfermeria.ServiciosEnfermeriaApplication</run.mainClass>
+            <run.mainClass>apiApplication.ApiEnfermeriaApplication</run.mainClass>
             <Env.SPRING_OUTPUT_ANSI_ENABLED>always</Env.SPRING_OUTPUT_ANSI_ENABLED>
         </properties>
     </action>
