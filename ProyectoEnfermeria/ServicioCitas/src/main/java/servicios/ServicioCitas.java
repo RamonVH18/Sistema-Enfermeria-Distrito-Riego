@@ -1,14 +1,16 @@
 package servicios;
 
 import dtos.CitaDTO;
-import exception.CitasException;
 import interfaces.IServicioCitas;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.Set;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import request.CrearCitaRequest;
+import response.CrearCitaResponse;
 
 /**
  *
@@ -18,17 +20,20 @@ import org.springframework.stereotype.Service;
 public class ServicioCitas implements IServicioCitas{
 
     @Override
-    public CitaDTO crear(CitaDTO cita) throws CitasException {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public CrearCitaResponse crear(CrearCitaRequest cita) {
+        //Ejemplo de como hacer las excepciones, cualquier duda ahi ando.
+//        throw new CitasException("Isaac estuvo aqui", HttpStatus.CREATED, "67");
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+
     }
 
     @Override
-    public CitaDTO actualizar(CitaDTO cita) throws CitasException {
+    public CitaDTO actualizar(CitaDTO cita){
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public CitaDTO eliminar(CitaDTO cita) throws CitasException {
+    public CitaDTO eliminar(CitaDTO cita) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

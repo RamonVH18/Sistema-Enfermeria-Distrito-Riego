@@ -1,7 +1,7 @@
 package mapper;
 
 import dtos.CitaDTO;
-import dtos.NuevaCitaDTO;
+import request.CrearCitaRequest;
 import entidades.Cita;
 import entidades.Empleado;
 import entidades.Enfermero;
@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class CitaMapper {
     
-    public static Cita toEntityNew(NuevaCitaDTO dto) {
+    public static Cita toEntityNew(CrearCitaRequest dto) {
         Cita entity = new Cita();
         entity.setFechaHora(dto.getFechaHora());
         entity.setDuracionMin(dto.getDuracionMin());

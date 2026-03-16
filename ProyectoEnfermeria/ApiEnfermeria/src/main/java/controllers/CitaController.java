@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import response.CrearCitaResponse;
 
 /**
  *
@@ -35,10 +36,10 @@ public class CitaController {
     }
 
     @PostMapping
-    public ResponseEntity<CitaDTO> crearCita(@RequestBody CrearCitaRequest request) {
-        CitaDTO citaDTO = servicioCitas.guardarCita(request);
+    public ResponseEntity<CrearCitaResponse> crearCita(@RequestBody CrearCitaRequest request) {
+        CrearCitaResponse response = servicioCitas.crear(request);
 
-        return new ResponseEntity<>(citaDTO, HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
     }
 
     @GetMapping
@@ -58,8 +59,8 @@ public class CitaController {
     }
 
     @GetMapping("/buscar/paciente")
-    public ResponseEntity<List<CitaDTO>> buscarPorNombre(@RequestParam String nombre) {
-        List<CitaDTO> citas = servicioCitas.buscarPorNombrePaciente(nombre);
+    public ResponseEntity<List<CitaDTO>> buscarPorNombreCurp(@RequestParam String nombre, String curp) {
+        List<CitaDTO> citas = servicioCitas.buscarPorNombreCurpPaciente(nombre, curp);
         return ResponseEntity.ok(citas);
     }
 }

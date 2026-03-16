@@ -1,12 +1,13 @@
 package interfaces;
 
 import dtos.CitaDTO;
-import exception.CitasException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.Set;
+import request.CrearCitaRequest;
+import response.CrearCitaResponse;
 
 /**
  *
@@ -14,11 +15,11 @@ import java.util.Set;
  */
 public interface IServicioCitas {
     
-    public CitaDTO crear(CitaDTO cita) throws CitasException;
+    public CrearCitaResponse crear(CrearCitaRequest cita);
     
-    public CitaDTO actualizar(CitaDTO cita) throws CitasException;
+    public CitaDTO actualizar(CitaDTO cita);
     
-    public CitaDTO eliminar(CitaDTO cita) throws CitasException;
+    public CitaDTO eliminar(CitaDTO cita);
     
     // No creo que se llegue a necesitar
     public List<CitaDTO> obtenerTodas();

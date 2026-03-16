@@ -1,24 +1,30 @@
 package exception;
 
+import org.springframework.http.HttpStatus;
+
 /**
  *
  * @author Leonardo Flores Leyva - 252390
  */
-public class CitasException extends Exception {
-
-    /**
-     * Creates a new instance of <code>CitasException</code> without detail
-     * message.
-     */
-    public CitasException() {}
-
-    /**
-     * Constructs an instance of <code>CitasException</code> with the specified
-     * detail message.
-     *
-     * @param msg the detail message.
-     */
-    public CitasException(String msg) {
-        super(msg);
-    }
-}
+//public class CitasException extends BusinessException  {
+//
+//    /**
+//     * Creates a new instance of <code>CitasException</code> without detail
+//     * message.
+//     * @param mensaje
+//     * @param status
+//     * @param codigo
+//     */
+//
+//    public CitasException(String mensaje, HttpStatus status, String codigo) {
+//        super(mensaje, status, codigo);
+//    }
+//
+//    /**
+//     * Constructs an instance of <code>CitasException</code> with the specified
+//     * detail message.
+//     *
+//     * @param msg the detail message.
+//     */
+//    
+//}
