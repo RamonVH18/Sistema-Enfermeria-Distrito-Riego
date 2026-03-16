@@ -33,9 +33,6 @@ public class Cita {
     @Column(name = "fecha_hora", nullable = false)
     private LocalDateTime fechaHora;
 
-    @Column(name = "duracion_min", nullable = false)
-    private Integer duracionMin;
-
     @Enumerated(EnumType.STRING)
     @Column(name = "estado", nullable = false)
     private EstadoCita estado;
@@ -58,9 +55,8 @@ public class Cita {
     public Cita() {
     }
 
-    public Cita(LocalDateTime fechaHora, Integer duracionMin, EstadoCita estado, String motivo, Serie serie, Empleado empleado, Enfermero enfermero) {
+    public Cita(LocalDateTime fechaHora, EstadoCita estado, String motivo, Serie serie, Empleado empleado, Enfermero enfermero) {
         this.fechaHora = fechaHora;
-        this.duracionMin = duracionMin;
         this.estado = estado;
         this.motivo = motivo;
         this.serie = serie;
@@ -68,10 +64,9 @@ public class Cita {
         this.enfermero = enfermero;
     }
 
-    public Cita(Integer idCita, LocalDateTime fechaHora, Integer duracionMin, EstadoCita estado, String motivo, Serie serie, Empleado empleado, Enfermero enfermero) {
+    public Cita(Integer idCita, LocalDateTime fechaHora, EstadoCita estado, String motivo, Serie serie, Empleado empleado, Enfermero enfermero) {
         this.idCita = idCita;
         this.fechaHora = fechaHora;
-        this.duracionMin = duracionMin;
         this.estado = estado;
         this.motivo = motivo;
         this.serie = serie;
@@ -93,14 +88,6 @@ public class Cita {
 
     public void setFechaHora(LocalDateTime fechaHora) {
         this.fechaHora = fechaHora;
-    }
-
-    public Integer getDuracionMin() {
-        return duracionMin;
-    }
-
-    public void setDuracionMin(Integer duracionMin) {
-        this.duracionMin = duracionMin;
     }
 
     public EstadoCita getEstado() {
@@ -148,7 +135,6 @@ public class Cita {
         return "Cita{"
                 + "id_cita=" + idCita
                 + ", fecha_hora=" + fechaHora
-                + ", duracionMin=" + duracionMin
                 + ", estado=" + estado
                 + ", motivo=" + motivo
                 + ", serie=" + serie

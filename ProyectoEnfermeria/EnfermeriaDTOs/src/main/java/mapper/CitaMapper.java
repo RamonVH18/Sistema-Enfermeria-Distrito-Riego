@@ -18,7 +18,6 @@ public class CitaMapper {
     public static Cita toEntityNew(CrearCitaRequest dto) {
         Cita entity = new Cita();
         entity.setFechaHora(dto.getFechaHora());
-        entity.setDuracionMin(dto.getDuracionMin());
         entity.setEstado(dto.getEstado());
         entity.setMotivo(dto.getMotivo());
         
@@ -37,7 +36,6 @@ public class CitaMapper {
         Cita entity = new Cita();
         entity.setIdCita(dto.getIdCita());
         entity.setFechaHora(dto.getFechaHora());
-        entity.setDuracionMin(dto.getDuracionMin());
         entity.setEstado(dto.getEstado());
         entity.setMotivo(dto.getMotivo());
         
@@ -59,7 +57,6 @@ public class CitaMapper {
     public static CitaDTO toDTO(Cita entity) {
         CitaDTO dto = new CitaDTO();
         dto.setFechaHora(entity.getFechaHora());
-        dto.setDuracionMin(entity.getDuracionMin());
         dto.setEstado(entity.getEstado());
         dto.setMotivo(entity.getMotivo());
         
