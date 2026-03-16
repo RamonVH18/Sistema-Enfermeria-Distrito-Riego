@@ -19,7 +19,7 @@ public class ServicioCitas implements IServicioCitas{
 
     @Override
     public CitaDTO crear(CitaDTO cita) throws CitasException {
-        
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
