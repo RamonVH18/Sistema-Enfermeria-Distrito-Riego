@@ -18,5 +18,10 @@
             <artifactId>EnfermeriaCommon</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>DominioEnfermeria</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 </project>

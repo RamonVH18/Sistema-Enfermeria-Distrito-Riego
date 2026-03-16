@@ -4,12 +4,12 @@ package dtos;
  *
  * @author Leonardo Flores Leyva - 252390
  */
-public class VerificarCrearUsuarioDTO {
+public class UsuarioDTO {
     
     private final String email;
     private final String password;
 
-    public VerificarCrearUsuarioDTO(String email, String password) {
+    public UsuarioDTO(String email, String password) {
         this.email = email;
         this.password = password;
     }
