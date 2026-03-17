@@ -1,6 +1,8 @@
 package interfaces;
 
 import dtos.CitaDTO;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -19,17 +21,17 @@ import response.CrearCitaResponse;
  */
 public interface IServicioCitas {
     
-    public CrearCitaResponse crear(CrearCitaRequest cita);
+    public CrearCitaResponse crear(@Valid CrearCitaRequest cita);
     
-    public ActualizarCitaResponse actualizar(ActualizarCitaRequest cita);
+    public ActualizarCitaResponse actualizar(@Valid ActualizarCitaRequest cita);
     
-    public CancelarCitaResponse eliminar(CancelarCitaRequest cita);
+    public CancelarCitaResponse eliminar(@Valid CancelarCitaRequest cita);
     
     // No creo que se llegue a necesitar
     public List<CitaDTO> obtenerTodas();
     
     // Creo que este método tiene más sentido en la clase DAO
-    public CitaDTO obtenerPorId(Integer id);
+    public CitaDTO obtenerPorId(@NotNull Integer id);
     
     
     public List<CitaDTO> obtenerPorFecha(LocalDate fecha);

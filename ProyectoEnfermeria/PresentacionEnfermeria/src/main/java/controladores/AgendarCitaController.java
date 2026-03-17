@@ -4,6 +4,7 @@
  */
 package controladores;
 
+import clienteApi.ClienteApi;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -18,6 +19,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import request.CrearCitaRequest;
 
 /**
  *
@@ -34,7 +36,7 @@ public class AgendarCitaController implements Initializable {
     @FXML
     private ComboBox<LocalTime> cbHora;
     @FXML 
-    private TextArea textDescripcion;
+    private TextArea txtDescripcion;
 
     private final ObservableList<String> listaPacientes = FXCollections.observableArrayList();
 
@@ -64,9 +66,12 @@ public class AgendarCitaController implements Initializable {
     @FXML
     private void guardarCita() {
         
-        Integer idEmpleado = Integer.valueOf(txtIdEmpleado.getText());
+        Integer idEmpleado = 2;
         LocalDateTime fechaCita = LocalDateTime.of(dpFechaCita.getValue(), cbHora.getValue());
-        String motivo = textDescripcion.getText();
-        Integer idEnfermero = 101; //Harcodeado para pruebas
+        String motivo = txtDescripcion.getText();
+        Integer idEnfermero = 1; //Harcodeado para pruebas
+        CrearCitaRequest cita = new CrearCitaRequest(fechaCita, motivo, idEmpleado, idEnfermero);
+        ClienteApi cliente = new ClienteApi();
+        cliente.enviarCita(cita);
     }
 }

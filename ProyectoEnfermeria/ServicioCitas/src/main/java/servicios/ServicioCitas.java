@@ -53,7 +53,7 @@ public class ServicioCitas implements IServicioCitas{
     }
     
     @Override
-    public CrearCitaResponse crear(@Valid CrearCitaRequest cita) {
+    public CrearCitaResponse crear(CrearCitaRequest cita) {
         
         // Verificar empleado
         Empleado empleadoAsociado = empleadoRepository.findById(cita.getIdEmpleado()).orElse(null);
@@ -94,7 +94,7 @@ public class ServicioCitas implements IServicioCitas{
     }
 
     @Override
-    public ActualizarCitaResponse actualizar(@Valid ActualizarCitaRequest cita){
+    public ActualizarCitaResponse actualizar(ActualizarCitaRequest cita){
         
         // Verifica que la nueva fecha y hora corresponda a una cita existente
         Cita citaActualizar = citaRepository.findById(cita.getIdCita()).orElse(null);
@@ -128,7 +128,7 @@ public class ServicioCitas implements IServicioCitas{
     }
 
     @Override
-    public CancelarCitaResponse eliminar(@Valid CancelarCitaRequest cita) {
+    public CancelarCitaResponse eliminar(CancelarCitaRequest cita) {
         
         Cita citaEliminar = citaRepository.findById(cita.getIdCita()).orElse(null);
         if(citaEliminar == null)
@@ -146,7 +146,7 @@ public class ServicioCitas implements IServicioCitas{
     }
 
     @Override
-    public CitaDTO obtenerPorId(@NotNull Integer id) {
+    public CitaDTO obtenerPorId(Integer id) {
         Optional<Cita> resultado = citaRepository.findById(id);
         Cita citaEncontrada = resultado.orElse(null);
         return (citaEncontrada != null) ? CitaMapper.toDTO(citaEncontrada) : null;

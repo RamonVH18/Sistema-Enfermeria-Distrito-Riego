@@ -25,7 +25,6 @@ public class CrearCitaRequest {
 
     public CrearCitaRequest(
             LocalDateTime fechaHora, 
-            Integer duracionMin,
             String motivo, 
             Integer idEmpleado, 
             Integer idEnfermero

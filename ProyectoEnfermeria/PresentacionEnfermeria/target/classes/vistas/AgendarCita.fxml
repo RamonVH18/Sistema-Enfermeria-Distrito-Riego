@@ -44,6 +44,6 @@
 
     <HBox spacing="20" alignment="CENTER">
         <Button text="Cancelar" fx:id="btnCancelar" styleClass="btn-cancel" />
-        <Button text="Agendar Cita" fx:id="btnAgendar" styleClass="btn-submit" />
+        <Button text="Agendar Cita" fx:id="btnAgendar" styleClass="btn-submit" onAction="#guardarCita"/>
     </HBox>
 </VBox>
