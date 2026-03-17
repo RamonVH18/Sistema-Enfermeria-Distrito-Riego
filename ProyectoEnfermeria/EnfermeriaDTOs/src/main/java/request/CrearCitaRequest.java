@@ -2,6 +2,8 @@ package request;
 
 import enums.EstadoCita;
 import java.time.LocalDateTime;
+import jakarta.validation.constraints.*;
+
 
 /**
  *
@@ -9,12 +11,23 @@ import java.time.LocalDateTime;
  */
 public class CrearCitaRequest {
     // Atributos de la cita
+    @NotNull(message = "Fecha y hora requerida.")
+    @Future(message = "La fecha y hora debe ser futura.")
     private LocalDateTime fechaHora;
-    private Integer duracionMin;
+    
+    @NotNull(message = "Estado requerido.")
     private EstadoCita estado;
+    
+    @NotBlank(message = "Motivo requerido.")
     private String motivo;
+    
     // Empleado atendido y enfermero encargado
+    @NotNull(message = "Empleado requerido.")
+    @Positive
     private Integer idEmpleado;
+    
+    @NotNull(message = "Enfermero requerido.")
+    @Positive
     private Integer idEnfermero;
     
     // Constructores
@@ -29,7 +42,6 @@ public class CrearCitaRequest {
             Integer idEnfermero
     ) {
         this.fechaHora = fechaHora;
-        this.duracionMin = duracionMin;
         this.estado = estado;
         this.motivo = motivo;
         this.idEmpleado = idEmpleado;
@@ -38,8 +50,6 @@ public class CrearCitaRequest {
 
     // Getters
     public LocalDateTime getFechaHora() {return fechaHora;}
-
-    public Integer getDuracionMin() {return duracionMin;}
 
     public EstadoCita getEstado() {return estado;}
 
@@ -51,8 +61,6 @@ public class CrearCitaRequest {
     
     // Setters
     public void setFechaHora(LocalDateTime fechaHora) {this.fechaHora = fechaHora;}
-
-    public void setDuracionMin(Integer duracionMin) {this.duracionMin = duracionMin;}
 
     public void setEstado(EstadoCita estado) {this.estado = estado;}
 
