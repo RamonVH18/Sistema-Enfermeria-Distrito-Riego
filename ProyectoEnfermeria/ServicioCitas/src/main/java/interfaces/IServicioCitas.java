@@ -6,7 +6,11 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.Set;
+import request.ActualizarCitaRequest;
+import request.CancelarCitaRequest;
 import request.CrearCitaRequest;
+import response.ActualizarCitaResponse;
+import response.CancelarCitaResponse;
 import response.CrearCitaResponse;
 
 /**
@@ -17,9 +21,9 @@ public interface IServicioCitas {
     
     public CrearCitaResponse crear(CrearCitaRequest cita);
     
-    public CitaDTO actualizar(CitaDTO cita);
+    public ActualizarCitaResponse actualizar(ActualizarCitaRequest cita);
     
-    public CitaDTO eliminar(CitaDTO cita);
+    public CancelarCitaResponse eliminar(CancelarCitaRequest cita);
     
     // No creo que se llegue a necesitar
     public List<CitaDTO> obtenerTodas();

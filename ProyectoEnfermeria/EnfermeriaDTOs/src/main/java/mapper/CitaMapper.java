@@ -18,7 +18,6 @@ public class CitaMapper {
     public static Cita toEntityNew(CrearCitaRequest dto) {
         Cita entity = new Cita();
         entity.setFechaHora(dto.getFechaHora());
-        entity.setEstado(dto.getEstado());
         entity.setMotivo(dto.getMotivo());
         
         Empleado empleado = new Empleado();

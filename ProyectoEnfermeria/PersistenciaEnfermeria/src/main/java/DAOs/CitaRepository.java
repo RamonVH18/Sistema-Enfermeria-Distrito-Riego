@@ -14,6 +14,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CitaRepository extends JpaRepository<Cita, Integer>{
     
+    Cita findByFechaHora(LocalDateTime fechaHora);
+    
     List<Cita> findByEstado(String estado);
     
     List<Cita> findByFechaHoraBetween(LocalDateTime inicio, LocalDateTime fin);

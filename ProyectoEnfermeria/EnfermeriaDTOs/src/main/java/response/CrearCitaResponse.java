@@ -5,32 +5,31 @@ import java.time.LocalDateTime;
 /**
  *
  * @author Ramon Valencia
+ * @author Leonardo Flores Leyva - 252390
  */
 public class CrearCitaResponse {
     
     private String nombre;
     private LocalDateTime fechaCita;
+    private LocalDateTime fechaCreacion;
 
     public CrearCitaResponse() {}
 
-    public CrearCitaResponse(String nombre, LocalDateTime fechaCita) {
+    public CrearCitaResponse(String nombre, LocalDateTime fechaCita, LocalDateTime fechaCreacion) {
         this.nombre = nombre;
         this.fechaCita = fechaCita;
+        this.fechaCreacion = fechaCreacion;
     }
 
-    public String getNombre() {
-        return nombre;
-    }
+    public String getNombre() {return nombre;}
 
-    public LocalDateTime getFechaCita() {
-        return fechaCita;
-    }
+    public LocalDateTime getFechaCita() {return fechaCita;}
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+    public LocalDateTime getFechaCreacion() {return fechaCreacion;}
 
-    public void setFechaCita(LocalDateTime fechaCita) {
-        this.fechaCita = fechaCita;
-    }
+    public void setNombre(String nombre) {this.nombre = nombre;}
+
+    public void setFechaCita(LocalDateTime fechaCita) {this.fechaCita = fechaCita;}
+
+    public void setFechaCreacion(LocalDateTime fechaCreacion) {this.fechaCreacion = fechaCreacion;}
 }
