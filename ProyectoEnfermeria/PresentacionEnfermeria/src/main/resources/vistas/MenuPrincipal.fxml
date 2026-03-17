@@ -59,22 +59,22 @@
       <children>
          <HBox prefHeight="100.0" prefWidth="200.0" spacing="110.0">
             <children>
-               <VBox prefHeight="200.0" prefWidth="100.0">
+               <VBox prefHeight="200.0" prefWidth="100.0" styleClass="content-area">
                   <children>
-                     <Label text="Citas de Hoy:" />
+                     <Label styleClass="stat-card-title" text="Citas de Hoy:" />
                   </children>
                </VBox>
-               <VBox prefHeight="200.0" prefWidth="100.0">
+               <VBox prefHeight="200.0" prefWidth="100.0" styleClass="content-area">
                   <children>
-                     <Label text="Revisiones Pendientes:" />
+                     <Label styleClass="stat-card-title" text="Revisiones Pendientes:" />
                   </children>
                </VBox>
-               <VBox prefHeight="200.0" prefWidth="100.0">
+               <VBox prefHeight="200.0" prefWidth="100.0" styleClass="content-area">
                   <children>
                      <Label text="Pacientes Activos" />
                   </children>
                </VBox>
-               <VBox prefHeight="200.0" prefWidth="100.0">
+               <VBox prefHeight="200.0" prefWidth="100.0" styleClass="content-area">
                   <children>
                      <Label text="Tiempo de espera aprox:" />
                   </children>

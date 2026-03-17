@@ -4,8 +4,11 @@
  */
 package menuPrincipal;
 
+import com.mycompany.presentacionenfermeria.App;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
 /**
@@ -21,6 +24,11 @@ public class MenuPrincipalController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }
+    
+    @FXML
+    private void switchToCitas() throws IOException {
+        App.setRoot("/vistas/citas.fxml"); // ruta relativa al FXML
+    }
     
 }
