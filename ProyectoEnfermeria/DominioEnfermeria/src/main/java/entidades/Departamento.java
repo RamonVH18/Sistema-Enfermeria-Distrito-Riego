@@ -9,8 +9,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 /**
@@ -29,22 +27,16 @@ public class Departamento {
     @Column(name = "nombre", nullable = false)
     private String nombre;
 
-    @OneToOne
-    @JoinColumn(name = "id_jefe_departamento")
-    private JefeDepartamento jefeDepartamento;
-
     public Departamento() {
     }
 
-    public Departamento(String nombre, JefeDepartamento jefeDepartamento) {
+    public Departamento(String nombre) {
         this.nombre = nombre;
-        this.jefeDepartamento = jefeDepartamento;
     }
 
-    public Departamento(Integer id, String nombre, JefeDepartamento jefeDepartamento) {
+    public Departamento(Integer id, String nombre) {
         this.idDepartamento = id;
         this.nombre = nombre;
-        this.jefeDepartamento = jefeDepartamento;
     }
 
     public Integer getId() {
@@ -63,20 +55,11 @@ public class Departamento {
         this.nombre = nombre;
     }
 
-    public JefeDepartamento getJefeDepartamento() {
-        return jefeDepartamento;
-    }
-
-    public void setJefeDepartamento(JefeDepartamento jefeDepartamento) {
-        this.jefeDepartamento = jefeDepartamento;
-    }
-
     @Override
     public String toString() {
         return "Departamento{"
                 + "id=" + idDepartamento
                 + ", nombre=" + nombre
-                + ", jefeDepartamento=" + jefeDepartamento
                 + '}';
     }
 

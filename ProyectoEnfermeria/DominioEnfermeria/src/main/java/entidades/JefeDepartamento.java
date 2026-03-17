@@ -29,17 +29,23 @@ public class JefeDepartamento {
     @OneToOne
     @JoinColumn(name = "id_empleado", nullable = false, unique = true)
     private Empleado empleado;
+    
+    @OneToOne
+    @JoinColumn(name = "id_departamento")
+    private Departamento departamento;
 
     public JefeDepartamento() {
     }
 
-    public JefeDepartamento(Empleado empleado) {
+    public JefeDepartamento(Empleado empleado, Departamento departamento) {
         this.empleado = empleado;
+        this.departamento = departamento;
     }
 
-    public JefeDepartamento(Integer id, Empleado empleado) {
+    public JefeDepartamento(Integer id, Empleado empleado, Departamento departamento) {
         this.idJefe = id;
         this.empleado = empleado;
+        this.departamento = departamento;
     }
 
     public Integer getId() {
@@ -58,12 +64,16 @@ public class JefeDepartamento {
         this.empleado = empleado;
     }
 
-    @Override
-    public String toString() {
-        return "JefeDepartamento{"
-                + "id=" + idJefe
-                + ", empleado=" + empleado
-                + '}';
+    public Departamento getDepartamento() {
+        return departamento;
     }
 
+    public void setDepartamento(Departamento departamento) {
+        this.departamento = departamento;
+    }
+
+    @Override
+    public String toString() {
+        return "JefeDepartamento{" + "idJefe=" + idJefe + ", empleado=" + empleado + ", departamento=" + departamento + '}';
+    }
 }

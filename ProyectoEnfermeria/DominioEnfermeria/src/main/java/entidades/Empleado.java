@@ -4,8 +4,11 @@
  */
 package entidades;
 
+import enums.EstadoEmpleado;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -54,8 +57,9 @@ public class Empleado {
     @Column(name = "genero", nullable = false)
     private String genero;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "estado", nullable = false)
-    private String estado;
+    private EstadoEmpleado estado;
 
     @ManyToOne
     @JoinColumn(name = "id_departamento")
@@ -71,7 +75,7 @@ public class Empleado {
     public Empleado() {
     }
 
-    public Empleado(String nombres, String apellidoPaterno, String apellidoMaterno, LocalDate fechaNacimiento, String telefono, String curp, String unidadTrabajo, String genero, String estado, Departamento departamento, DireccionEmpleado direccion, List<Cita> citas) {
+    public Empleado(String nombres, String apellidoPaterno, String apellidoMaterno, LocalDate fechaNacimiento, String telefono, String curp, String unidadTrabajo, String genero, EstadoEmpleado estado, Departamento departamento, DireccionEmpleado direccion, List<Cita> citas) {
         this.nombres = nombres;
         this.apellidoPaterno = apellidoPaterno;
         this.apellidoMaterno = apellidoMaterno;
@@ -86,7 +90,7 @@ public class Empleado {
         this.citas = citas;
     }
 
-    public Empleado(Integer id, String nombres, String apellidoPaterno, String apellidoMaterno, LocalDate fechaNacimiento, String telefono, String curp, String unidadTrabajo, String genero, String estado, Departamento departamento, DireccionEmpleado direccion) {
+    public Empleado(Integer id, String nombres, String apellidoPaterno, String apellidoMaterno, LocalDate fechaNacimiento, String telefono, String curp, String unidadTrabajo, String genero, EstadoEmpleado estado, Departamento departamento, DireccionEmpleado direccion) {
         this.idEmpleado = id;
         this.nombres = nombres;
         this.apellidoPaterno = apellidoPaterno;
@@ -173,11 +177,11 @@ public class Empleado {
         this.genero = genero;
     }
 
-    public String getEstado() {
+    public EstadoEmpleado getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(EstadoEmpleado estado) {
         this.estado = estado;
     }
 
