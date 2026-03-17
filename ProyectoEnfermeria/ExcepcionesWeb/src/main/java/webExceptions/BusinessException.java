@@ -21,4 +21,13 @@ public abstract class BusinessException extends RuntimeException {
         this.status = status;
         this.codigo = codigo;
     }
+
+    public HttpStatus getStatus() {
+        return status;
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+    
 }
