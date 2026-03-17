@@ -1,5 +1,7 @@
-com\mycompany\presentacionenfermeria\PrimaryController.class
+com/mycompany/presentacionenfermeria/SecondaryController.class
+com/mycompany/presentacionenfermeria/Main.class
 module-info.class
-com\mycompany\presentacionenfermeria\App.class
-com\mycompany\presentacionenfermeria\SecondaryController.class
-com\mycompany\presentacionenfermeria\Main.class
+inicioDeSesion/IniciarSesionController.class
+com/mycompany/presentacionenfermeria/App.class
+com/mycompany/presentacionenfermeria/PrimaryController.class
+menuPrincipal/MenuPrincipalController.class

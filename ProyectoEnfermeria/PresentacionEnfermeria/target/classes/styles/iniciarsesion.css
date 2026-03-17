@@ -1,0 +1,71 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+/* ============================
+   Colores principales
+============================ */
+:root {
+    -color-bg: #f5f7fa;
+    -color-primary: #004d99;
+    -color-button: #007bff;
+    -color-button-hover: #0056b3;
+    -color-text-dark: #333333;
+    -color-text-sub: #8ca0b2;
+}
+
+/* ============================
+   Root VBox
+============================ */
+.iniciar-sesion-root {
+    -fx-background-color: -color-bg;
+    -fx-padding: 40;
+    -fx-spacing: 15;
+    -fx-alignment: center;
+}
+
+/* ============================
+   Titulo
+============================ */
+.iniciar-sesion-root Label.titulo {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -color-primary;
+}
+
+/* ============================
+   Labels de campo
+============================ */
+.iniciar-sesion-root Label.campo {
+    -fx-font-size: 13px;
+    -fx-text-fill: -color-text-sub;
+    -fx-font-weight: normal;
+}
+
+/* ============================
+   TextField y PasswordField
+============================ */
+.iniciar-sesion-root TextField,
+.iniciar-sesion-root PasswordField {
+    -fx-pref-width: 250px;
+    -fx-padding: 8;
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+    -fx-border-color: rgba(0,0,0,0.2);
+}
+
+/* ============================
+   Botón Iniciar Sesión
+============================ */
+.iniciar-sesion-root Button {
+    -fx-background-color: -color-button;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 8 20;
+    -fx-background-radius: 5px;
+    -fx-cursor: hand;
+}
+
+.iniciar-sesion-root Button:hover {
+    -fx-background-color: -color-button-hover;
+}

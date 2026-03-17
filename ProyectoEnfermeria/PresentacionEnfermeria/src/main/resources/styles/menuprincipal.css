@@ -1,0 +1,141 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+/* ============================
+   Definición de colores principales
+============================ */
+:root {
+    -color-primary-blue: #004d99;    /* Azul oscuro de la barra lateral */
+    -color-active-blue: #007bff;     /* Azul brillante botones activos */
+    -color-content-bg: #f5f7fa;      /* Gris muy claro fondo principal */
+    -color-card-bg: #ffffff;         /* Fondo de los cuadros blancos */
+    -color-text-white: #ffffff;
+    -color-text-sub: #8ca0b2;        /* Gris azulado subtítulos */
+    -color-text-dark: #333333;       /* Texto principal */
+}
+
+/* ============================
+   1. Barra lateral y botones
+============================ */
+.side-panel {
+    -fx-background-color: -color-primary-blue;
+    -fx-padding: 15;
+}
+
+.menu-button, .menu-button-active, .logout-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: -color-text-white;
+    -fx-font-size: 13px;
+    -fx-alignment: center-left;
+    -fx-border-width: 0 0 1px 0;  /* Línea inferior */
+    -fx-border-color: rgba(255,255,255,0.1);
+    -fx-cursor: hand;
+    -fx-padding: 8 10;
+}
+
+.menu-button-active {
+    -fx-background-color: -color-active-blue;
+    -fx-font-weight: bold;
+}
+
+.logout-button {
+    -fx-border-color: -color-text-white;
+    -fx-border-width: 1px;
+    -fx-alignment: center;
+    -fx-padding: 8 10;
+}
+
+/* ============================
+   2. Área de contenido
+============================ */
+.content-area {
+    -fx-background-color: -color-content-bg;
+    -fx-padding: 20;
+}
+
+/* ============================
+   3. Cuadros de estadísticas (Citas de Hoy, Revisiones, etc.)
+============================ */
+.stat-card {
+    -fx-background-color: -color-card-bg;
+    -fx-background-radius: 10;
+    -fx-padding: 15;
+    -fx-spacing: 5;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 5, 0, 0, 3);
+    -fx-alignment: center; /* centra título y número */
+}
+
+.stat-card-title {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -color-text-sub;
+}
+
+.stat-card-number {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -color-text-dark;
+}
+
+/* ============================
+   4. Búsqueda rápida
+============================ */
+.search-box {
+    -fx-spacing: 10;
+    -fx-alignment: center-left;
+    -fx-padding: 10 0;
+}
+
+.search-box TextField {
+    -fx-pref-width: 200px;
+    -fx-padding: 5;
+    -fx-background-radius: 5px;
+}
+
+.search-box Button {
+    -fx-background-color: -color-active-blue;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 5px;
+    -fx-cursor: hand;
+    -fx-padding: 5 15;
+}
+
+/* ============================
+   5. Lista de citas
+============================ */
+.cita-card {
+    -fx-background-color: -color-card-bg;
+    -fx-background-radius: 10;
+    -fx-padding: 10;
+    -fx-spacing: 10;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 5, 0, 0, 3);
+    -fx-alignment: center-left;
+}
+
+.cita-time {
+    -fx-font-size: 13px;
+    -fx-text-fill: -color-text-dark;
+    -fx-font-weight: bold;
+}
+
+.cita-info {
+    -fx-font-size: 12px;
+    -fx-text-fill: -color-text-sub;
+}
+
+.cita-status {
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -color-active-blue;
+}
+
+.cita-button {
+    -fx-background-color: -color-active-blue;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 5 10;
+    -fx-background-radius: 5px;
+    -fx-cursor: hand;
+}
