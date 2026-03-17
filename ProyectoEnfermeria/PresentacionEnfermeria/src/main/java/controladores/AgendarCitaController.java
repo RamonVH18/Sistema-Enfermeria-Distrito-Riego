@@ -5,29 +5,50 @@
 package controladores;
 
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 
 /**
  *
  * @author Ramon Valencia
  */
-public class AgendarCitaController implements Initializable{
-    @FXML private ComboBox<String> cbPaciente;
-    @FXML private ComboBox<String> cbHora;
-    
-    // Lista original que traerás de tu API /edr/pacientes
+public class AgendarCitaController implements Initializable {
+
+    @FXML
+    private ComboBox<String> cbPaciente;
+    @FXML
+    private TextField txtIdEmpleado;
+    @FXML
+    private DatePicker dpFechaCita;
+    @FXML
+    private ComboBox<LocalTime> cbHora;
+    @FXML 
+    private TextArea textDescripcion;
+
     private final ObservableList<String> listaPacientes = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // 1. Llenar horas (ejemplo rápido)
-        cbHora.getItems().addAll("09:00 AM", "10:00 AM", "11:00 AM", "07:00 PM");
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("hh:mm a");
+        LocalTime horaInicio = LocalTime.of(8, 0); // 8:00 AM
+        LocalTime horaFin = LocalTime.of(16, 0);   // 4:00 PM
 
+        while (horaInicio.isBefore(horaFin.plusSeconds(1))) {
+            cbHora.getItems().add(horaInicio);
+            horaInicio = horaInicio.plusMinutes(15); 
+        }
         // 2. Lógica de búsqueda en el ComboBox
         cbPaciente.getEditor().textProperty().addListener((obs, oldVal, newVal) -> {
             if (newVal == null || newVal.isEmpty()) {
@@ -42,8 +63,10 @@ public class AgendarCitaController implements Initializable{
 
     @FXML
     private void guardarCita() {
-        // Aquí usas tu ClienteApi para mandar el POST a /edr/citas
-        String nombre = cbPaciente.getEditor().getText();
         
+        Integer idEmpleado = Integer.valueOf(txtIdEmpleado.getText());
+        LocalDateTime fechaCita = LocalDateTime.of(dpFechaCita.getValue(), cbHora.getValue());
+        String motivo = textDescripcion.getText();
+        Integer idEnfermero = 101; //Harcodeado para pruebas
     }
 }

@@ -41,6 +41,11 @@ public class CitaController {
 
         return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
     }
+    
+    @GetMapping("/test")
+    public ResponseEntity<String> test() {
+        return ResponseEntity.ok("¡Conexión exitosa! El Distrito de Riego está en línea.");
+    }
 
     @GetMapping
     public ResponseEntity<List<CitaDTO>> obtenerTodas() {

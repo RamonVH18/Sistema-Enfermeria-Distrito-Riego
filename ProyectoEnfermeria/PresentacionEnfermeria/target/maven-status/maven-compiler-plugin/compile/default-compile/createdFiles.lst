@@ -1,9 +1,11 @@
 com\mycompany\presentacionenfermeria\PrimaryController.class
+response\CrearCitaResponse.class
 com\mycompany\presentacionenfermeria\App.class
 com\mycompany\presentacionenfermeria\SecondaryController.class
 controladores\MenuPrincipalController.class
 clienteApi\ClienteApi.class
 controladores\AgendarCitaController.class
+request\CrearCitaRequest.class
 module-info.class
 controladores\CitasController.class
 controladores\IniciarSesionController.class

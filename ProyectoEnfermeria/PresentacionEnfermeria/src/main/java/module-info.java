@@ -5,6 +5,7 @@ module com.mycompany.presentacionenfermeria {
     requires javafx.graphics;
     requires java.base;
     requires java.net.http;
+    requires com.fasterxml.jackson.databind;
 
     opens com.mycompany.presentacionenfermeria to javafx.fxml;
     exports com.mycompany.presentacionenfermeria;
