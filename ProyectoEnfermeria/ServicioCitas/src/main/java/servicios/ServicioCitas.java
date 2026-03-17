@@ -41,6 +41,10 @@ public class ServicioCitas implements IServicioCitas{
     private final CitaRepository citaRepository;
     private final EmpleadoRepository empleadoRepository;
     private final EnfermeroRepository enfermeroRepository;
+    
+    private final int DURACION_CITA = 15;
+    private final LocalTime HORA_INICIO_CITAS = LocalTime.of(7, 0, 0);
+    private final LocalTime HORA_TERMINO_CITAS = LocalTime.of(15, 0, 0);
 
     public ServicioCitas(CitaRepository citaRepository, EmpleadoRepository empleadoRepository, EnfermeroRepository enfermeroRepository) {
         this.citaRepository = citaRepository;
@@ -66,6 +70,12 @@ public class ServicioCitas implements IServicioCitas{
         if(citaMismaFechaHora != null)
             throw new CitasException("Ya existe una cita con la misma fecha y hora.", HttpStatus.BAD_REQUEST, "400");
         
+        // Extrae la hora de la cita
+        LocalTime horaCita = cita.getFechaHora().toLocalTime();
+        
+        // Valida la hora de la cita
+        validarHoraCita(horaCita);
+        
         // Mapea la solicitud a una entidad
         Cita nuevaCita = CitaMapper.toEntityNew(cita);
         
@@ -90,6 +100,12 @@ public class ServicioCitas implements IServicioCitas{
         Cita citaActualizar = citaRepository.findById(cita.getIdCita()).orElse(null);
         if(citaActualizar == null)
             throw new CitasException("La cita no existe.", HttpStatus.BAD_REQUEST, "400");
+        
+        // Extrae la hora de la cita
+        LocalTime nuevaHoraCita = cita.getNuevaFechaHora().toLocalTime();
+        
+        // Valida la hora de la cita
+        validarHoraCita(nuevaHoraCita);
         
         // Verifica que la nueva fecha no sea la misma que la cita original
         LocalDateTime nuevaFechaHora = cita.getNuevaFechaHora();
@@ -149,5 +165,24 @@ public class ServicioCitas implements IServicioCitas{
     @Override
     public List<CitaDTO> obtenerPorFiltro(String empleado, LocalDate limite, Set<DayOfWeek> dias, LocalTime horaInicio, LocalTime horaFin) {
         return null;
+    }
+    
+    private void validarHoraCita(LocalTime horaCita){
+        
+        // Verifica que el minuto es múltiplo de la duración de la cita.
+        if(horaCita.getMinute() % DURACION_CITA != 0)
+            throw new CitasException(String.format("Cada cita debe tener una duración de %d minutos", DURACION_CITA), HttpStatus.BAD_REQUEST, "400");
+        
+        // Verifica que el segundo de la hora es igual a cero.
+        if(horaCita.getSecond() != 0)
+            throw new CitasException("Cada cita debe tener una hora exacta.", HttpStatus.BAD_REQUEST, "400");
+        
+        // Verifica que la hora de la cita no es inferior a la hora de comienzo de citas
+        if(horaCita.isBefore(HORA_INICIO_CITAS))
+            throw new CitasException("La cita no puede estar antes del período de citas.", HttpStatus.BAD_REQUEST, "400");
+        
+        // Verifica que la hora de la cita no es superior a la hora de término de citas
+        if(horaCita.isAfter(HORA_TERMINO_CITAS))
+            throw new CitasException("La cita no puede estar después del período de citas.", HttpStatus.BAD_REQUEST, "400");
     }
 }
