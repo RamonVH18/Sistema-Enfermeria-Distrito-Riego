@@ -17,7 +17,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/vistas/IniciarSesion.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/vistas/Citas.fxml"));
         Scene scene = new Scene(root);
 
         // Vinculamos el CSS

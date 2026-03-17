@@ -1,7 +1,10 @@
-com/mycompany/presentacionenfermeria/SecondaryController.class
-com/mycompany/presentacionenfermeria/Main.class
+com\mycompany\presentacionenfermeria\PrimaryController.class
+com\mycompany\presentacionenfermeria\App.class
+com\mycompany\presentacionenfermeria\SecondaryController.class
+controladores\MenuPrincipalController.class
+clienteApi\ClienteApi.class
+controladores\AgendarCitaController.class
 module-info.class
-inicioDeSesion/IniciarSesionController.class
-com/mycompany/presentacionenfermeria/App.class
-com/mycompany/presentacionenfermeria/PrimaryController.class
-menuPrincipal/MenuPrincipalController.class
+controladores\CitasController.class
+controladores\IniciarSesionController.class
+com\mycompany\presentacionenfermeria\Main.class

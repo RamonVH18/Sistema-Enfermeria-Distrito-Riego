@@ -1,4 +1,4 @@
-l/* Definición de colores principales */
+/* Definición de colores principales */
 :root {
     -color-primary-blue: #004d99; /* El azul oscuro de la barra lateral */
     -color-active-blue: #007bff;  /* El azul brillante para botones activos */
@@ -10,7 +10,7 @@ l/* Definición de colores principales */
 
 /* 1. Side Panel Styles */
 .side-panel {
-    -fx-background-color: -color-primary-blue;
+    -fx-background-color: #194C87;
 }
 
 .menu-button, .menu-button-active, .logout-button {
@@ -91,7 +91,7 @@ l/* Definición de colores principales */
 
 /* New Cita Button */
 .new-cita-button {
-    -fx-background-color: -color-active-blue;
+    -fx-background-color: #194C87;
     -fx-text-fill: white;
     -fx-font-weight: bold;
     -fx-padding: 10 20;

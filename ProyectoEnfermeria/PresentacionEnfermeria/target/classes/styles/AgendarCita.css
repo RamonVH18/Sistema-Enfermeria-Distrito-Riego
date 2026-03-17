@@ -1,0 +1,30 @@
+.form-card {
+    -fx-background-color: white;
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 5);
+}
+
+.form-title {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-padding: 0 0 20 0;
+}
+
+.form-label {
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+}
+
+.btn-submit {
+    -fx-background-color: #0056b3;
+    -fx-text-fill: white;
+    -fx-padding: 10 30;
+    -fx-background-radius: 5;
+}
+
+.btn-cancel {
+    -fx-background-color: #4d4d4d;
+    -fx-text-fill: white;
+    -fx-padding: 10 30;
+    -fx-background-radius: 5;
+}

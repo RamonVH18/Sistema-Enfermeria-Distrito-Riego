@@ -15,7 +15,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox fx:id="root" prefHeight="768.0" prefWidth="1024.0" styleClass="main-root" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<HBox fx:id="root" prefHeight="768.0" prefWidth="1024.0" styleClass="main-root" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" 
+      fx:controller="controladores.CitasController">
     
     <VBox fx:id="sidePanel" alignment="TOP_CENTER" prefWidth="200.0" spacing="20.0" styleClass="side-panel">
         
@@ -93,7 +94,7 @@
                     <VBox.margin>
                         <Insets top="10.0" />
                     </VBox.margin>
-                    <Button fx:id="btnNuevaCita" mnemonicParsing="false" styleClass="new-cita-button" text="+ Nueva Cita" />
+                    <Button fx:id="btnNuevaCita" onAction="#handleNuevaCita" mnemonicParsing="false" styleClass="new-cita-button" text="+ Nueva Cita" />
                 </HBox>
             </VBox> 
         </HBox> 
