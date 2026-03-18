@@ -109,10 +109,6 @@
    5. Lista de citas
 ============================ */
 
-#resumen-citas-container{
-
-}
-
 #descripcion-citas-container{
     -fx-alignment: top-left;
     -fx-orientation: horizontal;

@@ -12,30 +12,9 @@
     -fx-background-color: white;
 }
 
-.menu-button, .menu-button-active, .logout-button {
-    -fx-background-color: transparent;
-    -fx-text-fill: -color-text-white;
-    -fx-alignment: center-left;
-    -fx-font-size: 13px;
-    -fx-border-width: 0 0 1px 0; /* Solo línea inferior */
-    -fx-border-color: rgba(255, 255, 255, 0.1);
-    -fx-cursor: hand;
-}
-
-.menu-button-active {
-    -fx-background-color: -color-active-blue;
-    -fx-font-weight: bold;
-}
-
-.logout-button {
-    -fx-border-color: -color-text-white;
-    -fx-border-width: 1px;
-    -fx-alignment: center;
-}
-
 /* 2. Content Area Styles */
 .content-area {
-    -fx-background-color: -color-content-bg;
+    -fx-background-color: #f5f7fa;
 }
 
 /* 3. Calendar Card Styles */
@@ -48,7 +27,7 @@
 .calendar-month-title {
     -fx-font-size: 16px;
     -fx-font-weight: bold;
-    -fx-text-fill: -color-text-dark;
+    -fx-text-fill: #333333;
 }
 
 /* Personalización profunda del DatePicker nativo */
@@ -73,7 +52,7 @@
 .agenda-date-title {
     -fx-font-size: 14px;
     -fx-font-weight: bold;
-    -fx-text-fill: -color-text-dark;
+    -fx-text-fill: #333333;
 }
 
 /* ListView styles */

@@ -20,7 +20,7 @@
             </VBox.margin>
         </Label>
                 
-        <DatePicker fx:id="datePicker" editable="false" showWeekNumbers="false" styleClass="calendar-control" VBox.vgrow="ALWAYS" />
+        <DatePicker fx:id="datePicker" editable="false" styleClass="calendar-control" VBox.vgrow="ALWAYS" />
     </VBox>
             
     <VBox fx:id="agendaCard" prefWidth="400.0" spacing="10.0" styleClass="agenda-card" HBox.hgrow="NEVER">
@@ -40,7 +40,7 @@
             <VBox.margin>
                 <Insets top="10.0" />
             </VBox.margin>
-            <Button fx:id="btnNuevaCita" mnemonicParsing="false" onAction="#handleNuevaCita" styleClass="new-cita-button" text="+ Nueva Cita" />
+            <Button fx:id="btnNuevaCita" mnemonicParsing="false" onAction="#handleNuevaCita" styleClass="new-cita-button" text="Nueva Cita" />
         </HBox>
     </VBox> 
 </HBox>
