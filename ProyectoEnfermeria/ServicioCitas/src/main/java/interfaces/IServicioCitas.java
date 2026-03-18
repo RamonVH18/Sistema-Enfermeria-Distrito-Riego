@@ -3,11 +3,8 @@ package interfaces;
 import dtos.CitaDTO;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
-import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.List;
-import java.util.Set;
 import request.ActualizarCitaRequest;
 import request.CancelarCitaRequest;
 import request.CrearCitaRequest;
@@ -21,32 +18,51 @@ import response.CrearCitaResponse;
  */
 public interface IServicioCitas {
     
+    /**
+     * Agenda una nueva cita.
+     * @param cita Request con información de la cita a registrar en la base de datos.
+     * @return Response con datos relevantes de la operación.
+     */
     public CrearCitaResponse crear(@Valid CrearCitaRequest cita);
     
+    /**
+     * Reagenda una nueva cita.
+     * @param cita Request con información de la cita a actualizar en la base de datos.
+     * @return Response con datos relevantes de la operación.
+     */
     public ActualizarCitaResponse actualizar(@Valid ActualizarCitaRequest cita);
     
+    /**
+     * Cancela una cita.
+     * @param cita Request con información de la cita a cancelar en la base de datos.
+     * @return Response con datos relevantes de la operación.
+     */
     public CancelarCitaResponse eliminar(@Valid CancelarCitaRequest cita);
     
     /**
-     * 
-     * @return 
+     * Obtiene todas las citas habidas y por haber.
+     * @return Todas las citas de la base de datos.
      */
     public List<CitaDTO> obtenerTodas();
     
-    // Creo que este método tiene más sentido en la clase DAO
+    /**
+     * Obtiene una cita por su id.
+     * @param id ID de la cita.
+     * @return La cita solicitada o null.
+     */
     public CitaDTO obtenerPorId(@NotNull Integer id);
     
-    
+    /**
+     * Obtiene todas las citas pendientes en una fecha específica.
+     * @param fecha Fecha a solicitar.
+     * @return La lista de citas encontradas o null.
+     */
     public List<CitaDTO> obtenerPorFechaPendiente(LocalDate fecha);
     
+    /**
+     * Busca la citas de un empleado por su nombre o curp.
+     * @param nombreCurp Nombre o curp del empleado.
+     * @return La lista de citas encontradas o null.
+     */
     public List<CitaDTO> buscarPorNombreCurpPacientePendiente(String nombreCurp);
-    
-    // PROVISIONAL
-    public List<CitaDTO> obtenerPorFiltroPendiente(
-            String empleado, 
-            LocalDate limite, 
-            Set<DayOfWeek> dias, 
-            LocalTime horaInicio, 
-            LocalTime horaFin
-    );
 }
