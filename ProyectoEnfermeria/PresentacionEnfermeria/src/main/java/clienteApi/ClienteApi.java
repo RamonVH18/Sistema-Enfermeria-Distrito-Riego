@@ -4,15 +4,20 @@
  */
 package clienteApi;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import java.net.URI;
+import java.net.URLEncoder;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.nio.charset.StandardCharsets;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import request.CrearCitaRequest;
 import response.CrearCitaResponse;
+import response.EmpleadoOptionResponse;
 
 /**
  *
@@ -27,11 +32,11 @@ public class ClienteApi {
     public CompletableFuture<CrearCitaResponse> enviarCita(CrearCitaRequest requestData) {
         return CompletableFuture.supplyAsync(() -> {
             try {
-                
+
                 ObjectMapper mapper = new ObjectMapper();
                 mapper.registerModule(new JavaTimeModule());
                 String json = mapper.writeValueAsString(requestData);
-                
+
                 HttpRequest request = HttpRequest.newBuilder()
                         .uri(URI.create("http://localhost:8080/enfermeriaDR/citas"))
                         .header("Content-Type", "application/json")
@@ -51,4 +56,53 @@ public class ClienteApi {
             }
         });
     }
+
+    public CompletableFuture<List<EmpleadoOptionResponse>> obtenerTodosLosEmpleados() {
+        return CompletableFuture.supplyAsync(() -> {
+            try {
+                HttpRequest request = HttpRequest.newBuilder()
+                        .uri(URI.create("http://localhost:8080/enfermeriaDR/empleados"))
+                        .GET()
+                        .build();
+
+                HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+                validarRespuesta(response);
+
+                return mapper.readValue(response.body(), new TypeReference<List<EmpleadoOptionResponse>>() {
+                });
+            } catch (Exception e) {
+                throw new RuntimeException("Error al obtener empleados: " + e.getMessage(), e);
+            }
+        });
+    }
+
+    // 2. Método para obtener por FILTRO (GET /empleados/options?filtroNombre=...)
+    public CompletableFuture<List<EmpleadoOptionResponse>> buscarEmpleadosPorFiltro(String filtro) {
+        return CompletableFuture.supplyAsync(() -> {
+            try {
+                // Importante: Encodear el parámetro por si lleva espacios o caracteres especiales
+                String urlConFiltro = "http://localhost:8080/enfermeriaDR/empleados" + "/options?filtroNombre=" + URLEncoder.encode(filtro, StandardCharsets.UTF_8);
+
+                HttpRequest request = HttpRequest.newBuilder()
+                        .uri(URI.create(urlConFiltro))
+                        .GET()
+                        .build();
+
+                HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+                validarRespuesta(response);
+
+                return mapper.readValue(response.body(), new TypeReference<List<EmpleadoOptionResponse>>() {
+                });
+            } catch (Exception e) {
+                throw new RuntimeException("Error al filtrar empleados: " + e.getMessage(), e);
+            }
+        });
+    }
+
+    private void validarRespuesta(HttpResponse<String> response) {
+        if (response.statusCode() < 200 || response.statusCode() >= 300) {
+            throw new RuntimeException("Error del servidor: " + response.statusCode() + " - " + response.body());
+        }
+    }
+
 }

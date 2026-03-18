@@ -11,6 +11,7 @@ import java.util.List;
 import mapper.EmpleadoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 import response.EmpleadoOptionResponse;
 
 /**
@@ -18,6 +19,7 @@ import response.EmpleadoOptionResponse;
  * @author Ramon Valencia
  */
 @Service
+@Validated
 public class ServicioEmpleado implements IServicioEmpleado {
     
     @Autowired

@@ -6,11 +6,14 @@ package controladores;
 
 import clienteApi.ClienteApi;
 import java.net.URL;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.concurrent.ExecutionException;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -19,7 +22,9 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.util.StringConverter;
 import request.CrearCitaRequest;
+import response.EmpleadoOptionResponse;
 
 /**
  *
@@ -28,50 +33,101 @@ import request.CrearCitaRequest;
 public class AgendarCitaController implements Initializable {
 
     @FXML
-    private ComboBox<String> cbPaciente;
+    private ComboBox<EmpleadoOptionResponse> cbPaciente;
     @FXML
     private TextField txtIdEmpleado;
     @FXML
     private DatePicker dpFechaCita;
     @FXML
     private ComboBox<LocalTime> cbHora;
-    @FXML 
+    @FXML
     private TextArea txtDescripcion;
+    ClienteApi cliente = new ClienteApi();
+    private List<EmpleadoOptionResponse> empleados = new ArrayList<>();
 
     private final ObservableList<String> listaPacientes = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // 1. Llenar horas (ejemplo rápido)
+        
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("hh:mm a");
         LocalTime horaInicio = LocalTime.of(8, 0); // 8:00 AM
         LocalTime horaFin = LocalTime.of(16, 0);   // 4:00 PM
+        crearComboBox();
 
         while (horaInicio.isBefore(horaFin.plusSeconds(1))) {
             cbHora.getItems().add(horaInicio);
-            horaInicio = horaInicio.plusMinutes(15); 
+            horaInicio = horaInicio.plusMinutes(15);
         }
-        // 2. Lógica de búsqueda en el ComboBox
-        cbPaciente.getEditor().textProperty().addListener((obs, oldVal, newVal) -> {
-            if (newVal == null || newVal.isEmpty()) {
-                cbPaciente.hide();
-            } else {
-                // Aquí filtrarías la lista según lo que escribes
-                // Y podrías llamar a la API si quieres búsqueda en tiempo real
-                cbPaciente.show();
+
+    }
+
+    private void crearComboBox() {
+        // Configuración del Converter (Igual que ya lo tienes)
+        cbPaciente.setConverter(new StringConverter<EmpleadoOptionResponse>() {
+            @Override
+            public String toString(EmpleadoOptionResponse e) {
+                return (e == null) ? "" : e.getNombre();
             }
+
+            @Override
+            public EmpleadoOptionResponse fromString(String s) {
+                return cbPaciente.getItems().stream().filter(e -> e.getNombre().equals(s)).findFirst().orElse(null);
+            }
+        });
+
+        // --- 1. ESCUCHAR LA SELECCIÓN PARA EL TEXTFIELD ---
+        cbPaciente.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                txtIdEmpleado.setText(String.valueOf(newSelection.getIdEmpleado()));
+            } else {
+                Platform.runLater(() -> txtIdEmpleado.clear());
+            }
+        });
+
+        // --- 2. ESCUCHAR EL EDITOR PARA FILTRAR ---
+        cbPaciente.getEditor().textProperty().addListener((obs, oldVal, newVal) -> {
+            // Si se borra todo, mandamos cadena vacía para traer todos
+            String filtro = (newVal == null || newVal.trim().isEmpty()) ? "" : newVal;
+            actualizarListaEmpleados(filtro);
+        });
+
+        // Carga inicial
+        actualizarListaEmpleados("");
+    }
+
+    private void actualizarListaEmpleados(String filtro) {
+        cliente.buscarEmpleadosPorFiltro(filtro).thenAccept(lista -> {
+            Platform.runLater(() -> {
+                String currentText = cbPaciente.getEditor().getText();
+
+                cbPaciente.getItems().setAll(lista);
+
+                cbPaciente.getEditor().setText(currentText);
+
+                if (!lista.isEmpty() && !filtro.isEmpty()) {
+                    cbPaciente.show();
+                } else if (filtro.isEmpty()) {
+                    cbPaciente.hide(); 
+                }
+            });
+        }).exceptionally(ex -> {
+            ex.printStackTrace();
+            return null;
         });
     }
 
     @FXML
     private void guardarCita() {
-        
-        Integer idEmpleado = 2;
-        LocalDateTime fechaCita = LocalDateTime.of(dpFechaCita.getValue(), cbHora.getValue());
-        String motivo = txtDescripcion.getText();
-        Integer idEnfermero = 1; //Harcodeado para pruebas
-        CrearCitaRequest cita = new CrearCitaRequest(fechaCita, motivo, idEmpleado, idEnfermero);
-        ClienteApi cliente = new ClienteApi();
-        cliente.enviarCita(cita);
+        EmpleadoOptionResponse seleccionado = cbPaciente.getSelectionModel().getSelectedItem();
+
+        if (seleccionado != null) {
+            Integer idEmpleado = seleccionado.getIdEmpleado();
+            LocalDateTime fechaCita = LocalDateTime.of(dpFechaCita.getValue(), cbHora.getValue());
+            String motivo = txtDescripcion.getText();
+            Integer idEnfermero = 1; //Harcodeado para pruebas
+            CrearCitaRequest cita = new CrearCitaRequest(fechaCita, motivo, idEmpleado, idEnfermero);
+            cliente.enviarCita(cita);
+        }
     }
 }

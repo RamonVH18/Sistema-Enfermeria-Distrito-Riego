@@ -34,7 +34,6 @@ public class CitaController {
     @PostMapping
     public ResponseEntity<CrearCitaResponse> crearCita(@RequestBody CrearCitaRequest request) {
         CrearCitaResponse response = servicioCitas.crear(request);
-        System.out.println("Llego");
         return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
     }
 
