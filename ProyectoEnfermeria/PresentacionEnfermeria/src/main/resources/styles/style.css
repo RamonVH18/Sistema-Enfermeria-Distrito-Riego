@@ -8,9 +8,8 @@
     -color-text-dark: #333333;
 }
 
-/* 1. Side Panel Styles */
-.side-panel {
-    -fx-background-color: #194C87;
+#citas-container{
+    -fx-background-color: white;
 }
 
 .menu-button, .menu-button-active, .logout-button {

@@ -5,42 +5,60 @@
 /* ============================
    Definición de colores principales
 ============================ */
-:root {
-    -color-primary-blue: #004d99;    /* Azul oscuro de la barra lateral */
-    -color-active-blue: #007bff;     /* Azul brillante botones activos */
-    -color-content-bg: #f5f7fa;      /* Gris muy claro fondo principal */
-    -color-card-bg: #ffffff;         /* Fondo de los cuadros blancos */
-    -color-text-white: #ffffff;
-    -color-text-sub: #8ca0b2;        /* Gris azulado subtítulos */
-    -color-text-dark: #333333;       /* Texto principal */
-}
 
 /* ============================
    1. Barra lateral y botones
 ============================ */
+
+.main-root{
+    -fx-font-family:    "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
 .side-panel {
-    -fx-background-color: -color-primary-blue;
+    -fx-background-color: #004d99;
     -fx-padding: 15;
 }
 
-.menu-button, .menu-button-active, .logout-button {
-    -fx-background-color: transparent;
-    -fx-text-fill: -color-text-white;
+.side-panel-footer{
+    -fx-alignment: center;
+    -fx-column-halignment: center;
+    -fx-orientation: vertical;
+    -fx-vgap: 20;
+}
+
+#imagen-logo-container{
+    -fx-alignment: center;
+    -fx-padding: 10 0;
+}
+
+.imagen-descripcion {
+    -fx-text-fill: white;
+    -fx-alignment: center;
+    -fx-font-size: 90%;
+}
+
+.menu-button, .menu-button-active {
+    -fx-background-color: #0556ac;
+    -fx-text-fill: white;
     -fx-font-size: 13px;
     -fx-alignment: center-left;
     -fx-border-width: 0 0 1px 0;  /* Línea inferior */
     -fx-border-color: rgba(255,255,255,0.1);
+    -fx-border-radius: 5;
     -fx-cursor: hand;
     -fx-padding: 8 10;
 }
 
-.menu-button-active {
-    -fx-background-color: -color-active-blue;
+.logout-button{
+    -fx-text-fill: white;
+    -fx-font-size: 130%;
+    -fx-background-color: #14a81c;
+    -fx-border-color: rgba(255,255,255,0.1);
     -fx-font-weight: bold;
 }
 
 .logout-button {
-    -fx-border-color: -color-text-white;
+    -fx-border-color: white;
     -fx-border-width: 1px;
     -fx-alignment: center;
     -fx-padding: 8 10;
@@ -49,64 +67,66 @@
 /* ============================
    2. Área de contenido
 ============================ */
-.content-area {
-    -fx-background-color: -color-content-bg;
-    -fx-padding: 20;
+
+#panel-principal{
+   -fx-spacing: 50; 
+   -fx-alignment: top-center;
+   -fx-background-color: white;
 }
 
 /* ============================
    3. Cuadros de estadísticas (Citas de Hoy, Revisiones, etc.)
 ============================ */
+
+#datos-container{
+    -fx-alignment: center;
+    -fx-hgap: 20;
+    -fx-padding: 20 10;
+}
+
+
 .stat-card {
-    -fx-background-color: -color-card-bg;
-    -fx-background-radius: 10;
-    -fx-padding: 15;
+    -fx-background-color: #f5f7fa;
+    -fx-padding: 10;
+    -fx-border-color: black;
+    -fx-alignment: center;
+    -fx-border-radius: 5;
     -fx-spacing: 5;
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 5, 0, 0, 3);
-    -fx-alignment: center; /* centra título y número */
 }
 
 .stat-card-title {
-    -fx-font-size: 13px;
     -fx-font-weight: bold;
-    -fx-text-fill: -color-text-sub;
+    -fx-text-fill: black;
+    -fx-font-size: 105%;
 }
 
 .stat-card-number {
-    -fx-font-size: 18px;
-    -fx-font-weight: bold;
-    -fx-text-fill: -color-text-dark;
-}
-
-/* ============================
-   4. Búsqueda rápida
-============================ */
-.search-box {
-    -fx-spacing: 10;
-    -fx-alignment: center-left;
-    -fx-padding: 10 0;
-}
-
-.search-box TextField {
-    -fx-pref-width: 200px;
-    -fx-padding: 5;
-    -fx-background-radius: 5px;
-}
-
-.search-box Button {
-    -fx-background-color: -color-active-blue;
-    -fx-text-fill: white;
-    -fx-font-weight: bold;
-    -fx-background-radius: 5px;
-    -fx-cursor: hand;
-    -fx-padding: 5 15;
+    -fx-text-fill: #333333;
+    -fx-font-size: 100%;
 }
 
 /* ============================
    5. Lista de citas
 ============================ */
+
+#resumen-citas-container{
+
+}
+
+#descripcion-citas-container{
+    -fx-alignment: top-left;
+    -fx-orientation: horizontal;
+    -fx-hgap: 20;
+    -fx-padding: 20 10;
+}
+
+.descripcion-cita{
+    -fx-font-weight: bold;
+    -fx-font-size: 110%;
+}
+
 .cita-card {
-    -fx-background-color: -color-card-bg;
+    -fx-background-color: #ffffff;
     -fx-background-radius: 10;
     -fx-padding: 10;
     -fx-spacing: 10;
@@ -116,23 +136,23 @@
 
 .cita-time {
     -fx-font-size: 13px;
-    -fx-text-fill: -color-text-dark;
+    -fx-text-fill: #333333;
     -fx-font-weight: bold;
 }
 
 .cita-info {
     -fx-font-size: 12px;
-    -fx-text-fill: -color-text-sub;
+    -fx-text-fill: #8ca0b2;
 }
 
 .cita-status {
     -fx-font-size: 12px;
     -fx-font-weight: bold;
-    -fx-text-fill: -color-active-blue;
+    -fx-text-fill: #007bff;
 }
 
 .cita-button {
-    -fx-background-color: -color-active-blue;
+    -fx-background-color: #007bff;
     -fx-text-fill: white;
     -fx-font-weight: bold;
     -fx-padding: 5 10;
