@@ -14,6 +14,7 @@
         <module>../ServicioCitas</module>
         <module>../EnfermeriaCommon</module>
         <module>../ExcepcionesWeb</module>
+        <module>../ServicioEmpleados</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
