@@ -12,12 +12,12 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.concurrent.ExecutionException;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
@@ -49,7 +49,7 @@ public class AgendarCitaController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("hh:mm a");
         LocalTime horaInicio = LocalTime.of(8, 0); // 8:00 AM
         LocalTime horaFin = LocalTime.of(16, 0);   // 4:00 PM
@@ -108,7 +108,7 @@ public class AgendarCitaController implements Initializable {
                 if (!lista.isEmpty() && !filtro.isEmpty()) {
                     cbPaciente.show();
                 } else if (filtro.isEmpty()) {
-                    cbPaciente.hide(); 
+                    cbPaciente.hide();
                 }
             });
         }).exceptionally(ex -> {
@@ -127,7 +127,34 @@ public class AgendarCitaController implements Initializable {
             String motivo = txtDescripcion.getText();
             Integer idEnfermero = 1; //Harcodeado para pruebas
             CrearCitaRequest cita = new CrearCitaRequest(fechaCita, motivo, idEmpleado, idEnfermero);
-            cliente.enviarCita(cita);
+            cliente.enviarCita(cita).thenAccept(res -> {
+                mostrarAlerta("Éxito", "La cita se ha agendado correctamente.", Alert.AlertType.INFORMATION);
+                // Opcional: Limpiar el formulario tras el éxito
+                Platform.runLater(this::limpiarFormulario);
+            })
+                    .exceptionally(ex -> {
+                        mostrarAlerta("Error de Conexión", "No se pudo guardar la cita: " + ex.getMessage(), Alert.AlertType.ERROR);
+                        return null;
+                    });
         }
+    }
+
+    private void limpiarFormulario() {
+        cbPaciente.getSelectionModel().clearSelection();
+        cbPaciente.getEditor().clear();
+        txtIdEmpleado.clear();
+        dpFechaCita.setValue(null);
+        cbHora.getSelectionModel().clearSelection();
+        txtDescripcion.clear();
+    }
+
+    private void mostrarAlerta(String titulo, String mensaje, Alert.AlertType tipo) {
+        Platform.runLater(() -> {
+            Alert alerta = new Alert(tipo);
+            alerta.setTitle(titulo);
+            alerta.setHeaderText(null); // Esto quita el encabezado gris grueso
+            alerta.setContentText(mensaje);
+            alerta.showAndWait();
+        });
     }
 }
