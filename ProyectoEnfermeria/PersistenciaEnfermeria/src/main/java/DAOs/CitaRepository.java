@@ -25,6 +25,6 @@ public interface CitaRepository extends JpaRepository<Cita, Integer>{
     
     List<Cita> findByFechaHoraBetweenAndEstado(LocalDateTime inicio, LocalDateTime fin, EstadoCita estado);
     
-    @Query("SELECT c FROM Cita c WHERE c.estado = :estado AND (CONCAT(c.empleado.nombres, ' ', c.empleado.apellidoPaterno, ' ', c.empleado.apellidoMaterno) LIKE %:curp_nombre% OR c.empleado.curp = :curp_nombre)")
+    @Query("SELECT c FROM Cita c WHERE c.estado = :estado AND (LOWER(CONCAT(c.empleado.nombres, ' ', c.empleado.apellidoPaterno, ' ', c.empleado.apellidoMaterno)) LIKE LOWER(CONCAT('%', :curp_nombre, '%')) OR c.empleado.curp = :curp_nombre)")
     List<Cita> findByNombreOrCurpPendiente(@Param("curp_nombre") String nombreCurp, @Param("estado") EstadoCita estado);
 }

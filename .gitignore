@@ -3,3 +3,6 @@
 /ProyectoEnfermeria/EnfermeriaDTOs/target/
 /ProyectoEnfermeria/EnfermeriaCommon/target/
 /ProyectoEnfermeria/GestionOrdenes/target/
+*.class
+*.lst
+ProyectoEnfermeria/PresentacionEnfermeria/target/PresentacionEnfermeria-1.0-SNAPSHOT.jar
