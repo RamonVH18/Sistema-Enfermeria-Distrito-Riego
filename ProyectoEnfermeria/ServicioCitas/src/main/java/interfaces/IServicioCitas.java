@@ -27,19 +27,22 @@ public interface IServicioCitas {
     
     public CancelarCitaResponse eliminar(@Valid CancelarCitaRequest cita);
     
-    // No creo que se llegue a necesitar
+    /**
+     * 
+     * @return 
+     */
     public List<CitaDTO> obtenerTodas();
     
     // Creo que este método tiene más sentido en la clase DAO
     public CitaDTO obtenerPorId(@NotNull Integer id);
     
     
-    public List<CitaDTO> obtenerPorFecha(LocalDate fecha);
+    public List<CitaDTO> obtenerPorFechaPendiente(LocalDate fecha);
     
-    public List<CitaDTO> buscarPorNombreCurpPaciente(String nombre, String curp);
+    public List<CitaDTO> buscarPorNombreCurpPacientePendiente(String nombreCurp);
     
     // PROVISIONAL
-    public List<CitaDTO> obtenerPorFiltro(
+    public List<CitaDTO> obtenerPorFiltroPendiente(
             String empleado, 
             LocalDate limite, 
             Set<DayOfWeek> dias, 

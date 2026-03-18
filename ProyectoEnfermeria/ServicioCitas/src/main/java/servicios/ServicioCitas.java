@@ -8,14 +8,14 @@ import entidades.Cita;
 import entidades.Empleado;
 import entidades.Enfermero;
 import enums.EstadoCita;
+import enums.EstadoEmpleado;
 import exception.CitasException;
 import interfaces.IServicioCitas;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -43,8 +43,10 @@ public class ServicioCitas implements IServicioCitas{
     private final EnfermeroRepository enfermeroRepository;
     
     private final int DURACION_CITA = 15;
-    private final LocalTime HORA_INICIO_CITAS = LocalTime.of(7, 0, 0);
-    private final LocalTime HORA_TERMINO_CITAS = LocalTime.of(15, 0, 0);
+    private final LocalTime HORA_INICIO_CITAS = LocalTime.of(8, 0, 0);
+    private final LocalTime HORA_TERMINO_CITAS = LocalTime.of(16, 0, 0);
+    
+    private static final System.Logger LOG = System.getLogger(ServicioCitas.class.getName());
 
     public ServicioCitas(CitaRepository citaRepository, EmpleadoRepository empleadoRepository, EnfermeroRepository enfermeroRepository) {
         this.citaRepository = citaRepository;
@@ -85,11 +87,37 @@ public class ServicioCitas implements IServicioCitas{
         // Guarda la cita en la base de datos
         nuevaCita = citaRepository.save(nuevaCita);
         
+        // Extrae los datos de la cita
+        
+        // Nombre del empleado
+        String nombreEmpleado = empleadoAsociado.getNombres();
+        
+        // Formateador de fechas y horas
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy : HH:mm:ss");
+        
+        // Fecha y hora de la cita
+        LocalDateTime fechaHoraCita = nuevaCita.getFechaHora();
+        
+        // Fecha y hora actual
+        LocalDateTime fechaHoraActual = LocalDateTime.now();
+        
+        // Mensaje de la fecha y hora de la cita (formateada)
+        String msgFechaHoraCita = fechaHoraCita.format(dateFormat);
+        
+        // Mensaje de la fecha y hora actual (formateada)
+        String msgFechaHora = fechaHoraActual.format(dateFormat);
+        
+        // Mensaje a loggear
+        String logMsg = String.format("Nueva cita creada exitosamente. Empleado: %s, Cita: %s, Operación: %s", nombreEmpleado, msgFechaHoraCita, msgFechaHora);
+        
+        // Loggeo del sistema
+        LOG.log(System.Logger.Level.INFO, logMsg);
+        
         // Regresa la respuesta
         return new CrearCitaResponse(
-                nuevaCita.getEmpleado().getNombres(), 
-                nuevaCita.getFechaHora(), 
-                LocalDateTime.now()
+                nombreEmpleado, 
+                fechaHoraCita, 
+                fechaHoraActual
         );
     }
 
@@ -123,8 +151,32 @@ public class ServicioCitas implements IServicioCitas{
         // Actualiza la cita con la nueva fecha y hora
         citaActualizar = citaRepository.save(citaActualizar);
         
+        // Formateador de fechas y horas
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy : HH:mm:ss");
+        
+        // Nombre del empleado asociado a la cita
+        String nombreEmpleado = citaActualizar.getEmpleado().getNombres();
+        
+        // Nueva fecha y hora de la cita
+        LocalDateTime nuevaFechaHoraCita = citaActualizar.getFechaHora();
+        
+         // Fecha y hora actual
+        LocalDateTime fechaHoraActual = LocalDateTime.now();
+        
+        // Mensaje de la nueva fecha y hora de la cita
+        String msgFechaHoraCita = nuevaFechaHoraCita.format(dateFormat);
+        
+        // Mensaje de la fecha y hora actual (formateada)
+        String msgFechaHora = fechaHoraActual.format(dateFormat);
+        
+        // Mensaje a loggear
+        String logMsg = String.format("Cita reagendada exitosamente. Empleado: %s, Cita: %s, Operación: %s", nombreEmpleado, msgFechaHoraCita, msgFechaHora);
+        
+        // Loggeo del sistema
+        LOG.log(System.Logger.Level.INFO, logMsg);
+        
         // Regresa la respuesta
-        return new ActualizarCitaResponse(citaActualizar.getEmpleado().getNombres(), LocalDateTime.now());
+        return new ActualizarCitaResponse(nombreEmpleado, fechaHoraActual);
     }
 
     @Override
@@ -134,15 +186,37 @@ public class ServicioCitas implements IServicioCitas{
         if(citaEliminar == null)
             throw new CitasException("La cita no existe.", HttpStatus.BAD_REQUEST, "400");
         
-        citaRepository.delete(citaEliminar);
-        return new CancelarCitaResponse(citaEliminar.getEmpleado().getNombres(), LocalDateTime.now());
+        citaEliminar.setEstado(EstadoCita.CANCELADA);
+        citaEliminar = citaRepository.save(citaEliminar);
+        
+        // Formateador de fechas y horas
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy : HH:mm:ss");
+        
+        // Nombre del empleado asociado a la cita
+        String nombreEmpleado = citaEliminar.getEmpleado().getNombres();
+        
+         // Fecha y hora actual
+        LocalDateTime fechaHoraActual = LocalDateTime.now();
+        
+        // Mensaje de la fecha y hora actual (formateada)
+        String msgFechaHora = fechaHoraActual.format(dateFormat);
+        
+        // Mensaje a loggear
+        String logMsg = String.format("Cita cancelada exitosamente. Empleado: %s, Operación: %s", nombreEmpleado, msgFechaHora);
+        
+        // Loggeo del sistema
+        LOG.log(System.Logger.Level.INFO, logMsg);
+        
+        return new CancelarCitaResponse(nombreEmpleado, fechaHoraActual);
     }
 
     @Override
     public List<CitaDTO> obtenerTodas() {
         List<Cita> citasEncontradas = citaRepository.findAll();
-        List<CitaDTO> citasEncontradasDTO = CitaMapper.toDTOList(citasEncontradas);
-        return citasEncontradasDTO;
+        if(!citasEncontradas.isEmpty()){
+            List<CitaDTO> citasEncontradasDTO = CitaMapper.toDTOList(citasEncontradas);
+            return citasEncontradasDTO;
+        } else { return null; }
     }
 
     @Override
@@ -153,17 +227,48 @@ public class ServicioCitas implements IServicioCitas{
     }
 
     @Override
-    public List<CitaDTO> obtenerPorFecha(LocalDate fecha) {
-        return null;
+    public List<CitaDTO> obtenerPorFechaPendiente(LocalDate fecha) {
+        // Verifica que la fecha no sea null
+        if(fecha == null){ return null; }
+        else{
+            // Lista de citas encontradas
+            List<CitaDTO> citasEncontradasDTO;
+            // Límites (mismo día)
+            LocalDateTime inicio = LocalDateTime.of(fecha, LocalTime.of(0, 0, 0));
+            LocalDateTime fin = LocalDateTime.of(fecha, LocalTime.of(23, 59, 59));
+            // Ejecuta la consulta
+            List<Cita> citasEncontradas = citaRepository.findByFechaHoraBetweenAndEstado(inicio, fin, EstadoCita.PENDIENTE.toString());
+            // Si la lista de citas no está vacía
+            if (citasEncontradas != null && !citasEncontradas.isEmpty()){
+                // Mapea las citas encontradas a DTOs
+                citasEncontradasDTO = CitaMapper.toDTOList(citasEncontradas);
+                // Regresa la lista de citas
+                return citasEncontradasDTO;
+            } else{ return null; }
+        }
     }
 
     @Override
-    public List<CitaDTO> buscarPorNombreCurpPaciente(String nombre, String curp) {
-        return null;
+    public List<CitaDTO> buscarPorNombreCurpPacientePendiente(String nombreCurp) {
+        // Verifica que la fecha no sea null
+        if(nombreCurp == null){ return null; }
+        else{
+            // Lista de citas encontradas
+            List<CitaDTO> citasEncontradasDTO;
+            // Ejecuta la consulta
+            List<Cita> citasEncontradas = citaRepository.findByNombreOrCurpPendiente(nombreCurp, EstadoCita.PENDIENTE.toString());
+            // Si la lista de citas no está vacía
+            if (citasEncontradas != null && !citasEncontradas.isEmpty()){
+                // Mapea las citas encontradas a DTOs
+                citasEncontradasDTO = CitaMapper.toDTOList(citasEncontradas);
+                // Regresa la lista de citas
+                return citasEncontradasDTO;
+            } else{ return null; }
+        }
     }
 
     @Override
-    public List<CitaDTO> obtenerPorFiltro(String empleado, LocalDate limite, Set<DayOfWeek> dias, LocalTime horaInicio, LocalTime horaFin) {
+    public List<CitaDTO> obtenerPorFiltroPendiente(String empleado, LocalDate limite, Set<DayOfWeek> dias, LocalTime horaInicio, LocalTime horaFin) {
         return null;
     }
     

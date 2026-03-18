@@ -4,6 +4,8 @@ import entidades.Cita;
 import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -20,4 +22,11 @@ public interface CitaRepository extends JpaRepository<Cita, Integer>{
     
     List<Cita> findByFechaHoraBetween(LocalDateTime inicio, LocalDateTime fin);
     
+    List<Cita> findByFechaHoraBetweenAndEstado(LocalDateTime inicio, LocalDateTime fin, String estado);
+    
+    @Query("SELECT c FROM Cita c "
+            + "WHERE CONCAT(c.empleado.nombres, ' ', c.empleado.apellidoPaterno, ' ', c.empleado.apellidoMaterno) LIKE %:curp_nombre% "
+            + "OR c.empleado.curp = :curp_nombre "
+            + "AND c.estado = :estado")
+    List<Cita> findByNombreOrCurpPendiente(@Param("curp_nombre") String nombreCurp, @Param("estado") String estado);
 }

@@ -55,12 +55,12 @@ public class CitaController {
     @GetMapping("/buscar")
     public ResponseEntity<List<CitaDTO>> obtenerPorFecha(
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha) {
-        return ResponseEntity.ok(servicioCitas.obtenerPorFecha(fecha));
+        return ResponseEntity.ok(servicioCitas.obtenerPorFechaPendiente(fecha));
     }
 
     @GetMapping("/buscar/paciente")
-    public ResponseEntity<List<CitaDTO>> buscarPorNombreCurp(@RequestParam String nombre, String curp) {
-        List<CitaDTO> citas = servicioCitas.buscarPorNombreCurpPaciente(nombre, curp);
+    public ResponseEntity<List<CitaDTO>> buscarPorNombreCurp(@RequestParam String nombreCurp) {
+        List<CitaDTO> citas = servicioCitas.buscarPorNombreCurpPacientePendiente(nombreCurp);
         return ResponseEntity.ok(citas);
     }
 }
