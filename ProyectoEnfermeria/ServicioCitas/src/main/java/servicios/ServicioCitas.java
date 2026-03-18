@@ -237,7 +237,7 @@ public class ServicioCitas implements IServicioCitas{
             LocalDateTime inicio = LocalDateTime.of(fecha, LocalTime.of(0, 0, 0));
             LocalDateTime fin = LocalDateTime.of(fecha, LocalTime.of(23, 59, 59));
             // Ejecuta la consulta
-            List<Cita> citasEncontradas = citaRepository.findByFechaHoraBetweenAndEstado(inicio, fin, EstadoCita.PENDIENTE.toString());
+            List<Cita> citasEncontradas = citaRepository.findByFechaHoraBetweenAndEstado(inicio, fin, EstadoCita.PENDIENTE);
             // Si la lista de citas no está vacía
             if (citasEncontradas != null && !citasEncontradas.isEmpty()){
                 // Mapea las citas encontradas a DTOs
@@ -256,7 +256,7 @@ public class ServicioCitas implements IServicioCitas{
             // Lista de citas encontradas
             List<CitaDTO> citasEncontradasDTO;
             // Ejecuta la consulta
-            List<Cita> citasEncontradas = citaRepository.findByNombreOrCurpPendiente(nombreCurp, EstadoCita.PENDIENTE.toString());
+            List<Cita> citasEncontradas = citaRepository.findByNombreOrCurpPendiente(nombreCurp, EstadoCita.PENDIENTE);
             // Si la lista de citas no está vacía
             if (citasEncontradas != null && !citasEncontradas.isEmpty()){
                 // Mapea las citas encontradas a DTOs

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package entidades;
 
 import jakarta.persistence.Column;
@@ -14,6 +10,7 @@ import jakarta.persistence.Table;
 /**
  *
  * @author Ramon Valencia
+ * @author Leonardo Flores Leyva - 252390
  */
 @Entity
 @Table(name = "direcciones_empleado")
@@ -39,10 +36,15 @@ public class DireccionEmpleado {
     @Column(name = "ciudad", nullable = false)
     private String ciudad;
 
-    public DireccionEmpleado() {
-    }
+    public DireccionEmpleado() {}
 
-    public DireccionEmpleado(int numero, String calle, String municipio, int cp, String ciudad) {
+    public DireccionEmpleado(
+            int numero, 
+            String calle, 
+            String municipio, 
+            int cp, 
+            String ciudad
+    ) {
         this.numero = numero;
         this.calle = calle;
         this.municipio = municipio;
@@ -50,7 +52,14 @@ public class DireccionEmpleado {
         this.ciudad = ciudad;
     }
 
-    public DireccionEmpleado(Integer id, int numero, String calle, String municipio, int cp, String ciudad) {
+    public DireccionEmpleado(
+            Integer id, 
+            int numero, 
+            String calle, 
+            String municipio, 
+            int cp, 
+            String ciudad
+    ) {
         this.idDireccion = id;
         this.numero = numero;
         this.calle = calle;
@@ -59,53 +68,29 @@ public class DireccionEmpleado {
         this.ciudad = ciudad;
     }
 
-    public Integer getId() {
-        return idDireccion;
-    }
+    public Integer getId() {return idDireccion;}
 
-    public void setId(Integer id) {
-        this.idDireccion = id;
-    }
+    public void setId(Integer id) {this.idDireccion = id;}
 
-    public int getNumero() {
-        return numero;
-    }
+    public int getNumero() {return numero;}
 
-    public void setNumero(int numero) {
-        this.numero = numero;
-    }
+    public void setNumero(int numero) {this.numero = numero;}
 
-    public String getCalle() {
-        return calle;
-    }
+    public String getCalle() {return calle;}
 
-    public void setCalle(String calle) {
-        this.calle = calle;
-    }
+    public void setCalle(String calle) {this.calle = calle;}
 
-    public String getMunicipio() {
-        return municipio;
-    }
+    public String getMunicipio() {return municipio;}
 
-    public void setMunicipio(String municipio) {
-        this.municipio = municipio;
-    }
+    public void setMunicipio(String municipio) {this.municipio = municipio;}
 
-    public int getCp() {
-        return cp;
-    }
+    public int getCp() {return cp;}
 
-    public void setCp(int cp) {
-        this.cp = cp;
-    }
+    public void setCp(int cp) {this.cp = cp;}
 
-    public String getCiudad() {
-        return ciudad;
-    }
+    public String getCiudad() {return ciudad;}
 
-    public void setCiudad(String ciudad) {
-        this.ciudad = ciudad;
-    }
+    public void setCiudad(String ciudad) {this.ciudad = ciudad;}
 
     @Override
     public String toString() {
@@ -118,5 +103,4 @@ public class DireccionEmpleado {
                 + ", ciudad=" + ciudad
                 + '}';
     }
-
 }

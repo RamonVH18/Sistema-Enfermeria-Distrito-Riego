@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package entidades;
 
 import enums.PeriodoCita;
@@ -19,6 +15,7 @@ import java.time.LocalTime;
 /**
  *
  * @author Ramon Valencia
+ * @author Leonardo Flores Leyva - 252390
  */
 @Entity
 @Table(name = "series")
@@ -42,8 +39,7 @@ public class Serie {
     @Column(name = "hora", nullable = false)
     private LocalTime hora;
 
-    public Serie() {
-    }
+    public Serie() {}
 
     public Serie(PeriodoCita periodo, LocalDate fechaInicio, LocalDate fechaFin, LocalTime hora) {
         this.periodo = periodo;
@@ -60,45 +56,25 @@ public class Serie {
         this.hora = hora;
     }
 
-    public Integer getId() {
-        return idSerie;
-    }
+    public Integer getId() {return idSerie;}
 
-    public void setId(Integer id) {
-        this.idSerie = id;
-    }
+    public void setId(Integer id) {this.idSerie = id;}
 
-    public PeriodoCita getPeriodo() {
-        return periodo;
-    }
+    public PeriodoCita getPeriodo() {return periodo;}
 
-    public void setPeriodo(PeriodoCita periodo) {
-        this.periodo = periodo;
-    }
+    public void setPeriodo(PeriodoCita periodo) {this.periodo = periodo;}
 
-    public LocalDate getFechaInicio() {
-        return fechaInicio;
-    }
+    public LocalDate getFechaInicio() {return fechaInicio;}
 
-    public void setFechaInicio(LocalDate fechaInicio) {
-        this.fechaInicio = fechaInicio;
-    }
+    public void setFechaInicio(LocalDate fechaInicio) {this.fechaInicio = fechaInicio;}
 
-    public LocalDate getFechaFin() {
-        return fechaFin;
-    }
+    public LocalDate getFechaFin() {return fechaFin;}
 
-    public void setFechaFin(LocalDate fechaFin) {
-        this.fechaFin = fechaFin;
-    }
+    public void setFechaFin(LocalDate fechaFin) {this.fechaFin = fechaFin;}
 
-    public LocalTime getHora() {
-        return hora;
-    }
+    public LocalTime getHora() {return hora;}
 
-    public void setHora(LocalTime hora) {
-        this.hora = hora;
-    }
+    public void setHora(LocalTime hora) {this.hora = hora;}
 
     @Override
     public String toString() {
@@ -110,5 +86,4 @@ public class Serie {
                 + ", hora=" + hora
                 + '}';
     }
-
 }

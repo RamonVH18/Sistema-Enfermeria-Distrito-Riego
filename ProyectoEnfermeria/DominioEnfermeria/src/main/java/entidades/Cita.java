@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package entidades;
 
 import enums.EstadoCita;
@@ -21,6 +17,7 @@ import java.time.LocalDateTime;
 /**
  *
  * @author Ramon Valencia
+ * @author Leonardo Flores Leyva - 252390
  */
 @Entity
 @Table(name = "citas")
@@ -56,7 +53,14 @@ public class Cita {
     public Cita() {
     }
 
-    public Cita(LocalDateTime fechaHora, EstadoCita estado, String motivo, Serie serie, Empleado empleado, Enfermero enfermero) {
+    public Cita(
+            LocalDateTime fechaHora, 
+            EstadoCita estado, 
+            String motivo, 
+            Serie serie, 
+            Empleado empleado, 
+            Enfermero enfermero
+    ) {
         this.fechaHora = fechaHora;
         this.estado = estado;
         this.motivo = motivo;
@@ -65,7 +69,15 @@ public class Cita {
         this.enfermero = enfermero;
     }
 
-    public Cita(Integer idCita, LocalDateTime fechaHora, EstadoCita estado, String motivo, Serie serie, Empleado empleado, Enfermero enfermero) {
+    public Cita(
+            Integer idCita, 
+            LocalDateTime fechaHora, 
+            EstadoCita estado, 
+            String motivo, 
+            Serie serie, 
+            Empleado empleado, 
+            Enfermero enfermero
+    ) {
         this.idCita = idCita;
         this.fechaHora = fechaHora;
         this.estado = estado;
@@ -75,61 +87,33 @@ public class Cita {
         this.enfermero = enfermero;
     }
 
-    public Integer getIdCita() {
-        return idCita;
-    }
+    public Integer getIdCita() {return idCita;}
 
-    public void setIdCita(Integer idCita) {
-        this.idCita = idCita;
-    }
+    public void setIdCita(Integer idCita) {this.idCita = idCita;}
 
-    public LocalDateTime getFechaHora() {
-        return fechaHora;
-    }
+    public LocalDateTime getFechaHora() {return fechaHora;}
 
-    public void setFechaHora(LocalDateTime fechaHora) {
-        this.fechaHora = fechaHora;
-    }
+    public void setFechaHora(LocalDateTime fechaHora) {this.fechaHora = fechaHora;}
 
-    public EstadoCita getEstado() {
-        return estado;
-    }
+    public EstadoCita getEstado() {return estado;}
 
-    public void setEstado(EstadoCita estado) {
-        this.estado = estado;
-    }
+    public void setEstado(EstadoCita estado) {this.estado = estado;}
 
-    public String getMotivo() {
-        return motivo;
-    }
+    public String getMotivo() {return motivo;}
 
-    public void setMotivo(String motivo) {
-        this.motivo = motivo;
-    }
+    public void setMotivo(String motivo) {this.motivo = motivo;}
 
-    public Serie getSerie() {
-        return serie;
-    }
+    public Serie getSerie() {return serie;}
 
-    public void setSerie(Serie serie) {
-        this.serie = serie;
-    }
+    public void setSerie(Serie serie) {this.serie = serie;}
 
-    public Empleado getEmpleado() {
-        return empleado;
-    }
+    public Empleado getEmpleado() {return empleado;}
 
-    public void setEmpleado(Empleado empleado) {
-        this.empleado = empleado;
-    }
+    public void setEmpleado(Empleado empleado) {this.empleado = empleado;}
 
-    public Enfermero getEnfermero() {
-        return enfermero;
-    }
+    public Enfermero getEnfermero() {return enfermero;}
 
-    public void setEnfermero(Enfermero enfermero) {
-        this.enfermero = enfermero;
-    }
+    public void setEnfermero(Enfermero enfermero) {this.enfermero = enfermero;}
 
     @Override
     public String toString() {
@@ -143,5 +127,4 @@ public class Cita {
                 + ", enfermero=" + enfermero
                 + '}';
     }
-
 }

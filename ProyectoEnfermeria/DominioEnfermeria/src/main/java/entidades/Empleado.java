@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package entidades;
 
 import enums.EstadoEmpleado;
@@ -23,6 +19,7 @@ import java.util.List;
 /**
  *
  * @author Ramon Valencia
+ * @author Leonardo Flores Leyva - 252390
  */
 @Entity
 @Table(name = "empleados")
@@ -72,10 +69,22 @@ public class Empleado {
     @OneToMany(mappedBy = "empleado")
     private List<Cita> citas;
 
-    public Empleado() {
-    }
+    public Empleado() {}
 
-    public Empleado(String nombres, String apellidoPaterno, String apellidoMaterno, LocalDate fechaNacimiento, String telefono, String curp, String unidadTrabajo, String genero, EstadoEmpleado estado, Departamento departamento, DireccionEmpleado direccion, List<Cita> citas) {
+    public Empleado(
+            String nombres, 
+            String apellidoPaterno, 
+            String apellidoMaterno, 
+            LocalDate fechaNacimiento, 
+            String telefono, 
+            String curp, 
+            String unidadTrabajo, 
+            String genero, 
+            EstadoEmpleado estado, 
+            Departamento departamento, 
+            DireccionEmpleado direccion, 
+            List<Cita> citas
+    ) {
         this.nombres = nombres;
         this.apellidoPaterno = apellidoPaterno;
         this.apellidoMaterno = apellidoMaterno;
@@ -90,7 +99,19 @@ public class Empleado {
         this.citas = citas;
     }
 
-    public Empleado(Integer id, String nombres, String apellidoPaterno, String apellidoMaterno, LocalDate fechaNacimiento, String telefono, String curp, String unidadTrabajo, String genero, EstadoEmpleado estado, Departamento departamento, DireccionEmpleado direccion) {
+    public Empleado(
+            Integer id, 
+            String nombres, 
+            String apellidoPaterno, 
+            String apellidoMaterno, 
+            LocalDate fechaNacimiento, 
+            String telefono, String curp, 
+            String unidadTrabajo, 
+            String genero, 
+            EstadoEmpleado estado, 
+            Departamento departamento, 
+            DireccionEmpleado direccion
+    ) {
         this.idEmpleado = id;
         this.nombres = nombres;
         this.apellidoPaterno = apellidoPaterno;
@@ -105,101 +126,53 @@ public class Empleado {
         this.direccion = direccion;
     }
 
-    public Integer getId() {
-        return idEmpleado;
-    }
+    public Integer getId() {return idEmpleado;}
 
-    public void setId(Integer id) {
-        this.idEmpleado = id;
-    }
+    public void setId(Integer id) {this.idEmpleado = id;}
 
-    public String getNombres() {
-        return nombres;
-    }
+    public String getNombres() {return nombres;}
 
-    public void setNombres(String nombres) {
-        this.nombres = nombres;
-    }
+    public void setNombres(String nombres) {this.nombres = nombres;}
 
-    public String getApellidoPaterno() {
-        return apellidoPaterno;
-    }
+    public String getApellidoPaterno() {return apellidoPaterno;}
 
-    public void setApellidoPaterno(String apellidoPaterno) {
-        this.apellidoPaterno = apellidoPaterno;
-    }
+    public void setApellidoPaterno(String apellidoPaterno) {this.apellidoPaterno = apellidoPaterno;}
 
-    public String getApellidoMaterno() {
-        return apellidoMaterno;
-    }
+    public String getApellidoMaterno() {return apellidoMaterno;}
 
-    public void setApellidoMaterno(String apellidoMaterno) {
-        this.apellidoMaterno = apellidoMaterno;
-    }
+    public void setApellidoMaterno(String apellidoMaterno) {this.apellidoMaterno = apellidoMaterno;}
 
-    public LocalDate getFechaNacimiento() {
-        return fechaNacimiento;
-    }
+    public LocalDate getFechaNacimiento() {return fechaNacimiento;}
 
-    public void setFechaNacimiento(LocalDate fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
-    }
+    public void setFechaNacimiento(LocalDate fechaNacimiento) {this.fechaNacimiento = fechaNacimiento;}
 
-    public String getTelefono() {
-        return telefono;
-    }
+    public String getTelefono() {return telefono;}
 
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
+    public void setTelefono(String telefono) {this.telefono = telefono;}
 
-    public String getCurp() {
-        return curp;
-    }
+    public String getCurp() {return curp;}
 
-    public void setCurp(String curp) {
-        this.curp = curp;
-    }
+    public void setCurp(String curp) {this.curp = curp;}
 
-    public String getUnidadTrabajo() {
-        return unidadTrabajo;
-    }
+    public String getUnidadTrabajo() {return unidadTrabajo;}
 
-    public void setUnidadTrabajo(String unidadTrabajo) {
-        this.unidadTrabajo = unidadTrabajo;
-    }
+    public void setUnidadTrabajo(String unidadTrabajo) {this.unidadTrabajo = unidadTrabajo;}
 
-    public String getGenero() {
-        return genero;
-    }
+    public String getGenero() {return genero;}
 
-    public void setGenero(String genero) {
-        this.genero = genero;
-    }
+    public void setGenero(String genero) {this.genero = genero;}
 
-    public EstadoEmpleado getEstado() {
-        return estado;
-    }
+    public EstadoEmpleado getEstado() {return estado;}
 
-    public void setEstado(EstadoEmpleado estado) {
-        this.estado = estado;
-    }
+    public void setEstado(EstadoEmpleado estado) {this.estado = estado;}
 
-    public Departamento getDepartamento() {
-        return departamento;
-    }
+    public Departamento getDepartamento() {return departamento;}
 
-    public void setDepartamento(Departamento departamento) {
-        this.departamento = departamento;
-    }
+    public void setDepartamento(Departamento departamento) {this.departamento = departamento;}
 
-    public DireccionEmpleado getDireccion() {
-        return direccion;
-    }
+    public DireccionEmpleado getDireccion() {return direccion;}
 
-    public void setDireccion(DireccionEmpleado direccion) {
-        this.direccion = direccion;
-    }
+    public void setDireccion(DireccionEmpleado direccion) {this.direccion = direccion;}
 
     @Override
     public String toString() {
@@ -219,5 +192,4 @@ public class Empleado {
                 + ", citas=" + citas
                 + '}';
     }
-
 }

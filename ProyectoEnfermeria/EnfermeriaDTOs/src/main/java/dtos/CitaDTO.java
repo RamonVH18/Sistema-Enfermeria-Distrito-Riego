@@ -12,7 +12,6 @@ public class CitaDTO {
 
     private Integer idCita;
     private LocalDateTime fechaHora;
-    private Integer duracionMin;
     private EstadoCita estado;
     private String motivo;
 
@@ -26,8 +25,7 @@ public class CitaDTO {
     // Constructor completo para mapeos desde la Entidad
     public CitaDTO(
             Integer idCita, 
-            LocalDateTime fechaHora, 
-            Integer duracionMin,
+            LocalDateTime fechaHora,
             EstadoCita estado, 
             String motivo, 
             Integer idSerie,
@@ -36,7 +34,6 @@ public class CitaDTO {
     ) {
         this.idCita = idCita;
         this.fechaHora = fechaHora;
-        this.duracionMin = duracionMin;
         this.estado = estado;
         this.motivo = motivo;
         this.idSerie = idSerie;
@@ -52,10 +49,6 @@ public class CitaDTO {
     public LocalDateTime getFechaHora() {return fechaHora;}
 
     public void setFechaHora(LocalDateTime fechaHora) {this.fechaHora = fechaHora;}
-
-    public Integer getDuracionMin() {return duracionMin;}
-
-    public void setDuracionMin(Integer duracionMin) {this.duracionMin = duracionMin;}
 
     public EstadoCita getEstado() {return estado;}
 
@@ -82,7 +75,6 @@ public class CitaDTO {
         return "CitaDTO{"
                 + "idCita=" + idCita
                 + ", fechaHora=" + fechaHora
-                + ", duracionMin=" + duracionMin
                 + ", estado=" + estado
                 + ", motivo='" + motivo + '\''
                 + ", idSerie=" + idSerie

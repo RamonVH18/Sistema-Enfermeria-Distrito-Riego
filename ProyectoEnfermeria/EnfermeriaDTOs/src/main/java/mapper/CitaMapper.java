@@ -55,6 +55,7 @@ public class CitaMapper {
     
     public static CitaDTO toDTO(Cita entity) {
         CitaDTO dto = new CitaDTO();
+        dto.setIdCita(entity.getIdCita());
         dto.setFechaHora(entity.getFechaHora());
         dto.setEstado(entity.getEstado());
         dto.setMotivo(entity.getMotivo());

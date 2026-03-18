@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package entidades;
 
 import jakarta.persistence.Column;
@@ -16,6 +12,7 @@ import jakarta.persistence.Table;
 /**
  *
  * @author Ramon Valencia
+ * @author Leonardo Flores Leyva - 252390
  */
 @Entity
 @Table(name = "jefes_departamento")
@@ -34,8 +31,7 @@ public class JefeDepartamento {
     @JoinColumn(name = "id_departamento")
     private Departamento departamento;
 
-    public JefeDepartamento() {
-    }
+    public JefeDepartamento() {}
 
     public JefeDepartamento(Empleado empleado, Departamento departamento) {
         this.empleado = empleado;
@@ -48,29 +44,17 @@ public class JefeDepartamento {
         this.departamento = departamento;
     }
 
-    public Integer getId() {
-        return idJefe;
-    }
+    public Integer getId() {return idJefe;}
 
-    public void setId(Integer id) {
-        this.idJefe = id;
-    }
+    public void setId(Integer id) {this.idJefe = id;}
 
-    public Empleado getEmpleado() {
-        return empleado;
-    }
+    public Empleado getEmpleado() {return empleado;}
 
-    public void setEmpleado(Empleado empleado) {
-        this.empleado = empleado;
-    }
+    public void setEmpleado(Empleado empleado) {this.empleado = empleado;}
 
-    public Departamento getDepartamento() {
-        return departamento;
-    }
+    public Departamento getDepartamento() {return departamento;}
 
-    public void setDepartamento(Departamento departamento) {
-        this.departamento = departamento;
-    }
+    public void setDepartamento(Departamento departamento) {this.departamento = departamento;}
 
     @Override
     public String toString() {

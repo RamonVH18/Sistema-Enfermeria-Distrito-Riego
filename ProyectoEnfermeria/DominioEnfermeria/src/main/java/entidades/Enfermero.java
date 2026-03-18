@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package entidades;
 
 import jakarta.persistence.Column;
@@ -18,6 +14,7 @@ import java.util.List;
 /**
  *
  * @author Ramon Valencia
+ * @author Leonardo Flores Leyva - 252390
  */
 @Entity
 @Table(name = "enfermeros")
@@ -35,8 +32,7 @@ public class Enfermero {
     @OneToMany(mappedBy = "enfermero")
     private List<Cita> citas;
 
-    public Enfermero() {
-    }
+    public Enfermero() {}
 
     public Enfermero(Empleado empleado, List<Cita> citas) {
         this.empleado = empleado;
@@ -49,29 +45,17 @@ public class Enfermero {
         this.citas = citas;
     }
 
-    public Integer getId() {
-        return idEnfermero;
-    }
+    public Integer getId() {return idEnfermero;}
 
-    public void setId(Integer id) {
-        this.idEnfermero = id;
-    }
+    public void setId(Integer id) {this.idEnfermero = id;}
 
-    public Empleado getEmpleado() {
-        return empleado;
-    }
+    public Empleado getEmpleado() {return empleado;}
 
-    public void setEmpleado(Empleado empleado) {
-        this.empleado = empleado;
-    }
+    public void setEmpleado(Empleado empleado) {this.empleado = empleado;}
 
-    public List<Cita> getCitas() {
-        return citas;
-    }
+    public List<Cita> getCitas() {return citas;}
 
-    public void setCitas(List<Cita> citas) {
-        this.citas = citas;
-    }
+    public void setCitas(List<Cita> citas) {this.citas = citas;}
 
     @Override
     public String toString() {
@@ -81,5 +65,4 @@ public class Enfermero {
                 + ", citas=" + citas
                 + '}';
     }
-
 }

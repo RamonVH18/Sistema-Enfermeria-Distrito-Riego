@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package entidades;
 
 import jakarta.persistence.Column;
@@ -14,6 +10,7 @@ import jakarta.persistence.Table;
 /**
  *
  * @author Ramon Valencia
+ * @author Leonardo Flores Leyva - 252390
  */
 @Entity
 @Table(name = "departamentos")
@@ -27,33 +24,22 @@ public class Departamento {
     @Column(name = "nombre", nullable = false)
     private String nombre;
 
-    public Departamento() {
-    }
+    public Departamento() {}
 
-    public Departamento(String nombre) {
-        this.nombre = nombre;
-    }
+    public Departamento(String nombre) {this.nombre = nombre;}
 
     public Departamento(Integer id, String nombre) {
         this.idDepartamento = id;
         this.nombre = nombre;
     }
 
-    public Integer getId() {
-        return idDepartamento;
-    }
+    public Integer getId() {return idDepartamento;}
 
-    public void setId(Integer id) {
-        this.idDepartamento = id;
-    }
+    public void setId(Integer id) {this.idDepartamento = id;}
 
-    public String getNombre() {
-        return nombre;
-    }
+    public String getNombre() {return nombre;}
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+    public void setNombre(String nombre) {this.nombre = nombre;}
 
     @Override
     public String toString() {
@@ -62,5 +48,4 @@ public class Departamento {
                 + ", nombre=" + nombre
                 + '}';
     }
-
 }
