@@ -15,9 +15,12 @@ import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import javafx.scene.control.Alert;
 import request.CrearCitaRequest;
+import request.IniciarSesionRequest;
 import response.CrearCitaResponse;
 import response.EmpleadoOptionResponse;
+import response.UsuarioResponse;
 
 /**
  *
@@ -99,10 +102,41 @@ public class ClienteApi {
         });
     }
 
+    public CompletableFuture<UsuarioResponse> inicioSesionRequest(IniciarSesionRequest requestData) {
+        return CompletableFuture.supplyAsync(() -> {
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.registerModule(new JavaTimeModule());
+            String json = mapper.writeValueAsString(requestData);
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create("http://localhost:8080/enfermeriaDR/auth/login"))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(json))
+                    .build();
+
+            // Usamos un solo cliente (es mejor práctica que crear uno nuevo en cada petición)
+            HttpResponse<String> response = HttpClient.newHttpClient()
+                    .send(request, HttpResponse.BodyHandlers.ofString());
+
+            if (response.statusCode() >= 200 && response.statusCode() < 300) {
+                return mapper.readValue(response.body(), UsuarioResponse.class);
+            } else {
+                // No mostramos alerta aquí, lanzamos la excepción para que el Controller la maneje
+                throw new RuntimeException("Credenciales incorrectas o error de servidor");
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("Error de conexión: " + e.getMessage());
+        }
+    });
+    }
+
     private void validarRespuesta(HttpResponse<String> response) {
         if (response.statusCode() < 200 || response.statusCode() >= 300) {
             throw new RuntimeException("Error del servidor: " + response.statusCode() + " - " + response.body());
         }
     }
+    
+    
 
 }

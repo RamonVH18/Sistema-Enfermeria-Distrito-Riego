@@ -4,27 +4,13 @@
  */
 package interfaces;
 
-import dtos.UsuarioDTO;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
-import java.util.List;
-import request.IniciarSesionRequest;
-import response.IniciarSesionResponse;
+import response.UsuarioResponse;
 
 /**
  *
  * @author isaac
  */
 public interface IServicioUsuarios {
-
-    public List<UsuarioDTO> obtenerUsuarios();
-
-    public UsuarioDTO obtenerPorId(@NotNull Integer id);
-    
-    public UsuarioDTO buscarUsuarioPorEmail(String email);
-
-     public IniciarSesionResponse crearIniciarSesionRequest(@Valid IniciarSesionRequest iniciarSesion);
      
-     
-   
+    public UsuarioResponse login(String email, String password);
 }

@@ -6,8 +6,10 @@ package controllers;
 
 import dtos.CitaDTO;
 import dtos.UsuarioDTO;
+import entidades.Usuario;
 import interfaces.IServicioUsuarios;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import request.IniciarSesionRequest;
-import response.IniciarSesionResponse;
+import response.UsuarioResponse;
 
 /**
  *
@@ -28,6 +30,7 @@ import response.IniciarSesionResponse;
 @RequestMapping("/auth")
 public class IniciarSesionController {
 
+    @Autowired
     private IServicioUsuarios servicioUsuarios;
 
     public IniciarSesionController(IServicioUsuarios servicioUsuarios) {
@@ -35,15 +38,7 @@ public class IniciarSesionController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<IniciarSesionResponse> iniciarSesion(@RequestBody IniciarSesionRequest request) {
-        IniciarSesionResponse response = servicioUsuarios.crearIniciarSesionRequest(request);
-        System.out.println("Ya llego el Ramonson");
-        return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
+    public ResponseEntity<UsuarioResponse> authenticate(@RequestBody Usuario loginRequest) {
+        return ResponseEntity.ok(servicioUsuarios.login(loginRequest.getEmail(), loginRequest.getPassword()));
     }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<UsuarioDTO> obtenerPorId(@PathVariable Integer id) {
-        return ResponseEntity.ok(servicioUsuarios.obtenerPorId(id));
-    }
-
 }

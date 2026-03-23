@@ -8,15 +8,15 @@ package response;
  *
  * @author isaac
  */
-public class IniciarSesionResponse {
+public class UsuarioResponse {
 
-    private String email;
     private String nombre;
+    private String email;
 
-    public IniciarSesionResponse() {
+    public UsuarioResponse() {
     }
 
-    public IniciarSesionResponse(String email, String nombre) {
+    public UsuarioResponse(String nombre, String email) {
         this.email = email;
         this.nombre = nombre;
     }

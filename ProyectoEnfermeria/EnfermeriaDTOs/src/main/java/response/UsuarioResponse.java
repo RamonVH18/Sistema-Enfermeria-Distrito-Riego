@@ -8,15 +8,15 @@ package response;
  *
  * @author isaac
  */
-public class IniciarSesionResponse {
+public class UsuarioResponse {
     
     private String nombre;
     private String email;
 
-    public IniciarSesionResponse() {
+    public UsuarioResponse() {
     }
 
-    public IniciarSesionResponse(String nombre, String email) {
+    public UsuarioResponse(String nombre, String email) {
         this.nombre = nombre;
         this.email = email;
     }
@@ -36,7 +36,5 @@ public class IniciarSesionResponse {
     public void setEmail(String email) {
         this.email = email;
     }
-    
-    
     
 }
