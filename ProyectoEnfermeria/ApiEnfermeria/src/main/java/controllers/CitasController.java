@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import response.CitaPendienteResponse;
 import response.CrearCitaResponse;
 
 /**
@@ -23,11 +24,11 @@ import response.CrearCitaResponse;
  */
 @RestController
 @RequestMapping("/citas")
-public class CitaController {
+public class CitasController {
 
     private IServicioCitas servicioCitas;
 
-    public CitaController(IServicioCitas servicioCitas) {
+    public CitasController(IServicioCitas servicioCitas) {
         this.servicioCitas = servicioCitas;
     }
 
@@ -37,9 +38,9 @@ public class CitaController {
         return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
     }
 
-    @GetMapping
-    public ResponseEntity<List<CitaDTO>> obtenerTodas() {
-        return ResponseEntity.ok(servicioCitas.obtenerTodas());
+    @GetMapping(params = "estado=PENDIENTE")
+    public ResponseEntity<List<CitaPendienteResponse>> obtenerCitasPendientes() {
+        return ResponseEntity.ok(servicioCitas.obtenerCitasPendientes());
     }
 
     @GetMapping("/{id}")

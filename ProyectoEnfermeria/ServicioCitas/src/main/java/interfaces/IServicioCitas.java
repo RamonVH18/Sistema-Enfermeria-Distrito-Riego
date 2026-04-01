@@ -10,6 +10,7 @@ import request.CancelarCitaRequest;
 import request.CrearCitaRequest;
 import response.ActualizarCitaResponse;
 import response.CancelarCitaResponse;
+import response.CitaPendienteResponse;
 import response.CrearCitaResponse;
 
 /**
@@ -40,10 +41,10 @@ public interface IServicioCitas {
     public CancelarCitaResponse eliminar(@Valid CancelarCitaRequest cita);
     
     /**
-     * Obtiene todas las citas habidas y por haber.
+     * Obtiene las citas pendientes.
      * @return Todas las citas de la base de datos.
      */
-    public List<CitaDTO> obtenerTodas();
+    public List<CitaPendienteResponse> obtenerCitasPendientes();
     
     /**
      * Obtiene una cita por su id.

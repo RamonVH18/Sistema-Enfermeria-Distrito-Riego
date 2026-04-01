@@ -54,11 +54,11 @@ public class Cita {
     }
 
     public Cita(
-            LocalDateTime fechaHora, 
-            EstadoCita estado, 
-            String motivo, 
-            Serie serie, 
-            Empleado empleado, 
+            LocalDateTime fechaHora,
+            EstadoCita estado,
+            String motivo,
+            Serie serie,
+            Empleado empleado,
             Enfermero enfermero
     ) {
         this.fechaHora = fechaHora;
@@ -70,12 +70,12 @@ public class Cita {
     }
 
     public Cita(
-            Integer idCita, 
-            LocalDateTime fechaHora, 
-            EstadoCita estado, 
-            String motivo, 
-            Serie serie, 
-            Empleado empleado, 
+            Integer idCita,
+            LocalDateTime fechaHora,
+            EstadoCita estado,
+            String motivo,
+            Serie serie,
+            Empleado empleado,
             Enfermero enfermero
     ) {
         this.idCita = idCita;
@@ -87,33 +87,61 @@ public class Cita {
         this.enfermero = enfermero;
     }
 
-    public Integer getIdCita() {return idCita;}
+    public Integer getIdCita() {
+        return idCita;
+    }
 
-    public void setIdCita(Integer idCita) {this.idCita = idCita;}
+    public void setIdCita(Integer idCita) {
+        this.idCita = idCita;
+    }
 
-    public LocalDateTime getFechaHora() {return fechaHora;}
+    public LocalDateTime getFechaHora() {
+        return fechaHora;
+    }
 
-    public void setFechaHora(LocalDateTime fechaHora) {this.fechaHora = fechaHora;}
+    public void setFechaHora(LocalDateTime fechaHora) {
+        this.fechaHora = fechaHora;
+    }
 
-    public EstadoCita getEstado() {return estado;}
+    public EstadoCita getEstado() {
+        return estado;
+    }
 
-    public void setEstado(EstadoCita estado) {this.estado = estado;}
+    public void setEstado(EstadoCita estado) {
+        this.estado = estado;
+    }
 
-    public String getMotivo() {return motivo;}
+    public String getMotivo() {
+        return motivo;
+    }
 
-    public void setMotivo(String motivo) {this.motivo = motivo;}
+    public void setMotivo(String motivo) {
+        this.motivo = motivo;
+    }
 
-    public Serie getSerie() {return serie;}
+    public Serie getSerie() {
+        return serie;
+    }
 
-    public void setSerie(Serie serie) {this.serie = serie;}
+    public void setSerie(Serie serie) {
+        this.serie = serie;
+    }
 
-    public Empleado getEmpleado() {return empleado;}
+    public Empleado getEmpleado() {
+        return empleado;
+    }
 
-    public void setEmpleado(Empleado empleado) {this.empleado = empleado;}
+    public void setEmpleado(Empleado empleado) {
+        this.empleado = empleado;
+    }
 
-    public Enfermero getEnfermero() {return enfermero;}
+    public Enfermero getEnfermero() {
+        return enfermero;
+    }
 
-    public void setEnfermero(Enfermero enfermero) {this.enfermero = enfermero;}
+    public void setEnfermero(Enfermero enfermero) {
+        this.enfermero = enfermero;
+    }
 
     @Override
     public String toString() {

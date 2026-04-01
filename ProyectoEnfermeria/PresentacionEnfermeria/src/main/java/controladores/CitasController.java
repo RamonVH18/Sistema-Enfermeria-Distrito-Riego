@@ -69,7 +69,12 @@ public class CitasController implements Initializable {
 //            return null;
 //        });
     }
-    
+
+    @FXML
+    private void cargarCitasExistentes() {
+        FXMLLoader loader = new FXMLLoader();
+    }
+
     @FXML
     private void handleNuevaCita() {
         try {

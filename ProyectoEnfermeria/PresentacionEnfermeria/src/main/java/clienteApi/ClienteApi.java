@@ -18,6 +18,7 @@ import java.util.concurrent.CompletableFuture;
 import javafx.scene.control.Alert;
 import request.CrearCitaRequest;
 import request.IniciarSesionRequest;
+import response.CitaPendienteResponse;
 import response.CrearCitaResponse;
 import response.EmpleadoOptionResponse;
 import response.UsuarioResponse;
@@ -41,7 +42,7 @@ public class ClienteApi {
                 String json = mapper.writeValueAsString(requestData);
 
                 HttpRequest request = HttpRequest.newBuilder()
-                        .uri(URI.create("http://localhost:8080/enfermeriaDR/citas"))
+                        .uri(URI.create(BASE_URL + "/citas"))
                         .header("Content-Type", "application/json")
                         .POST(HttpRequest.BodyPublishers.ofString(json))
                         .build();
@@ -56,6 +57,25 @@ public class ClienteApi {
                 }
             } catch (Exception e) {
                 throw new RuntimeException("Fallo en la conexión: " + e.getMessage());
+            }
+        });
+    }
+    
+    public CompletableFuture<List<CitaPendienteResponse>> obtenerCitasPendientes() {
+        return CompletableFuture.supplyAsync(() -> {
+            try {
+                HttpRequest request = HttpRequest.newBuilder()
+                        .uri(URI.create(BASE_URL + "/citas"))
+                        .GET()
+                        .build();
+                HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+                validarRespuesta(response);
+                
+                return mapper.readValue(response.body(),
+                        new TypeReference<List<CitaPendienteResponse>>() { 
+                        });
+            } catch (Exception e) {
+                 throw new RuntimeException("Error al obtener empleados: " + e.getMessage(), e);
             }
         });
     }

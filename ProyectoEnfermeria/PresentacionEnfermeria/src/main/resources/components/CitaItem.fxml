@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="100.0" prefWidth="400.0" styleClass="card-container" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox layoutX="20.0" layoutY="15.0" spacing="5.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="15.0">
+         <children>
+            <Label styleClass="text-hora" text="09:00 am" />
+            <Label styleClass="text-nombre" text="Pepe Perez Petalos" />
+            <Label styleClass="text-descripcion" text="Chequeo Rutinario" />
+         </children>
+      </VBox>
+
+      <Button layoutX="280.0" layoutY="45.0" mnemonicParsing="false" styleClass="btn-detalles" text="Detalles" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="20.0" />
+   </children>
+</AnchorPane>

@@ -8,6 +8,7 @@ import entidades.Enfermero;
 import entidades.Serie;
 import java.util.ArrayList;
 import java.util.List;
+import response.CitaPendienteResponse;
 
 /**
  *
@@ -31,7 +32,7 @@ public class CitaMapper {
         return entity;
     }
     
-    public static Cita toEntityOld(CitaDTO dto){
+    public static Cita toEntityOld(CitaDTO dto) {
         Cita entity = new Cita();
         entity.setIdCita(dto.getIdCita());
         entity.setFechaHora(dto.getFechaHora());
@@ -61,26 +62,48 @@ public class CitaMapper {
         dto.setMotivo(entity.getMotivo());
         
         Serie serie = entity.getSerie();
-        if(serie != null)
+        if (serie != null) {
             dto.setIdSerie(serie.getId());
+        }
         
         Empleado empleado = entity.getEmpleado();
-        if(empleado != null)
+        if (empleado != null) {
             dto.setIdEmpleado(empleado.getId());
+        }
         
         Enfermero enfermero = entity.getEnfermero();
-        if(enfermero != null)
+        if (enfermero != null) {
             dto.setIdEnfermero(enfermero.getId());
+        }
         
         return dto;
     }
     
-    public static List<CitaDTO> toDTOList(List<Cita> entities){
+    public static List<CitaDTO> toDTOList(List<Cita> entities) {
         List<CitaDTO> dtos = new ArrayList<>();
-        for(Cita entity: entities){
+        for (Cita entity : entities) {
             CitaDTO dto = toDTO(entity);
             dtos.add(dto);
         }
         return dtos;
+    }
+    
+    public static CitaPendienteResponse toCitaPendiente(Cita c) {
+        CitaPendienteResponse cpr = new CitaPendienteResponse();
+        cpr.setFechaHora(c.getFechaHora());
+        cpr.setIdCita(c.getIdCita());
+        cpr.setIdEmpleado(c.getEmpleado().getId());
+        cpr.setMotivo(c.getMotivo());
+        cpr.setNombreEmpleado(c.getEmpleado().getNombreCompleto());
+        return cpr;
+    }
+    
+    public static List<CitaPendienteResponse> toCitaPendienteList(List<Cita> citas) {
+        List<CitaPendienteResponse> cprs = new ArrayList<>();
+        for (Cita c : citas) {
+            CitaPendienteResponse cpr = toCitaPendiente(c);
+            cprs.add(cpr);
+        }
+        return cprs;
     }
 }
