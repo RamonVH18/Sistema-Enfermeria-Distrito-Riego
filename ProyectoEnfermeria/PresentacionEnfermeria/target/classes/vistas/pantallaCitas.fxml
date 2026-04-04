@@ -76,6 +76,12 @@
                 </Label>
                 
                 <DatePicker fx:id="datePicker" editable="false" showWeekNumbers="false" styleClass="calendar-control" VBox.vgrow="ALWAYS" />
+                
+                <Button fx:id="btnReset" text="Reiniciar Calendario" onAction="#handleReset" maxWidth="Infinity" styleClass="new-cita-button">
+                    <VBox.margin>
+                        <Insets top="15.0" left="20.0" right="20.0" />
+                    </VBox.margin>
+                </Button>
             </VBox>
             
             <VBox fx:id="agendaCard" prefWidth="400.0" spacing="10.0" styleClass="agenda-card" HBox.hgrow="NEVER">

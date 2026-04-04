@@ -4,6 +4,7 @@ import dtos.CitaDTO;
 import interfaces.IServicioCitas;
 import java.time.LocalDate;
 import java.util.List;
+import org.apache.catalina.connector.Response;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import request.CrearCitaRequest;
@@ -39,7 +40,11 @@ public class CitasController {
     }
 
     @GetMapping(params = "estado=PENDIENTE")
-    public ResponseEntity<List<CitaPendienteResponse>> obtenerCitasPendientes() {
+    public ResponseEntity<List<CitaPendienteResponse>> obtenerCitasPendientes(
+            @RequestParam(name = "filtroFecha", required = false) @DateTimeFormat( iso = DateTimeFormat.ISO.DATE) LocalDate fecha) {
+        if (fecha != null) {
+            return ResponseEntity.ok(servicioCitas.obtenerPorFechaPendiente(fecha));
+        }
         return ResponseEntity.ok(servicioCitas.obtenerCitasPendientes());
     }
 
@@ -48,15 +53,9 @@ public class CitasController {
         return ResponseEntity.ok(servicioCitas.obtenerPorId(id));
     }
 
-    @GetMapping("/buscar")
-    public ResponseEntity<List<CitaDTO>> obtenerPorFecha(
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha) {
-        return ResponseEntity.ok(servicioCitas.obtenerPorFechaPendiente(fecha));
-    }
-
-    @GetMapping("/buscar/paciente")
-    public ResponseEntity<List<CitaDTO>> buscarPorNombreCurp(@RequestParam String nombreCurp) {
-        List<CitaDTO> citas = servicioCitas.buscarPorNombreCurpPacientePendiente(nombreCurp);
-        return ResponseEntity.ok(citas);
-    }
+//    @GetMapping("/buscar/paciente")  LOS LEONARDEARE A TODOS
+//    public ResponseEntity<List<CitaDTO>> buscarPorNombreCurp(@RequestParam String nombreCurp) {
+//        List<CitaDTO> citas = servicioCitas.buscarPorNombreCurpPacientePendiente(nombreCurp);
+//        return ResponseEntity.ok(citas);
+//    }
 }

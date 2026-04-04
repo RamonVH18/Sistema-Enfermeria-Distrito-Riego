@@ -197,11 +197,11 @@ public class ServicioCitas implements IServicioCitas {
         // Regresa la respuesta
         return new CancelarCitaResponse(nombreEmpleado, fechaHoraActual);
     }
-    
+
     @Override
     public List<CitaPendienteResponse> obtenerCitasPendientes() {
         List<CitaPendienteResponse> citasPendientes = new ArrayList<>();
-        
+
         List<Cita> citasEncontradas = citaRepository.findAll();
         if (!citasEncontradas.isEmpty()) {
             citasPendientes = CitaMapper.toCitaPendienteList(citasEncontradas);
@@ -220,25 +220,20 @@ public class ServicioCitas implements IServicioCitas {
     }
 
     @Override
-    public List<CitaDTO> obtenerPorFechaPendiente(LocalDate fecha) {
-        // Verifica que la fecha no sea null
+    public List<CitaPendienteResponse> obtenerPorFechaPendiente(LocalDate fecha) {
         if (fecha == null) {
             return null;
         } else {
-            // Lista de citas encontradas
-            List<CitaDTO> citasEncontradasDTO;
-            // Límites (mismo día)
+            List<CitaPendienteResponse> citasPendientes
+                    ;
             LocalDateTime inicio = LocalDateTime.of(fecha, LocalTime.of(0, 0, 0));
             LocalDateTime fin = LocalDateTime.of(fecha, LocalTime.of(23, 59, 59));
-            // Ejecuta la consulta
-            List<Cita> citasEncontradas = citaRepository.findByFechaHoraBetweenAndEstado(inicio, fin, EstadoCita.PENDIENTE);
-            // Si la lista de citas no está vacía
-            if (citasEncontradas != null && !citasEncontradas.isEmpty()) {
-                // Mapea las citas encontradas a DTOs
-                citasEncontradasDTO = CitaMapper.toDTOList(citasEncontradas);
-                // Regresa la lista de citas
-                return citasEncontradasDTO;
-                // Regresa null si no se encontraron citas
+            
+            List<Cita> citas = citaRepository.findByFechaHoraBetweenAndEstado(inicio, fin, EstadoCita.PENDIENTE);
+            
+            if (citas != null && !citas.isEmpty()) {
+                citasPendientes = CitaMapper.toCitaPendienteList(citas);
+                return citasPendientes;
             } else {
                 return null;
             }

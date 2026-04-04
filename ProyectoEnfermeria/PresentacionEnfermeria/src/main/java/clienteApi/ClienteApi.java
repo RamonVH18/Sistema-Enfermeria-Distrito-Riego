@@ -14,6 +14,9 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import javafx.scene.control.Alert;
@@ -86,7 +89,30 @@ public class ClienteApi {
             }
         });
     }
-    
+
+    public CompletableFuture<List<CitaPendienteResponse>> obtenerCitasPorFecha(LocalDate filtro) {
+        return CompletableFuture.supplyAsync(() -> {
+            try {
+                String urlConFiltro = BASE_URL + "/citas" + "?estado=PENDIENTE&filtroFecha=" + URLEncoder.encode(filtro.format(DateTimeFormatter.ISO_DATE), StandardCharsets.UTF_8);
+
+                HttpRequest request = HttpRequest.newBuilder()
+                        .uri(URI.create(urlConFiltro))
+                        .GET()
+                        .build();
+                HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+                if (response.statusCode() == 404 || response.body() == null || response.body().isBlank()) {
+                    return Collections.emptyList();
+                }
+                validarRespuesta(response);
+
+                return mapper.readValue(response.body(),
+                        new TypeReference<List<CitaPendienteResponse>>() {
+                });
+            } catch (Exception e) {
+                throw new RuntimeException("Error al obtener las citass: " + e.getMessage(), e);
+            }
+        });
+    }
 
     public CompletableFuture<List<EmpleadoOptionResponse>> obtenerTodosLosEmpleados() {
         return CompletableFuture.supplyAsync(() -> {

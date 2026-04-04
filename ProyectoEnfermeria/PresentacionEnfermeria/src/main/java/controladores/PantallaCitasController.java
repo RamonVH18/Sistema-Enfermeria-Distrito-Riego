@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.concurrent.ExecutionException;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -20,6 +21,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -37,45 +39,63 @@ import response.CitaPendienteResponse;
  */
 public class PantallaCitasController implements Initializable {
 
-    // --- Elementos del FXML ---
+    //OBJETOS DEL STAGE
     @FXML
     private DatePicker datePicker;
     @FXML
-    private ListView<String> lvCitasDelDia; // Cambia String por tu objeto Cita luego
-    @FXML
-    private Label lblFechaSeleccionada;
-    @FXML
-    private Label lblMesAño;
-    @FXML
-    private Button btnNuevaCita;
-
-    @FXML
     private Pagination paginadorCitas;
+
+    // CONSTANTES
     private final int CITAS_POR_PAGINA = 5;
 
     private List<CitaPendienteResponse> citasPendientes = new ArrayList<>();
-
-    private final ClienteApi apiClient = new ClienteApi();
+    private final ClienteApi cliente = new ClienteApi();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
         cargarCitasPendientes();
+        generarDatePicker();
 
-        datePicker.setValue(LocalDate.now());
+    }
+
+    private void generarDatePicker() {
+        datePicker.valueProperty().addListener((observable, oldDate, newDate) -> {
+            if (newDate != null) {
+                cliente.obtenerCitasPorFecha(newDate)
+                        .thenAccept(citas -> {
+                            if (citas == null) {
+                                citas = new ArrayList<>();
+                            } else {
+                                this.citasPendientes = citas;
+                            }
+                            Platform.runLater(() -> {
+                                generarPaginador();
+                            });
+                        });
+            }
+        });
+
     }
 
     private void cargarCitasPendientes() {
-        try {
-            citasPendientes = apiClient.obtenerCitasPendientes().get();
-        } catch (InterruptedException ex) {
-            System.err.println(ex);
-        } catch (ExecutionException ex) {
-            System.err.println(ex);
-        }
+
+        cliente.obtenerCitasPendientes().thenAccept(citas -> {
+            Platform.runLater(() -> {
+                this.citasPendientes = citas;
+                generarPaginador();
+            });
+        });
+
+    }
+
+    private void generarPaginador() {
+        paginadorCitas.setPageCount(0);
+        paginadorCitas.setPageFactory(null); // Limpia la fábrica anterior
+
         if (citasPendientes == null || citasPendientes.isEmpty()) {
             paginadorCitas.setPageCount(1);
-            paginadorCitas.setPageFactory(n -> new Label("No hay citas para hoy."));
+            paginadorCitas.setCurrentPageIndex(0);
+            paginadorCitas.setPageFactory(n -> new Label("No hay citas programadas para ese dia."));
             return;
         }
 
@@ -127,16 +147,9 @@ public class PantallaCitasController implements Initializable {
             CitaPendienteResponse citaSeleccionada = (CitaPendienteResponse) card.getUserData();
             System.out.println("Has seleccionado la cita ID: " + citaSeleccionada.getIdCita());
 
-            // Aquí podrías abrir un modal o mostrar detalles
-            mostrarDetallesCita(citaSeleccionada);
         });
 
         return card;
-    }
-
-    private void mostrarDetallesCita(CitaPendienteResponse cita) {
-        // Lógica para mostrar la info completa
-        System.out.println("Motivo: " + cita.getMotivo());
     }
 
     @FXML
@@ -166,5 +179,28 @@ public class PantallaCitasController implements Initializable {
             System.err.println("Error al abrir la ventana de Nueva Cita: " + e.getMessage());
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    private void handleReset() {
+        datePicker.setValue(null);
+        cargarCitasPendientes();
+    }
+
+    /**
+     * Metodo Auxiliar para mostrar una ventana
+     *
+     * @param titulo
+     * @param mensaje
+     * @param tipo
+     */
+    private void mostrarAlerta(String titulo, String mensaje, Alert.AlertType tipo) {
+        Platform.runLater(() -> {
+            Alert alerta = new Alert(tipo);
+            alerta.setTitle(titulo);
+            alerta.setHeaderText(null);
+            alerta.setContentText(mensaje);
+            alerta.showAndWait();
+        });
     }
 }

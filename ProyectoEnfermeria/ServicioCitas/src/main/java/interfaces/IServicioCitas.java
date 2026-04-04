@@ -58,7 +58,7 @@ public interface IServicioCitas {
      * @param fecha Fecha a solicitar.
      * @return La lista de citas encontradas o null.
      */
-    public List<CitaDTO> obtenerPorFechaPendiente(LocalDate fecha);
+    public List<CitaPendienteResponse> obtenerPorFechaPendiente(LocalDate fecha);
     
     /**
      * Busca la citas de un empleado por su nombre o curp.
