@@ -14,9 +14,10 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.control.Pagination?>
 
 <HBox fx:id="root" prefHeight="768.0" prefWidth="1024.0" styleClass="main-root" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" 
-      fx:controller="controladores.CitasController">
+      fx:controller="controladores.PantallaCitasController">
     
     <VBox fx:id="sidePanel" alignment="TOP_CENTER" prefWidth="200.0" spacing="20.0" styleClass="side-panel">
         
@@ -88,7 +89,7 @@
                     </VBox.margin>
                 </Label>
                 
-                <ListView fx:id="lvCitasDelDia" styleClass="agenda-list" VBox.vgrow="ALWAYS" />
+                <Pagination fx:id="paginadorCitas" VBox.vgrow="ALWAYS" />
                 
                 <HBox alignment="CENTER" styleClass="agenda-footer">
                     <VBox.margin>

@@ -1,0 +1,36 @@
+.card-container {
+    -fx-background-color: white;
+    -fx-background-radius: 15;
+    -fx-border-color: black;
+    -fx-border-radius: 15;
+    -fx-border-width: 1;
+}
+
+.text-hora {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: black;
+}
+
+.text-nombre {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: black;
+    -fx-underline: true; /* Para la línea azul, podrías usar border-bottom */
+}
+
+.text-descripcion {
+    -fx-font-size: 14px;
+    -fx-text-fill: gray;
+}
+
+.btn-detalles {
+    -fx-background-color: #40B5E8; /* El color azul de tu imagen */
+    -fx-text-fill: black;
+    -fx-font-size: 14px;
+    -fx-background-radius: 10;
+    -fx-border-color: black;
+    -fx-border-radius: 10;
+    -fx-padding: 5 20 5 20;
+    -fx-cursor: hand;
+}

@@ -17,11 +17,11 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/vistas/IniciarSesion.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/vistas/pantallaCitas.fxml"));
         Scene scene = new Scene(root);
 
         // Vinculamos el CSS
-        scene.getStylesheets().add(getClass().getResource("/styles/iniciarsesion.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getResource("/styles/pantallaCitas.css").toExternalForm());
 
         stage.setScene(scene);
         stage.show();

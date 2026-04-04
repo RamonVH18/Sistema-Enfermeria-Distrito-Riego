@@ -28,12 +28,12 @@ import response.UsuarioResponse;
  */
 @RestController
 @RequestMapping("/auth")
-public class IniciarSesionController {
+public class UsuariosController {
 
     @Autowired
     private IServicioUsuarios servicioUsuarios;
 
-    public IniciarSesionController(IServicioUsuarios servicioUsuarios) {
+    public UsuariosController(IServicioUsuarios servicioUsuarios) {
         this.servicioUsuarios = servicioUsuarios;
     }
 

@@ -10,7 +10,7 @@ clienteApi\ClienteApi$3.class
 request\CrearCitaRequest.class
 response\UsuarioResponse.class
 module-info.class
-controladores\CitasController.class
+controladores\PantallaCitasController.class
 com\mycompany\presentacionenfermeria\Main.class
 com\mycompany\presentacionenfermeria\SecondaryController.class
 clienteApi\ClienteApi$1.class

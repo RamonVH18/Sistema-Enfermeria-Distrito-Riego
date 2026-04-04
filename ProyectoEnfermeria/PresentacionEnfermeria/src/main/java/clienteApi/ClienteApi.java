@@ -6,6 +6,7 @@ package clienteApi;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import java.net.URI;
 import java.net.URLEncoder;
@@ -31,7 +32,13 @@ public class ClienteApi {
 
     private final HttpClient client = HttpClient.newHttpClient();
     private final String BASE_URL = "http://localhost:8080/enfermeriaDR";
-    private final ObjectMapper mapper = new ObjectMapper();
+    private final ObjectMapper mapper;
+
+    public ClienteApi() {
+        mapper = new ObjectMapper();
+        mapper.registerModule(new JavaTimeModule());
+        mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+    }
 
     public CompletableFuture<CrearCitaResponse> enviarCita(CrearCitaRequest requestData) {
         return CompletableFuture.supplyAsync(() -> {
@@ -60,25 +67,26 @@ public class ClienteApi {
             }
         });
     }
-    
+
     public CompletableFuture<List<CitaPendienteResponse>> obtenerCitasPendientes() {
         return CompletableFuture.supplyAsync(() -> {
             try {
                 HttpRequest request = HttpRequest.newBuilder()
-                        .uri(URI.create(BASE_URL + "/citas"))
+                        .uri(URI.create(BASE_URL + "/citas?estado=PENDIENTE"))
                         .GET()
                         .build();
                 HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
                 validarRespuesta(response);
-                
+
                 return mapper.readValue(response.body(),
-                        new TypeReference<List<CitaPendienteResponse>>() { 
-                        });
+                        new TypeReference<List<CitaPendienteResponse>>() {
+                });
             } catch (Exception e) {
-                 throw new RuntimeException("Error al obtener empleados: " + e.getMessage(), e);
+                throw new RuntimeException("Error al obtener empleados: " + e.getMessage(), e);
             }
         });
     }
+    
 
     public CompletableFuture<List<EmpleadoOptionResponse>> obtenerTodosLosEmpleados() {
         return CompletableFuture.supplyAsync(() -> {
@@ -104,7 +112,7 @@ public class ClienteApi {
         return CompletableFuture.supplyAsync(() -> {
             try {
                 // Importante: Encodear el parámetro por si lleva espacios o caracteres especiales
-                String urlConFiltro = "http://localhost:8080/enfermeriaDR/empleados" + "/options?filtroNombre=" + URLEncoder.encode(filtro, StandardCharsets.UTF_8);
+                String urlConFiltro = BASE_URL + "/empleados" + "?filtroNombre=" + URLEncoder.encode(filtro, StandardCharsets.UTF_8);
 
                 HttpRequest request = HttpRequest.newBuilder()
                         .uri(URI.create(urlConFiltro))
@@ -124,31 +132,31 @@ public class ClienteApi {
 
     public CompletableFuture<UsuarioResponse> inicioSesionRequest(IniciarSesionRequest requestData) {
         return CompletableFuture.supplyAsync(() -> {
-        try {
-            ObjectMapper mapper = new ObjectMapper();
-            mapper.registerModule(new JavaTimeModule());
-            String json = mapper.writeValueAsString(requestData);
+            try {
+                ObjectMapper mapper = new ObjectMapper();
+                mapper.registerModule(new JavaTimeModule());
+                String json = mapper.writeValueAsString(requestData);
 
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create("http://localhost:8080/enfermeriaDR/auth/login"))
-                    .header("Content-Type", "application/json")
-                    .POST(HttpRequest.BodyPublishers.ofString(json))
-                    .build();
+                HttpRequest request = HttpRequest.newBuilder()
+                        .uri(URI.create("http://localhost:8080/enfermeriaDR/auth/login"))
+                        .header("Content-Type", "application/json")
+                        .POST(HttpRequest.BodyPublishers.ofString(json))
+                        .build();
 
-            // Usamos un solo cliente (es mejor práctica que crear uno nuevo en cada petición)
-            HttpResponse<String> response = HttpClient.newHttpClient()
-                    .send(request, HttpResponse.BodyHandlers.ofString());
+                // Usamos un solo cliente (es mejor práctica que crear uno nuevo en cada petición)
+                HttpResponse<String> response = HttpClient.newHttpClient()
+                        .send(request, HttpResponse.BodyHandlers.ofString());
 
-            if (response.statusCode() >= 200 && response.statusCode() < 300) {
-                return mapper.readValue(response.body(), UsuarioResponse.class);
-            } else {
-                // No mostramos alerta aquí, lanzamos la excepción para que el Controller la maneje
-                throw new RuntimeException("Credenciales incorrectas o error de servidor");
+                if (response.statusCode() >= 200 && response.statusCode() < 300) {
+                    return mapper.readValue(response.body(), UsuarioResponse.class);
+                } else {
+                    // No mostramos alerta aquí, lanzamos la excepción para que el Controller la maneje
+                    throw new RuntimeException("Credenciales incorrectas o error de servidor");
+                }
+            } catch (Exception e) {
+                throw new RuntimeException("Error de conexión: " + e.getMessage());
             }
-        } catch (Exception e) {
-            throw new RuntimeException("Error de conexión: " + e.getMessage());
-        }
-    });
+        });
     }
 
     private void validarRespuesta(HttpResponse<String> response) {
@@ -156,7 +164,5 @@ public class ClienteApi {
             throw new RuntimeException("Error del servidor: " + response.statusCode() + " - " + response.body());
         }
     }
-    
-    
 
 }

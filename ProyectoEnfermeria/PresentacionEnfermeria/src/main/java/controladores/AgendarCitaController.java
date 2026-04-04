@@ -22,6 +22,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import request.CrearCitaRequest;
 import response.EmpleadoOptionResponse;
@@ -32,6 +34,7 @@ import response.EmpleadoOptionResponse;
  */
 public class AgendarCitaController implements Initializable {
 
+    //OBJETOS DEL STAGE
     @FXML
     private ComboBox<EmpleadoOptionResponse> cbPaciente;
     @FXML
@@ -42,28 +45,36 @@ public class AgendarCitaController implements Initializable {
     private ComboBox<LocalTime> cbHora;
     @FXML
     private TextArea txtDescripcion;
-    ClienteApi cliente = new ClienteApi();
-    private List<EmpleadoOptionResponse> empleados = new ArrayList<>();
 
-    private final ObservableList<String> listaPacientes = FXCollections.observableArrayList();
+    //CONSTANTES
+    private LocalTime HORA_INICIO = LocalTime.of(8, 0); // 8:00 AM
+    private LocalTime HORA_FIN = LocalTime.of(16, 0);   // 4:00 PM
 
+    private ClienteApi cliente;
+
+    /**
+     * Inicializador del controlador
+     *
+     * @param url
+     * @param rb
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
-        DateTimeFormatter formato = DateTimeFormatter.ofPattern("hh:mm a");
-        LocalTime horaInicio = LocalTime.of(8, 0); // 8:00 AM
-        LocalTime horaFin = LocalTime.of(16, 0);   // 4:00 PM
+        cliente = new ClienteApi();
         crearComboBox();
 
-        while (horaInicio.isBefore(horaFin.plusSeconds(1))) {
-            cbHora.getItems().add(horaInicio);
-            horaInicio = horaInicio.plusMinutes(15);
+        while (HORA_INICIO.isBefore(HORA_FIN.plusSeconds(1))) {
+            cbHora.getItems().add(HORA_INICIO);
+            HORA_INICIO = HORA_INICIO.plusMinutes(15);
         }
 
     }
 
+    /**
+     * Metodo para crear el combo box con los pacientes
+     */
     private void crearComboBox() {
-        // Configuración del Converter (Igual que ya lo tienes)
+        // Configuración del Converter para poder guardar el objeto en el comboBox y que solo se muestre el nombre.
         cbPaciente.setConverter(new StringConverter<EmpleadoOptionResponse>() {
             @Override
             public String toString(EmpleadoOptionResponse e) {
@@ -76,7 +87,7 @@ public class AgendarCitaController implements Initializable {
             }
         });
 
-        // --- 1. ESCUCHAR LA SELECCIÓN PARA EL TEXTFIELD ---
+        // Se agrega un listener en el cbPaciente en caso de seleccionar un paciente el textField del Id debe cambiar.
         cbPaciente.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
                 txtIdEmpleado.setText(String.valueOf(newSelection.getIdEmpleado()));
@@ -85,26 +96,28 @@ public class AgendarCitaController implements Initializable {
             }
         });
 
-        // --- 2. ESCUCHAR EL EDITOR PARA FILTRAR ---
+        // Se agrega un listener que permitira que si escribes un nombre el combobox cambiara y solo mostrara los valores que coincidan con el regex
         cbPaciente.getEditor().textProperty().addListener((obs, oldVal, newVal) -> {
-            // Si se borra todo, mandamos cadena vacía para traer todos
             String filtro = (newVal == null || newVal.trim().isEmpty()) ? "" : newVal;
             actualizarListaEmpleados(filtro);
         });
 
-        // Carga inicial
+        // Se llama al metodo sin filtro para mostrar todos los pacientes.
         actualizarListaEmpleados("");
     }
 
+    /**
+     * Metodo para actualizar la lista de empleados y meter dentro del combobos
+     * a los pacientes
+     *
+     * @param filtro
+     */
     private void actualizarListaEmpleados(String filtro) {
         cliente.buscarEmpleadosPorFiltro(filtro).thenAccept(lista -> {
             Platform.runLater(() -> {
                 String currentText = cbPaciente.getEditor().getText();
-
                 cbPaciente.getItems().setAll(lista);
-
                 cbPaciente.getEditor().setText(currentText);
-
                 if (!lista.isEmpty() && !filtro.isEmpty()) {
                     cbPaciente.show();
                 } else if (filtro.isEmpty()) {
@@ -112,25 +125,23 @@ public class AgendarCitaController implements Initializable {
                 }
             });
         }).exceptionally(ex -> {
-            ex.printStackTrace();
+            cerrarVentana();
+            mostrarAlerta("Error", "Error al cargar la lista de empleados. Contactar con servicio tecnico.", Alert.AlertType.ERROR);
             return null;
         });
     }
 
+    /**
+     * Metodo que se activa por un boton. Este metodo es el que se encarga de
+     * agendar las citas
+     */
     @FXML
     private void guardarCita() {
-        EmpleadoOptionResponse seleccionado = cbPaciente.getSelectionModel().getSelectedItem();
-
-        if (seleccionado != null) {
-            Integer idEmpleado = seleccionado.getIdEmpleado();
-            LocalDateTime fechaCita = LocalDateTime.of(dpFechaCita.getValue(), cbHora.getValue());
-            String motivo = txtDescripcion.getText();
-            Integer idEnfermero = 1; //Harcodeado para pruebas
-            CrearCitaRequest cita = new CrearCitaRequest(fechaCita, motivo, idEmpleado, idEnfermero);
+        if (validarCita()) {
+            CrearCitaRequest cita = crearCita();
             cliente.enviarCita(cita).thenAccept(res -> {
                 mostrarAlerta("Éxito", "La cita se ha agendado correctamente.", Alert.AlertType.INFORMATION);
-                // Opcional: Limpiar el formulario tras el éxito
-                Platform.runLater(this::limpiarFormulario);
+                cerrarVentana();
             })
                     .exceptionally(ex -> {
                         mostrarAlerta("Error de Conexión", "No se pudo guardar la cita: " + ex.getMessage(), Alert.AlertType.ERROR);
@@ -139,20 +150,66 @@ public class AgendarCitaController implements Initializable {
         }
     }
 
-    private void limpiarFormulario() {
-        cbPaciente.getSelectionModel().clearSelection();
-        cbPaciente.getEditor().clear();
-        txtIdEmpleado.clear();
-        dpFechaCita.setValue(null);
-        cbHora.getSelectionModel().clearSelection();
-        txtDescripcion.clear();
+    /**
+     * Metodo para validar los campos de la cita y asegurarse de que no sean
+     * nulos.
+     *
+     * @return
+     */
+    private boolean validarCita() {
+        if (cbPaciente.getSelectionModel().getSelectedItem() == null) {
+            mostrarAlerta("Error", "Debe seleccionar un empleado para agendar una cita.", Alert.AlertType.ERROR);
+            return false;
+        }
+        if (dpFechaCita.getValue() == null || cbHora.getValue() == null) {
+            mostrarAlerta("Error", "Debe agregar fecha y hora para agendar una cita.", Alert.AlertType.ERROR);
+            return false;
+        }
+        if (txtDescripcion.getText().isEmpty()) {
+            mostrarAlerta("Error", "Debe agregar un motivo para agendar una cita.", Alert.AlertType.ERROR);
+            return false;
+        }
+        return true;
     }
 
+    /**
+     * Metodo auxiliar que crea una cita con la informacion de los campos.
+     *
+     * @return
+     */
+    private CrearCitaRequest crearCita() {
+        EmpleadoOptionResponse seleccionado = cbPaciente.getSelectionModel().getSelectedItem();
+        Integer idEmpleado = seleccionado.getIdEmpleado();
+        LocalDateTime fechaCita = LocalDateTime.of(dpFechaCita.getValue(), cbHora.getValue());
+        String motivo = txtDescripcion.getText();
+        // Harcodeado por lo mientras JEJE
+        Integer idEnfermero = 1;
+        return new CrearCitaRequest(fechaCita, motivo, idEmpleado, idEnfermero);
+    }
+
+    /**
+     * Metodo Auxiliar para cerrar una ventana
+     */
+    private void cerrarVentana() {
+        Platform.runLater(() -> {
+            if (cbPaciente.getScene() != null && cbPaciente.getScene().getWindow() != null) {
+                Stage stage = (Stage) cbPaciente.getScene().getWindow();
+                stage.close();
+            }
+        });
+    }
+    
+    /**
+     * Metodo Auxiliar para mostrar una ventana
+     * @param titulo
+     * @param mensaje
+     * @param tipo 
+     */
     private void mostrarAlerta(String titulo, String mensaje, Alert.AlertType tipo) {
         Platform.runLater(() -> {
             Alert alerta = new Alert(tipo);
             alerta.setTitle(titulo);
-            alerta.setHeaderText(null); // Esto quita el encabezado gris grueso
+            alerta.setHeaderText(null);
             alerta.setContentText(mensaje);
             alerta.showAndWait();
         });

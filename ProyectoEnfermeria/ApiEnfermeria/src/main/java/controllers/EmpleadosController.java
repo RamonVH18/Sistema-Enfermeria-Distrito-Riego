@@ -25,13 +25,11 @@ public class EmpleadosController {
     private IServicioEmpleado servicioEmpleado;
     
     @GetMapping
-    public ResponseEntity<List<EmpleadoOptionResponse>> obtenerTodas() {
+    public ResponseEntity<List<EmpleadoOptionResponse>> obtenerEmpleados(@RequestParam(name = "filtroNombre", required = false) String filtroNombre) {
+        if ( filtroNombre != null) {
+            return ResponseEntity.ok(servicioEmpleado.obtenerEmpleadosPorNombre(filtroNombre));
+        }
         return ResponseEntity.ok(servicioEmpleado.obtenerEmpleados());
-    }
-    
-    @GetMapping("/options")
-    public ResponseEntity<List<EmpleadoOptionResponse>> obtenerTodas(@RequestParam String filtroNombre) {
-        return ResponseEntity.ok(servicioEmpleado.obtenerEmpleadosPorNombre(filtroNombre));
     }
     
 }
