@@ -1,0 +1,94 @@
+/* Definición de colores principales de la tarjeta */
+:root {
+    -color-bg-card: #ffffff;
+    -color-border-card: #e0e6ed;
+    
+    -color-text-main: #2c3e50; /* Azul grisáceo oscuro profesional */
+    -color-text-sub: #7f8c8d;  /* Gris suave */
+    
+    -color-primary: #1a5ac1;   /* Azul del sistema (más vibrante) */
+    -color-primary-hover: #154696;
+    
+    -color-danger: #e74c3c;    /* Rojo suave para cancelar */
+    -color-danger-hover: #c0392b;
+    
+    -color-secondary: #bdc3c7; /* Gris claro para volver */
+    -color-secondary-hover: #95a5a6;
+}
+
+.floating-details-card {
+    -fx-background-color: white;
+    -fx-background-radius: 12px;
+    -fx-border-color: rgba(0,0,0,0.05); /* Sutil contorno */
+    -fx-border-radius: 12px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.15), 20, 0, 0, 10); /* Efecto flotante */
+}
+
+/* Estilos de los títulos de campo (Gris suave y negrita) */
+.detail-field-title {
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #7f8c8d;
+    -fx-text-transform: uppercase; /* Pequeño toque profesional */
+}
+
+/* Estilo para los datos reales (Fecha, Hora, ID) */
+.lbl-data {
+    -fx-font-size: 14px;
+    -fx-text-fill: #34495e;
+}
+
+/* Mejora estética del TextArea de descripción */
+.detail-text-area {
+    -fx-background-color: transparent;
+    -fx-border-width: 0; /* Sin bordes */
+}
+.detail-text-area .content {
+    -fx-background-color: #f8fbfd; /* Ligero tono azulado para diferenciarlo */
+    -fx-background-radius: 8px;
+    -fx-padding: 10px;
+    -fx-text-fill: #34495e;
+}
+
+/* =========================================
+   ESTILOS DE BOTONES MEJORADOS
+   ========================================= */
+
+/* Estilo común de botones */
+.button {
+    -fx-padding: 10 20;
+    -fx-background-radius: 8px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
+/* Botón Principal (Marcar Asistencia) */
+.btn-primary {
+    -fx-background-color: #1a5ac1;
+    -fx-text-fill: white;
+}
+.btn-primary:hover {
+    -fx-background-color: #154696;
+}
+
+/* Botón Secundario (Volver) */
+.btn-secondary {
+    -fx-background-color: transparent;
+    -fx-text-fill: #7f8c8d;
+    -fx-border-color: #bdc3c7;
+    -fx-border-radius: 8px;
+}
+.btn-secondary:hover {
+    -fx-background-color: #ecf0f1;
+}
+
+/* Botón Danger Outline (Cancelar Cita) */
+.btn-danger-outline {
+    -fx-background-color: transparent;
+    -fx-text-fill: #e74c3c;
+    -fx-border-color: #e74c3c;
+    -fx-border-radius: 8px;
+}
+.btn-danger-outline:hover {
+    -fx-background-color: rgba(231, 76, 60, 0.1); /* Efecto hover suave rojo */
+}

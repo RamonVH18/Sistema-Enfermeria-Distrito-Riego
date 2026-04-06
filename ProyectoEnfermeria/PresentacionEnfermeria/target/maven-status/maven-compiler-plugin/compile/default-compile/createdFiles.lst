@@ -9,6 +9,7 @@ response\EmpleadoOptionResponse.class
 clienteApi\ClienteApi$3.class
 request\CrearCitaRequest.class
 response\UsuarioResponse.class
+controladores\DetallesCitaController.class
 module-info.class
 controladores\PantallaCitasController.class
 com\mycompany\presentacionenfermeria\Main.class
