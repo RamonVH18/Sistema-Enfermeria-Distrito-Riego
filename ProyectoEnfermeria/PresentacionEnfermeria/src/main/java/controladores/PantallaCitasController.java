@@ -7,31 +7,26 @@ package controladores;
 import clienteApi.ClienteApi;
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.concurrent.ExecutionException;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.control.Pagination;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import response.CitaPendienteResponse;
+import utilerias.Utils;
 
 /**
  *
@@ -44,20 +39,31 @@ public class PantallaCitasController implements Initializable {
     private DatePicker datePicker;
     @FXML
     private Pagination paginadorCitas;
+    @FXML
+    private Label lblFechaSeleccionada;
 
     // CONSTANTES
     private final int CITAS_POR_PAGINA = 5;
 
     private List<CitaPendienteResponse> citasPendientes = new ArrayList<>();
     private final ClienteApi cliente = new ClienteApi();
-
+    
+    /**
+     * Inicializador del controlador
+     * @param url
+     * @param rb 
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         cargarCitasPendientes();
         generarDatePicker();
 
     }
-
+    
+    
+    /**
+     * Metodo para generar el date picker y agregarle un listener para poder cambiar las fechas
+     */
     private void generarDatePicker() {
         datePicker.valueProperty().addListener((observable, oldDate, newDate) -> {
             if (newDate != null) {
@@ -68,42 +74,54 @@ public class PantallaCitasController implements Initializable {
                             } else {
                                 this.citasPendientes = citas;
                             }
-                            Platform.runLater(() -> {
-                                generarPaginador();
-                            });
+                            generarPaginador();
                         });
+
+                lblFechaSeleccionada.setText("Citas Pendientes del " + Utils.obtenerFechaTraducida(newDate) + ":");
             }
         });
 
     }
 
+    /**
+     * Metodo encargado de cargar las citas pendientes
+     */
     private void cargarCitasPendientes() {
-
         cliente.obtenerCitasPendientes().thenAccept(citas -> {
-            Platform.runLater(() -> {
-                this.citasPendientes = citas;
-                generarPaginador();
-            });
+            this.citasPendientes = citas;
+            generarPaginador();
         });
 
     }
-
-    private void generarPaginador() {
-        paginadorCitas.setPageCount(0);
-        paginadorCitas.setPageFactory(null); // Limpia la fábrica anterior
-
-        if (citasPendientes == null || citasPendientes.isEmpty()) {
-            paginadorCitas.setPageCount(1);
-            paginadorCitas.setCurrentPageIndex(0);
-            paginadorCitas.setPageFactory(n -> new Label("No hay citas programadas para ese dia."));
-            return;
-        }
-
-        int totalPaginas = (int) Math.ceil((double) citasPendientes.size() / CITAS_POR_PAGINA);
-        paginadorCitas.setPageCount(totalPaginas);
-        paginadorCitas.setPageFactory(this::crearPaginaCitas);
+    
+    /**
+     * Metodo para cargar el paginador aqui es donde se muestran las citas pendientes
+     */
+    public void generarPaginador() {
+        Platform.runLater(() -> {
+            paginadorCitas.setPageCount(0);
+            paginadorCitas.setPageFactory(null); // Limpia la fábrica anterior
+            
+            // Si no hay citas pendientes, entonces el paginador solo muestra un mensaje en medio
+            if (citasPendientes == null || citasPendientes.isEmpty()) {
+                paginadorCitas.setPageCount(1);
+                paginadorCitas.setCurrentPageIndex(0);
+                paginadorCitas.setPageFactory(n -> new Label("No hay citas programadas."));
+                return;
+            }
+            //  En esta parte es donde se calcula cuantas paginas habra en el paginador para que solo salgan n citas por pagina.
+            int totalPaginas = (int) Math.ceil((double) citasPendientes.size() / CITAS_POR_PAGINA);
+            paginadorCitas.setPageCount(totalPaginas);
+            paginadorCitas.setPageFactory(this::crearPaginaCitas);
+        });
     }
-
+    
+    /**
+     * Metodo auxiliar del paginador que se encarga de crear los VBox que iran en cada pagina
+     * Aqui tambien es donde se asocia cada objeto con un VBox
+     * @param pageIndex
+     * @return 
+     */
     private VBox crearPaginaCitas(int pageIndex) {
         VBox contenedorDePagina = new VBox(10);
         contenedorDePagina.setPadding(new Insets(10));
@@ -119,15 +137,19 @@ public class PantallaCitasController implements Initializable {
 
         return contenedorDePagina;
     }
-
+    
+    /**
+     * Metodo auxiliar para crear el card individual de cada cita.
+     * @param cita
+     * @return 
+     */
     private VBox crearCardIndividual(CitaPendienteResponse cita) {
-        // 1. Creamos el contenedor visual
+        
         VBox card = new VBox(5);
         card.getStyleClass().add("cita-item-card");
         card.setStyle("-fx-background-color: white; -fx-border-color: #ddd; -fx-border-radius: 8; -fx-cursor: hand;");
         card.setPadding(new Insets(15));
 
-        // 2. Extraemos los datos del objeto para las etiquetas
         Label lblMotivo = new Label(cita.getMotivo());
         lblMotivo.setStyle("-fx-font-weight: bold; -fx-font-size: 14px;");
 
@@ -136,48 +158,59 @@ public class PantallaCitasController implements Initializable {
         lblInfo.setStyle("-fx-text-fill: #666;");
 
         card.getChildren().addAll(lblMotivo, lblInfo);
-
-        // --- CLAVE: GUARDAR LA REFERENCIA ---
-        // Usamos setUserData para "esconder" el objeto dentro del VBox
         card.setUserData(cita);
-
-        // 3. Añadir evento de clic para recuperar el objeto
+        // Se añade para detectar cuando se le de clic.
         card.setOnMouseClicked(event -> {
             // Recuperamos el objeto guardado
             CitaPendienteResponse citaSeleccionada = (CitaPendienteResponse) card.getUserData();
-            System.out.println("Has seleccionado la cita ID: " + citaSeleccionada.getIdCita());
+            cargarDetalleCita(citaSeleccionada);
 
         });
 
         return card;
     }
+    
+    private void cargarDetalleCita(CitaPendienteResponse citaSeleccionada) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(""));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            
+            scene.getStylesheets().add(getClass().getResource("").toExternalForm());
+            
+            Stage stage = new Stage();
+            stage.setTitle("Detalle de la Cita - Distrito de Riego");
+            
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setScene(scene);
+            stage.show();
+            
+        } catch (IOException e) {
+            mostrarAlerta("Error", "Hubo un error al mostrar los detalles de esta cita. Contacte con Servicio Tecnico", Alert.AlertType.ERROR);
+        }
+    }
 
     @FXML
     private void handleNuevaCita() {
         try {
-            // 1. Cargar el FXML de la nueva pantalla
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/vistas/AgendarCita.fxml"));
             Parent root = loader.load();
-
-            // 2. Crear la escena (puedes pasarle el tamaño o dejar que use el del FXML)
             Scene scene = new Scene(root);
+            // Se le da la nueva pantalla el controlador actual para que le avise cuando se registro una cita y este controlador actualice el observer
+            AgendarCitaController controller = loader.getController();
+            controller.setObserver(this);
 
-            // Opcional: Cargar tu CSS a la nueva ventana
             scene.getStylesheets().add(getClass().getResource("/styles/AgendarCita.css").toExternalForm());
 
-            // 3. Crear el nuevo "Escenario" (Ventana)
             Stage stage = new Stage();
             stage.setTitle("Agendar Nueva Cita - Distrito de Riego");
 
-            // 4. Hacerla "Modal" (bloquea la ventana de atrás hasta que cierres esta)
             stage.initModality(Modality.APPLICATION_MODAL);
-
             stage.setScene(scene);
             stage.show();
 
         } catch (IOException e) {
-            System.err.println("Error al abrir la ventana de Nueva Cita: " + e.getMessage());
-            e.printStackTrace();
+            mostrarAlerta("Error", "Hubo un error al abrir la pantalla de Nueva Cita. Contacte con Servicio Tecnico", Alert.AlertType.ERROR);
         }
     }
 
@@ -185,6 +218,7 @@ public class PantallaCitasController implements Initializable {
     private void handleReset() {
         datePicker.setValue(null);
         cargarCitasPendientes();
+        lblFechaSeleccionada.setText("Citas Pendientes:");
     }
 
     /**

@@ -6,6 +6,7 @@ package controladores;
 
 import clienteApi.ClienteApi;
 import java.net.URL;
+import java.security.PublicKey;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ResourceBundle;
@@ -45,6 +46,7 @@ public class AgendarCitaController implements Initializable {
     private LocalTime HORA_FIN = LocalTime.of(16, 0);   // 4:00 PM
 
     private ClienteApi cliente;
+    private PantallaCitasController controller;
 
     /**
      * Inicializador del controlador
@@ -136,6 +138,7 @@ public class AgendarCitaController implements Initializable {
             cliente.enviarCita(cita).thenAccept(res -> {
                 mostrarAlerta("Éxito", "La cita se ha agendado correctamente.", Alert.AlertType.INFORMATION);
                 cerrarVentana();
+                controller.generarPaginador();
             })
                     .exceptionally(ex -> {
                         mostrarAlerta("Error de Conexión", "No se pudo guardar la cita: " + ex.getMessage(), Alert.AlertType.ERROR);
@@ -192,12 +195,13 @@ public class AgendarCitaController implements Initializable {
             }
         });
     }
-    
+
     /**
      * Metodo Auxiliar para mostrar una ventana
+     *
      * @param titulo
      * @param mensaje
-     * @param tipo 
+     * @param tipo
      */
     private void mostrarAlerta(String titulo, String mensaje, Alert.AlertType tipo) {
         Platform.runLater(() -> {
@@ -207,5 +211,9 @@ public class AgendarCitaController implements Initializable {
             alerta.setContentText(mensaje);
             alerta.showAndWait();
         });
+    }
+
+    public void setObserver(PantallaCitasController controller) {
+        this.controller = controller;
     }
 }

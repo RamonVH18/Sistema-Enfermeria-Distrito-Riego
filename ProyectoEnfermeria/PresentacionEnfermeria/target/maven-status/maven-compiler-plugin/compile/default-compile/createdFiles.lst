@@ -18,4 +18,5 @@ request\IniciarSesionRequest.class
 controladores\AgendarCitaController.class
 controladores\AgendarCitaController$1.class
 controladores\IniciarSesionController.class
+utilerias\Utils.class
 clienteApi\ClienteApi$4.class
