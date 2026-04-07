@@ -18,49 +18,6 @@
 
 <HBox fx:id="root" prefHeight="768.0" prefWidth="1024.0" styleClass="main-root" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" 
       fx:controller="controladores.PantallaCitasController">
-    
-    <VBox fx:id="sidePanel" alignment="TOP_CENTER" prefWidth="200.0" spacing="20.0" styleClass="side-panel">
-        
-        <VBox alignment="CENTER" spacing="5.0" styleClass="side-panel-header">
-            <VBox.margin>
-                <Insets bottom="30.0" top="10.0" />
-            </VBox.margin>
-            <ImageView fx:id="logoImageView" fitHeight="70.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                <image>
-                    <Image url="@../icons/logo.png" />
-                </image>
-            </ImageView>
-            <Label alignment="CENTER" text="Distrito de Riego del Rio Yaqui" textFill="WHITE" wrapText="true">
-                <font>
-                    <Font name="System Bold" size="12.0" />
-                </font>
-            </Label>
-            <Label alignment="CENTER" text="Sistema de Enfermeria" textFill="#8ca0b2" wrapText="true" />
-        </VBox>
-        
-        <Button fx:id="btnPanelPrincipal" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="menu-button" text="Panel Principal" />
-        <Button fx:id="btnCitas" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="menu-button-active" text="Citas" />
-        <Button fx:id="btnHistorialPacientes" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="menu-button" text="Historial de Pacientes" />
-        <Button fx:id="btnInformesSalud" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="menu-button" text="Informes de Salud" />
-        
-        <Pane fx:id="springPane" VBox.vgrow="ALWAYS" />
-        
-        <VBox alignment="CENTER" spacing="10.0" styleClass="side-panel-footer">
-            <Label fx:id="lblNombreEnfermero" text="Enfermero Abraham Coronel" textFill="WHITE">
-                <font>
-                    <Font name="System Bold" size="12.0" />
-                </font>
-            </Label>
-            <Button fx:id="btnCerrarSesion" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="logout-button" text="Cerrar Sesion" />
-        </VBox>
-        <HBox.margin>
-            <Insets />
-        </HBox.margin>
-        <padding>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-        </padding>
-    </VBox>
-    
     <StackPane fx:id="contentArea" styleClass="content-area" HBox.hgrow="ALWAYS">
         
         <HBox fx:id="citasMainContainer" alignment="CENTER" spacing="20.0">

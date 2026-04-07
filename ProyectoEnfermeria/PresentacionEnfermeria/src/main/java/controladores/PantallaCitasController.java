@@ -104,20 +104,23 @@ public class PantallaCitasController implements Initializable {
      * pendientes
      */
     public void generarPaginador() {
-        paginadorCitas.setPageCount(0);
-        paginadorCitas.setPageFactory(null); // Limpia la fábrica anterior
+        Platform.runLater(() -> {
 
-        // Si no hay citas pendientes, entonces el paginador solo muestra un mensaje en medio
-        if (citasPendientes == null || citasPendientes.isEmpty()) {
-            paginadorCitas.setPageCount(1);
-            paginadorCitas.setCurrentPageIndex(0);
-            paginadorCitas.setPageFactory(n -> new Label("No hay citas programadas."));
-            return;
-        }
-        //  En esta parte es donde se calcula cuantas paginas habra en el paginador para que solo salgan n citas por pagina.
-        int totalPaginas = (int) Math.ceil((double) citasPendientes.size() / CITAS_POR_PAGINA);
-        paginadorCitas.setPageCount(totalPaginas);
-        paginadorCitas.setPageFactory(this::crearPaginaCitas);
+            paginadorCitas.setPageCount(0);
+            paginadorCitas.setPageFactory(null); // Limpia la fábrica anterior
+
+            // Si no hay citas pendientes, entonces el paginador solo muestra un mensaje en medio
+            if (citasPendientes == null || citasPendientes.isEmpty()) {
+                paginadorCitas.setPageCount(1);
+                paginadorCitas.setCurrentPageIndex(0);
+                paginadorCitas.setPageFactory(n -> new Label("No hay citas programadas."));
+                return;
+            }
+            //  En esta parte es donde se calcula cuantas paginas habra en el paginador para que solo salgan n citas por pagina.
+            int totalPaginas = (int) Math.ceil((double) citasPendientes.size() / CITAS_POR_PAGINA);
+            paginadorCitas.setPageCount(totalPaginas);
+            paginadorCitas.setPageFactory(this::crearPaginaCitas);
+        });
     }
 
     /**
@@ -186,10 +189,10 @@ public class PantallaCitasController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/vistas/DetalleCita.fxml"));
             Parent root = loader.load();
             Scene scene = new Scene(root);
-            
+
             DetallesCitaController controller = loader.getController();
             controller.initializeData(citaSeleccionada);
-            
+
             scene.getStylesheets().add(getClass().getResource("/styles/DetalleCita.css").toExternalForm());
 
             Stage stage = new Stage();

@@ -8,12 +8,14 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import java.io.IOException;
 import java.net.URI;
 import java.net.URLEncoder;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Collections;
@@ -33,134 +35,110 @@ import response.UsuarioResponse;
  */
 public class ClienteApi {
 
-    private final HttpClient client = HttpClient.newHttpClient();
+    private HttpClient client = HttpClient.newHttpClient();
     private final String BASE_URL = "http://localhost:8080/enfermeriaDR";
-    private final ObjectMapper mapper;
+    private ObjectMapper mapper;
 
     public ClienteApi() {
-        mapper = new ObjectMapper();
-        mapper.registerModule(new JavaTimeModule());
-        mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+        this.client = HttpClient.newBuilder()
+                .connectTimeout(Duration.ofSeconds(10))
+                .build();
+
+        this.mapper = new ObjectMapper()
+                .registerModule(new JavaTimeModule())
+                .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
     }
 
-    public CompletableFuture<CrearCitaResponse> enviarCita(CrearCitaRequest requestData) {
-        return CompletableFuture.supplyAsync(() -> {
+    // Método genérico para procesar la respuesta y deserializar
+    private <T> CompletableFuture<T> handleResponse(CompletableFuture<HttpResponse<String>> responseFuture, Class<T> responseClass) {
+        return responseFuture.thenApply(response -> {
+            validarRespuesta(response);
             try {
-
-                ObjectMapper mapper = new ObjectMapper();
-                mapper.registerModule(new JavaTimeModule());
-                String json = mapper.writeValueAsString(requestData);
-
-                HttpRequest request = HttpRequest.newBuilder()
-                        .uri(URI.create(BASE_URL + "/citas"))
-                        .header("Content-Type", "application/json")
-                        .POST(HttpRequest.BodyPublishers.ofString(json))
-                        .build();
-
-                HttpResponse<String> response = HttpClient.newHttpClient()
-                        .send(request, HttpResponse.BodyHandlers.ofString());
-
-                if (response.statusCode() >= 200 && response.statusCode() < 300) {
-                    return mapper.readValue(response.body(), CrearCitaResponse.class);
-                } else {
-                    throw new RuntimeException("Error del servidor: " + response.statusCode());
-                }
+                return mapper.readValue(response.body(), responseClass);
             } catch (Exception e) {
-                throw new RuntimeException("Fallo en la conexión: " + e.getMessage());
+                throw new RuntimeException("Error al deserializar: " + e.getMessage());
             }
         });
     }
 
-    public CompletableFuture<List<CitaPendienteResponse>> obtenerCitasPendientes() {
-        return CompletableFuture.supplyAsync(() -> {
+    // Sobrecarga para Listas (TypeReference)
+    private <T> CompletableFuture<T> handleResponse(CompletableFuture<HttpResponse<String>> responseFuture, TypeReference<T> typeRef) {
+        return responseFuture.thenApply(response -> {
+            validarRespuesta(response);
             try {
-                HttpRequest request = HttpRequest.newBuilder()
-                        .uri(URI.create(BASE_URL + "/citas?estado=PENDIENTE"))
-                        .GET()
-                        .build();
-                HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-                validarRespuesta(response);
-
-                return mapper.readValue(response.body(),
-                        new TypeReference<List<CitaPendienteResponse>>() {
-                });
+                return mapper.readValue(response.body(), typeRef);
             } catch (Exception e) {
-                throw new RuntimeException("Error al obtener empleados: " + e.getMessage(), e);
+                throw new RuntimeException("Error al deserializar lista: " + e.getMessage());
             }
+        });
+    }
+
+    public CompletableFuture<CrearCitaResponse> enviarCita(CrearCitaRequest requestData) {
+        try {
+
+            String json = mapper.writeValueAsString(requestData);
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BASE_URL + "/citas"))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(json))
+                    .build();
+            return handleResponse(client.sendAsync(request, HttpResponse.BodyHandlers.ofString()), CrearCitaResponse.class);
+        } catch (IOException e) {
+            return CompletableFuture.failedFuture(e);
+        }
+    }
+
+    public CompletableFuture<List<CitaPendienteResponse>> obtenerCitasPendientes() {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(BASE_URL + "/citas?estado=PENDIENTE"))
+                .GET()
+                .build();
+
+        return handleResponse(client.sendAsync(request, HttpResponse.BodyHandlers.ofString()),
+                new TypeReference<List<CitaPendienteResponse>>() {
         });
     }
 
     public CompletableFuture<List<CitaPendienteResponse>> obtenerCitasPorFecha(LocalDate filtro) {
-        return CompletableFuture.supplyAsync(() -> {
-            try {
-                String urlConFiltro = BASE_URL + "/citas" + "?estado=PENDIENTE&filtroFecha=" + URLEncoder.encode(filtro.format(DateTimeFormatter.ISO_DATE), StandardCharsets.UTF_8);
 
-                HttpRequest request = HttpRequest.newBuilder()
-                        .uri(URI.create(urlConFiltro))
-                        .GET()
-                        .build();
-                HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-                if (response.statusCode() == 404 || response.body() == null || response.body().isBlank()) {
-                    return Collections.emptyList();
-                }
-                validarRespuesta(response);
+        String urlConFiltro = BASE_URL + "/citas" + "?estado=PENDIENTE&filtroFecha="
+                + URLEncoder.encode(filtro.format(DateTimeFormatter.ISO_DATE), StandardCharsets.UTF_8);
 
-                return mapper.readValue(response.body(),
-                        new TypeReference<List<CitaPendienteResponse>>() {
-                });
-            } catch (Exception e) {
-                throw new RuntimeException("Error al obtener las citass: " + e.getMessage(), e);
-            }
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(urlConFiltro))
+                .GET()
+                .build();
+        return handleResponse(client.sendAsync(request, HttpResponse.BodyHandlers.ofString()),
+                new TypeReference<List<CitaPendienteResponse>>() {
         });
     }
 
     public CompletableFuture<List<EmpleadoOptionResponse>> obtenerTodosLosEmpleados() {
-        return CompletableFuture.supplyAsync(() -> {
-            try {
-                HttpRequest request = HttpRequest.newBuilder()
-                        .uri(URI.create("http://localhost:8080/enfermeriaDR/empleados"))
-                        .GET()
-                        .build();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(BASE_URL + "/enfermeriaDR/empleados"))
+                .GET()
+                .build();
 
-                HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-                validarRespuesta(response);
-
-                return mapper.readValue(response.body(), new TypeReference<List<EmpleadoOptionResponse>>() {
-                });
-            } catch (Exception e) {
-                throw new RuntimeException("Error al obtener empleados: " + e.getMessage(), e);
-            }
+        return handleResponse(client.sendAsync(request, HttpResponse.BodyHandlers.ofString()),
+                new TypeReference<List<EmpleadoOptionResponse>>() {
         });
     }
 
     // 2. Método para obtener por FILTRO (GET /empleados/options?filtroNombre=...)
     public CompletableFuture<List<EmpleadoOptionResponse>> buscarEmpleadosPorFiltro(String filtro) {
-        return CompletableFuture.supplyAsync(() -> {
-            try {
-                // Importante: Encodear el parámetro por si lleva espacios o caracteres especiales
-                String urlConFiltro = BASE_URL + "/empleados" + "?filtroNombre=" + URLEncoder.encode(filtro, StandardCharsets.UTF_8);
-
-                HttpRequest request = HttpRequest.newBuilder()
-                        .uri(URI.create(urlConFiltro))
-                        .GET()
-                        .build();
-
-                HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-                validarRespuesta(response);
-
-                return mapper.readValue(response.body(), new TypeReference<List<EmpleadoOptionResponse>>() {
-                });
-            } catch (Exception e) {
-                throw new RuntimeException("Error al filtrar empleados: " + e.getMessage(), e);
-            }
+        String urlConFiltro = BASE_URL + "/empleados" + "?filtroNombre=" + URLEncoder.encode(filtro, StandardCharsets.UTF_8);
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(urlConFiltro))
+                .GET()
+                .build();
+        return handleResponse(client.sendAsync(request, HttpResponse.BodyHandlers.ofString()),
+                new TypeReference<List<EmpleadoOptionResponse>>() {
         });
     }
 
     public CompletableFuture<UsuarioResponse> inicioSesionRequest(IniciarSesionRequest requestData) {
         return CompletableFuture.supplyAsync(() -> {
             try {
-                ObjectMapper mapper = new ObjectMapper();
-                mapper.registerModule(new JavaTimeModule());
                 String json = mapper.writeValueAsString(requestData);
 
                 HttpRequest request = HttpRequest.newBuilder()
