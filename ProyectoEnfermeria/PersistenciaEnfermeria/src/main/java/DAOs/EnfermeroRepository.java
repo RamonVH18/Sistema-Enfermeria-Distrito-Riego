@@ -9,4 +9,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface EnfermeroRepository extends JpaRepository<Enfermero, Integer>{
     
+    boolean existsByEmpleadoIdEmpleado(Integer idEmpleado);
 }

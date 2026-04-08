@@ -83,14 +83,14 @@ public class IniciarSesionController {
     private void sesionIniciada(){
         try {
             // 1. Cargar el FXML de la nueva pantalla
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/vistas/citas.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/vistas/MenuPrincipal.fxml"));
             Parent root = loader.load();
 
             // 2. Crear la escena (puedes pasarle el tamaño o dejar que use el del FXML)
             Scene scene = new Scene(root);
 
             // Opcional: Cargar tu CSS a la nueva ventana
-            scene.getStylesheets().add(getClass().getResource("/styles/style.css").toExternalForm());
+            scene.getStylesheets().add(getClass().getResource("/styles/menuprincipal.css").toExternalForm());
 
             // 3. Crear el nuevo "Escenario" (Ventana)
             Stage stage = new Stage();
