@@ -9,3 +9,5 @@ ProyectoEnfermeria/PresentacionEnfermeria/target/PresentacionEnfermeria-1.0-SNAP
 *.class
 *.lst
 *.class
+/ProyectoEnfermeria/ServicioCitas/nbproject/
+ProyectoEnfermeria/PresentacionEnfermeria/target/classes/controladores/AgendarCitaController.class
