@@ -43,8 +43,11 @@ import servicios.ServicioCitas;
  *
  * @author Leonardo Flores Leyva - 252390
  */
-@ExtendWith(SpringExtension.class) 
-@Import({ServicioCitas.class, MethodValidationPostProcessor.class})
+@ExtendWith(SpringExtension.class) // Levanta el contexto de SpringBoot = obligatorio
+@Import({
+    ServicioCitas.class, // Importante incluir la clase que implementa la interfaz de IServicioCitas
+    MethodValidationPostProcessor.class // IMPORTANTE INCLUIR ESTA CLASE PARA ACTIVAR LAS ETIQUETAS DE VALIDACIÓN
+})
 public class ValidarCrearCitaRequest {
     
     // Se mockean los repositorios (la base de datos)
@@ -60,12 +63,7 @@ public class ValidarCrearCitaRequest {
     private IServicioCitas servicioCitas;
     
     /*
-        Se crean atributos con valores ideales para evitar la repetición de código
-        ¡Ojo! El valor de FECHA_HORA_IDEAL está sujeto al tiempo. Si no se desea actualizar
-        su valor en cada prueba, se puede codificar para que se ajuste a partir de la fecha
-        actual. En esta primera versión, las pruebas están contempladas para ser ejecutadas
-        el 14 de abril del 2026. Si ya realizó esta actualización, puede eliminar este
-        comentario.
+        Se crean atributos con valores ideales para evitar la repetición de código.
     */
     private static final Integer ID_EMPLEADO_IDEAL = 1;
     private static final Integer ID_ENFERMERO_IDEAL = 2;
@@ -81,9 +79,7 @@ public class ValidarCrearCitaRequest {
     // Empleado ficticio
     private final Empleado empleadoFicticio = new Empleado(
             ID_EMPLEADO_IDEAL, 
-            "Leonardo ",
-            "Flores",
-            "Leyva",
+            "Leonardo ", "Flores", "Leyva",
             LocalDate.of(1991, Month.JULY, 3), 
             "6441549274",
             "GAMC850820HDFRRR05", 
@@ -99,9 +95,7 @@ public class ValidarCrearCitaRequest {
             ID_ENFERMERO_IDEAL, 
             new Empleado(
                 ID_ENFERMERO_IDEAL, 
-                "Ramón",
-                "Valencia",
-                "Hernández",
+                "Ramón", "Valencia", "Hernández",
                 LocalDate.of(1984, Month.OCTOBER, 20), 
                 "6442548932",
                 "RGHE850820HDFRRR09", 
@@ -115,7 +109,7 @@ public class ValidarCrearCitaRequest {
     );
     
     @BeforeAll
-    static void setup(){
+    public static void setup(){
         // Establece la fecha ideal como la de hoy a las 3:30 p.m.
         FECHA_HORA_IDEAL = LocalDateTime.of(LocalDate.now(), LocalTime.of(15, 30, 0));
         // Se verifica que la fecha a probar esté dentro del horario del enfermero y esté en el futuro
@@ -124,7 +118,7 @@ public class ValidarCrearCitaRequest {
             diasTranscurridos++;
         }
         // Indica la fecha a probar
-        System.out.printf("%d/%d/%d : %d:%d:%d \n", 
+        System.out.printf("Cita ideal: %d/%d/%d : %d:%d:%d \n", 
                 FECHA_HORA_IDEAL.getDayOfMonth(),
                 FECHA_HORA_IDEAL.getMonthValue(),
                 FECHA_HORA_IDEAL.getYear(),
@@ -309,7 +303,6 @@ public class ValidarCrearCitaRequest {
         verifyNoInteractions(enfermeroRepository);
         verifyNoInteractions(citaRepository);
     }
-    
     /**
      * Verifica que el motivo no esté vacío.
      */
@@ -332,7 +325,6 @@ public class ValidarCrearCitaRequest {
         verifyNoInteractions(enfermeroRepository);
         verifyNoInteractions(citaRepository);
     }
-    
     /**
      * Verifica que el motivo no esté vacío (espacios en blanco).
      */
@@ -355,7 +347,6 @@ public class ValidarCrearCitaRequest {
         verifyNoInteractions(enfermeroRepository);
         verifyNoInteractions(citaRepository);
     }
-    
     /**
      * Verifica que la fecha no sea null
      */
@@ -375,7 +366,6 @@ public class ValidarCrearCitaRequest {
         */
         assertTrue(error.getMessage().contains("Fecha y hora requerida."));
     }
-    
     /**
      * Verifica que el minuto de la fecha y hora de la cita sea múltiplo de 15.
      */
@@ -507,6 +497,7 @@ public class ValidarCrearCitaRequest {
     public void csc15(){
         // Resta los días de diferencia de la fecha ideal respecto a la actual
         LocalDateTime fechaHoraInvalida = FECHA_HORA_IDEAL.minusDays(diasTranscurridos);
+        
         // Asigna la fecha y hora inválida a la cita
         cita.setFechaHora(fechaHoraInvalida);
         
@@ -555,6 +546,7 @@ public class ValidarCrearCitaRequest {
         LocalDateTime fechaHoraInvalida = FECHA_HORA_IDEAL;
         while(!fechaHoraInvalida.getDayOfWeek().equals(DayOfWeek.SUNDAY))
             fechaHoraInvalida = fechaHoraInvalida.plusDays(1);
+        
         // Asigna la fecha y hora inválida a la cita
         cita.setFechaHora(fechaHoraInvalida);
         

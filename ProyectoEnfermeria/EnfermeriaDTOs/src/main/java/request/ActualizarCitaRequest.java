@@ -11,8 +11,8 @@ import java.time.LocalDateTime;
  */
 public class ActualizarCitaRequest {
     
-    @NotNull
-    @Positive
+    @NotNull(message = "Cita requerida.")
+    @Positive(message = "Cita requerida.")
     private Integer idCita;
 
     // Atributos de la cita

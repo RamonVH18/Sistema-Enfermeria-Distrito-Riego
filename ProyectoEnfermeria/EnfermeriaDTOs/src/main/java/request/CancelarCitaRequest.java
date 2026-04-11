@@ -9,8 +9,8 @@ import jakarta.validation.constraints.Positive;
  */
 public class CancelarCitaRequest {
     
-    @NotNull
-    @Positive
+    @NotNull(message = "Cita requerida.")
+    @Positive(message = "Cita requerida.")
     private Integer idCita;
 
     public CancelarCitaRequest() {}
