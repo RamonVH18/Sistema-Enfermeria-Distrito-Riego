@@ -13,3 +13,5 @@ ProyectoEnfermeria/PresentacionEnfermeria/target/PresentacionEnfermeria-1.0-SNAP
 ProyectoEnfermeria/PresentacionEnfermeria/target/classes/controladores/AgendarCitaController.class
 *.lst
 *.class
+*.class
+*.lst
