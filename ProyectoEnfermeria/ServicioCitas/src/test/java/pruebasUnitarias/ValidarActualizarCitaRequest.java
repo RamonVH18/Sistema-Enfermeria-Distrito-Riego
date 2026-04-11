@@ -69,7 +69,7 @@ public class ValidarActualizarCitaRequest {
     private static LocalDateTime NUEVA_FECHA_HORA_IDEAL;
     
     // Días de diferencia respecto a la nueva fecha ideal y a la fecha actual
-    private static int diasTranscurridos = 1;
+    private static int diasTranscurridos = 7;
     
     // Solicitud a validar
     private ActualizarCitaRequest nuevaCita = new ActualizarCitaRequest();
@@ -80,9 +80,9 @@ public class ValidarActualizarCitaRequest {
     @BeforeAll
     public static void setup(){
         // Establece la fecha ideal como la de hoy a las 3:30 p.m.
-        NUEVA_FECHA_HORA_IDEAL = LocalDateTime.of(LocalDate.now(), LocalTime.of(15, 30, 0));
+        NUEVA_FECHA_HORA_IDEAL = LocalDateTime.of(LocalDate.now(), LocalTime.of(15, 30, 0)).plusDays(7);
         // Se verifica que la fecha a probar esté dentro del horario del enfermero y esté en el futuro
-        while(!HorarioEnfermero.diasLaborales.contains(NUEVA_FECHA_HORA_IDEAL.getDayOfWeek()) || NUEVA_FECHA_HORA_IDEAL.isBefore(LocalDateTime.now())){
+        while(!HorarioEnfermero.diasLaborales.contains(NUEVA_FECHA_HORA_IDEAL.getDayOfWeek()) || NUEVA_FECHA_HORA_IDEAL.minusDays(7).isBefore(LocalDateTime.now())){
             NUEVA_FECHA_HORA_IDEAL = NUEVA_FECHA_HORA_IDEAL.plusDays(1);
             diasTranscurridos++;
         }

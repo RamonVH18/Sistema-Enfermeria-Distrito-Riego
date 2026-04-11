@@ -24,7 +24,6 @@ public class HorarioEnfermero {
             DayOfWeek.TUESDAY, 
             DayOfWeek.WEDNESDAY, 
             DayOfWeek.THURSDAY, 
-            DayOfWeek.FRIDAY,
-            DayOfWeek.SATURDAY
+            DayOfWeek.FRIDAY
     ));
 }

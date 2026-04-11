@@ -91,7 +91,7 @@ public class ValidarCrearCitaRequest {
     );
     
     // Enfermero ficticio
-    private Enfermero enfermeroFicticio = new Enfermero(
+    private final Enfermero enfermeroFicticio = new Enfermero(
             ID_ENFERMERO_IDEAL, 
             new Empleado(
                 ID_ENFERMERO_IDEAL, 
@@ -146,7 +146,7 @@ public class ValidarCrearCitaRequest {
         when(enfermeroRepository.findById(cita.getIdEnfermero())).thenReturn(Optional.of(enfermeroFicticio));
         when(empleadoRepository.findById(cita.getIdEmpleado())).thenReturn(Optional.of(empleadoFicticio));
         when(citaRepository.findByFechaHora(cita.getFechaHora())).thenReturn(null);
-        when(citaRepository.save(any(Cita.class))).thenReturn(new Cita(1, FECHA_HORA_IDEAL, EstadoCita.REALIZADA, MOTIVO_IDEAL, null, empleadoFicticio, enfermeroFicticio));
+        when(citaRepository.save(any(Cita.class))).thenReturn(new Cita(1, FECHA_HORA_IDEAL, EstadoCita.PENDIENTE, MOTIVO_IDEAL, null, empleadoFicticio, enfermeroFicticio));
         
     }
     /**
