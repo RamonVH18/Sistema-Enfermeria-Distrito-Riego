@@ -20,11 +20,11 @@ public class CrearCitaRequest {
     
     // Empleado atendido y enfermero encargado
     @NotNull(message = "Empleado requerido.")
-    @Positive
+    @Positive(message = "Empleado requerido.")
     private Integer idEmpleado;
     
     @NotNull(message = "Enfermero requerido.")
-    @Positive
+    @Positive(message = "Enfermero requerido.")
     private Integer idEnfermero;
     
     // Constructores

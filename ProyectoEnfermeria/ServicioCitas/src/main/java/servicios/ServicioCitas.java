@@ -10,13 +10,17 @@ import entidades.Enfermero;
 import enums.EstadoCita;
 import exception.CitasException;
 import interfaces.IServicioCitas;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import mapper.CitaMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -41,10 +45,19 @@ public class ServicioCitas implements IServicioCitas {
     private final CitaRepository citaRepository;
     private final EmpleadoRepository empleadoRepository;
     private final EnfermeroRepository enfermeroRepository;
-    // Límites de hora y duración de las citas
+    // Límites de hora y duración de las citas (hardcodeado; debería ser almacenado en BD)
     private final int DURACION_CITA = 15;
     private final LocalTime HORA_INICIO_CITAS = LocalTime.of(8, 0, 0);
     private final LocalTime HORA_TERMINO_CITAS = LocalTime.of(16, 0, 0);
+    // Días laborales del enfermero (hardcodeado; debería ser almacenado en BD)
+    private final Set<DayOfWeek> diasLaborales = new HashSet<>(Arrays.asList(
+            DayOfWeek.MONDAY, 
+            DayOfWeek.TUESDAY, 
+            DayOfWeek.WEDNESDAY, 
+            DayOfWeek.THURSDAY, 
+            DayOfWeek.FRIDAY,
+            DayOfWeek.SATURDAY
+    ));
     // Fomatter de fechas y horas
     private final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy : HH:mm:ss");
     // Logeo del sistema
@@ -83,7 +96,10 @@ public class ServicioCitas implements IServicioCitas {
         if (citaMismaFechaHora != null) {
             throw new CitasException("Ya existe una cita con la misma fecha y hora.", HttpStatus.BAD_REQUEST, "400");
         }
-
+        // Extrae la fecha de la cita
+        LocalDate fechaCita = cita.getFechaHora().toLocalDate();
+        // Valida el día de la cita
+        validarDiaCita(fechaCita);
         // Extrae la hora de la cita
         LocalTime horaCita = cita.getFechaHora().toLocalTime();
         // Valida la hora de la cita
@@ -125,7 +141,10 @@ public class ServicioCitas implements IServicioCitas {
         if (citaActualizar == null) {
             throw new CitasException("La cita no existe.", HttpStatus.BAD_REQUEST, "400");
         }
-
+        // Extrae la fecha de la cita
+        LocalDate fechaCita = cita.getNuevaFechaHora().toLocalDate();
+        // Valida el día de la cita
+        validarDiaCita(fechaCita);
         // Extrae la hora de la cita
         LocalTime nuevaHoraCita = cita.getNuevaFechaHora().toLocalTime();
         // Valida la hora de la cita
@@ -262,7 +281,19 @@ public class ServicioCitas implements IServicioCitas {
             }
         }
     }
-
+    
+    /**
+     * Valida el día de la fecha de la cita.
+     * @param fechaCita Fecha de la cita.
+     */
+    private void validarDiaCita(LocalDate fechaCita){
+        // Obtiene el día de la fecha
+        DayOfWeek diaCita = fechaCita.getDayOfWeek();
+        // Verifica si el día de la fecha forma parte de los días laborales del enfermero.
+        if(!diasLaborales.contains(diaCita))
+            throw new CitasException("La cita está fuera del horario laboral del enfermero.", HttpStatus.BAD_REQUEST, "400");
+    }
+    
     /**
      * Valida la hora de una cita.
      *
@@ -282,8 +313,8 @@ public class ServicioCitas implements IServicioCitas {
             throw new CitasException("La cita no puede estar antes del período de citas.", HttpStatus.BAD_REQUEST, "400");
         }
         // Verifica que la hora de la cita no es superior a la hora de término de citas
-        if (horaCita.isAfter(HORA_TERMINO_CITAS)) {
-            throw new CitasException("La cita no puede estar después del período de citas.", HttpStatus.BAD_REQUEST, "400");
+        if (!horaCita.isBefore(HORA_TERMINO_CITAS)) {
+            throw new CitasException("La cita debe estar antes de la hora de término de citas.", HttpStatus.BAD_REQUEST, "400");
         }
     }
 }
