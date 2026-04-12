@@ -41,7 +41,7 @@ public class MenuPrincipalController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         try {
             cargarPantalla("MenuPrincipal", "/vistas/panelPrincipal.fxml");
-            cargarPantalla("PantallaCitas", "/vistas/PantallaCitas.fxml");
+            cargarPantalla("PantallaCitas", "/vistas/pantallaCitas.fxml");
             
             mostrarPantalla("MenuPrincipal");
         } catch (IOException e) {
