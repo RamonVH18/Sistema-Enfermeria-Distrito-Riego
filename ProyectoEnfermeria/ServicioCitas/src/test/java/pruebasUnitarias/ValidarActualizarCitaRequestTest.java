@@ -395,7 +395,7 @@ public class ValidarActualizarCitaRequestTest {
             Se recomienda actualizar el mensaje si el mensaje original de la excepción 
             fue actualizado.
         */
-        assertTrue(error.getMessage().contains("La fecha y hora debe ser futura."));
+        assertTrue(error.getMessage().contains("La nueva fecha es la misma que la original."));
     }
     /**
      * Verifica que la fecha y hora esté ubicada en el futuro:
