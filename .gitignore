@@ -15,3 +15,5 @@ ProyectoEnfermeria/PresentacionEnfermeria/target/classes/controladores/AgendarCi
 *.class
 *.class
 *.lst
+/ProyectoEnfermeria/Leogay/target/
+/ProyectoEnfermeria/WebSocketDemo/target/

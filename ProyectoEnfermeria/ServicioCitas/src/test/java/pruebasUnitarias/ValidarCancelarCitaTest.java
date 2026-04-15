@@ -53,7 +53,7 @@ import servicios.ServicioCitas;
     ServicioCitas.class, // Importante incluir la clase que implementa la interfaz de IServicioCitas
     MethodValidationPostProcessor.class // IMPORTANTE INCLUIR ESTA CLASE PARA ACTIVAR LAS ETIQUETAS DE VALIDACIÓN
 })
-public class ValidarCancelarCita {
+public class ValidarCancelarCitaTest {
   
     // Se mockean los repositorios (la base de datos)
     @MockitoBean
