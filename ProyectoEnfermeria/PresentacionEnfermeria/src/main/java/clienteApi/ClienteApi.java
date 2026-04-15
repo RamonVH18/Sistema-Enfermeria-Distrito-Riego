@@ -5,6 +5,7 @@
 package clienteApi;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -164,9 +165,19 @@ public class ClienteApi {
     }
 
     private void validarRespuesta(HttpResponse<String> response) {
-        if (response.statusCode() < 200 || response.statusCode() >= 300) {
-            throw new RuntimeException("Error del servidor: " + response.statusCode() + " - " + response.body());
+        if (response.statusCode() >= 400) {
+            String mensajeParaUsuario;
+            try {
+                // Leemos el JSON que mandó el servidor
+                JsonNode nodo = mapper.readTree(response.body());
+                // Sacamos solo el valor del campo "message"
+                mensajeParaUsuario = nodo.get("message").asText();
+            } catch (Exception e) {
+                // Si no es un JSON o no tiene 'message', mensaje genérico
+                mensajeParaUsuario = "Error inesperado en el servidor (Código: " + response.statusCode() + ")";
+            }
+            throw new RuntimeException(mensajeParaUsuario);
         }
-    }
 
+    }
 }

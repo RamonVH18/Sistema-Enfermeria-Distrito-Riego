@@ -140,7 +140,7 @@ public class AgendarCitaController implements Initializable {
                 controller.generarPaginador();
             })
                     .exceptionally(ex -> {
-                        mostrarAlerta("Error de Conexión", "No se pudo guardar la cita: " + ex.getMessage(), Alert.AlertType.ERROR);
+                        mostrarAlerta("Error de Conexión", "No se pudo guardar la cita: " + ex.getCause().getMessage(), Alert.AlertType.ERROR);
                         return null;
                     });
         }
