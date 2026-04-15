@@ -79,7 +79,7 @@ public class IniciarSesionController {
         alert.setContentText(mensaje);
         alert.showAndWait();
     }
-    
+
     private void sesionIniciada(){
         try {
             // 1. Cargar el FXML de la nueva pantalla
@@ -88,24 +88,23 @@ public class IniciarSesionController {
 
             // 2. Crear la escena (puedes pasarle el tamaño o dejar que use el del FXML)
             Scene scene = new Scene(root);
-
-            // Opcional: Cargar tu CSS a la nueva ventana
+            // Cargar tu CSS a la nueva ventana
             scene.getStylesheets().add(getClass().getResource("/styles/menuprincipal.css").toExternalForm());
 
             // 3. Crear el nuevo "Escenario" (Ventana)
             Stage stage = new Stage();
             stage.setTitle("Menu Principal - Distrito de Riego");
 
-            // 4. Hacerla "Modal" (bloquea la ventana de atrás hasta que cierres esta)
-            stage.initModality(Modality.APPLICATION_MODAL);
-
             stage.setScene(scene);
             stage.show();
+
+            // 4. CERRAR la ventana de Login
+            Stage stageLogin = (Stage) btnIniciarSesion.getScene().getWindow();
+            stageLogin.close();
 
         } catch (IOException e) {
             System.err.println("Error al abrir la ventana de Nueva Cita: " + e.getMessage());
             e.printStackTrace();
         }
     }
-    
 }
