@@ -195,10 +195,10 @@ public class ValidarActualizarCitaTest {
                  new Empleado(),
                  new Enfermero()
          );
-         // Cuando se busque una cita a partir de la fecha y hora de la nueva fecha y hora, retornará una cita existente
-         when(citaRepository.findByFechaHora(nuevaCita.getNuevaFechaHora())).thenReturn(citaExistente);
+        // Cuando se busque una cita a partir de la fecha y hora de la nueva fecha y hora, retornará una cita existente
+        when(citaRepository.findByFechaHora(nuevaCita.getNuevaFechaHora())).thenReturn(Optional.of(citaExistente));
          
-         // Si se intenta actualizar la cita, se devolverá una cita vacía
+        // Si se intenta actualizar la cita, se devolverá una cita vacía
         when(citaRepository.save(any(Cita.class))).thenReturn(new Cita());
         
         // Ejecuta el método "actualizar" del servicio y verifica que se lanzó una excepción
@@ -226,7 +226,7 @@ public class ValidarActualizarCitaTest {
         
         // Omite las otras validaciones de negocio
         when(citaRepository.findById(nuevaCita.getIdCita())).thenReturn(Optional.of(citaOriginal));
-        when(citaRepository.findByFechaHora(nuevaCita.getNuevaFechaHora())).thenReturn(citaOriginal);
+        when(citaRepository.findByFechaHora(nuevaCita.getNuevaFechaHora())).thenReturn(Optional.of(citaOriginal));
          
         // Si se intenta actualizar la cita, se devolverá una cita vacía
         when(citaRepository.save(any(Cita.class))).thenReturn(new Cita());
@@ -245,15 +245,96 @@ public class ValidarActualizarCitaTest {
         // Verifica que no se haya llamado al método save()
         verify(citaRepository, never()).save(any(Cita.class));
     }
+    /**
+     * Valida que no se pueda actualizar una cita si la nueva
+     * fecha y hora está ubicada antes que la cita original.
+     */
+    @Test
+    public void rcsc04(){
+        // Voltea las fechas de la cita original y la actualizada
+        nuevaCita.setNuevaFechaHora(citaOriginal.getFechaHora());
+        Cita citaOriginalFutura = new Cita(
+                citaOriginal.getIdCita(), 
+                NUEVA_FECHA_HORA_IDEAL, // Fecha y hora futura
+                citaOriginal.getEstado(),
+                citaOriginal.getMotivo(), 
+                citaOriginal.getSerie(), 
+                citaOriginal.getEmpleado(), 
+                citaOriginal.getEnfermero()
+        );
+        
+        // Cuando se busque la cita original por su ID, retornará la cita original con la fecha futura
+        when(citaRepository.findById(nuevaCita.getIdCita())).thenReturn(Optional.of(citaOriginalFutura));
+        
+        // Omite la otra validación de negocio
+        when(citaRepository.findByFechaHora(nuevaCita.getNuevaFechaHora())).thenReturn(Optional.empty());
+        
+        // Si se intenta actualizar la cita, se devolverá una cita vacía
+        when(citaRepository.save(any(Cita.class))).thenReturn(new Cita());
+        
+        // Ejecuta el método "actualizar" del servicio y verifica que se lanzó una excepción
+        Exception error = assertThrows(Exception.class, () -> {servicioCitas.actualizar(nuevaCita);});
+        /*
+            Verifica que el mensaje de la excepción corresponda con el error identificado
+            Se recomienda actualizar el mensaje si el mensaje original de la excepción 
+            fue actualizado.
+        */
+        assertTrue(error.getMessage().contains("La nueva fecha está ubicada antes de la cita original."));
+        
+        // Verifica que el método findById haya sido llamado una vez
+        verify(citaRepository, times(1)).findById(anyInt());
+        // Verifica que no se haya llamado al método save()
+        verify(citaRepository, never()).save(any(Cita.class));
+    }
+    /**
+     * Valida que no se pueda actualizar una cita si la cita
+     * original no está pendiente.
+     */
+    @Test
+    public void rcsc05(){
+        // Crea una cita original con un estado incorrecto
+        Cita citaOriginalNoPendiente = new Cita(
+                citaOriginal.getIdCita(), 
+                citaOriginal.getFechaHora(), 
+                EstadoCita.CANCELADA, // Estado diferente de PENDIENTE
+                citaOriginal.getMotivo(), 
+                citaOriginal.getSerie(), 
+                citaOriginal.getEmpleado(), 
+                citaOriginal.getEnfermero()
+        );
+        // Cuando se busque la cita original por su ID, retornará la cita con estado inválido
+        when(citaRepository.findById(nuevaCita.getIdCita())).thenReturn(Optional.of(citaOriginalNoPendiente));
+        
+        // Omite la otra validación de negocio
+        when(citaRepository.findByFechaHora(nuevaCita.getNuevaFechaHora())).thenReturn(Optional.empty());
+        
+        // Si se intenta actualizar la cita, se devolverá una cita vacía
+        when(citaRepository.save(any(Cita.class))).thenReturn(new Cita());
+        
+        // Ejecuta el método "actualizar" del servicio y verifica que se lanzó una excepción
+        Exception error = assertThrows(Exception.class, () -> {servicioCitas.actualizar(nuevaCita);});
+        /*
+            Verifica que el mensaje de la excepción corresponda con el error identificado
+            Se recomienda actualizar el mensaje si el mensaje original de la excepción 
+            fue actualizado.
+        */
+        assertTrue(error.getMessage().contains("La cita original no está pendiente. No se puede reagendar."));
+        
+        // Verifica que el método findById haya sido llamado una vez
+        verify(citaRepository, times(1)).findById(anyInt());
+        // Verifica que no se haya llamado al método save()
+        verify(citaRepository, never()).save(any(Cita.class));
+    }
+    
      /**
      * Valida que se actualice la cita si se han cumplido todas las validaciones
      * de negocio correspondientes.
      */
      @Test
-     public void rcsc04(){
+     public void rcsc06(){
         // Pasa las validaciones de negocio de los dos parámetros de la solicitud
         when(citaRepository.findById(nuevaCita.getIdCita())).thenReturn(Optional.of(citaOriginal));
-        when(citaRepository.findByFechaHora(nuevaCita.getNuevaFechaHora())).thenReturn(null);
+        when(citaRepository.findByFechaHora(nuevaCita.getNuevaFechaHora())).thenReturn(Optional.empty());
         
         // Si se intenta registrar la nueva cita, devolverá una Cita con los datos de la nueva cita y un nuevo ID
         when(citaRepository.save(any(Cita.class))).thenReturn(new Cita(

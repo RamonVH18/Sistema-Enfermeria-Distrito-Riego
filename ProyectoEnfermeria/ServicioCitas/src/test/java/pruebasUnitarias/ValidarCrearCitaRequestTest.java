@@ -70,9 +70,6 @@ public class ValidarCrearCitaRequestTest {
     private static LocalDateTime FECHA_HORA_IDEAL;
     private static final String MOTIVO_IDEAL = "Chequeo general";
     
-    // Días de diferencia respecto a la fecha ideal y a la fecha actual
-    private static int diasTranscurridos = 1;
-    
     // Petición a validar
     private CrearCitaRequest cita = new CrearCitaRequest();
     
@@ -110,6 +107,8 @@ public class ValidarCrearCitaRequestTest {
     
     @BeforeAll
     public static void setup(){
+        // Días de diferencia respecto a la fecha ideal y a la fecha actual
+        int diasTranscurridos = 1;
         // Establece la fecha ideal como la de hoy a las 3:30 p.m.
         FECHA_HORA_IDEAL = LocalDateTime.of(LocalDate.now(), LocalTime.of(15, 30, 0));
         // Se verifica que la fecha a probar esté dentro del horario del enfermero y esté en el futuro
@@ -145,7 +144,7 @@ public class ValidarCrearCitaRequestTest {
         // Omite las validaciones de negocio
         when(enfermeroRepository.findById(cita.getIdEnfermero())).thenReturn(Optional.of(enfermeroFicticio));
         when(empleadoRepository.findById(cita.getIdEmpleado())).thenReturn(Optional.of(empleadoFicticio));
-        when(citaRepository.findByFechaHora(cita.getFechaHora())).thenReturn(null);
+        when(citaRepository.findByFechaHora(cita.getFechaHora())).thenReturn(Optional.empty());
         when(citaRepository.save(any(Cita.class))).thenReturn(new Cita(1, FECHA_HORA_IDEAL, EstadoCita.PENDIENTE, MOTIVO_IDEAL, null, empleadoFicticio, enfermeroFicticio));
         
     }
@@ -495,8 +494,11 @@ public class ValidarCrearCitaRequestTest {
      */
     @Test
     public void csc15(){
-        // Resta los días de diferencia de la fecha ideal respecto a la actual
-        LocalDateTime fechaHoraInvalida = FECHA_HORA_IDEAL.minusDays(diasTranscurridos);
+        // Le resta un día a la fecha actual en una hora válida
+        LocalDateTime fechaHoraInvalida = LocalDateTime.of(LocalDate.now(), FECHA_HORA_IDEAL.toLocalTime());
+        // Si la fecha inválida está fuera del horario del enfermero o después de la fecha y hora actuales, se le sigue restando 1 día
+        while(!HorarioEnfermero.diasLaborales.contains(fechaHoraInvalida.getDayOfWeek()) || fechaHoraInvalida.isAfter(LocalDateTime.now()))
+            fechaHoraInvalida = fechaHoraInvalida.minusDays(1);
         
         // Asigna la fecha y hora inválida a la cita
         cita.setFechaHora(fechaHoraInvalida);

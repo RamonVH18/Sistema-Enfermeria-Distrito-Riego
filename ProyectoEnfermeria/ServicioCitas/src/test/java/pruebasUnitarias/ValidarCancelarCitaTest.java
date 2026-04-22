@@ -46,7 +46,7 @@ import servicios.ServicioCitas;
  */
 /**
  *
- * @author PC WHITE WOLF
+ * @author Leonardo Flores Leyva - 252390
  */
 @ExtendWith(SpringExtension.class) // Levanta el contexto de SpringBoot = obligatorio
 @Import({
@@ -142,6 +142,7 @@ public class ValidarCancelarCitaTest {
     public void ccsc01(){
         // Cuando se intente buscar la cita por su ID, devolverá un objeto de la clase Optional vacío
         when(citaRepository.findById(ID_CITA_IDEAL)).thenReturn(Optional.empty());
+        
         // Si se intenta actualizar la cita, se devolverá una cita vacía
         when(citaRepository.save(any(Cita.class))).thenReturn(new Cita());
         
@@ -159,12 +160,45 @@ public class ValidarCancelarCitaTest {
         // Verifica que no se haya llamado al método save()
         verify(citaRepository, never()).save(any(Cita.class));
     }
+    @Test
+    public void ccsc02(){
+        // Crea una cita original con un estado incorrecto
+        Cita citaOriginalNoPendiente = new Cita(
+                citaOriginal.getIdCita(), 
+                citaOriginal.getFechaHora(), 
+                EstadoCita.CANCELADA, // Estado diferente de PENDIENTE
+                citaOriginal.getMotivo(), 
+                citaOriginal.getSerie(), 
+                citaOriginal.getEmpleado(), 
+                citaOriginal.getEnfermero()
+        );
+        
+        // Cuando se busque la cita original por su ID, retornará la cita con estado inválido
+        when(citaRepository.findById(ID_CITA_IDEAL)).thenReturn(Optional.of(citaOriginalNoPendiente));
+        
+        // Si se intenta actualizar la cita, se devolverá una cita vacía
+        when(citaRepository.save(any(Cita.class))).thenReturn(new Cita());
+        
+        // Ejecuta el método "actualizar" del servicio y verifica que se lanzó una excepción
+        Exception error = assertThrows(Exception.class, () -> {servicioCitas.eliminar(cancelarCita);});
+        /*
+            Verifica que el mensaje de la excepción corresponda con el error identificado
+            Se recomienda actualizar el mensaje si el mensaje original de la excepción 
+            fue actualizado.
+        */
+        assertTrue(error.getMessage().contains("La cita no está pendiente. No se puede cancelar."));
+        
+        // Verifica que el método findById haya sido llamado una vez
+        verify(citaRepository, times(1)).findById(anyInt());
+        // Verifica que no se haya llamado al método save()
+        verify(citaRepository, never()).save(any(Cita.class));
+    }
     /**
      * Valida que se cancele la cita si se han cumplido todas las validaciones
      * de negocio correspondientes.
      */
     @Test
-    public void ccsc02(){
+    public void ccsc03(){
         // Cuando se intente buscar la cita por su ID, devolverá la cita original
         when(citaRepository.findById(ID_CITA_IDEAL)).thenReturn(Optional.of(citaOriginal));
         // Si se intenta cancelar la cita original, devolverá una Cita con los datos de la nueva cita y su estado actualizado como CANCELADA

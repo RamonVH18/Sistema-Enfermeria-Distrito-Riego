@@ -146,7 +146,7 @@ public class ValidarCrearCitaTest {
         when(empleadoRepository.findById(cita.getIdEmpleado())).thenReturn(Optional.of(empleadoFicticio));
         
         // Cuando se busque la cita por su fecha y hora, deberá retornar una cita existente
-        when(citaRepository.findByFechaHora(cita.getFechaHora())).thenReturn(citaExistente);
+        when(citaRepository.findByFechaHora(cita.getFechaHora())).thenReturn(Optional.of(citaExistente));
         
         // Si se intenta registrar la nueva cita, devolverá una Cita vacía
         when(citaRepository.save(any(Cita.class))).thenReturn(new Cita());
@@ -174,7 +174,7 @@ public class ValidarCrearCitaTest {
                
         // Omite las validaciones de negocio del enfermero y de la fecha y hora
         when(enfermeroRepository.findById(cita.getIdEnfermero())).thenReturn(Optional.of(enfermeroFicticio));
-        when(citaRepository.findByFechaHora(cita.getFechaHora())).thenReturn(null);
+        when(citaRepository.findByFechaHora(cita.getFechaHora())).thenReturn(Optional.empty());
         
         // Cuando se busque al empleado por su id, devolverá un objeto de la clase Optional vacío
         when(empleadoRepository.findById(cita.getIdEmpleado())).thenReturn(Optional.empty());
@@ -205,7 +205,7 @@ public class ValidarCrearCitaTest {
                
         // Omite las validaciones de negocio del empleado y de la fecha y hora
         when(empleadoRepository.findById(cita.getIdEmpleado())).thenReturn(Optional.of(empleadoFicticio));
-        when(citaRepository.findByFechaHora(cita.getFechaHora())).thenReturn(null);
+        when(citaRepository.findByFechaHora(cita.getFechaHora())).thenReturn(Optional.empty());
         
         // Cuando se busque al enfermero por su id, devolverá un objeto de la clase Optional vacío
         when(enfermeroRepository.findById(cita.getIdEnfermero())).thenReturn(Optional.empty());
@@ -236,7 +236,7 @@ public class ValidarCrearCitaTest {
         // Pasa las validaciones de negocio de los tres parámetros de la solicitud
         when(empleadoRepository.findById(cita.getIdEmpleado())).thenReturn(Optional.of(empleadoFicticio));
         when(enfermeroRepository.findById(cita.getIdEnfermero())).thenReturn(Optional.of(enfermeroFicticio));
-        when(citaRepository.findByFechaHora(cita.getFechaHora())).thenReturn(null);
+        when(citaRepository.findByFechaHora(cita.getFechaHora())).thenReturn(Optional.empty());
         
         // Si se intenta registrar la nueva cita, devolverá una Cita con los datos de la nueva cita y un nuevo ID
         when(citaRepository.save(any(Cita.class))).thenReturn(new Cita(

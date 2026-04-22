@@ -81,21 +81,19 @@ public class ServicioCitas implements IServicioCitas {
 
         // Verificar empleado
         Empleado empleadoAsociado = empleadoRepository.findById(cita.getIdEmpleado()).orElse(null);
-        if (empleadoAsociado == null) {
+        if (empleadoAsociado == null) 
             throw new CitasException("No existe un empleado asociado a la cita.", HttpStatus.BAD_REQUEST, "400");
-        }
 
         // Verificar al enfermero
         Enfermero enfermeroAsociado = enfermeroRepository.findById(cita.getIdEnfermero()).orElse(null);
-        if (enfermeroAsociado == null) {
+        if (enfermeroAsociado == null)
             throw new CitasException("No existe un enfermero asociado a la cita.", HttpStatus.BAD_REQUEST, "400");
-        }
 
         // Verifica que la nueva cita no se empalma con una ya existente
-        Cita citaMismaFechaHora = citaRepository.findByFechaHora(cita.getFechaHora());
-        if (citaMismaFechaHora != null) {
+        Cita citaMismaFechaHora = citaRepository.findByFechaHora(cita.getFechaHora()).orElse(null);
+        if (citaMismaFechaHora != null)
             throw new CitasException("Ya existe una cita con la misma fecha y hora.", HttpStatus.BAD_REQUEST, "400");
-        }
+        
         // Extrae la fecha de la cita
         LocalDate fechaCita = cita.getFechaHora().toLocalDate();
         // Valida el día de la cita
@@ -138,30 +136,39 @@ public class ServicioCitas implements IServicioCitas {
 
         // Verifica que la nueva fecha y hora corresponda a una cita existente
         Cita citaActualizar = citaRepository.findById(cita.getIdCita()).orElse(null);
-        if (citaActualizar == null) {
+        if (citaActualizar == null)
             throw new CitasException("La cita no existe.", HttpStatus.BAD_REQUEST, "400");
-        }
-        // Extrae la fecha de la cita
-        LocalDate fechaCita = cita.getNuevaFechaHora().toLocalDate();
+        
+        // Extrae la nueva fecha y hora
+        LocalDateTime nuevaFechaHora = cita.getNuevaFechaHora();
+        
+        // Extrae la nueva fecha
+        LocalDate fechaCita = nuevaFechaHora.toLocalDate();
         // Valida el día de la cita
         validarDiaCita(fechaCita);
-        // Extrae la hora de la cita
-        LocalTime nuevaHoraCita = cita.getNuevaFechaHora().toLocalTime();
+        
+        // Extrae la nueva hora
+        LocalTime nuevaHoraCita = nuevaFechaHora.toLocalTime();
         // Valida la hora de la cita
         validarHoraCita(nuevaHoraCita);
-
+        
         // Verifica que la nueva fecha no sea la misma que la cita original
-        LocalDateTime nuevaFechaHora = cita.getNuevaFechaHora();
-        if (nuevaFechaHora.isEqual(citaActualizar.getFechaHora())) {
+        if (nuevaFechaHora.isEqual(citaActualizar.getFechaHora()))
             throw new CitasException("La nueva fecha es la misma que la original.", HttpStatus.BAD_REQUEST, "400");
-        }
-
+        
+        // Verifica que la nueva fecha no esté antes que la cita original
+        if(nuevaFechaHora.isBefore(citaActualizar.getFechaHora()))
+            throw new CitasException("La nueva fecha está ubicada antes de la cita original.", HttpStatus.BAD_REQUEST, "400");
+        
         // Verifica que no exista otra cita con la misma fecha y hora
-        Cita citaMismaFechaHora = citaRepository.findByFechaHora(nuevaFechaHora);
-        if (citaMismaFechaHora != null) {
+        Cita citaMismaFechaHora = citaRepository.findByFechaHora(nuevaFechaHora).orElse(null);
+        if (citaMismaFechaHora != null)
             throw new CitasException("Ya existe una cita con la misma fecha y hora.", HttpStatus.BAD_REQUEST, "400");
-        }
-
+        
+        // Verifica que la cita no haya sido cancelada ni confirmada
+        if(citaActualizar.getEstado() != EstadoCita.PENDIENTE)
+            throw new CitasException("La cita original no está pendiente. No se puede reagendar.", HttpStatus.BAD_REQUEST, "400");
+        
         // Actualiza la fecha y hora de la cita
         citaActualizar.setFechaHora(nuevaFechaHora);
         // Actualiza la cita con la nueva fecha y hora
@@ -192,10 +199,13 @@ public class ServicioCitas implements IServicioCitas {
 
         // Verifica que la cita a cancelar exista en la base de datos
         Cita citaEliminar = citaRepository.findById(cita.getIdCita()).orElse(null);
-        if (citaEliminar == null) {
+        if (citaEliminar == null)
             throw new CitasException("La cita no existe.", HttpStatus.BAD_REQUEST, "400");
-        }
-
+        
+        // Verifica que la cita no haya sido cancelada ni confirmada
+        if(citaEliminar.getEstado() != EstadoCita.PENDIENTE)
+            throw new CitasException("La cita no está pendiente. No se puede cancelar.", HttpStatus.BAD_REQUEST, "400");
+        
         // Actualiza el estado de la cita a CANCELADA
         citaEliminar.setEstado(EstadoCita.CANCELADA);
         // Guarda el cambio de la cita en la base de datos
@@ -222,9 +232,9 @@ public class ServicioCitas implements IServicioCitas {
         List<CitaPendienteResponse> citasPendientes = new ArrayList<>();
 
         List<Cita> citasEncontradas = citaRepository.findAll();
-        if (!citasEncontradas.isEmpty()) {
+        if (!citasEncontradas.isEmpty())
             citasPendientes = CitaMapper.toCitaPendienteList(citasEncontradas);
-        }
+        
         return citasPendientes;
     }
 
@@ -243,8 +253,7 @@ public class ServicioCitas implements IServicioCitas {
         if (fecha == null) {
             return null;
         } else {
-            List<CitaPendienteResponse> citasPendientes
-                    ;
+            List<CitaPendienteResponse> citasPendientes;
             LocalDateTime inicio = LocalDateTime.of(fecha, LocalTime.of(0, 0, 0));
             LocalDateTime fin = LocalDateTime.of(fecha, LocalTime.of(23, 59, 59));
             
@@ -253,18 +262,15 @@ public class ServicioCitas implements IServicioCitas {
             if (citas != null && !citas.isEmpty()) {
                 citasPendientes = CitaMapper.toCitaPendienteList(citas);
                 return citasPendientes;
-            } else {
-                return null;
-            }
+            } else {return null;}
         }
     }
 
     @Override
     public List<CitaDTO> buscarPorNombreCurpPacientePendiente(String nombreCurp) {
         // Verifica que la fecha no sea null
-        if (nombreCurp == null) {
-            return null;
-        } else {
+        if (nombreCurp == null) {return null;} 
+        else {
             // Lista de citas encontradas
             List<CitaDTO> citasEncontradasDTO;
             // Ejecuta la consulta
@@ -276,9 +282,7 @@ public class ServicioCitas implements IServicioCitas {
                 // Regresa la lista de citas
                 return citasEncontradasDTO;
                 // Regresa null si no se encontraron citas
-            } else {
-                return null;
-            }
+            } else {return null;}
         }
     }
     
@@ -301,20 +305,19 @@ public class ServicioCitas implements IServicioCitas {
      */
     private void validarHoraCita(LocalTime horaCita) {
         // Verifica que el minuto es múltiplo de la duración de la cita.
-        if (horaCita.getMinute() % DURACION_CITA != 0) {
+        if (horaCita.getMinute() % DURACION_CITA != 0)
             throw new CitasException(String.format("Cada cita debe tener una duración de %d minutos", DURACION_CITA), HttpStatus.BAD_REQUEST, "400");
-        }
+        
         // Verifica que el segundo de la hora es igual a cero.
-        if (horaCita.getSecond() != 0) {
+        if (horaCita.getSecond() != 0)
             throw new CitasException("Cada cita debe tener una hora exacta.", HttpStatus.BAD_REQUEST, "400");
-        }
+        
         // Verifica que la hora de la cita no es inferior a la hora de comienzo de citas
-        if (horaCita.isBefore(HORA_INICIO_CITAS)) {
+        if (horaCita.isBefore(HORA_INICIO_CITAS))
             throw new CitasException("La cita no puede estar antes del período de citas.", HttpStatus.BAD_REQUEST, "400");
-        }
+        
         // Verifica que la hora de la cita no es superior a la hora de término de citas
-        if (!horaCita.isBefore(HORA_TERMINO_CITAS)) {
+        if (!horaCita.isBefore(HORA_TERMINO_CITAS))
             throw new CitasException("La cita debe estar antes de la hora de término de citas.", HttpStatus.BAD_REQUEST, "400");
-        }
     }
 }

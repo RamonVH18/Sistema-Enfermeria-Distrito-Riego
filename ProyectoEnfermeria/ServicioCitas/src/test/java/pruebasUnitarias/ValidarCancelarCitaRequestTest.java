@@ -40,7 +40,7 @@ import servicios.ServicioCitas;
 
 /**
  *
- * @author PC WHITE WOLF
+ * @author Leonardo Flores Leyva - 252390
  */
 @ExtendWith(SpringExtension.class) // Levanta el contexto de SpringBoot = obligatorio
 @Import({
