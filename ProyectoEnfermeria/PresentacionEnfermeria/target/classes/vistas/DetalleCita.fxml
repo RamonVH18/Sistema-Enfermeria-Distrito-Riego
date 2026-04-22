@@ -103,7 +103,7 @@
          <children>
             <HBox spacing="10.0" HBox.hgrow="ALWAYS">
                <children>
-                  <Button fx:id="btnCancelarCita" mnemonicParsing="false"  styleClass="btn-danger-outline" text="❌ Cancelar Cita" />
+                  <Button fx:id="btnCancelarCita" mnemonicParsing="false"  styleClass="btn-danger-outline" text="❌ Cancelar Cita" onAction="#cancelarCita"/>
                </children>
             </HBox>
             <Button fx:id="btnMarcarAsistencia" mnemonicParsing="false"  styleClass="btn-primary" text="✅ Marcar Asistencia" />

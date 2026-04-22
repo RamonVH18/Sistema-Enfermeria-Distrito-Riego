@@ -20,7 +20,7 @@ public interface CitaRepository extends JpaRepository<Cita, Integer>{
     
     Optional<Cita> findByFechaHora(LocalDateTime fechaHora);
     
-    List<Cita> findByEstado(String estado);
+    List<Cita> findByEstado(EstadoCita estado);
     
     List<Cita> findByFechaHoraBetween(LocalDateTime inicio, LocalDateTime fin);
     

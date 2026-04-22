@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import request.CrearCitaRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -52,7 +53,13 @@ public class CitasController {
     public ResponseEntity<CitaDTO> obtenerPorId(@PathVariable Integer id) {
         return ResponseEntity.ok(servicioCitas.obtenerPorId(id));
     }
-
+    
+    @PatchMapping("/{id}/cancelar")
+    public ResponseEntity<Void> cancelarCita(@PathVariable Integer id) {
+        servicioCitas.cancelar(id);
+        return ResponseEntity.noContent().build();
+    }
+    
 //    @GetMapping("/buscar/paciente")  LOS LEONARDEARE A TODOS
 //    public ResponseEntity<List<CitaDTO>> buscarPorNombreCurp(@RequestParam String nombreCurp) {
 //        List<CitaDTO> citas = servicioCitas.buscarPorNombreCurpPacientePendiente(nombreCurp);

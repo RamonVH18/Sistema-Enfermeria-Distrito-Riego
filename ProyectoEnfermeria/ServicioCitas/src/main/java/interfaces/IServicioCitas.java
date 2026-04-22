@@ -6,10 +6,8 @@ import jakarta.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.List;
 import request.ActualizarCitaRequest;
-import request.CancelarCitaRequest;
 import request.CrearCitaRequest;
 import response.ActualizarCitaResponse;
-import response.CancelarCitaResponse;
 import response.CitaPendienteResponse;
 import response.CrearCitaResponse;
 
@@ -35,10 +33,8 @@ public interface IServicioCitas {
     
     /**
      * Cancela una cita.
-     * @param cita Request con información de la cita a cancelar en la base de datos.
-     * @return Response con datos relevantes de la operación.
      */
-    public CancelarCitaResponse eliminar(@Valid CancelarCitaRequest cita);
+    public void cancelar(@Valid Integer idCita);
     
     /**
      * Obtiene las citas pendientes.

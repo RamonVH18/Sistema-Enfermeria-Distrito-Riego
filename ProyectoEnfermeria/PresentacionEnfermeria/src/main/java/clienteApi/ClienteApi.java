@@ -19,10 +19,8 @@ import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
-import javafx.scene.control.Alert;
 import request.CrearCitaRequest;
 import request.IniciarSesionRequest;
 import response.CitaPendienteResponse;
@@ -54,6 +52,10 @@ public class ClienteApi {
     private <T> CompletableFuture<T> handleResponse(CompletableFuture<HttpResponse<String>> responseFuture, Class<T> responseClass) {
         return responseFuture.thenApply(response -> {
             validarRespuesta(response);
+
+            if (responseClass == Void.class) {
+                return null;
+            }
             try {
                 return mapper.readValue(response.body(), responseClass);
             } catch (Exception e) {
@@ -112,6 +114,21 @@ public class ClienteApi {
         return handleResponse(client.sendAsync(request, HttpResponse.BodyHandlers.ofString()),
                 new TypeReference<List<CitaPendienteResponse>>() {
         });
+    }
+
+    public CompletableFuture<Void> cancelarCita(Integer idCita) {
+        String url = BASE_URL + "/citas/" + idCita + "/cancelar";
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .method("PATCH",
+                        HttpRequest.BodyPublishers.ofString("{\"status\":\"cancelada\"}"
+                        ))
+                .header("Content-Type", "application/json")
+                .build();
+        return handleResponse(client.sendAsync(request, HttpResponse.BodyHandlers.ofString()),
+                Void.class);
+
     }
 
     public CompletableFuture<List<EmpleadoOptionResponse>> obtenerTodosLosEmpleados() {
