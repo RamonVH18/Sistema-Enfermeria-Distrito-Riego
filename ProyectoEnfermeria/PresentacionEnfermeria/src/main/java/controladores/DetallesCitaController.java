@@ -61,6 +61,19 @@ public class DetallesCitaController implements Initializable{
         
     }
     
+    @FXML
+    private void marcarAsistencia() {
+        Integer idCita = cita.getIdCita();
+        cliente.completarCita(idCita).thenAccept(res -> {
+            mostrarAlerta("Exito", String.format("La cita con el id: %s fue acompletada exitosamente.", idCita), Alert.AlertType.INFORMATION);
+            cerrarVentana();
+        })
+                .exceptionally(ex -> {
+                    mostrarAlerta("Error de Conexion", "No se pudo acompletar la cita", Alert.AlertType.ERROR);
+                    return null;
+                });
+    }
+    
     /**
      * Metodo Auxiliar para mostrar una ventana
      *

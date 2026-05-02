@@ -106,7 +106,7 @@
                   <Button fx:id="btnCancelarCita" mnemonicParsing="false"  styleClass="btn-danger-outline" text="❌ Cancelar Cita" onAction="#cancelarCita"/>
                </children>
             </HBox>
-            <Button fx:id="btnMarcarAsistencia" mnemonicParsing="false"  styleClass="btn-primary" text="✅ Marcar Asistencia" />
+            <Button fx:id="btnMarcarAsistencia" mnemonicParsing="false"  styleClass="btn-primary" text="✅ Marcar Asistencia" onAction="#marcarAsistencia"/>
             <Button fx:id="btnVolver" mnemonicParsing="false"  styleClass="btn-secondary" text="Volver" />
          </children>
          <VBox.margin>

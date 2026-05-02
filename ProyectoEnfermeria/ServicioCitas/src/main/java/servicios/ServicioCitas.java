@@ -212,7 +212,7 @@ public class ServicioCitas implements IServicioCitas {
         }
 
         citaEliminar.setEstado(EstadoCita.CANCELADA);
-        citaEliminar = citaRepository.save(citaEliminar);
+        citaRepository.save(citaEliminar);
         
         String nombreEmpleado = citaEliminar.getEmpleado().getNombres();
         LocalDateTime fechaHoraActual = LocalDateTime.now();
@@ -222,6 +222,28 @@ public class ServicioCitas implements IServicioCitas {
         LOG.log(System.Logger.Level.INFO, logMsg);
 
     }
+    
+    @Override
+    public void completar(Integer idCita) {
+        Cita citaRealizada = citaRepository.findById(idCita).orElse(null);
+        if (citaRealizada == null) {
+            throw new CitasException("La cita no existe.", HttpStatus.BAD_REQUEST, "400");
+        }
+
+        if (citaRealizada.getEstado() != EstadoCita.PENDIENTE) {
+            throw new CitasException("La cita no está pendiente. No se puede completar.", HttpStatus.BAD_REQUEST, "400");
+        } 
+        citaRealizada.setEstado(EstadoCita.REALIZADA);
+        citaRepository.save(citaRealizada);
+        
+        String nombreEmpleado = citaRealizada.getEmpleado().getNombres();
+        LocalDateTime fechaHoraActual = LocalDateTime.now();
+        String msgFechaHora = fechaHoraActual.format(dateFormat);
+
+        String logMsg = String.format("Cita acompletada exitosamente. Empleado: %s, Operación: %s", nombreEmpleado, msgFechaHora);
+        LOG.log(System.Logger.Level.INFO, logMsg);
+    }
+    
 
     @Override
     public List<CitaPendienteResponse> obtenerCitasPendientes() {

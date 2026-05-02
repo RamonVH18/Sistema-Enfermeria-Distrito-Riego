@@ -33,8 +33,15 @@ public interface IServicioCitas {
     
     /**
      * Cancela una cita.
+     * @param idCita
      */
     public void cancelar(@Valid Integer idCita);
+    
+    /**
+     * Completa una cita y marca su estado como realizada
+     * @param idCita 
+     */
+    public void completar(@Valid Integer idCita);
     
     /**
      * Obtiene las citas pendientes.

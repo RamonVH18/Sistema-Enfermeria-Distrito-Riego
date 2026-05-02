@@ -60,6 +60,12 @@ public class CitasController {
         return ResponseEntity.noContent().build();
     }
     
+    @PatchMapping("/{id}/completar")
+    public ResponseEntity<Void> completarCita(@PathVariable Integer id) {
+        servicioCitas.completar(id);
+        return ResponseEntity.noContent().build();
+    }
+    
 //    @GetMapping("/buscar/paciente")  LOS LEONARDEARE A TODOS
 //    public ResponseEntity<List<CitaDTO>> buscarPorNombreCurp(@RequestParam String nombreCurp) {
 //        List<CitaDTO> citas = servicioCitas.buscarPorNombreCurpPacientePendiente(nombreCurp);

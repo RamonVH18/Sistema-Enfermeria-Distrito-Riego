@@ -130,6 +130,20 @@ public class ClienteApi {
                 Void.class);
 
     }
+    
+    public CompletableFuture<Void> completarCita(Integer idCita) {
+        String url = BASE_URL + "/citas/" + idCita + "/completar";
+        
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(url))
+                .method("PATCH",
+                        HttpRequest.BodyPublishers.ofString("{\"status\":\"completada\"}"
+                        ))
+                .header("Content-Type", "application/json")
+                .build();
+        return handleResponse(client.sendAsync(request, HttpResponse.BodyHandlers.ofString()),
+                Void.class);
+    }
 
     public CompletableFuture<List<EmpleadoOptionResponse>> obtenerTodosLosEmpleados() {
         HttpRequest request = HttpRequest.newBuilder()
