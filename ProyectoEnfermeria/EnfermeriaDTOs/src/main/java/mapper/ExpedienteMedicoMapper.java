@@ -25,8 +25,6 @@ public class ExpedienteMedicoMapper {
         entity.setAntecedentes(AntecedenteExpedienteMedicoMapper.toEntitySet(dto.getAntecedentes()));
         entity.setAtributosFisicos(AtributoFisicoExpedienteMedicoMapper.toEntitySet(dto.getAtributosFisicos()));
         entity.setDetallesExtra(DetalleExtraExpedienteMedicoMapper.toEntitySet(dto.getDetallesExtra()));
-        entity.setRegistrosMedicos(RegistroMedicoMapper.toEntityList(dto.getRegistrosMedicos()));
-        
         return entity;
     }
     
@@ -43,7 +41,6 @@ public class ExpedienteMedicoMapper {
         dto.setAntecedentes(AntecedenteExpedienteMedicoMapper.toDTOSet(entity.getAntecedentes()));
         dto.setAtributosFisicos(AtributoFisicoExpedienteMedicoMapper.toDTOSet(entity.getAtributosFisicos()));
         dto.setDetallesExtra(DetalleExtraExpedienteMedicoMapper.toDTOSet(entity.getDetallesExtra()));
-        dto.setRegistrosMedicos(RegistroMedicoMapper.toDTOList(entity.getRegistrosMedicos()));
         
         return dto;
     }
