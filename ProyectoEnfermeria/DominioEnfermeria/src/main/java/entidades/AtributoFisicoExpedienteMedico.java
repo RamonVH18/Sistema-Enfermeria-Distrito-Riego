@@ -35,8 +35,52 @@ public class AtributoFisicoExpedienteMedico implements Serializable {
     @ManyToOne
     @JoinColumn(name = "id_expediente", nullable = false)
     private ExpedienteMedico expedienteMedico;
+
+    public AtributoFisicoExpedienteMedico() {}
+
+    public AtributoFisicoExpedienteMedico(
+            String especificacion, 
+            String nota, 
+            AtributoFisico atributoFisico, 
+            ExpedienteMedico expedienteMedico
+    ) {
+        this.especificacion = especificacion;
+        this.nota = nota;
+        this.atributoFisico = atributoFisico;
+        this.expedienteMedico = expedienteMedico;
+    }
+
+    public AtributoFisicoExpedienteMedico(
+            Integer id, 
+            String especificacion, 
+            String nota, 
+            AtributoFisico atributoFisico, 
+            ExpedienteMedico expedienteMedico
+    ) {
+        this.id = id;
+        this.especificacion = especificacion;
+        this.nota = nota;
+        this.atributoFisico = atributoFisico;
+        this.expedienteMedico = expedienteMedico;
+    }
     
     public Integer getId() {return id;}
 
+    public String getEspecificacion() {return especificacion;}
+
+    public String getNota() {return nota;}
+
+    public AtributoFisico getAtributoFisico() {return atributoFisico;}
+
+    public ExpedienteMedico getExpedienteMedico() {return expedienteMedico;}
+
     public void setId(Integer id) {this.id = id;}
+
+    public void setEspecificacion(String especificacion) {this.especificacion = especificacion;}
+
+    public void setNota(String nota) {this.nota = nota;}
+
+    public void setAtributoFisico(AtributoFisico atributoFisico) {this.atributoFisico = atributoFisico;}
+
+    public void setExpedienteMedico(ExpedienteMedico expedienteMedico) {this.expedienteMedico = expedienteMedico;}
 }
