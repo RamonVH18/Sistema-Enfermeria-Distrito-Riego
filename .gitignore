@@ -20,3 +20,4 @@ ProyectoEnfermeria/PresentacionEnfermeria/target/classes/controladores/AgendarCi
 *.class
 *.lst
 *.jar
+/ProyectoEnfermeria/ServicioExpedientes/target/
