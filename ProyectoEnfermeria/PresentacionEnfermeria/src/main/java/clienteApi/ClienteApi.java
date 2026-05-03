@@ -25,7 +25,9 @@ import request.CrearCitaRequest;
 import request.IniciarSesionRequest;
 import response.CitaPendienteResponse;
 import response.CrearCitaResponse;
+import response.EmpleadoHistoricoResponse;
 import response.EmpleadoOptionResponse;
+import response.ExpedienteResponse;
 import response.UsuarioResponse;
 
 /**
@@ -130,10 +132,10 @@ public class ClienteApi {
                 Void.class);
 
     }
-    
+
     public CompletableFuture<Void> completarCita(Integer idCita) {
         String url = BASE_URL + "/citas/" + idCita + "/completar";
-        
+
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .method("PATCH",
@@ -211,4 +213,26 @@ public class ClienteApi {
         }
 
     }
+
+    public CompletableFuture<List<EmpleadoHistoricoResponse>> obtenerPacientesHistorial() {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(BASE_URL + "/empleados/historial"))
+                .GET()
+                .build();
+        return handleResponse(client.sendAsync(request, HttpResponse.BodyHandlers.ofString()),
+                new TypeReference<List<EmpleadoHistoricoResponse>>() {
+        });
+    }
+
+    public CompletableFuture<ExpedienteResponse> obtenerExpedientePorEmpleado(Long idEmpleado) {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(BASE_URL + "/expedientes/empleado/" + idEmpleado))
+                .GET()
+                .build();
+
+        return handleResponse(client.sendAsync(request, HttpResponse.BodyHandlers.ofString()),
+                new TypeReference<ExpedienteResponse>() {
+        });
+    }
+
 }

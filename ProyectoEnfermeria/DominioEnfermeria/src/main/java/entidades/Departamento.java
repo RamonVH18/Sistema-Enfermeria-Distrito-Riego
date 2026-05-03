@@ -24,22 +24,33 @@ public class Departamento {
     @Column(name = "nombre", nullable = false)
     private String nombre;
 
-    public Departamento() {}
+    public Departamento() {
+    }
 
-    public Departamento(String nombre) {this.nombre = nombre;}
+    public Departamento(String nombre) {
+        this.nombre = nombre;
+    }
 
     public Departamento(Integer id, String nombre) {
         this.idDepartamento = id;
         this.nombre = nombre;
     }
 
-    public Integer getId() {return idDepartamento;}
+    public Integer getId() {
+        return idDepartamento;
+    }
 
-    public void setId(Integer id) {this.idDepartamento = id;}
+    public void setId(Integer id) {
+        this.idDepartamento = id;
+    }
 
-    public String getNombre() {return nombre;}
+    public String getNombre() {
+        return nombre;
+    }
 
-    public void setNombre(String nombre) {this.nombre = nombre;}
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
     @Override
     public String toString() {

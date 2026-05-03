@@ -5,6 +5,7 @@
 package servicios;
 
 import DAOs.EmpleadoRepository;
+import dtos.EmpleadoDTO;
 import entidades.Empleado;
 import interfaces.IServicioEmpleado;
 import java.util.List;
@@ -21,14 +22,14 @@ import response.EmpleadoOptionResponse;
 @Service
 @Validated
 public class ServicioEmpleado implements IServicioEmpleado {
-    
+
     @Autowired
     private EmpleadoRepository empleadoRepository;
-    
+
     @Override
     public List<EmpleadoOptionResponse> obtenerEmpleados() {
         List<Empleado> empleados = empleadoRepository.findAll();
-        List<EmpleadoOptionResponse> emps = EmpleadoMapper.toOptionResponse(empleados) ;
+        List<EmpleadoOptionResponse> emps = EmpleadoMapper.toOptionResponse(empleados);
         return emps;
     }
 
@@ -38,5 +39,28 @@ public class ServicioEmpleado implements IServicioEmpleado {
         List<EmpleadoOptionResponse> emps = EmpleadoMapper.toOptionResponse(empleados);
         return emps;
     }
-    
+
+    @Override
+    public List<EmpleadoDTO> obtenerPacientesHistorial() {
+        List<Empleado> entidades = empleadoRepository.findAll();
+        return EmpleadoMapper.toDTOList(entidades);
+    }
+
+    @Override
+    public List<EmpleadoDTO> obtenerTodosPacientes() {
+        List<Empleado> entidades = empleadoRepository.findAll();
+        return entidades.stream().map(entidad -> {
+            EmpleadoDTO dto = EmpleadoMapper.toDTO(entidad);
+
+            // Seteamos el nombre consolidado
+            dto.setNombres(entidad.getNombres() + " " + entidad.getApellidoPaterno());
+
+            // Cálculo y asignación correcta de la edad
+            if (entidad.getFechaNacimiento() != null) {
+                int edad = java.time.Period.between(entidad.getFechaNacimiento(), java.time.LocalDate.now()).getYears();
+               
+            }
+            return dto;
+        }).collect(java.util.stream.Collectors.toList());
+    }
 }

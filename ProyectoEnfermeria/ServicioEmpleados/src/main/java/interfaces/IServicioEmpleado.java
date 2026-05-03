@@ -4,6 +4,7 @@
  */
 package interfaces;
 
+import dtos.EmpleadoDTO;
 import jakarta.validation.Valid;
 import java.util.List;
 import response.EmpleadoOptionResponse;
@@ -17,4 +18,10 @@ public interface IServicioEmpleado {
     public List<EmpleadoOptionResponse> obtenerEmpleados();
     
     public List<EmpleadoOptionResponse> obtenerEmpleadosPorNombre(@Valid String filtroNombre);
+    
+    public List<EmpleadoDTO> obtenerPacientesHistorial();
+    
+    public List<EmpleadoDTO> obtenerTodosPacientes();
+    
+    
 }

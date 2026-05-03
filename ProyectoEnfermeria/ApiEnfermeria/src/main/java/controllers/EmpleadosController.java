@@ -4,6 +4,7 @@
  */
 package controllers;
 
+import dtos.EmpleadoDTO;
 import interfaces.IServicioEmpleado;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,15 +22,23 @@ import response.EmpleadoOptionResponse;
 @RestController
 @RequestMapping("/empleados")
 public class EmpleadosController {
+
     @Autowired
     private IServicioEmpleado servicioEmpleado;
-    
+
     @GetMapping
     public ResponseEntity<List<EmpleadoOptionResponse>> obtenerEmpleados(@RequestParam(name = "filtroNombre", required = false) String filtroNombre) {
-        if ( filtroNombre != null) {
+        if (filtroNombre != null) {
             return ResponseEntity.ok(servicioEmpleado.obtenerEmpleadosPorNombre(filtroNombre));
         }
         return ResponseEntity.ok(servicioEmpleado.obtenerEmpleados());
     }
-    
+
+    @GetMapping("/historial")
+    public ResponseEntity<List<EmpleadoDTO>> obtenerParaHistorial() {
+        // Llamamos al nuevo método del servicio que devuelve el DTO completo
+        List<EmpleadoDTO> empleados = servicioEmpleado.obtenerTodosPacientes();
+        return ResponseEntity.ok(empleados);
+    }
+
 }

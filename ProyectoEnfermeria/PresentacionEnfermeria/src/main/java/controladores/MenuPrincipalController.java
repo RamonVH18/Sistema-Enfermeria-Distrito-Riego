@@ -42,6 +42,7 @@ public class MenuPrincipalController implements Initializable {
         try {
             cargarPantalla("MenuPrincipal", "/vistas/panelPrincipal.fxml");
             cargarPantalla("PantallaCitas", "/vistas/pantallaCitas.fxml");
+            cargarPantalla("HistorialPacientes", "/vistas/HistorialPacientes.fxml");
             
             mostrarPantalla("MenuPrincipal");
         } catch (IOException e) {
@@ -79,5 +80,10 @@ public class MenuPrincipalController implements Initializable {
     @FXML
     private void mostrarCitas(){
         mostrarPantalla("PantallaCitas");
-    }    
+    }
+    
+    @FXML
+    private void mostrarHistorial() {
+        mostrarPantalla("HistorialPacientes");
+    }
 }
