@@ -5,7 +5,6 @@
 package controllers;
 
 import dtos.ExpedienteMedicoDTO;
-import interfaces.IServicioExpedientes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,33 +20,33 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author isaac
  */
-@RestController
-@RequestMapping("/enfermeriaDR/expedientes")
-public class ExpedientesController {
-    
-    @Autowired
-    private IServicioExpedientes servicioExpediente;
-
-    // Obtener expediente por ID de empleado
-    @GetMapping("/empleado/{id}")
-    public ResponseEntity<ExpedienteMedicoDTO> obtenerPorEmpleado(@PathVariable Long id) {
-        ExpedienteMedicoDTO expediente = servicioExpediente.buscarPorEmpleadoId(id);
-        if (expediente != null) {
-            return ResponseEntity.ok(expediente);
-        }
-        return ResponseEntity.notFound().build(); // Retorna 404 si no tiene historial
-    }
-
-    
-    @PostMapping
-    public ResponseEntity<ExpedienteMedicoDTO> crear(@RequestBody ExpedienteMedicoDTO dto) {
-        return new ResponseEntity<>(servicioExpediente.guardar(dto), HttpStatus.CREATED);
-    }
-
-    
-    @PutMapping("/{id}")
-    public ResponseEntity<ExpedienteMedicoDTO> actualizar(@PathVariable Long id, @RequestBody ExpedienteMedicoDTO dto) {
-        return ResponseEntity.ok(servicioExpediente.actualizar(id, dto));
-    }
-
-}
+//@RestController
+//@RequestMapping("/expedientes")
+//public class ExpedientesController {
+//    
+//    @Autowired
+//    private IServicioExpedientes servicioExpediente;
+//
+//    // Obtener expediente por ID de empleado
+//    @GetMapping("/empleado/{id}")
+//    public ResponseEntity<ExpedienteMedicoDTO> obtenerPorEmpleado(@PathVariable Long id) {
+//        ExpedienteMedicoDTO expediente = servicioExpediente.buscarPorEmpleadoId(id);
+//        if (expediente != null) {
+//            return ResponseEntity.ok(expediente);
+//        }
+//        return ResponseEntity.notFound().build(); // Retorna 404 si no tiene historial
+//    }
+//
+//    
+//    @PostMapping
+//    public ResponseEntity<ExpedienteMedicoDTO> crear(@RequestBody ExpedienteMedicoDTO dto) {
+//        return new ResponseEntity<>(servicioExpediente.guardar(dto), HttpStatus.CREATED);
+//    }
+//
+//    
+//    @PutMapping("/{id}")
+//    public ResponseEntity<ExpedienteMedicoDTO> actualizar(@PathVariable Long id, @RequestBody ExpedienteMedicoDTO dto) {
+//        return ResponseEntity.ok(servicioExpediente.actualizar(id, dto));
+//    }
+//
+//}
