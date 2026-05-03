@@ -16,7 +16,7 @@
         <module>../ExcepcionesWeb</module>
         <module>../ServicioEmpleados</module>
         <module>../ServicioUsuarios</module>
-        <module>../../../../../NetBeansProjects/ServicioExpedientes</module>
+        <module>../ServicioExpedientesMedicos</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

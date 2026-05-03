@@ -21,3 +21,6 @@ ProyectoEnfermeria/PresentacionEnfermeria/target/classes/controladores/AgendarCi
 *.lst
 *.jar
 /ProyectoEnfermeria/ServicioExpedientes/target/
+ProyectoEnfermeria/PresentacionEnfermeria/target/classes/controladores/AgendarCitaController.class
+ProyectoEnfermeria/PresentacionEnfermeria/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
+ProyectoEnfermeria/PresentacionEnfermeria/target/PresentacionEnfermeria-1.0-SNAPSHOT.jar

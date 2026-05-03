@@ -38,5 +38,11 @@ public class RegistroMedico implements Serializable {
     @JoinColumn(name = "id_expediente", nullable = false)
     private ExpedienteMedico expedienteMedico;
     
+    
     // Pendiente el resto de atributos y métodos...
+    public RegistroMedico() {}
+
+    public Integer getId() {return id;}
+
+    public void setId(Integer id) {this.id = id;}
 }

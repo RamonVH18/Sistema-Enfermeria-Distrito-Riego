@@ -12,6 +12,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -49,7 +50,7 @@ public class ExpedienteMedico {
     private Set<DetalleExtraExpedienteMedico> detallesExtra;
     
     @OneToMany(mappedBy = "expedienteMedico")
-    private Set<RegistroMedico> registrosMedicos;
+    private List<RegistroMedico> registrosMedicos;
 
     public ExpedienteMedico() {}
 
@@ -60,7 +61,7 @@ public class ExpedienteMedico {
             Set<AntecedenteExpedienteMedico> antecedentes, 
             Set<AtributoFisicoExpedienteMedico> atributosFisicos, 
             Set<DetalleExtraExpedienteMedico> detallesExtra, 
-            Set<RegistroMedico> registrosMedicos
+            List<RegistroMedico> registrosMedicos
     ) {
         this.tipoSangre = tipoSangre;
         this.numeroSeguridadSocial = numeroSeguridadSocial;
@@ -79,7 +80,7 @@ public class ExpedienteMedico {
             Set<AntecedenteExpedienteMedico> antecedentes, 
             Set<AtributoFisicoExpedienteMedico> atributosFisicos, 
             Set<DetalleExtraExpedienteMedico> detallesExtra, 
-            Set<RegistroMedico> registrosMedicos
+            List<RegistroMedico> registrosMedicos
     ) {
         this.id = id;
         this.tipoSangre = tipoSangre;
@@ -105,7 +106,7 @@ public class ExpedienteMedico {
 
     public Set<DetalleExtraExpedienteMedico> getDetallesExtra() {return detallesExtra;}
 
-    public Set<RegistroMedico> getRegistrosMedicos() {return registrosMedicos;}
+    public List<RegistroMedico> getRegistrosMedicos() {return registrosMedicos;}
 
     public void setId(Integer id) {this.id = id;}
 
@@ -121,5 +122,5 @@ public class ExpedienteMedico {
 
     public void setDetallesExtra(Set<DetalleExtraExpedienteMedico> detallesExtra) {this.detallesExtra = detallesExtra;}
 
-    public void setRegistrosMedicos(Set<RegistroMedico> registrosMedicos) {this.registrosMedicos = registrosMedicos;}
+    public void setRegistrosMedicos(List<RegistroMedico> registrosMedicos) {this.registrosMedicos = registrosMedicos;}
 }
