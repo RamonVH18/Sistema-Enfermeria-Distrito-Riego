@@ -1,7 +1,6 @@
 package dtos;
 
 import enums.TipoSangre;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -23,8 +22,6 @@ public class ExpedienteMedicoDTO {
     private Set<AtributoFisicoExpedienteMedicoDTO> atributosFisicos;
     
     private Set<DetalleExtraExpedienteMedicoDTO> detallesExtra;
-    
-    private List<RegistroMedicoDTO> registrosMedicos;
 
     public ExpedienteMedicoDTO() {}
 
@@ -34,8 +31,7 @@ public class ExpedienteMedicoDTO {
             Integer idEmpleado, 
             Set<AntecedenteExpedienteMedicoDTO> antecedentes, 
             Set<AtributoFisicoExpedienteMedicoDTO> atributosFisicos, 
-            Set<DetalleExtraExpedienteMedicoDTO> detallesExtra, 
-            List<RegistroMedicoDTO> registrosMedicos
+            Set<DetalleExtraExpedienteMedicoDTO> detallesExtra
     ) {
         this.tipoSangre = tipoSangre;
         this.numeroSeguridadSocial = numeroSeguridadSocial;
@@ -43,7 +39,6 @@ public class ExpedienteMedicoDTO {
         this.antecedentes = antecedentes;
         this.atributosFisicos = atributosFisicos;
         this.detallesExtra = detallesExtra;
-        this.registrosMedicos = registrosMedicos;
     }
 
     public ExpedienteMedicoDTO(
@@ -53,8 +48,7 @@ public class ExpedienteMedicoDTO {
             Integer idEmpleado, 
             Set<AntecedenteExpedienteMedicoDTO> antecedentes, 
             Set<AtributoFisicoExpedienteMedicoDTO> atributosFisicos, 
-            Set<DetalleExtraExpedienteMedicoDTO> detallesExtra, 
-            List<RegistroMedicoDTO> registrosMedicos
+            Set<DetalleExtraExpedienteMedicoDTO> detallesExtra
     ) {
         this.id = id;
         this.tipoSangre = tipoSangre;
@@ -62,8 +56,6 @@ public class ExpedienteMedicoDTO {
         this.idEmpleado = idEmpleado;
         this.antecedentes = antecedentes;
         this.atributosFisicos = atributosFisicos;
-        this.detallesExtra = detallesExtra;
-        this.registrosMedicos = registrosMedicos;
     }
     
     public Integer getId() {return id;}
@@ -80,8 +72,6 @@ public class ExpedienteMedicoDTO {
 
     public Set<DetalleExtraExpedienteMedicoDTO> getDetallesExtra() {return detallesExtra;}
 
-    public List<RegistroMedicoDTO> getRegistrosMedicos() {return registrosMedicos;}
-
     public void setId(Integer id) {this.id = id;}
 
     public void setTipoSangre(TipoSangre tipoSangre) {this.tipoSangre = tipoSangre;}
@@ -95,6 +85,4 @@ public class ExpedienteMedicoDTO {
     public void setAtributosFisicos(Set<AtributoFisicoExpedienteMedicoDTO> atributosFisicos) {this.atributosFisicos = atributosFisicos;}
 
     public void setDetallesExtra(Set<DetalleExtraExpedienteMedicoDTO> detallesExtra) {this.detallesExtra = detallesExtra;}
-
-    public void setRegistrosMedicos(List<RegistroMedicoDTO> registrosMedicos) {this.registrosMedicos = registrosMedicos;}
 }
