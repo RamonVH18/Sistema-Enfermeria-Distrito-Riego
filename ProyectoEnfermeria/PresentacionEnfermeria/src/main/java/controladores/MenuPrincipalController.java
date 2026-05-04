@@ -46,9 +46,8 @@ public class MenuPrincipalController implements Initializable {
             cargarPantalla("MenuPrincipal", "/vistas/panelPrincipal.fxml");
             cargarPantalla("PantallaCitas", "/vistas/pantallaCitas.fxml");
             cargarPantalla("HistorialPacientes", "/vistas/HistorialPacientes.fxml");
-            cargarPantalla("OpcionesPacienteHistorial", "/vistas/OpcionesPacienteHistorial.fxml");
 
-            mostrarPantalla("MenuPrincipal");
+            mostrarPantalla("MenuPrincipal", "/styles/menuprincipal.css");
         } catch (IOException e) {
             System.err.println("Error al cargar el menú principal: " + e.getMessage());
         }
@@ -61,51 +60,40 @@ public class MenuPrincipalController implements Initializable {
         pantallas.put(nombre, pantalla);
         mainLayout.getChildren().add(pantalla);
 
-        // para los controladores
-        Object controller = loader.getController();
-        controladores.put(nombre, controller);
+    }
 
-        if (controller instanceof ParentAware) {
-            ((ParentAware) controller).setMenuPrincipal(this);
+    private void mostrarPantalla(String nombre, String estilo) {
+        Node nodo = pantallas.get(nombre);
+        if (nodo == null) {
+            return;
         }
 
-    }
+        // Limpiar estilos anteriores y aplicar el nuevo
+        nodo.getStyleClass().removeIf(s -> s.endsWith("-theme")); // Convención de nombres
+        if (estilo != null && !estilo.isEmpty()) {
+            nodo.getStyleClass().add(estilo + "-theme");
+        }
 
-    private void mostrarPantalla(String nombre) {
-        pantallas.forEach((n, nodo) -> {
-            if (n.equals(nombre)) {
-                nodo.setVisible(true);
-                nodo.toFront();
-            } else {
-                nodo.setVisible(false);
-            }
-        });
+        // Lógica de visibilidad
+        pantallas.values().forEach(n -> n.setVisible(false));
+        nodo.setVisible(true);
+        nodo.toFront();
     }
-//    @FXML
-//    private void switchToCitas() throws IOException {
-//        App.setRoot("/vistas/citas.fxml"); // ruta relativa al FXML
-//    }
 
     @FXML
     private void mostrarPanelPrincipal() {
-        mostrarPantalla("MenuPrincipal");
+        mostrarPantalla("MenuPrincipal", "/styles/menuprincipal.css");
+
     }
 
     @FXML
     private void mostrarCitas() {
-        mostrarPantalla("PantallaCitas");
+        mostrarPantalla("PantallaCitas", "/styles/pantallaCitas.css");
     }
 
     @FXML
-    public void mostrarHistorial() {
-        mostrarPantalla("HistorialPacientes");
+    private void mostrarHistorial() {
+        mostrarPantalla("HistorialPacientes", "/styles/HistorialPacientes.css");
     }
 
-    public void mostrarOpcionesHistorialPaciente(EmpleadoHistoricoResponse seleccionado) {
-        OpcionesPacienteHistorialController controller
-                = (OpcionesPacienteHistorialController) controladores.get("OpcionesPacienteHistorial");
-
-        controller.cargarDatosPaciente(seleccionado);
-        mostrarPantalla("OpcionesPacienteHistorial");
-    }
 }

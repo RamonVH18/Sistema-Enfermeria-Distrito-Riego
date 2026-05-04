@@ -4,11 +4,15 @@
  */
 package controladores;
 
+import java.net.URL;
+import java.util.ResourceBundle;
 import javafx.scene.control.Button;
 import javafx.scene.control.TitledPane;
 import response.EmpleadoHistoricoResponse;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import response.DatosEmpleadoResponse;
 import response.EmpleadoHistoricoResponse;
 import response.ExpedienteResponse;
 
@@ -17,7 +21,7 @@ import response.ExpedienteResponse;
  * @author isaac
  */
 
-public class ExpedientePacienteController {
+public class ExpedientePacienteController implements Initializable {
 
     @FXML
     private TextField lblNombre, txtAlergias, txtPeso, txtTalla, txtPA;
@@ -27,30 +31,32 @@ public class ExpedientePacienteController {
     private Button btnGuardar, btnEditar;
     
 
-    private EmpleadoHistoricoResponse empleadoActivo;
+    private DatosEmpleadoResponse empleadoActivo;
     private ExpedienteResponse expedienteActual;
-
-    public void initData(EmpleadoHistoricoResponse empleado, ExpedienteResponse expediente, String modo) {
+    
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+    }
+    
+    public void initializeData(DatosEmpleadoResponse empleado) {
         this.empleadoActivo = empleado;
-        this.expedienteActual = expediente;
 
         // Datos fijos del empleado
-        lblNombre.setText(empleado.getNombreCompleto());
-
-        if (modo.equals("CREAR")) {
-            prepararNuevoExpediente();
-        } else {
-            cargarDatosExpediente(expediente);
-            bloquearCampos(true);
-        }
+        lblNombre.setText(empleado.getNombreEmpleado());
+//
+//        if (modo.equals("CREAR")) {
+//            prepararNuevoExpediente();
+//        } else {
+//            bloquearCampos(true);
+//        }
     }
 
-    private void cargarDatosExpediente(ExpedienteResponse exp) {
-        txtAlergias.setText(exp.getAlergias());
-        txtPeso.setText(String.valueOf(exp.getPeso()));
-        txtPA.setText(exp.getTensionArterial());
-        txtNotas.setText(exp.getNotasEvolucion());
-    }
+//    private void cargarDatosExpediente(ExpedienteResponse exp) {
+//        txtAlergias.setText(exp.getAlergias());
+//        txtPeso.setText(String.valueOf(exp.getPeso()));
+//        txtPA.setText(exp.getTensionArterial());
+//        txtNotas.setText(exp.getNotasEvolucion());
+//    }
 
     private void prepararNuevoExpediente() {
         btnEditar.setVisible(false);
@@ -70,4 +76,6 @@ public class ExpedientePacienteController {
         bloquearCampos(false);
         btnEditar.setVisible(false);
     }
+
+    
 }

@@ -1,4 +1,5 @@
 com\mycompany\presentacionenfermeria\PrimaryController.class
+controladores\HistorialPacienteController.class
 clienteApi\ClienteApi$5.class
 clienteApi\ClienteApi$2.class
 controladores\MenuPrincipalController.class
@@ -15,11 +16,11 @@ response\EmpleadoHistoricoResponse.class
 response\CitaPendienteResponse.class
 response\CrearCitaResponse.class
 com\mycompany\presentacionenfermeria\App.class
+utilerias\ParentAware.class
 clienteApi\ClienteApi$3.class
 controladores\DetallesCitaController.class
 module-info.class
 controladores\ExpedientePacienteController.class
-controladores\PantallaHistorialMedicoController.class
 com\mycompany\presentacionenfermeria\Main.class
 com\mycompany\presentacionenfermeria\SecondaryController.class
 clienteApi\ClienteApi$1.class

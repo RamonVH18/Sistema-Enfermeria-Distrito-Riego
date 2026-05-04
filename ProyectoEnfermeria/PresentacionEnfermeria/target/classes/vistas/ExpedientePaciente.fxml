@@ -1,77 +1,95 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.geometry.Insets?>
 
-<ScrollPane fitToWidth="true" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="controladores.ExpedientePacienteController">
-    <VBox spacing="15.0" styleClass="expediente-container">
-        <padding>
-            <Insets bottom="30.0" left="30.0" right="30.0" top="20.0" />
-        </padding>
+<VBox prefHeight="800.0" prefWidth="900.0" spacing="20.0" styleClass="root" 
+      stylesheets="@HistorialMedico.css" xmlns="http://javafx.com/javafx/17" 
+      xmlns:fx="http://javafx.com/fxml/1">
+    
+    <padding>
+        <Insets bottom="30.0" left="40.0" right="40.0" top="30.0" />
+    </padding>
 
-        <Label text="EXPEDIENTE CLÍNICO - DISTRITO DE RIEGO" styleClass="header-label" />
-        <Separator />
+    <!-- Encabezado Principal -->
+    <VBox spacing="5.0">
+        <Label styleClass="title-label" text="Historial Medico del Paciente" />
+        <Label styleClass="subtitle-label" text="Registro clínicos completos y gestion de informacion de salud" />
+    </VBox>
 
-        <TitledPane text="1. Datos de Identificación" collapsible="false">
-            <GridPane hgap="10.0" vgap="10.0">
-                <Label text="Nombre:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                <TextField fx:id="lblNombre" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="0" prefWidth="300"/>
-                
-                <Label text="Género:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                <TextField fx:id="lblGenero" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-
-                <Label text="Fecha Nac.:" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                <TextField fx:id="lblFechaNac" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-
-                <Label text="Área:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                <TextField fx:id="lblArea" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-
-                <Label text="Grupo Sanguíneo:" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                <TextField fx:id="lblSangre" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-            </GridPane>
-        </TitledPane>
-
-        <TitledPane text="2. Antecedentes Laborales" collapsible="false">
-            <VBox spacing="10.0">
-                <HBox spacing="10.0" alignment="CENTER_LEFT">
-                    <Label text="Inicio de Labores:" />
-                    <DatePicker fx:id="dpInicioLabores" disable="true" />
-                </HBox>
-                <Label text="Exposición a agentes:" style="-fx-font-weight: bold;" />
-                <FlowPane hgap="20.0" vgap="10.0">
-                    <CheckBox text="Disolventes" fx:id="chkDisolventes" disable="true" />
-                    <CheckBox text="Ruido" fx:id="chkRuido" disable="true" />
-                    <CheckBox text="Polvos" fx:id="chkPolvos" disable="true" />
-                    <CheckBox text="Biológicos" fx:id="chkBiologicos" disable="true" />
-                </FlowPane>
-            </VBox>
-        </TitledPane>
-
-        <TitledPane text="3. Signos Vitales y Exploración Física" collapsible="false">
-            <GridPane hgap="10.0" vgap="10.0">
-                <Label text="Presión Arterial:" />
-                <TextField fx:id="txtPA" GridPane.columnIndex="1" />
-                
-                <Label text="Frec. Cardiaca:" GridPane.columnIndex="2" />
-                <TextField fx:id="txtFC" GridPane.columnIndex="3" />
-
-                <Label text="Temperatura:" GridPane.rowIndex="1" />
-                <TextField fx:id="txtTemp" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-
-                <Label text="Peso (kg):" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                <TextField fx:id="txtPeso" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-            </GridPane>
-        </TitledPane>
-
-        <TitledPane text="4. Nota de Evolución y Tratamiento" collapsible="false">
-            <TextArea fx:id="txtNotas" prefHeight="150.0" wrapText="true" 
-                      promptText="Escriba aquí el diagnóstico y plan de tratamiento..." />
-        </TitledPane>
-
-        <HBox alignment="CENTER_RIGHT" spacing="10.0">
-            <Button text="Imprimir PDF" styleClass="secondary-button" />
-            <Button text="Guardar Cambios" styleClass="primary-button" />
+    
+    <!-- Tarjeta de Información Personal -->
+    <VBox spacing="15.0" styleClass="section-container">
+        <HBox alignment="CENTER_LEFT" spacing="15.0">
+            <Label style="-fx-font-size: 30px;" text="👤" />
+            <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Mario Alfredo Jimenez Valencia" />
+        </HBox>
+        <HBox spacing="50.0">
+            <Label text="ID: EMP-4245" />
+            <Label text="Departamento: Manufactura" />
+            <Label text="Edad: 34" />
+            <Label text="Tipo de Sangre: A-" />
         </HBox>
     </VBox>
-</ScrollPane>
+
+    <!-- Barra de Navegación -->
+    <HBox alignment="CENTER" spacing="20.0" styleClass="tab-container">
+        <Button prefWidth="150" styleClass="nav-button-active" text="Signos Vitales" />
+        <Button prefWidth="150" styleClass="nav-button" text="Antecedentes Medicos" />
+        <Button prefWidth="150" styleClass="nav-button" text="Sintomas y Diagnostico" />
+        <Button prefWidth="150" styleClass="nav-button" text="Plan de Tratamiento" />
+    </HBox>
+
+    <!-- Sección de Signos Vitales -->
+    <VBox spacing="30.0" styleClass="section-container">
+        <Label styleClass="vital-label-header" text="Signos Vitales Actuales" />
+        
+        <GridPane hgap="40.0" vgap="30.0">
+            <columnConstraints>
+                <ColumnConstraints halignment="CENTER" percentWidth="33.3" />
+                <ColumnConstraints halignment="CENTER" percentWidth="33.3" />
+                <ColumnConstraints halignment="CENTER" percentWidth="33.3" />
+            </columnConstraints>
+
+            <!-- Fila 1 -->
+            <VBox alignment="CENTER" spacing="5" GridPane.columnIndex="0">
+                <Label styleClass="vital-value-name" text="Presion Arterial ( mmHg )" />
+                <Label styleClass="vital-value-number" text="120/80" />
+            </VBox>
+            <VBox alignment="CENTER" spacing="5" GridPane.columnIndex="1">
+                <Label styleClass="vital-value-name" text="Frecuencia Cardiaca (lpm)" />
+                <Label styleClass="vital-value-number" text="72" />
+            </VBox>
+            <VBox alignment="CENTER" spacing="5" GridPane.columnIndex="2">
+                <Label styleClass="vital-value-name" text="Temperatura ( Celcius )" />
+                <Label styleClass="vital-value-number" text="36.5" />
+            </VBox>
+
+            <!-- Fila 2 -->
+            <VBox alignment="CENTER" spacing="5" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                <Label styleClass="vital-value-name" text="Peso (kg)" />
+                <Label styleClass="vital-value-number" text="68" />
+            </VBox>
+            <VBox alignment="CENTER" spacing="5" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                <Label styleClass="vital-value-name" text="Altura (cm)" />
+                <Label styleClass="vital-value-number" text="176" />
+            </VBox>
+            <VBox alignment="CENTER" spacing="5" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                <Label styleClass="vital-value-name" text="Saturacion de Oxigeno (%)" />
+                <Label styleClass="vital-value-number" text="98" />
+            </VBox>
+        </GridPane>
+
+        <!-- Recuadro de IMC -->
+        <VBox spacing="5.0" styleClass="imc-box">
+            <Label style="-fx-font-weight: bold;" text="Calculo de IMC" />
+            <Label styleClass="imc-value" text="25.0" />
+            <Label style="-fx-font-size: 12px;" text="Rango normal: 18.5 - 24.9" />
+        </VBox>
+        
+        <!-- Botón Volver -->
+        <Button styleClass="button-primary" text="← Volver a la lista" />
+
+    </VBox>
+</VBox>

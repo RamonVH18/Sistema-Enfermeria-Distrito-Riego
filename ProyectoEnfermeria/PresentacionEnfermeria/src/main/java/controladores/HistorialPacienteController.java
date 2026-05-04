@@ -26,7 +26,7 @@ import javafx.stage.Stage;
 import response.DatosEmpleadoResponse;
 import response.ExpedienteResponse;
 
-public class PantallaHistorialMedicoController implements Initializable {
+public class HistorialPacienteController implements Initializable {
 
     @FXML
     private TextField txtBusqueda;
@@ -102,26 +102,28 @@ public class PantallaHistorialMedicoController implements Initializable {
         tablaPacientes.setItems(filteredData);
     }
 
-//    private void abrirVentanaExpediente(EmpleadoHistoricoResponse paciente, ExpedienteResponse expediente, String modo) {
-//        try {
-//            FXMLLoader loader = new FXMLLoader(getClass().getResource("/vistas/ExpedientePaciente.fxml"));
-//            Parent root = loader.load();
-//
-//            ExpedientePacienteController controller = loader.getController();
-//            // Pasamos los datos y el modo (CREAR o DETALLE)
-//            controller.initData(paciente, expediente, modo);
-//
-//            Stage stage = new Stage();
-//            stage.initModality(Modality.APPLICATION_MODAL);
-//            stage.setTitle("Expediente Médico - " + paciente.getNombreCompleto());
-//            stage.setScene(new Scene(root));
-//            stage.showAndWait(); // Espera a que se cierre para refrescar si es necesario
-//
-//        } catch (IOException e) {
-//            System.err.println("Error al abrir la ventana: " + e.getMessage());
-//            e.printStackTrace();
-//        }
-//    }
+    private void abrirVentanaExpediente(DatosEmpleadoResponse paciente) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/vistas/ExpedientePaciente.fxml"));
+            Parent root = loader.load();
+
+            ExpedientePacienteController controller = loader.getController();
+            // Pasamos los datos y el modo (CREAR o DETALLE)
+//            controller.initData(paciente);
+
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Expediente Médico - " + paciente.getNombreEmpleado());
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add(getClass().getResource("/styles/ExpedientePaciente.css").toExternalForm());
+            stage.setScene(scene);
+            stage.showAndWait(); // Espera a que se cierre para refrescar si es necesario
+
+        } catch (IOException e) {
+            System.err.println("Error al abrir la ventana: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
 
     @FXML
     private void seleccionarPaciente() {
@@ -130,19 +132,7 @@ public class PantallaHistorialMedicoController implements Initializable {
             return;
         }
 
-        // Consultamos a la API si ya tiene expediente
-        clienteApi.obtenerExpedientePorEmpleado(seleccionado.getIdEmpleado())
-                .thenAccept(expediente -> {
-                    Platform.runLater(() -> {
-                        // Si la API devuelve un objeto (200 OK), es DETALLE. 
-                        // Si devuelve null (porque manejaste el 404), es CREAR.
-//                        if (expediente == null) {
-//                            abrirVentanaExpediente(seleccionado, null, "CREAR");
-//                        } else {
-//                            abrirVentanaExpediente(seleccionado, expediente, "DETALLE");
-//                        }
-                    });
-                });
+        abrirVentanaExpediente(seleccionado);
     }
 
 }

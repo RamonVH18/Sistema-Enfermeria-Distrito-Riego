@@ -1,0 +1,85 @@
+.main-container {
+    -fx-background-color: white;
+}
+
+/* Campo de Búsqueda */
+.search-field {
+    -fx-background-color: white;
+    -fx-border-color: #333333;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-border-width: 1;
+    -fx-padding: 0 15 0 15;
+    -fx-font-size: 14px;
+}
+
+.search-field:focused {
+    -fx-border-color: #0056b3;
+    -fx-border-width: 1.5;
+}
+
+/* Botones */
+.action-button, .view-button {
+    -fx-background-color: #0056b3;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
+}
+
+.action-button:hover, .view-button:hover {
+    -fx-background-color: #004494;
+}
+
+/* Tabla de Pacientes */
+.patient-table {
+    -fx-background-color: transparent;
+    -fx-border-color: #cccccc;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-border-width: 1;
+}
+
+/* Cabeceras de la Tabla */
+.patient-table .column-header {
+    -fx-background-color: white;
+    -fx-border-color: transparent transparent #333333 transparent; /* Solo línea inferior gruesa */
+    -fx-border-width: 0 0 2 0;
+    -fx-padding: 10;
+}
+
+.patient-table .column-header .label {
+    -fx-text-fill: #333333;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+}
+
+/* Celdas y Filas */
+.patient-table .table-row-cell {
+    -fx-background-color: white;
+    -fx-border-color: transparent transparent #eeeeee transparent;
+    -fx-border-width: 0 0 1 0;
+    -fx-padding: 10;
+}
+
+.patient-table .table-row-cell:filled:selected {
+    -fx-background-color: #f0f7ff;
+    -fx-table-cell-background-color: #f0f7ff;
+}
+
+.patient-table .table-cell {
+    -fx-alignment: CENTER_LEFT;
+    -fx-font-size: 13px;
+    -fx-text-fill: #333333;
+    -fx-border-color: transparent; /* Quitar líneas verticales */
+}
+
+/* Eliminar el scroll background y bordes internos */
+.patient-table .placeholder .label {
+    -fx-text-fill: #999999;
+}
+
+.patient-table .virtual-flow .scroll-bar:vertical {
+    -fx-background-color: transparent;
+}
