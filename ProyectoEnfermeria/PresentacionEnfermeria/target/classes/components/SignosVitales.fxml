@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<!-- Sección de Signos Vitales -->
+<VBox spacing="30.0" styleClass="section-container">
+    <Label styleClass="vital-label-header" text="Signos Vitales Actuales" />
+        
+    <GridPane hgap="40.0" vgap="30.0">
+        <columnConstraints>
+            <ColumnConstraints halignment="CENTER" percentWidth="33.3" />
+            <ColumnConstraints halignment="CENTER" percentWidth="33.3" />
+            <ColumnConstraints halignment="CENTER" percentWidth="33.3" />
+        </columnConstraints>
+
+        <!-- Fila 1 -->
+        <VBox alignment="CENTER" spacing="5" GridPane.columnIndex="0">
+            <Label styleClass="vital-value-name" text="Presion Arterial ( mmHg )" />
+            <Label styleClass="vital-value-number" text="120/80" />
+        </VBox>
+        <VBox alignment="CENTER" spacing="5" GridPane.columnIndex="1">
+            <Label styleClass="vital-value-name" text="Frecuencia Cardiaca (lpm)" />
+            <Label styleClass="vital-value-number" text="72" />
+        </VBox>
+        <VBox alignment="CENTER" spacing="5" GridPane.columnIndex="2">
+            <Label styleClass="vital-value-name" text="Temperatura ( Celcius )" />
+            <Label styleClass="vital-value-number" text="36.5" />
+        </VBox>
+
+        <!-- Fila 2 -->
+        <VBox alignment="CENTER" spacing="5" GridPane.columnIndex="0" GridPane.rowIndex="1">
+            <Label styleClass="vital-value-name" text="Peso (kg)" />
+            <Label styleClass="vital-value-number" text="68" />
+        </VBox>
+        <VBox alignment="CENTER" spacing="5" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Label styleClass="vital-value-name" text="Altura (cm)" />
+            <Label styleClass="vital-value-number" text="176" />
+        </VBox>
+        <VBox alignment="CENTER" spacing="5" GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <Label styleClass="vital-value-name" text="Saturacion de Oxigeno (%)" />
+            <Label styleClass="vital-value-number" text="98" />
+        </VBox>
+    </GridPane>
+
+    <!-- Recuadro de IMC -->
+    <VBox spacing="5.0" styleClass="imc-box">
+        <Label style="-fx-font-weight: bold;" text="Calculo de IMC" />
+        <Label styleClass="imc-value" text="25.0" />
+        <Label style="-fx-font-size: 12px;" text="Rango normal: 18.5 - 24.9" />
+    </VBox>
+
+</VBox>
+

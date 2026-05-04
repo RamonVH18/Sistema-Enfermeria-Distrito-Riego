@@ -43,6 +43,7 @@ public class ExpedientePacienteController implements Initializable {
 
         // Datos fijos del empleado
         lblNombre.setText(empleado.getNombreEmpleado());
+//        cargarDatosExpediente(empleado);
 //
 //        if (modo.equals("CREAR")) {
 //            prepararNuevoExpediente();
@@ -51,7 +52,7 @@ public class ExpedientePacienteController implements Initializable {
 //        }
     }
 
-//    private void cargarDatosExpediente(ExpedienteResponse exp) {
+//    private void cargarDatosExpediente(DatosEmpleadoResponse e) {
 //        txtAlergias.setText(exp.getAlergias());
 //        txtPeso.setText(String.valueOf(exp.getPeso()));
 //        txtPA.setText(exp.getTensionArterial());

@@ -109,7 +109,7 @@ public class HistorialPacienteController implements Initializable {
 
             ExpedientePacienteController controller = loader.getController();
             // Pasamos los datos y el modo (CREAR o DETALLE)
-//            controller.initData(paciente);
+            controller.initializeData(paciente);
 
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
