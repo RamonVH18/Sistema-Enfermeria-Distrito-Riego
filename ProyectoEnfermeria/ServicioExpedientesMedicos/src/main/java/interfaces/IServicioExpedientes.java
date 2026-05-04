@@ -20,6 +20,6 @@ public interface IServicioExpedientes {
     
     public SignosVitalesResponse obtenerSignosVitalesEmpleado(Integer idExpediente);
     
-    public Map<String, List<DetalleResponse>> obtenerAntecedentesEmpleado(Integer idExpediente);
+    public Map<String, List<DetalleResponse>> obtenerDetallesEmpleado(Integer idExpediente);
     
 }

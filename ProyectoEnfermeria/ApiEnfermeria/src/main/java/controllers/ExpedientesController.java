@@ -7,6 +7,7 @@ package controllers;
 import dtos.ExpedienteMedicoDTO;
 import interfaces.IServicioExpedientes;
 import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import response.DatosEmpleadoResponse;
+import response.DetalleResponse;
+import response.SignosVitalesResponse;
 
 /**
  *
@@ -33,6 +36,16 @@ public class ExpedientesController {
     @GetMapping
     public ResponseEntity<List<DatosEmpleadoResponse>> obtenerPorEmpleado() {
         return ResponseEntity.ok(servicioExpediente.obtenerDatosPrincipalesEmpleados()); 
+    }
+    
+    @GetMapping("/signos/{id}")
+    public ResponseEntity<SignosVitalesResponse> obtenerSignosVitalesEmpleado(@PathVariable Integer id) {
+        return ResponseEntity.ok(servicioExpediente.obtenerSignosVitalesEmpleado(id));
+    }
+    
+    @GetMapping("/detalles/{id}")
+    public ResponseEntity<Map<String, List<DetalleResponse>>> obtenerDetallesEmpleado(@PathVariable Integer id) {
+        return ResponseEntity.ok(servicioExpediente.obtenerDetallesEmpleado(id));
     }
 
 }
