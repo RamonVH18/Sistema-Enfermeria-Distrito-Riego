@@ -43,8 +43,8 @@
         
         <Button fx:id="btnPanelPrincipal" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#mostrarPanelPrincipal" styleClass="menu-button" text="Panel Principal" />
         <Button fx:id="btnCitas" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#mostrarCitas" styleClass="menu-button" text="Citas" />
-        <Button fx:id="btnHistorialPacientes" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction ="#mostrarHistorial" styleClass="menu-button" text="Historial de Pacientes" />
-        <Button fx:id="btnInformesSalud" maxWidth="1.7976931348623157E308" mnemonicParsing="false" styleClass="menu-button" text="Informes de Salud" />
+        <Button fx:id="btnHistorialPacientes" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#mostrarHistorial" styleClass="menu-button" text="Historial de Pacientes" />
+        <Button fx:id="btnInformesSalud" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#mostrarInformes" styleClass="menu-button" text="Informes de Salud" />
         
         <Pane fx:id="springPane" VBox.vgrow="ALWAYS" />
       <FlowPane prefHeight="150.0" prefWidth="200.0" styleClass="side-panel-footer">

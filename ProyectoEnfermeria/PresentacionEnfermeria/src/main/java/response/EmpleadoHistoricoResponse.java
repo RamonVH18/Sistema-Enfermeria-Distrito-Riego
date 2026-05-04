@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class EmpleadoHistoricoResponse {
 
-    private Long idEmpleado;
+    private Integer idEmpleado;
     private String nombres;
     private String apellidoPaterno;
     private String apellidoMaterno;
@@ -27,11 +27,11 @@ public class EmpleadoHistoricoResponse {
         return nombres + " " + apellidoPaterno + " " + apellidoMaterno;
     }
 
-    public Long getIdEmpleado() {
+    public Integer getIdEmpleado() {
         return idEmpleado;
     }
 
-    public void setIdEmpleado(Long idEmpleado) {
+    public void setIdEmpleado(Integer idEmpleado) {
         this.idEmpleado = idEmpleado;
     }
 

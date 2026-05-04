@@ -30,6 +30,7 @@ import response.EmpleadoHistoricoResponse;
 import response.EmpleadoOptionResponse;
 import response.ExpedienteResponse;
 import response.UsuarioResponse;
+import response.ReporteEmpleadosResponse;
 
 /**
  *
@@ -217,6 +218,16 @@ public class ClienteApi {
         return handleResponse(client.sendAsync(request, HttpResponse.BodyHandlers.ofString()),
                 new TypeReference<ExpedienteResponse>() {
         });
+    }
+
+    public CompletableFuture<ReporteEmpleadosResponse> obtenerReporte() {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(BASE_URL + "/reportes/empleados"))
+                .GET()
+                .build();
+
+        return handleResponse(client.sendAsync(request, HttpResponse.BodyHandlers.ofString()),
+                ReporteEmpleadosResponse.class);
     }
 
     private void validarRespuesta(HttpResponse<String> response) {
