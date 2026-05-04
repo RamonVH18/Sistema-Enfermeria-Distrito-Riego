@@ -4,9 +4,10 @@
  */
 package interfaces;
 
-import entidades.ExpedienteMedico;
 import java.util.List;
+import java.util.Map;
 import response.DatosEmpleadoResponse;
+import response.DetalleResponse;
 import response.SignosVitalesResponse;
 
 /**
@@ -17,6 +18,8 @@ public interface IServicioExpedientes {
     
     public List<DatosEmpleadoResponse> obtenerDatosPrincipalesEmpleados();
     
-    public SignosVitalesResponse obtenerSignosVitalesEmpleado(ExpedienteMedico expediente);
+    public SignosVitalesResponse obtenerSignosVitalesEmpleado(Integer idExpediente);
+    
+    public Map<String, List<DetalleResponse>> obtenerAntecedentesEmpleado(Integer idExpediente);
     
 }

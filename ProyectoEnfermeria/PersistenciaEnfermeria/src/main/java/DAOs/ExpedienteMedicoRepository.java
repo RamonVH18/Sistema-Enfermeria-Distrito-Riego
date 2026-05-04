@@ -11,12 +11,12 @@ import org.springframework.data.jpa.repository.Query;
  */
 public interface ExpedienteMedicoRepository extends JpaRepository<ExpedienteMedico, Integer> {
     
-    public Optional<ExpedienteMedico> findByNumeroSeguridadSocial(Integer numeroSeguridadSocial);
+    public ExpedienteMedico findByNumeroSeguridadSocial(Integer numeroSeguridadSocial);
     
     @Query("SELECT e FROM ExpedienteMedico e JOIN Usuario u ON e.empleado = u.empleado WHERE u.email = :email")
-    public Optional<ExpedienteMedico> findByEmail(String email);
+    public ExpedienteMedico findByEmail(String email);
     
     @Query("SELECT e FROM ExpedienteMedico e  WHERE e.empleado.curp = :curp")
-    public Optional<ExpedienteMedico> findByCurp(String curp);
+    public ExpedienteMedico findByCurp(String curp);
     
 }

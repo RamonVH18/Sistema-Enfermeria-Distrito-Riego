@@ -1,8 +1,13 @@
 package mapper;
 
 import dtos.DetalleExtraDTO;
+import entidades.Detalle;
 import entidades.DetalleExtra;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import response.DetalleResponse;
 
 /**
  *
@@ -10,25 +15,19 @@ import java.util.List;
  */
 public class DetalleExtraMapper {
     
-    public static DetalleExtra toEntity(DetalleExtraDTO dto){
-        DetalleExtra entity = new DetalleExtra();
-        entity.setId(dto.getId());
-        entity.setDetalle(dto.getDetalle());
-        return entity;
+    public static Map<String, List<DetalleResponse>> toDetalleResponseMap(List<DetalleExtra> detalles) {
+    Map<String, List<DetalleResponse>> map = new HashMap<>();
+
+    for (DetalleExtra d : detalles) {
+        String nombre = d.getDetalle().getNombreDetalle();
+        
+        // Creamos el DTO de respuesta para este detalle
+        DetalleResponse response = new DetalleResponse(d.getDetalle().getNombreDetalle(), d.getValor());
+
+        // Si la llave no existe, computeIfAbsent crea la lista vacía por nosotros
+        map.computeIfAbsent(nombre, k -> new ArrayList<>()).add(response);
     }
     
-    public static DetalleExtraDTO toDTO(DetalleExtra entity){
-        DetalleExtraDTO dto = new DetalleExtraDTO();
-        dto.setId(entity.getId());
-        dto.setDetalle(dto.getDetalle());
-        return dto;
-    }
-    
-    public static List<DetalleExtra> toEntityList(List<DetalleExtraDTO> dtos){
-        return dtos.stream().map(dto -> toEntity(dto)).toList();
-    }
-    
-    public static List<DetalleExtraDTO> toDTOList(List<DetalleExtra> entities){
-        return entities.stream().map(entity -> toDTO(entity)).toList();
-    }
+    return map;
+}
 }

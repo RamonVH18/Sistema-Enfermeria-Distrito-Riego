@@ -41,7 +41,7 @@ public class ExpedienteMedico {
     private Empleado empleado;
 
     @OneToMany(mappedBy = "expedienteMedico")
-    private Set<DetalleExtraExpedienteMedico> detallesExtra;
+    private Set<DetalleExtra> detallesExtra;
 
     @OneToMany(mappedBy = "expedienteMedico")
     private List<RegistroMedico> registrosMedicos;
@@ -53,7 +53,7 @@ public class ExpedienteMedico {
             TipoSangre tipoSangre,
             Integer numeroSeguridadSocial,
             Empleado empleado,
-            Set<DetalleExtraExpedienteMedico> detallesExtra,
+            Set<DetalleExtra> detallesExtra,
             List<RegistroMedico> registrosMedicos
     ) {
         this.tipoSangre = tipoSangre;
@@ -68,7 +68,7 @@ public class ExpedienteMedico {
             TipoSangre tipoSangre,
             Integer numeroSeguridadSocial,
             Empleado empleado,
-            Set<DetalleExtraExpedienteMedico> detallesExtra,
+            Set<DetalleExtra> detallesExtra,
             List<RegistroMedico> registrosMedicos
     ) {
         this.id = id;
@@ -95,7 +95,7 @@ public class ExpedienteMedico {
         return empleado;
     }
 
-    public Set<DetalleExtraExpedienteMedico> getDetallesExtra() {
+    public Set<DetalleExtra> getDetallesExtra() {
         return detallesExtra;
     }
 
@@ -119,7 +119,7 @@ public class ExpedienteMedico {
         this.empleado = empleado;
     }
 
-    public void setDetallesExtra(Set<DetalleExtraExpedienteMedico> detallesExtra) {
+    public void setDetallesExtra(Set<DetalleExtra> detallesExtra) {
         this.detallesExtra = detallesExtra;
     }
 

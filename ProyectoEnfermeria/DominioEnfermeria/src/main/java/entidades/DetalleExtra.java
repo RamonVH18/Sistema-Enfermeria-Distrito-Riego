@@ -1,58 +1,92 @@
 package entidades;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import java.io.Serializable;
-import java.util.Set;
 
 /**
  *
- * @author Leonardo Flores Leyva
+ * @author Ramon Valencia 
  */
 @Entity
 public class DetalleExtra implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_detalle")
+    @Column(name = "id_detalle_extra")
     private Integer id;
-    
-    @Column(nullable = false, unique = true, length = 100)
-    private String detalle;
-    
-    @OneToMany(mappedBy = "detalleExtra")
-    private Set<DetalleExtraExpedienteMedico> expedientes;
 
-    public DetalleExtra() {}
+    @Column(nullable = false, length = 500)
+    private String valor;
 
-    public DetalleExtra(String detalle, Set<DetalleExtraExpedienteMedico> expedientes) {
-        this.detalle = detalle;
-        this.expedientes = expedientes;
+    @ManyToOne(cascade = CascadeType.PERSIST) // Nos ahorra el crear el antecedente previamente
+    @JoinColumn(name = "id_detalle", nullable = false)
+    private Detalle detalle;
+
+    @ManyToOne
+    @JoinColumn(name = "id_expediente", nullable = false)
+    private ExpedienteMedico expedienteMedico;
+
+    public DetalleExtra() {
     }
 
     public DetalleExtra(
-            Integer id, 
-            String detalle, 
-            Set<DetalleExtraExpedienteMedico> expedientes
+            String valor,
+            Detalle detalle,
+            ExpedienteMedico expedienteMedico
     ) {
-        this.id = id;
+        this.valor = valor;
         this.detalle = detalle;
-        this.expedientes = expedientes;
+        this.expedienteMedico = expedienteMedico;
     }
 
-    public Integer getId() {return id;}
+    public DetalleExtra(
+            Integer id,
+            String valor,
+            Detalle detalle,
+            ExpedienteMedico expedienteMedico
+    ) {
+        this.id = id;
+        this.valor = valor;
+        this.detalle = detalle;
+        this.expedienteMedico = expedienteMedico;
+    }
 
-    public String getDetalle() {return detalle;}
+    public Integer getId() {
+        return id;
+    }
 
-    public Set<DetalleExtraExpedienteMedico> getExpedientes() {return expedientes;}
+    public String getValor() {
+        return valor;
+    }
 
-    public void setId(Integer id) {this.id = id;}
+    public Detalle getDetalle() {
+        return detalle;
+    }
 
-    public void setDetalle(String detalle) {this.detalle = detalle;}
+    public ExpedienteMedico getExpedienteMedico() {
+        return expedienteMedico;
+    }
 
-    public void setExpedientes(Set<DetalleExtraExpedienteMedico> expedientes) {this.expedientes = expedientes;}
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setValor(String valor) {
+        this.valor = valor;
+    }
+
+    public void setDetalle(Detalle detalle) {
+        this.detalle = detalle;
+    }
+
+    public void setExpedienteMedico(ExpedienteMedico expedienteMedico) {
+        this.expedienteMedico = expedienteMedico;
+    }
 }

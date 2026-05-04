@@ -10,7 +10,7 @@
     <class>entidades.AtributoFisico</class>
     <class>entidades.AntecedenteExpedienteMedico</class>
     <class>entidades.AtributoFisicoExpedienteMedico</class>
-    <class>entidades.DetalleExtra</class>
+    <class>entidades.Detalle</class>
     <properties>
       <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/SistemaDistritoRiego"/>
       <property name="jakarta.persistence.jdbc.user" value="adminDR"/>
