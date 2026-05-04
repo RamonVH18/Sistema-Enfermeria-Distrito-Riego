@@ -21,11 +21,5 @@ public class CitasException extends BusinessException  {
         super(mensaje, status, codigo);
     }
 
-    /**
-     * Constructs an instance of <code>CitasException</code> with the specified
-     * detail message.
-     *
-     * @param msg the detail message.
-     */
     
 }
