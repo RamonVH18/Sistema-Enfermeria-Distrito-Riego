@@ -19,6 +19,8 @@ import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import response.EmpleadoHistoricoResponse;
+import utilerias.ParentAware;
 
 /**
  * FXML Controller class
@@ -26,14 +28,15 @@ import javafx.stage.Stage;
  * @author isaac
  */
 public class MenuPrincipalController implements Initializable {
-    
-    @FXML 
+
+    @FXML
     private StackPane mainLayout;
-    
+
     private Parent panelPrincipal;
     private Parent panelCitas;
     private Map<String, Node> pantallas = new HashMap<>();
-    
+    private Map<String, Object> controladores = new HashMap<>();
+
     /**
      * Initializes the controller class.
      */
@@ -43,20 +46,31 @@ public class MenuPrincipalController implements Initializable {
             cargarPantalla("MenuPrincipal", "/vistas/panelPrincipal.fxml");
             cargarPantalla("PantallaCitas", "/vistas/pantallaCitas.fxml");
             cargarPantalla("HistorialPacientes", "/vistas/HistorialPacientes.fxml");
-            
+            cargarPantalla("OpcionesPacienteHistorial", "/vistas/OpcionesPacienteHistorial.fxml");
+
             mostrarPantalla("MenuPrincipal");
         } catch (IOException e) {
             System.err.println("Error al cargar el menú principal: " + e.getMessage());
         }
     }
-    
+
     private void cargarPantalla(String nombre, String ruta) throws IOException {
-        Node pantalla = FXMLLoader.load(getClass().getResource(ruta));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(ruta));
+        Node pantalla = loader.load();
         pantalla.setVisible(false);
         pantallas.put(nombre, pantalla);
         mainLayout.getChildren().add(pantalla);
+
+        // para los controladores
+        Object controller = loader.getController();
+        controladores.put(nombre, controller);
+
+        if (controller instanceof ParentAware) {
+            ((ParentAware) controller).setMenuPrincipal(this);
+        }
+
     }
-    
+
     private void mostrarPantalla(String nombre) {
         pantallas.forEach((n, nodo) -> {
             if (n.equals(nombre)) {
@@ -71,19 +85,27 @@ public class MenuPrincipalController implements Initializable {
 //    private void switchToCitas() throws IOException {
 //        App.setRoot("/vistas/citas.fxml"); // ruta relativa al FXML
 //    }
-    
+
     @FXML
-    private void mostrarPanelPrincipal(){
+    private void mostrarPanelPrincipal() {
         mostrarPantalla("MenuPrincipal");
     }
-    
+
     @FXML
-    private void mostrarCitas(){
+    private void mostrarCitas() {
         mostrarPantalla("PantallaCitas");
     }
-    
+
     @FXML
-    private void mostrarHistorial() {
+    public void mostrarHistorial() {
         mostrarPantalla("HistorialPacientes");
+    }
+
+    public void mostrarOpcionesHistorialPaciente(EmpleadoHistoricoResponse seleccionado) {
+        OpcionesPacienteHistorialController controller
+                = (OpcionesPacienteHistorialController) controladores.get("OpcionesPacienteHistorial");
+
+        controller.cargarDatosPaciente(seleccionado);
+        mostrarPantalla("OpcionesPacienteHistorial");
     }
 }

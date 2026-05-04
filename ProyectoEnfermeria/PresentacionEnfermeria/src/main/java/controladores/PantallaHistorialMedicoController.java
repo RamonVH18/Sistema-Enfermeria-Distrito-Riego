@@ -23,8 +23,9 @@ import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import response.ExpedienteResponse;
+import utilerias.ParentAware;
 
-public class PantallaHistorialMedicoController implements Initializable {
+public class PantallaHistorialMedicoController implements Initializable, ParentAware {
 
     @FXML
     private TextField txtBusqueda;
@@ -39,6 +40,8 @@ public class PantallaHistorialMedicoController implements Initializable {
 
     private final ClienteApi clienteApi = new ClienteApi(); // O como lo instancies usualmente
     private ObservableList<EmpleadoHistoricoResponse> masterData = FXCollections.observableArrayList();
+
+    private MenuPrincipalController menuPrincipalController;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -131,23 +134,15 @@ public class PantallaHistorialMedicoController implements Initializable {
     @FXML
     private void seleccionarPaciente() {
         EmpleadoHistoricoResponse seleccionado = tablaPacientes.getSelectionModel().getSelectedItem();
-        if (seleccionado == null) {
-            return;
+        if (seleccionado != null) {
+            // Delegamos al padre, respetando que él maneja el StackPane
+            this.menuPrincipalController.mostrarOpcionesHistorialPaciente(seleccionado);
         }
-
-        // Consultamos a la API si ya tiene expediente
-        clienteApi.obtenerExpedientePorEmpleado(seleccionado.getIdEmpleado())
-                .thenAccept(expediente -> {
-                    Platform.runLater(() -> {
-                        // Si la API devuelve un objeto (200 OK), es DETALLE. 
-                        // Si devuelve null (porque manejaste el 404), es CREAR.
-                        if (expediente == null) {
-                            abrirVentanaExpediente(seleccionado, null, "CREAR");
-                        } else {
-                            abrirVentanaExpediente(seleccionado, expediente, "DETALLE");
-                        }
-                    });
-                });
     }
 
-}
+    @Override
+    public void setMenuPrincipal(MenuPrincipalController main) {
+
+        this.menuPrincipalController = main;
+    }
+} 

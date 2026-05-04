@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Font?>
+
+<VBox spacing="20.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controladores.OpcionesPacienteHistorialController">
+    <padding>
+        <Insets top="30" right="40" bottom="30" left="40" />
+    </padding>
+
+    <Button text="← Volver a la lista" onAction="#volverALista" />
+
+    <VBox spacing="10" style="-fx-border-color: #ddd; -fx-border-radius: 10; -fx-padding: 20;">
+        <Label fx:id="lblNombre" text="Nombre del Paciente">
+            <font><Font name="System Bold" size="22.0" /></font>
+        </Label>
+        <GridPane hgap="40" vgap="10">
+            <Label text="ID:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+            <Label fx:id="lblID" text="---" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+            
+            <Label text="Departamento:" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+            <Label fx:id="lblArea" text="---" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+            
+            <Label text="Edad:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            <Label fx:id="lblEdad" text="---" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            
+            <Label text="Tipo de Sangre:" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Label fx:id="lblSangre" text="---" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+        </GridPane>
+    </VBox>
+
+    <HBox spacing="40" alignment="CENTER" prefHeight="250">
+        <!-- Estos botones cambian según la existencia del historial -->
+        <Button fx:id="btnVer" text="Ver Historial Médico" prefWidth="280" prefHeight="100" onAction="#verHistorial" visible="false" managed="false" style="-fx-background-color: #5DADE2; -fx-text-fill: white; -fx-font-size: 16px;"/>
+        <Button fx:id="btnEditar" text="Editar Historial Médico" prefWidth="280" prefHeight="100" onAction="#editarHistorial" visible="false" managed="false" style="-fx-background-color: #5DADE2; -fx-text-fill: white; -fx-font-size: 16px;"/>
+        <Button fx:id="btnAgregar" text="Agregar Historial Médico" prefWidth="280" prefHeight="100" onAction="#agregarHistorial" visible="false" managed="false" style="-fx-background-color: #5DADE2; -fx-text-fill: white; -fx-font-size: 16px;"/>
+    </HBox>
+</VBox>
