@@ -9,7 +9,7 @@ package response;
  * @author Ramon Valencia
  */
 public class DatosEmpleadoResponse {
-    
+
     private String nombreEmpleado;
     private Integer idEmpleado;
     private String nombreDepartamento;
@@ -66,6 +66,5 @@ public class DatosEmpleadoResponse {
     public void setTipoSangre(String tipoSangre) {
         this.tipoSangre = tipoSangre;
     }
-    
-    
+
 }

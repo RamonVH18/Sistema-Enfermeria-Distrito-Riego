@@ -15,6 +15,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ResourceBundle;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXMLLoader;
@@ -22,26 +23,24 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import response.DatosEmpleadoResponse;
 import response.ExpedienteResponse;
-import utilerias.ParentAware;
 
-public class PantallaHistorialMedicoController implements Initializable, ParentAware {
+public class PantallaHistorialMedicoController implements Initializable {
 
     @FXML
     private TextField txtBusqueda;
     @FXML
-    private TableView<EmpleadoHistoricoResponse> tablaPacientes;
+    private TableView<DatosEmpleadoResponse> tablaPacientes;
     @FXML
-    private TableColumn<EmpleadoHistoricoResponse, String> colNombre, colArea, colSangre;
+    private TableColumn<DatosEmpleadoResponse, String> colNombre, colArea, colSangre;
     @FXML
-    private TableColumn<EmpleadoHistoricoResponse, Long> colID;
+    private TableColumn<DatosEmpleadoResponse, Long> colID;
     @FXML
-    private TableColumn<EmpleadoHistoricoResponse, Integer> colEdad;
+    private TableColumn<DatosEmpleadoResponse, Integer> colEdad;
 
     private final ClienteApi clienteApi = new ClienteApi(); // O como lo instancies usualmente
-    private ObservableList<EmpleadoHistoricoResponse> masterData = FXCollections.observableArrayList();
-
-    private MenuPrincipalController menuPrincipalController;
+    private ObservableList<DatosEmpleadoResponse> masterData = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -52,27 +51,20 @@ public class PantallaHistorialMedicoController implements Initializable, ParentA
     private void configurarColumnas() {
         // Nombre completo consolidado desde el modelo
         colNombre.setCellValueFactory(cellData
-                -> new SimpleStringProperty(cellData.getValue().getNombreCompleto()));
+                -> new SimpleStringProperty(cellData.getValue().getNombreEmpleado()));
 
         colID.setCellValueFactory(new PropertyValueFactory<>("idEmpleado"));
-        colArea.setCellValueFactory(new PropertyValueFactory<>("area"));
+        colArea.setCellValueFactory(new PropertyValueFactory<>("nombreDepartamento"));
         colSangre.setCellValueFactory(new PropertyValueFactory<>("tipoSangre"));
 
-        // CÁLCULO DE EDAD DINÁMICO
-        colEdad.setCellValueFactory(cellData -> {
-            LocalDate fechaNac = cellData.getValue().getFechaNacimiento();
-            if (fechaNac != null) {
-                int edadCalculada = Period.between(fechaNac, LocalDate.now()).getYears();
-
-                return new SimpleObjectProperty<>(edadCalculada);
-            }
-            return new SimpleObjectProperty<>(0);
-        });
+        colEdad.setCellValueFactory(cellData
+                -> new SimpleObjectProperty<>(cellData.getValue().getEdad())
+        );
     }
 
     private void cargarDatosAsincronos() {
         // Llamada asíncrona 
-        clienteApi.obtenerPacientesHistorial().thenAccept(lista -> {
+        clienteApi.obtenerDatosHistorialEmpleado().thenAccept(lista -> {
             Platform.runLater(() -> {
                 if (lista != null) {
                     masterData.setAll(lista);
@@ -96,53 +88,61 @@ public class PantallaHistorialMedicoController implements Initializable, ParentA
     }
 
     private void configurarFiltro() {
-        FilteredList<EmpleadoHistoricoResponse> filteredData = new FilteredList<>(masterData, p -> true);
+        FilteredList<DatosEmpleadoResponse> filteredData = new FilteredList<>(masterData, p -> true);
         txtBusqueda.textProperty().addListener((obs, oldVal, newVal) -> {
             filteredData.setPredicate(empleado -> {
                 if (newVal == null || newVal.isEmpty()) {
                     return true;
                 }
                 String filter = newVal.toLowerCase();
-                return empleado.getNombreCompleto().toLowerCase().contains(filter)
-                        || empleado.getIdEmpleado().toString().contains(filter);
+                return empleado.getNombreEmpleado().toLowerCase().contains(filter);
+//                        || empleado.getIdEmpleado().toString().contains(filter);
             });
         });
         tablaPacientes.setItems(filteredData);
     }
 
-    private void abrirVentanaExpediente(EmpleadoHistoricoResponse paciente, ExpedienteResponse expediente, String modo) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/vistas/ExpedientePaciente.fxml"));
-            Parent root = loader.load();
-
-            ExpedientePacienteController controller = loader.getController();
-            // Pasamos los datos y el modo (CREAR o DETALLE)
-            controller.initData(paciente, expediente, modo);
-
-            Stage stage = new Stage();
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.setTitle("Expediente Médico - " + paciente.getNombreCompleto());
-            stage.setScene(new Scene(root));
-            stage.showAndWait(); // Espera a que se cierre para refrescar si es necesario
-
-        } catch (IOException e) {
-            System.err.println("Error al abrir la ventana: " + e.getMessage());
-            e.printStackTrace();
-        }
-    }
+//    private void abrirVentanaExpediente(EmpleadoHistoricoResponse paciente, ExpedienteResponse expediente, String modo) {
+//        try {
+//            FXMLLoader loader = new FXMLLoader(getClass().getResource("/vistas/ExpedientePaciente.fxml"));
+//            Parent root = loader.load();
+//
+//            ExpedientePacienteController controller = loader.getController();
+//            // Pasamos los datos y el modo (CREAR o DETALLE)
+//            controller.initData(paciente, expediente, modo);
+//
+//            Stage stage = new Stage();
+//            stage.initModality(Modality.APPLICATION_MODAL);
+//            stage.setTitle("Expediente Médico - " + paciente.getNombreCompleto());
+//            stage.setScene(new Scene(root));
+//            stage.showAndWait(); // Espera a que se cierre para refrescar si es necesario
+//
+//        } catch (IOException e) {
+//            System.err.println("Error al abrir la ventana: " + e.getMessage());
+//            e.printStackTrace();
+//        }
+//    }
 
     @FXML
     private void seleccionarPaciente() {
-        EmpleadoHistoricoResponse seleccionado = tablaPacientes.getSelectionModel().getSelectedItem();
-        if (seleccionado != null) {
-            // Delegamos al padre, respetando que él maneja el StackPane
-            this.menuPrincipalController.mostrarOpcionesHistorialPaciente(seleccionado);
+        DatosEmpleadoResponse seleccionado = tablaPacientes.getSelectionModel().getSelectedItem();
+        if (seleccionado == null) {
+            return;
         }
+
+        // Consultamos a la API si ya tiene expediente
+        clienteApi.obtenerExpedientePorEmpleado(seleccionado.getIdEmpleado())
+                .thenAccept(expediente -> {
+                    Platform.runLater(() -> {
+                        // Si la API devuelve un objeto (200 OK), es DETALLE. 
+                        // Si devuelve null (porque manejaste el 404), es CREAR.
+//                        if (expediente == null) {
+//                            abrirVentanaExpediente(seleccionado, null, "CREAR");
+//                        } else {
+//                            abrirVentanaExpediente(seleccionado, expediente, "DETALLE");
+//                        }
+                    });
+                });
     }
 
-    @Override
-    public void setMenuPrincipal(MenuPrincipalController main) {
-
-        this.menuPrincipalController = main;
-    }
-} 
+}

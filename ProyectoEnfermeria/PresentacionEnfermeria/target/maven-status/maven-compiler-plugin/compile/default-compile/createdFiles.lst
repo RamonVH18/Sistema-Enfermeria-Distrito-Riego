@@ -6,6 +6,7 @@ clienteApi\ClienteApi.class
 response\EmpleadoOptionResponse.class
 request\CrearCitaRequest.class
 response\UsuarioResponse.class
+response\DatosEmpleadoResponse.class
 controladores\PantallaCitasController.class
 clienteApi\ClienteApi$6.class
 controladores\AgendarCitaController.class

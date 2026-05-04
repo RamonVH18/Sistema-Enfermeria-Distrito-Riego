@@ -25,6 +25,7 @@ import request.CrearCitaRequest;
 import request.IniciarSesionRequest;
 import response.CitaPendienteResponse;
 import response.CrearCitaResponse;
+import response.DatosEmpleadoResponse;
 import response.EmpleadoHistoricoResponse;
 import response.EmpleadoOptionResponse;
 import response.ExpedienteResponse;
@@ -197,6 +198,27 @@ public class ClienteApi {
         });
     }
 
+    public CompletableFuture<List<DatosEmpleadoResponse>> obtenerDatosHistorialEmpleado() {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(BASE_URL + "/expedientes"))
+                .GET()
+                .build();
+        return handleResponse(client.sendAsync(request, HttpResponse.BodyHandlers.ofString()),
+                new TypeReference<List<DatosEmpleadoResponse>>() {
+        });
+    }
+
+    public CompletableFuture<ExpedienteResponse> obtenerExpedientePorEmpleado(Integer idEmpleado) {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(BASE_URL + "/expedientes/empleado/" + idEmpleado))
+                .GET()
+                .build();
+
+        return handleResponse(client.sendAsync(request, HttpResponse.BodyHandlers.ofString()),
+                new TypeReference<ExpedienteResponse>() {
+        });
+    }
+
     private void validarRespuesta(HttpResponse<String> response) {
         if (response.statusCode() >= 400) {
             String mensajeParaUsuario;
@@ -212,27 +234,6 @@ public class ClienteApi {
             throw new RuntimeException(mensajeParaUsuario);
         }
 
-    }
-
-    public CompletableFuture<List<EmpleadoHistoricoResponse>> obtenerPacientesHistorial() {
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(BASE_URL + "/empleados/historial"))
-                .GET()
-                .build();
-        return handleResponse(client.sendAsync(request, HttpResponse.BodyHandlers.ofString()),
-                new TypeReference<List<EmpleadoHistoricoResponse>>() {
-        });
-    }
-
-    public CompletableFuture<ExpedienteResponse> obtenerExpedientePorEmpleado(Long idEmpleado) {
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(BASE_URL + "/expedientes/empleado/" + idEmpleado))
-                .GET()
-                .build();
-
-        return handleResponse(client.sendAsync(request, HttpResponse.BodyHandlers.ofString()),
-                new TypeReference<ExpedienteResponse>() {
-        });
     }
 
 }
