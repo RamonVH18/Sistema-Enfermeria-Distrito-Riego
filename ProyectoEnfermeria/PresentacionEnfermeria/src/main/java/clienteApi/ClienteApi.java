@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package clienteApi;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -15,6 +11,7 @@ import java.net.URLEncoder;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.time.LocalDate;
@@ -26,11 +23,8 @@ import request.IniciarSesionRequest;
 import response.CitaPendienteResponse;
 import response.CrearCitaResponse;
 import response.DatosEmpleadoResponse;
-import response.EmpleadoHistoricoResponse;
 import response.EmpleadoOptionResponse;
-import response.ExpedienteResponse;
 import response.UsuarioResponse;
-import response.ReporteEmpleadosResponse;
 import response.SignosVitalesResponse;
 
 /**
@@ -210,16 +204,15 @@ public class ClienteApi {
         });
     }
 
-    public CompletableFuture<ReporteEmpleadosResponse> obtenerReporte() {
+    public CompletableFuture<byte[]> obtenerReporte() {
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(BASE_URL + "/reportes/empleados"))
+                .uri(URI.create(BASE_URL + "/reportes/salud"))
                 .GET()
                 .build();
-
-        return handleResponse(client.sendAsync(request, HttpResponse.BodyHandlers.ofString()),
-                ReporteEmpleadosResponse.class);
+        CompletableFuture<HttpResponse<byte[]>> response = client.sendAsync(request, HttpResponse.BodyHandlers.ofByteArray());
+        return response.thenApply(HttpResponse::body);
     }
-    
+
     public CompletableFuture<SignosVitalesResponse> obtenerSignosVitalesEmpleado(Integer id) {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(BASE_URL + "/expedientes/signos/" + id))

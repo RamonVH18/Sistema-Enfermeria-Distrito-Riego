@@ -7,6 +7,9 @@ module com.mycompany.presentacionenfermeria {
     requires java.net.http;
     requires com.fasterxml.jackson.databind;
     requires com.fasterxml.jackson.datatype.jsr310; // ESTA ES LA CLAVE
+    requires org.apache.pdfbox;
+    requires javafx.swing;
+    requires java.desktop;
 
     opens com.mycompany.presentacionenfermeria to javafx.fxml;
     exports com.mycompany.presentacionenfermeria;

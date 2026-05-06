@@ -1,10 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
 package controladores;
 
-import com.mycompany.presentacionenfermeria.App;
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
@@ -15,12 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import response.EmpleadoHistoricoResponse;
-import utilerias.ParentAware;
 
 /**
  * FXML Controller class
@@ -43,11 +33,11 @@ public class MenuPrincipalController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
+            
             cargarPantalla("MenuPrincipal", "/vistas/panelPrincipal.fxml");
             cargarPantalla("PantallaCitas", "/vistas/pantallaCitas.fxml");
             cargarPantalla("HistorialPacientes", "/vistas/HistorialPacientes.fxml");
             cargarPantalla("InformesSalud", "/vistas/InformesSalud.fxml");
-
             mostrarPantalla("MenuPrincipal", "/styles/menuprincipal.css");
         } catch (IOException e) {
             System.err.println("Error al cargar el menú principal: " + e.getMessage());
