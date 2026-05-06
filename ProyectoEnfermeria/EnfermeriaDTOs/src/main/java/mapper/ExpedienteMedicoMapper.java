@@ -22,7 +22,8 @@ public class ExpedienteMedicoMapper {
                             e.getEmpleado().getId(),
                             e.getEmpleado().getDepartamento().getNombre(),
                             edad,
-                            e.getTipoSangre().getValor()
+                            e.getTipoSangre().getValor(),
+                            e.getEmpleado().getTelefono()
                     );
                 })
                 .collect(Collectors.toList());

@@ -15,16 +15,18 @@ public class DatosEmpleadoResponse {
     private String nombreDepartamento;
     private int edad;
     private String tipoSangre;
+    private String telefono;
 
     public DatosEmpleadoResponse() {
     }
 
-    public DatosEmpleadoResponse(String nombreEmpleado, int idEmpleado, String nombreDepartamento, int edad, String tipoSangre) {
+    public DatosEmpleadoResponse(String nombreEmpleado, Integer idEmpleado, String nombreDepartamento, int edad, String tipoSangre, String telefono) {
         this.nombreEmpleado = nombreEmpleado;
         this.idEmpleado = idEmpleado;
         this.nombreDepartamento = nombreDepartamento;
         this.edad = edad;
         this.tipoSangre = tipoSangre;
+        this.telefono = telefono;
     }
 
     public String getNombreEmpleado() {
@@ -35,11 +37,11 @@ public class DatosEmpleadoResponse {
         this.nombreEmpleado = nombreEmpleado;
     }
 
-    public int getIdEmpleado() {
+    public Integer getIdEmpleado() {
         return idEmpleado;
     }
 
-    public void setIdEmpleado(int idEmpleado) {
+    public void setIdEmpleado(Integer idEmpleado) {
         this.idEmpleado = idEmpleado;
     }
 
@@ -67,4 +69,13 @@ public class DatosEmpleadoResponse {
         this.tipoSangre = tipoSangre;
     }
 
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+    
+    
 }

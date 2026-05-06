@@ -29,7 +29,7 @@ import response.ExpedienteResponse;
 public class ExpedientePacienteController implements Initializable {
 
     @FXML // Labels de la pantalla principal
-    private Label lblNombre, lblID, lblEdad, lblDepartamento, lblTipoSangre;
+    private Label lblNombre, lblTelefono, lblEdad, lblDepartamento, lblTipoSangre;
     @FXML // Labels de la pantalla de signos vitales
     private Label lblPresion, lblFrecCard, lblTemp, lblPeso, lblAltura, lblSaturacion, lblIMC;
     @FXML
@@ -57,7 +57,7 @@ public class ExpedientePacienteController implements Initializable {
 
     private void cargarDatosExpediente(DatosEmpleadoResponse e) {
         lblNombre.setText(e.getNombreEmpleado());
-        lblID.setText("ID: " + e.getIdEmpleado());
+        lblTelefono.setText("Telefono: " + e.getTelefono());
         lblDepartamento.setText("Departamento: " + e.getNombreDepartamento());
         lblEdad.setText("Edad: " + e.getEdad());
         lblTipoSangre.setText("Tipo de Sangre: " + e.getTipoSangre());

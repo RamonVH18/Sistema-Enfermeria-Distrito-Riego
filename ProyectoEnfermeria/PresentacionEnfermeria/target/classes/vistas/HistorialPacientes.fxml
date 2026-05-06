@@ -21,7 +21,7 @@
     <TableView fx:id="tablaPacientes" VBox.vgrow="ALWAYS" styleClass="patient-table">
         <columns>
             <TableColumn fx:id="colNombre" prefWidth="250.0" text="Paciente" />
-            <TableColumn fx:id="colID" prefWidth="120.0" text="ID Empleado" />
+            <TableColumn fx:id="colTelefono" prefWidth="120.0" text="Telefono" />
             <TableColumn fx:id="colArea" prefWidth="180.0" text="Departamento" />
             <TableColumn fx:id="colEdad" prefWidth="80.0" text="Edad" />
             <TableColumn fx:id="colSangre" prefWidth="120.0" text="Tipo de Sangre" />

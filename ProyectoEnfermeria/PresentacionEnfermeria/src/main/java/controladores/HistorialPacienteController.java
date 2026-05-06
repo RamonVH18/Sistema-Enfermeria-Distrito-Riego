@@ -35,7 +35,7 @@ public class HistorialPacienteController implements Initializable {
     @FXML
     private TableColumn<DatosEmpleadoResponse, String> colNombre, colArea, colSangre;
     @FXML
-    private TableColumn<DatosEmpleadoResponse, Long> colID;
+    private TableColumn<DatosEmpleadoResponse, Long> colTelefono;
     @FXML
     private TableColumn<DatosEmpleadoResponse, Integer> colEdad;
 
@@ -53,7 +53,7 @@ public class HistorialPacienteController implements Initializable {
         colNombre.setCellValueFactory(cellData
                 -> new SimpleStringProperty(cellData.getValue().getNombreEmpleado()));
 
-        colID.setCellValueFactory(new PropertyValueFactory<>("idEmpleado"));
+        colTelefono.setCellValueFactory(new PropertyValueFactory<>("telefono"));
         colArea.setCellValueFactory(new PropertyValueFactory<>("nombreDepartamento"));
         colSangre.setCellValueFactory(new PropertyValueFactory<>("tipoSangre"));
 
