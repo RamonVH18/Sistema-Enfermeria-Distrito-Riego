@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 
 <VBox prefHeight="800.0" prefWidth="900.0" spacing="20.0" styleClass="root" 
-      stylesheets="@HistorialMedico.css" xmlns="http://javafx.com/javafx/17" 
+      stylesheets="@ExpedientePaciente.css" xmlns="http://javafx.com/javafx/17" fx:controller="controladores.ExpedientePacienteController"
       xmlns:fx="http://javafx.com/fxml/1">
     
     <padding>
@@ -23,13 +23,13 @@
     <VBox spacing="15.0" styleClass="section-container">
         <HBox alignment="CENTER_LEFT" spacing="15.0">
             <Label style="-fx-font-size: 30px;" text="👤" />
-            <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Mario Alfredo Jimenez Valencia" />
+            <Label fx:id="lblNombre" style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Mario Alfredo Jimenez Valencia" />
         </HBox>
         <HBox spacing="50.0">
-            <Label text="ID: EMP-4245" />
-            <Label text="Departamento: Manufactura" />
-            <Label text="Edad: 34" />
-            <Label text="Tipo de Sangre: A-" />
+            <Label fx:id="lblID" text="ID: EMP-4245" />
+            <Label fx:id="lblDepartamento" text="Departamento: Manufactura" />
+            <Label fx:id="lblEdad" text="Edad: 34" />
+            <Label fx:id="lblTipoSangre" text="Tipo de Sangre: A-" />
         </HBox>
     </VBox>
 

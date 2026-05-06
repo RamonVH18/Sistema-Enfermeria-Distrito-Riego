@@ -9,7 +9,6 @@ request\CrearCitaRequest.class
 response\UsuarioResponse.class
 response\DatosEmpleadoResponse.class
 controladores\PantallaCitasController.class
-clienteApi\ClienteApi$6.class
 controladores\AgendarCitaController.class
 controladores\IniciarSesionController.class
 response\EmpleadoHistoricoResponse.class
@@ -22,6 +21,7 @@ controladores\InformesSaludController.class
 clienteApi\ClienteApi$3.class
 controladores\DetallesCitaController.class
 module-info.class
+response\SignosVitalesResponse.class
 controladores\ExpedientePacienteController.class
 com\mycompany\presentacionenfermeria\Main.class
 com\mycompany\presentacionenfermeria\SecondaryController.class

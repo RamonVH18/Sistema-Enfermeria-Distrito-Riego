@@ -31,6 +31,7 @@ import response.EmpleadoOptionResponse;
 import response.ExpedienteResponse;
 import response.UsuarioResponse;
 import response.ReporteEmpleadosResponse;
+import response.SignosVitalesResponse;
 
 /**
  *
@@ -209,17 +210,6 @@ public class ClienteApi {
         });
     }
 
-    public CompletableFuture<ExpedienteResponse> obtenerExpedientePorEmpleado(Integer idEmpleado) {
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(BASE_URL + "/expedientes/empleado/" + idEmpleado))
-                .GET()
-                .build();
-
-        return handleResponse(client.sendAsync(request, HttpResponse.BodyHandlers.ofString()),
-                new TypeReference<ExpedienteResponse>() {
-        });
-    }
-
     public CompletableFuture<ReporteEmpleadosResponse> obtenerReporte() {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(BASE_URL + "/reportes/empleados"))
@@ -228,6 +218,15 @@ public class ClienteApi {
 
         return handleResponse(client.sendAsync(request, HttpResponse.BodyHandlers.ofString()),
                 ReporteEmpleadosResponse.class);
+    }
+    
+    public CompletableFuture<SignosVitalesResponse> obtenerSignosVitalesEmpleado(Integer id) {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(BASE_URL + "/expedientes/signos/" + id))
+                .GET()
+                .build();
+        return handleResponse(client.sendAsync(request, HttpResponse.BodyHandlers.ofString()),
+                SignosVitalesResponse.class);
     }
 
     private void validarRespuesta(HttpResponse<String> response) {
