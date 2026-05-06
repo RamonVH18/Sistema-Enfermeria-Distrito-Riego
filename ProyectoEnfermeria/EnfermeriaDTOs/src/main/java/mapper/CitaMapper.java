@@ -62,19 +62,13 @@ public class CitaMapper {
         dto.setMotivo(entity.getMotivo());
         
         Serie serie = entity.getSerie();
-        if (serie != null) {
-            dto.setIdSerie(serie.getId());
-        }
+        if (serie != null) {dto.setIdSerie(serie.getId());}
         
         Empleado empleado = entity.getEmpleado();
-        if (empleado != null) {
-            dto.setIdEmpleado(empleado.getId());
-        }
+        if (empleado != null) {dto.setIdEmpleado(empleado.getId());}
         
         Enfermero enfermero = entity.getEnfermero();
-        if (enfermero != null) {
-            dto.setIdEnfermero(enfermero.getId());
-        }
+        if (enfermero != null) {dto.setIdEnfermero(enfermero.getId());}
         
         return dto;
     }

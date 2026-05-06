@@ -75,15 +75,4 @@ public class Serie {
     public LocalTime getHora() {return hora;}
 
     public void setHora(LocalTime hora) {this.hora = hora;}
-
-    @Override
-    public String toString() {
-        return "Serie{"
-                + "id=" + idSerie
-                + ", periodo=" + periodo
-                + ", fechaInicio=" + fechaInicio
-                + ", fechaFin=" + fechaFin
-                + ", hora=" + hora
-                + '}';
-    }
 }

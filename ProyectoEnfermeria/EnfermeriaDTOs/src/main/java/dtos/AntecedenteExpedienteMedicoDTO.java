@@ -6,12 +6,9 @@ package dtos;
  */
 public class AntecedenteExpedienteMedicoDTO {
     
-    private Long id;
-    
-    private String especificacion;
-    
-    private AntecedenteDTO antecedente;
-    
+    private Long id;    
+    private String especificacion;    
+    private AntecedenteDTO antecedente;    
     private ExpedienteMedicoDTO expedienteMedico;
 
     public AntecedenteExpedienteMedicoDTO() {}

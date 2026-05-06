@@ -6,8 +6,7 @@ package dtos;
  */
 public class DetalleExtraDTO {
     
-    private Integer id;
-    
+    private Integer id;    
     private String detalle;
 
     public DetalleExtraDTO() {}

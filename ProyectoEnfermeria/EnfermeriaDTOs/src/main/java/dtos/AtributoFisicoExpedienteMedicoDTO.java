@@ -6,10 +6,8 @@ package dtos;
  */
 public class AtributoFisicoExpedienteMedicoDTO {
     
-    private Integer id;
-    
-    private String especificacion;
-    
+    private Integer id;    
+    private String especificacion;    
     private String nota;
     
     private AtributoFisicoDTO atributoFisico;

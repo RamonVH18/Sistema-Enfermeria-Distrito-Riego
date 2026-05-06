@@ -6,37 +6,31 @@ import java.time.LocalDate;
  *
  * @author Leonardo Flores Leyva
  */
-public class RegistroMedicoDTO {
-    
-    private Integer id;
-    
-    private String notas;
+public class ReporteRegistroDTO {
 
-    private LocalDate fechaCreacion;
-
+    private String nombre;
+    private String departamento;
+    private String sexo;
+    private Integer edad;
+    private Integer nss;
+    private LocalDate fechaRegistro;
     private Float altura;
-
     private Float peso;
-
     private Float presionSistolica;
-
     private Float presionDiatolica;
-
     private Float glucosa;
-
     private Float oxigenacion;
-
     private Float frecuenciaCardiaca;
-
     private Float temperatura;
 
-    private ExpedienteMedicoDTO expedienteMedico;
-    
-    public RegistroMedicoDTO() {}
+    public ReporteRegistroDTO() {}
 
-    public RegistroMedicoDTO(
-            String notas, 
-            LocalDate fechaCreacion, 
+    public ReporteRegistroDTO(
+            String departamento, 
+            String sexo, 
+            Integer edad, 
+            Integer nss, 
+            LocalDate fechaRegistro, 
             Float altura, 
             Float peso, 
             Float presionSistolica, 
@@ -44,11 +38,13 @@ public class RegistroMedicoDTO {
             Float glucosa, 
             Float oxigenacion, 
             Float frecuenciaCardiaca, 
-            Float temperatura, 
-            ExpedienteMedicoDTO expedienteMedico
+            Float temperatura
     ) {
-        this.notas = notas;
-        this.fechaCreacion = fechaCreacion;
+        this.departamento = departamento;
+        this.sexo = sexo;
+        this.edad = edad;
+        this.nss = nss;
+        this.fechaRegistro = fechaRegistro;
         this.altura = altura;
         this.peso = peso;
         this.presionSistolica = presionSistolica;
@@ -57,13 +53,15 @@ public class RegistroMedicoDTO {
         this.oxigenacion = oxigenacion;
         this.frecuenciaCardiaca = frecuenciaCardiaca;
         this.temperatura = temperatura;
-        this.expedienteMedico = expedienteMedico;
     }
 
-    public RegistroMedicoDTO(
-            Integer id, 
-            String notas, 
-            LocalDate fechaCreacion, 
+    public ReporteRegistroDTO(
+            String nombre, 
+            String departamento, 
+            String sexo, 
+            Integer edad, 
+            Integer nss, 
+            LocalDate fechaRegistro, 
             Float altura, 
             Float peso, 
             Float presionSistolica, 
@@ -71,12 +69,14 @@ public class RegistroMedicoDTO {
             Float glucosa, 
             Float oxigenacion, 
             Float frecuenciaCardiaca, 
-            Float temperatura, 
-            ExpedienteMedicoDTO expedienteMedico
+            Float temperatura
     ) {
-        this.id = id;
-        this.notas = notas;
-        this.fechaCreacion = fechaCreacion;
+        this.nombre = nombre;
+        this.departamento = departamento;
+        this.sexo = sexo;
+        this.edad = edad;
+        this.nss = nss;
+        this.fechaRegistro = fechaRegistro;
         this.altura = altura;
         this.peso = peso;
         this.presionSistolica = presionSistolica;
@@ -85,14 +85,19 @@ public class RegistroMedicoDTO {
         this.oxigenacion = oxigenacion;
         this.frecuenciaCardiaca = frecuenciaCardiaca;
         this.temperatura = temperatura;
-        this.expedienteMedico = expedienteMedico;
     }
-    
-    public Integer getId() {return id;}
 
-    public String getNotas() {return notas;}
+    public String getNombre() {return nombre;}
 
-    public LocalDate getFechaCreacion() {return fechaCreacion;}
+    public String getDepartamento() {return departamento;}
+
+    public String getSexo() {return sexo;}
+
+    public Integer getEdad() {return edad;}
+
+    public Integer getNss() {return nss;}
+
+    public LocalDate getFechaRegistro() {return fechaRegistro;}
 
     public Float getAltura() {return altura;}
 
@@ -110,13 +115,17 @@ public class RegistroMedicoDTO {
 
     public Float getTemperatura() {return temperatura;}
 
-    public ExpedienteMedicoDTO getExpedienteMedico() {return expedienteMedico;}
+    public void setNombre(String nombre) {this.nombre = nombre;}
 
-    public void setId(Integer id) {this.id = id;}
+    public void setDepartamento(String departamento) {this.departamento = departamento;}
 
-    public void setNotas(String notas) {this.notas = notas;}
+    public void setSexo(String sexo) {this.sexo = sexo;}
 
-    public void setFechaCreacion(LocalDate fechaCreacion) {this.fechaCreacion = fechaCreacion;}
+    public void setEdad(Integer edad) {this.edad = edad;}
+
+    public void setNss(Integer nss) {this.nss = nss;}
+
+    public void setFechaRegistro(LocalDate fechaRegistro) {this.fechaRegistro = fechaRegistro;}
 
     public void setAltura(Float altura) {this.altura = altura;}
 
@@ -133,6 +142,4 @@ public class RegistroMedicoDTO {
     public void setFrecuenciaCardiaca(Float frecuenciaCardiaca) {this.frecuenciaCardiaca = frecuenciaCardiaca;}
 
     public void setTemperatura(Float temperatura) {this.temperatura = temperatura;}
-
-    public void setExpedienteMedico(ExpedienteMedicoDTO expedienteMedico) {this.expedienteMedico = expedienteMedico;}
 }

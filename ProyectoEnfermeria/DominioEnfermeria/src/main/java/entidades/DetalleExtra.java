@@ -33,8 +33,7 @@ public class DetalleExtra implements Serializable {
     @JoinColumn(name = "id_expediente", nullable = false)
     private ExpedienteMedico expedienteMedico;
 
-    public DetalleExtra() {
-    }
+    public DetalleExtra() {}
 
     public DetalleExtra(
             String valor,
@@ -58,33 +57,19 @@ public class DetalleExtra implements Serializable {
         this.expedienteMedico = expedienteMedico;
     }
 
-    public Integer getId() {
-        return id;
-    }
+    public Integer getId() {return id;}
 
-    public String getValor() {
-        return valor;
-    }
+    public String getValor() {return valor;}
 
-    public Detalle getDetalle() {
-        return detalle;
-    }
+    public Detalle getDetalle() {return detalle;}
 
-    public ExpedienteMedico getExpedienteMedico() {
-        return expedienteMedico;
-    }
+    public ExpedienteMedico getExpedienteMedico() {return expedienteMedico;}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    public void setId(Integer id) {this.id = id;}
 
-    public void setValor(String valor) {
-        this.valor = valor;
-    }
+    public void setValor(String valor) {this.valor = valor;}
 
-    public void setDetalle(Detalle detalle) {
-        this.detalle = detalle;
-    }
+    public void setDetalle(Detalle detalle) {this.detalle = detalle;}
 
     public void setExpedienteMedico(ExpedienteMedico expedienteMedico) {
         this.expedienteMedico = expedienteMedico;

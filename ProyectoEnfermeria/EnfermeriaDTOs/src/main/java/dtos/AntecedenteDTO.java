@@ -6,10 +6,8 @@ package dtos;
  */
 public class AntecedenteDTO {
     
-    private Integer id;
-    
-    private String antecedente;
-    
+    private Integer id;    
+    private String antecedente;    
     private String tipo;
 
     public AntecedenteDTO() {}

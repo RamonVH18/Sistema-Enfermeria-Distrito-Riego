@@ -91,16 +91,4 @@ public class DireccionEmpleado {
     public String getCiudad() {return ciudad;}
 
     public void setCiudad(String ciudad) {this.ciudad = ciudad;}
-
-    @Override
-    public String toString() {
-        return "DireccionEmpleado{"
-                + "id=" + idDireccion
-                + ", numero=" + numero
-                + ", calle=" + calle
-                + ", municipio=" + municipio
-                + ", cp=" + cp
-                + ", ciudad=" + ciudad
-                + '}';
-    }
 }

@@ -9,18 +9,12 @@ import java.util.Set;
  */
 public class ExpedienteMedicoDTO {
     
-    private Integer id;
-    
-    private TipoSangre tipoSangre;
-    
-    private Integer numeroSeguridadSocial;
-    
-    private Integer idEmpleado;
-    
-    private Set<AntecedenteExpedienteMedicoDTO> antecedentes;
-    
-    private Set<AtributoFisicoExpedienteMedicoDTO> atributosFisicos;
-    
+    private Integer id;    
+    private TipoSangre tipoSangre;    
+    private Integer numeroSeguridadSocial;    
+    private Integer idEmpleado;    
+    private Set<AntecedenteExpedienteMedicoDTO> antecedentes;    
+    private Set<AtributoFisicoExpedienteMedicoDTO> atributosFisicos;    
     private Set<DetalleExtraExpedienteMedicoDTO> detallesExtra;
 
     public ExpedienteMedicoDTO() {}

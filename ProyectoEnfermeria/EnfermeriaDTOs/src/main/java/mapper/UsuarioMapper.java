@@ -15,10 +15,10 @@ public class UsuarioMapper {
         Empleado e = u.getEmpleado();
 
         return new UsuarioResponse(
-                        e.getNombres()
-                                + " " + e.getApellidoPaterno()
-                                + " " + e.getApellidoMaterno(),
-                        u.getEmail()
+                e.getNombres()
+                + " " + e.getApellidoPaterno()
+                + " " + e.getApellidoMaterno(),
+                u.getEmail()
         );
     }
 

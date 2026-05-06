@@ -57,10 +57,22 @@ public class RegistroMedico implements Serializable {
     private ExpedienteMedico expedienteMedico;
 
     // Pendiente el resto de atributos y métodos...
-    public RegistroMedico() {
-    }
+    public RegistroMedico() {}
 
-    public RegistroMedico(Integer id, String notas, LocalDate fechaCreacion, Float altura, Float peso, Float presionSistolica, Float presionDiatolica, Float glucosa, Float oxigenacion, Float frecuenciaCardiaca, Float temperatura, ExpedienteMedico expedienteMedico) {
+    public RegistroMedico(
+            Integer id, 
+            String notas, 
+            LocalDate fechaCreacion, 
+            Float altura, 
+            Float peso, 
+            Float presionSistolica, 
+            Float presionDiatolica, 
+            Float glucosa, 
+            Float oxigenacion, 
+            Float frecuenciaCardiaca, 
+            Float temperatura, 
+            ExpedienteMedico expedienteMedico
+    ) {
         this.id = id;
         this.notas = notas;
         this.fechaCreacion = fechaCreacion;
@@ -75,103 +87,51 @@ public class RegistroMedico implements Serializable {
         this.expedienteMedico = expedienteMedico;
     }
     
-    
+    public Integer getId() {return id;}
 
-    public Integer getId() {
-        return id;
-    }
+    public void setId(Integer id) {this.id = id;}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    public String getNotas() {return notas;}
 
-    public String getNotas() {
-        return notas;
-    }
+    public void setNotas(String notas) {this.notas = notas;}
 
-    public void setNotas(String notas) {
-        this.notas = notas;
-    }
+    public LocalDate getFechaCreacion() {return fechaCreacion;}
 
-    public LocalDate getFechaCreacion() {
-        return fechaCreacion;
-    }
+    public void setFechaCreacion(LocalDate fechaCreacion) {this.fechaCreacion = fechaCreacion;}
 
-    public void setFechaCreacion(LocalDate fechaCreacion) {
-        this.fechaCreacion = fechaCreacion;
-    }
+    public Float getAltura() {return altura;}
 
-    public Float getAltura() {
-        return altura;
-    }
+    public void setAltura(Float altura) {this.altura = altura;}
 
-    public void setAltura(Float altura) {
-        this.altura = altura;
-    }
+    public Float getPeso() {return peso;}
 
-    public Float getPeso() {
-        return peso;
-    }
+    public void setPeso(Float peso) {this.peso = peso;}
 
-    public void setPeso(Float peso) {
-        this.peso = peso;
-    }
+    public Float getPresionSistolica() {return presionSistolica;}
 
-    public Float getPresionSistolica() {
-        return presionSistolica;
-    }
+    public void setPresionSistolica(Float presionSistolica) {this.presionSistolica = presionSistolica;}
 
-    public void setPresionSistolica(Float presionSistolica) {
-        this.presionSistolica = presionSistolica;
-    }
+    public Float getPresionDiatolica() {return presionDiatolica;}
 
-    public Float getPresionDiatolica() {
-        return presionDiatolica;
-    }
+    public void setPresionDiatolica(Float presionDiatolica) {this.presionDiatolica = presionDiatolica;}
 
-    public void setPresionDiatolica(Float presionDiatolica) {
-        this.presionDiatolica = presionDiatolica;
-    }
+    public Float getGlucosa() {return glucosa;}
 
-    public Float getGlucosa() {
-        return glucosa;
-    }
+    public void setGlucosa(Float glucosa) {this.glucosa = glucosa;}
 
-    public void setGlucosa(Float glucosa) {
-        this.glucosa = glucosa;
-    }
+    public Float getOxigenacion() {return oxigenacion;}
 
-    public Float getOxigenacion() {
-        return oxigenacion;
-    }
+    public void setOxigenacion(Float oxigenacion) {this.oxigenacion = oxigenacion;}
 
-    public void setOxigenacion(Float oxigenacion) {
-        this.oxigenacion = oxigenacion;
-    }
+    public Float getFrecuenciaCardiaca() {return frecuenciaCardiaca;}
 
-    public Float getFrecuenciaCardiaca() {
-        return frecuenciaCardiaca;
-    }
+    public void setFrecuenciaCardiaca(Float frecuenciaCardiaca) {this.frecuenciaCardiaca = frecuenciaCardiaca;}
 
-    public void setFrecuenciaCardiaca(Float frecuenciaCardiaca) {
-        this.frecuenciaCardiaca = frecuenciaCardiaca;
-    }
+    public Float getTemperatura() {return temperatura;}
 
-    public Float getTemperatura() {
-        return temperatura;
-    }
+    public void setTemperatura(Float temperatura) {this.temperatura = temperatura;}
 
-    public void setTemperatura(Float temperatura) {
-        this.temperatura = temperatura;
-    }
+    public ExpedienteMedico getExpedienteMedico() {return expedienteMedico;}
 
-    public ExpedienteMedico getExpedienteMedico() {
-        return expedienteMedico;
-    }
-
-    public void setExpedienteMedico(ExpedienteMedico expedienteMedico) {
-        this.expedienteMedico = expedienteMedico;
-    }
-    
-    
+    public void setExpedienteMedico(ExpedienteMedico expedienteMedico) {this.expedienteMedico = expedienteMedico;}   
 }

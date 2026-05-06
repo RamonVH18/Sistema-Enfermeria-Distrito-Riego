@@ -27,8 +27,7 @@ public class Detalle implements Serializable {
     @OneToMany(mappedBy = "detalle")
     private Set<DetalleExtra> expedientes;
 
-    public Detalle() {
-    }
+    public Detalle() {}
 
     public Detalle(String nombreDetalle, Set<DetalleExtra> expedientes) {
         this.nombreDetalle = nombreDetalle;
@@ -45,27 +44,15 @@ public class Detalle implements Serializable {
         this.expedientes = expedientes;
     }
 
-    public Integer getId() {
-        return id;
-    }
+    public Integer getId() {return id;}
 
-    public String getNombreDetalle() {
-        return nombreDetalle;
-    }
+    public String getNombreDetalle() {return nombreDetalle;}
 
-    public Set<DetalleExtra> getDetalles() {
-        return expedientes;
-    }
+    public Set<DetalleExtra> getDetalles() {return expedientes;}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    public void setId(Integer id) {this.id = id;}
 
-    public void setNombreDetalle(String detalle) {
-        this.nombreDetalle = detalle;
-    }
+    public void setNombreDetalle(String detalle) {this.nombreDetalle = detalle;}
 
-    public void setDetalles(Set<DetalleExtra> expedientes) {
-        this.expedientes = expedientes;
-    }
+    public void setDetalles(Set<DetalleExtra> expedientes) {this.expedientes = expedientes;}
 }

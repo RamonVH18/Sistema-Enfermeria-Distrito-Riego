@@ -79,45 +79,27 @@ public class ExpedienteMedico {
         this.registrosMedicos = registrosMedicos;
     }
 
-    public Integer getId() {
-        return id;
-    }
+    public Integer getId() {return id;}
 
-    public TipoSangre getTipoSangre() {
-        return tipoSangre;
-    }
+    public TipoSangre getTipoSangre() {return tipoSangre;}
 
-    public Integer getNumeroSeguridadSocial() {
-        return numeroSeguridadSocial;
-    }
+    public Integer getNumeroSeguridadSocial() {return numeroSeguridadSocial;}
 
-    public Empleado getEmpleado() {
-        return empleado;
-    }
+    public Empleado getEmpleado() {return empleado;}
 
-    public Set<DetalleExtra> getDetallesExtra() {
-        return detallesExtra;
-    }
+    public Set<DetalleExtra> getDetallesExtra() {return detallesExtra;}
 
-    public List<RegistroMedico> getRegistrosMedicos() {
-        return registrosMedicos;
-    }
+    public List<RegistroMedico> getRegistrosMedicos() {return registrosMedicos;}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    public void setId(Integer id) {this.id = id;}
 
-    public void setTipoSangre(TipoSangre tipoSangre) {
-        this.tipoSangre = tipoSangre;
-    }
+    public void setTipoSangre(TipoSangre tipoSangre) {this.tipoSangre = tipoSangre;}
 
     public void setNumeroSeguridadSocial(Integer numeroSeguridadSocial) {
         this.numeroSeguridadSocial = numeroSeguridadSocial;
     }
 
-    public void setEmpleado(Empleado empleado) {
-        this.empleado = empleado;
-    }
+    public void setEmpleado(Empleado empleado) {this.empleado = empleado;}
 
     public void setDetallesExtra(Set<DetalleExtra> detallesExtra) {
         this.detallesExtra = detallesExtra;

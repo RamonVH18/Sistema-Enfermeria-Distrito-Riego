@@ -7,11 +7,8 @@ package dtos;
 public class DetalleExtraExpedienteMedicoDTO {
     
     private Integer id;
-
-    private String valor;
-    
-    private DetalleExtraDTO detalleExtra;
-    
+    private String valor;    
+    private DetalleExtraDTO detalleExtra;    
     private ExpedienteMedicoDTO expedienteMedico;
 
     public DetalleExtraExpedienteMedicoDTO() {}

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package response;
 
 /**
@@ -13,21 +9,21 @@ public class DepartamentoResponse {
     private String nombre;
     private Integer idJefeDepartamento;
 
-    // Getters y Setters
-    public String getNombre() {
-        return nombre;
-    }
+    public DepartamentoResponse() {}
 
-    public void setNombre(String nombre) {
+    public DepartamentoResponse(String nombre, Integer idJefeDepartamento) {
         this.nombre = nombre;
+        this.idJefeDepartamento = idJefeDepartamento;
     }
 
-    public Integer getIdJefeDepartamento() {
-        return idJefeDepartamento;
-    }
+    // Getters y Setters
+    public String getNombre() {return nombre;}
+
+    public void setNombre(String nombre) {this.nombre = nombre;}
+
+    public Integer getIdJefeDepartamento() {return idJefeDepartamento;}
 
     public void setIdJefeDepartamento(Integer idJefeDepartamento) {
         this.idJefeDepartamento = idJefeDepartamento;
     }
-
 }

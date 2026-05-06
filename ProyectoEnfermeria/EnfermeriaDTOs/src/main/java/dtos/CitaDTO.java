@@ -20,8 +20,7 @@ public class CitaDTO {
     private Integer idEmpleado;
     private Integer idEnfermero;
 
-    public CitaDTO() {
-    }
+    public CitaDTO() {}
 
     // Constructor completo para mapeos desde la Entidad
     public CitaDTO(
@@ -43,73 +42,31 @@ public class CitaDTO {
     }
 
     // Getters y Setters
-    public Integer getIdCita() {
-        return idCita;
-    }
+    public Integer getIdCita() {return idCita;}
 
-    public void setIdCita(Integer idCita) {
-        this.idCita = idCita;
-    }
+    public void setIdCita(Integer idCita) {this.idCita = idCita;}
 
-    public LocalDateTime getFechaHora() {
-        return fechaHora;
-    }
+    public LocalDateTime getFechaHora() {return fechaHora;}
 
-    public void setFechaHora(LocalDateTime fechaHora) {
-        this.fechaHora = fechaHora;
-    }
+    public void setFechaHora(LocalDateTime fechaHora) {this.fechaHora = fechaHora;}
 
-    public EstadoCita getEstado() {
-        return estado;
-    }
+    public EstadoCita getEstado() {return estado;}
 
-    public void setEstado(EstadoCita estado) {
-        this.estado = estado;
-    }
+    public void setEstado(EstadoCita estado) {this.estado = estado;}
 
-    public String getMotivo() {
-        return motivo;
-    }
+    public String getMotivo() {return motivo;}
 
-    public void setMotivo(String motivo) {
-        this.motivo = motivo;
-    }
+    public void setMotivo(String motivo) {this.motivo = motivo;}
 
-    public Integer getIdSerie() {
-        return idSerie;
-    }
+    public Integer getIdSerie() {return idSerie;}
 
-    public void setIdSerie(Integer idSerie) {
-        this.idSerie = idSerie;
-    }
+    public void setIdSerie(Integer idSerie) {this.idSerie = idSerie;}
 
-    public Integer getIdEmpleado() {
-        return idEmpleado;
-    }
+    public Integer getIdEmpleado() {return idEmpleado;}
 
-    public void setIdEmpleado(Integer idEmpleado) {
-        this.idEmpleado = idEmpleado;
-    }
+    public void setIdEmpleado(Integer idEmpleado) {this.idEmpleado = idEmpleado;}
 
-    public Integer getIdEnfermero() {
-        return idEnfermero;
-    }
+    public Integer getIdEnfermero() {return idEnfermero;}
 
-    public void setIdEnfermero(Integer idEnfermero) {
-        this.idEnfermero = idEnfermero;
-    }
-
-    @Override
-    public String toString() {
-        return "CitaDTO{"
-                + "idCita=" + idCita
-                + ", fechaHora=" + fechaHora
-                + ", estado=" + estado
-                + ", motivo='" + motivo + '\''
-                + ", idSerie=" + idSerie
-                + ", idEmpleado=" + idEmpleado
-                + ", idEnfermero=" + idEnfermero
-                + '}';
-    }
-
+    public void setIdEnfermero(Integer idEnfermero) {this.idEnfermero = idEnfermero;}
 }
