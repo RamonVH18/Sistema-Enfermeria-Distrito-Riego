@@ -37,8 +37,8 @@ public class RegistroMedico implements Serializable {
     @Column(name = "presion_sistolica", nullable = false)
     private Float presionSistolica;
 
-    @Column(name = "presion_diatolica", nullable = false)
-    private Float presionDiatolica;
+    @Column(name = "presion_diastolica", nullable = false)
+    private Float presionDiastolica;
 
     @Column(nullable = false)
     private Float glucosa;
@@ -66,7 +66,7 @@ public class RegistroMedico implements Serializable {
             Float altura, 
             Float peso, 
             Float presionSistolica, 
-            Float presionDiatolica, 
+            Float presionDiastolica, 
             Float glucosa, 
             Float oxigenacion, 
             Float frecuenciaCardiaca, 
@@ -79,7 +79,7 @@ public class RegistroMedico implements Serializable {
         this.altura = altura;
         this.peso = peso;
         this.presionSistolica = presionSistolica;
-        this.presionDiatolica = presionDiatolica;
+        this.presionDiastolica = presionDiastolica;
         this.glucosa = glucosa;
         this.oxigenacion = oxigenacion;
         this.frecuenciaCardiaca = frecuenciaCardiaca;
@@ -111,9 +111,9 @@ public class RegistroMedico implements Serializable {
 
     public void setPresionSistolica(Float presionSistolica) {this.presionSistolica = presionSistolica;}
 
-    public Float getPresionDiatolica() {return presionDiatolica;}
+    public Float getPresionDiatolica() {return presionDiastolica;}
 
-    public void setPresionDiatolica(Float presionDiatolica) {this.presionDiatolica = presionDiatolica;}
+    public void setPresionDiatolica(Float presionDiastolica) {this.presionDiastolica = presionDiastolica;}
 
     public Float getGlucosa() {return glucosa;}
 

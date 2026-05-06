@@ -8,28 +8,17 @@ import java.time.LocalDate;
  */
 public class RegistroMedicoDTO {
     
-    private Integer id;
-    
+    private Integer id;    
     private String notas;
-
     private LocalDate fechaCreacion;
-
     private Float altura;
-
     private Float peso;
-
     private Float presionSistolica;
-
-    private Float presionDiatolica;
-
+    private Float presionDiastolica;
     private Float glucosa;
-
     private Float oxigenacion;
-
     private Float frecuenciaCardiaca;
-
     private Float temperatura;
-
     private ExpedienteMedicoDTO expedienteMedico;
     
     public RegistroMedicoDTO() {}
@@ -40,7 +29,7 @@ public class RegistroMedicoDTO {
             Float altura, 
             Float peso, 
             Float presionSistolica, 
-            Float presionDiatolica, 
+            Float presionDiastolica, 
             Float glucosa, 
             Float oxigenacion, 
             Float frecuenciaCardiaca, 
@@ -52,7 +41,7 @@ public class RegistroMedicoDTO {
         this.altura = altura;
         this.peso = peso;
         this.presionSistolica = presionSistolica;
-        this.presionDiatolica = presionDiatolica;
+        this.presionDiastolica = presionDiastolica;
         this.glucosa = glucosa;
         this.oxigenacion = oxigenacion;
         this.frecuenciaCardiaca = frecuenciaCardiaca;
@@ -67,7 +56,7 @@ public class RegistroMedicoDTO {
             Float altura, 
             Float peso, 
             Float presionSistolica, 
-            Float presionDiatolica, 
+            Float presionDiastolica, 
             Float glucosa, 
             Float oxigenacion, 
             Float frecuenciaCardiaca, 
@@ -80,7 +69,7 @@ public class RegistroMedicoDTO {
         this.altura = altura;
         this.peso = peso;
         this.presionSistolica = presionSistolica;
-        this.presionDiatolica = presionDiatolica;
+        this.presionDiastolica = presionDiastolica;
         this.glucosa = glucosa;
         this.oxigenacion = oxigenacion;
         this.frecuenciaCardiaca = frecuenciaCardiaca;
@@ -100,7 +89,7 @@ public class RegistroMedicoDTO {
 
     public Float getPresionSistolica() {return presionSistolica;}
 
-    public Float getPresionDiatolica() {return presionDiatolica;}
+    public Float getPresionDiatolica() {return presionDiastolica;}
 
     public Float getGlucosa() {return glucosa;}
 
@@ -124,7 +113,7 @@ public class RegistroMedicoDTO {
 
     public void setPresionSistolica(Float presionSistolica) {this.presionSistolica = presionSistolica;}
 
-    public void setPresionDiatolica(Float presionDiatolica) {this.presionDiatolica = presionDiatolica;}
+    public void setPresionDiatolica(Float presionDiastolica) {this.presionDiastolica = presionDiastolica;}
 
     public void setGlucosa(Float glucosa) {this.glucosa = glucosa;}
 

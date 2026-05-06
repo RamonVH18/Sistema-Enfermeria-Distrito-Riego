@@ -1,8 +1,8 @@
 package pruebasUnitarias;
 
-import DAOs.CitaRepository;
-import DAOs.EmpleadoRepository;
-import DAOs.EnfermeroRepository;
+import repositorios.CitaRepository;
+import repositorios.EmpleadoRepository;
+import repositorios.EnfermeroRepository;
 import entidades.Cita;
 import entidades.Departamento;
 import entidades.DireccionEmpleado;

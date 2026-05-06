@@ -14,17 +14,15 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
             "controllers",
             "interfaces",
             "servicios",
-            "DAOs"
+            "repositorios"
         })
-@EnableJpaRepositories(basePackages = "DAOs") // El paquete de tu CitaRepository
-@EntityScan(basePackages = "entidades") // El paquete donde están tus @Entity
+@EnableJpaRepositories(basePackages = "repositorios")
+@EntityScan(basePackages = "entidades")
 public class ApiEnfermeriaApplication {
-
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         SpringApplication.run(ApiEnfermeriaApplication.class, args);
     }
-
 }

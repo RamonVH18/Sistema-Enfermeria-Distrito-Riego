@@ -1,10 +1,9 @@
-package DAOs;
+package repositorios;
 
 import entidades.DetalleExtra;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
 /**
  *

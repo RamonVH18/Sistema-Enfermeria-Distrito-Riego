@@ -1,6 +1,7 @@
 package entidades;
 
 import enums.EstadoEmpleado;
+import enums.Genero;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -51,8 +52,9 @@ public class Empleado {
     @Column(name = "unidad_trabajo", nullable = false)
     private String unidadTrabajo;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "genero", nullable = false)
-    private String genero;
+    private Genero genero;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "estado", nullable = false)
@@ -79,7 +81,7 @@ public class Empleado {
             String telefono,
             String curp,
             String unidadTrabajo,
-            String genero,
+            Genero genero,
             EstadoEmpleado estado,
             Departamento departamento,
             DireccionEmpleado direccion,
@@ -107,7 +109,7 @@ public class Empleado {
             LocalDate fechaNacimiento,
             String telefono, String curp,
             String unidadTrabajo,
-            String genero,
+            Genero genero,
             EstadoEmpleado estado,
             Departamento departamento,
             DireccionEmpleado direccion
@@ -158,9 +160,9 @@ public class Empleado {
 
     public void setUnidadTrabajo(String unidadTrabajo) {this.unidadTrabajo = unidadTrabajo;}
 
-    public String getGenero() {return genero;}
+    public Genero getGenero() {return genero;}
 
-    public void setGenero(String genero) {this.genero = genero;}
+    public void setGenero(Genero genero) {this.genero = genero;}
 
     public EstadoEmpleado getEstado() {return estado;}
 

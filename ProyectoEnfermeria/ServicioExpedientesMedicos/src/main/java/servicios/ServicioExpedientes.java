@@ -1,23 +1,22 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package servicios;
 
-import DAOs.DetalleExtraRepository;
-import DAOs.ExpedienteMedicoRepository;
-import DAOs.RegistroMedicoRepository;
+import repositorios.DetalleExtraRepository;
+import repositorios.ExpedienteMedicoRepository;
+import repositorios.RegistroMedicoRepository;
+import dtos.ReporteRegistroDTO;
 import entidades.DetalleExtra;
 import entidades.ExpedienteMedico;
 import entidades.RegistroMedico;
-import exceptions.ExpedientesException;
+import excepciones.ExpedientesException;
 import interfaces.IServicioExpedientes;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import mapper.DetalleExtraMapper;
 import mapper.ExpedienteMedicoMapper;
 import mapper.RegistroMedicoMapper;
+import mapper.ReporteRegistroMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import response.DatosEmpleadoResponse;
@@ -37,7 +36,11 @@ public class ServicioExpedientes implements IServicioExpedientes{
     
     private final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy : HH:mm:ss");
 
-    public ServicioExpedientes(ExpedienteMedicoRepository expedientesRepository, RegistroMedicoRepository registroMedicoRepository, DetalleExtraRepository detalleExtraRepository){
+    public ServicioExpedientes(
+            ExpedienteMedicoRepository expedientesRepository, 
+            RegistroMedicoRepository registroMedicoRepository, 
+            DetalleExtraRepository detalleExtraRepository
+    ){
         this.expedientesRepository = expedientesRepository;
         this.registroMedicoRepository = registroMedicoRepository;
         this.detalleExtraRepository = detalleExtraRepository;
@@ -62,11 +65,24 @@ public class ServicioExpedientes implements IServicioExpedientes{
         return RegistroMedicoMapper.toSignosVitalesResponse(registro);
     }
     
+    @Override
     public Map<String, List<DetalleResponse>> obtenerDetallesEmpleado(Integer idExpediente) {
         List<DetalleExtra> detalles = detalleExtraRepository.findByExpediente(idExpediente);
         if (detalles.isEmpty()) {
             throw new ExpedientesException("No se encontraron detalles medicos.", HttpStatus.BAD_REQUEST, "400");
         } 
         return DetalleExtraMapper.toDetalleResponseMap(detalles);
+    }
+    
+    @Override
+    public List<ReporteRegistroDTO> obtenerUltimoRegistroPacientes(){
+        // Lista a devolver
+        List<ReporteRegistroDTO> registrosMedicosDTO = new ArrayList<>();
+        // Consulta del último registro médico de cada empleado
+        List<RegistroMedico> registrosMedicos = registroMedicoRepository.findAllLastRecordEach();
+        // Cada registro se mapea a su dto y se agrega a la lista
+        registrosMedicos.stream().forEach(r -> {registrosMedicosDTO.add(ReporteRegistroMapper.toDTO(r));});
+        // Se regresa la lista de registros médicos
+        return registrosMedicosDTO;
     }
 }

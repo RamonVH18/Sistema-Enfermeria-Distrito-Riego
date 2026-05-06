@@ -51,7 +51,7 @@ public class EmpleadoMapper {
         dto.setApellidoPaterno(entidad.getApellidoPaterno());
         dto.setApellidoMaterno(entidad.getApellidoMaterno());
         dto.setFechaNacimiento(entidad.getFechaNacimiento());
-        dto.setGenero(entidad.getGenero());
+        dto.setGenero(entidad.getGenero().toString());
 
         // Mapeo del Departamento usando el mapper anterior
         dto.setDepartamento(DepartamentoMapper.toDTO(entidad.getDepartamento()));

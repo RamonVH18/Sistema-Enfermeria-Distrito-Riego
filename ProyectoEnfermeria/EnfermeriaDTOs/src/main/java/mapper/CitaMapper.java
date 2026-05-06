@@ -5,7 +5,6 @@ import request.CrearCitaRequest;
 import entidades.Cita;
 import entidades.Empleado;
 import entidades.Enfermero;
-import entidades.Serie;
 import java.util.ArrayList;
 import java.util.List;
 import response.CitaPendienteResponse;
@@ -39,10 +38,6 @@ public class CitaMapper {
         entity.setEstado(dto.getEstado());
         entity.setMotivo(dto.getMotivo());
         
-        Serie serie = new Serie();
-        serie.setId(dto.getIdSerie());
-        entity.setSerie(serie);
-        
         Empleado empleado = new Empleado();
         empleado.setId(dto.getIdEmpleado());
         entity.setEmpleado(empleado);
@@ -60,9 +55,6 @@ public class CitaMapper {
         dto.setFechaHora(entity.getFechaHora());
         dto.setEstado(entity.getEstado());
         dto.setMotivo(entity.getMotivo());
-        
-        Serie serie = entity.getSerie();
-        if (serie != null) {dto.setIdSerie(serie.getId());}
         
         Empleado empleado = entity.getEmpleado();
         if (empleado != null) {dto.setIdEmpleado(empleado.getId());}

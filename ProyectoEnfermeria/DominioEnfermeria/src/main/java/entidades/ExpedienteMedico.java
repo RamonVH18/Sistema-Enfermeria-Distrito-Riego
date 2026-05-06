@@ -34,7 +34,7 @@ public class ExpedienteMedico {
     private TipoSangre tipoSangre;
 
     @Column(name = "numero_seguridad_social", nullable = false, unique = true)
-    private Integer numeroSeguridadSocial;
+    private Long numeroSeguridadSocial;
 
     @OneToOne
     @JoinColumn(name = "id_empleado", nullable = false, unique = true)
@@ -46,12 +46,11 @@ public class ExpedienteMedico {
     @OneToMany(mappedBy = "expedienteMedico")
     private List<RegistroMedico> registrosMedicos;
 
-    public ExpedienteMedico() {
-    }
+    public ExpedienteMedico() {}
 
     public ExpedienteMedico(
             TipoSangre tipoSangre,
-            Integer numeroSeguridadSocial,
+            Long numeroSeguridadSocial,
             Empleado empleado,
             Set<DetalleExtra> detallesExtra,
             List<RegistroMedico> registrosMedicos
@@ -66,7 +65,7 @@ public class ExpedienteMedico {
     public ExpedienteMedico(
             Integer id,
             TipoSangre tipoSangre,
-            Integer numeroSeguridadSocial,
+            Long numeroSeguridadSocial,
             Empleado empleado,
             Set<DetalleExtra> detallesExtra,
             List<RegistroMedico> registrosMedicos
@@ -83,7 +82,7 @@ public class ExpedienteMedico {
 
     public TipoSangre getTipoSangre() {return tipoSangre;}
 
-    public Integer getNumeroSeguridadSocial() {return numeroSeguridadSocial;}
+    public Long getNumeroSeguridadSocial() {return numeroSeguridadSocial;}
 
     public Empleado getEmpleado() {return empleado;}
 
@@ -95,7 +94,7 @@ public class ExpedienteMedico {
 
     public void setTipoSangre(TipoSangre tipoSangre) {this.tipoSangre = tipoSangre;}
 
-    public void setNumeroSeguridadSocial(Integer numeroSeguridadSocial) {
+    public void setNumeroSeguridadSocial(Long numeroSeguridadSocial) {
         this.numeroSeguridadSocial = numeroSeguridadSocial;
     }
 

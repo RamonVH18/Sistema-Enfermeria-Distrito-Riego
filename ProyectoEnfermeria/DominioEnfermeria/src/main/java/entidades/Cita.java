@@ -38,10 +38,6 @@ public class Cita {
     @Column(name = "motivo", nullable = false)
     private String motivo;
 
-    @ManyToOne
-    @JoinColumn(name = "id_serie")
-    private Serie serie;
-
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_empleado", nullable = false)
     private Empleado empleado;
@@ -56,14 +52,12 @@ public class Cita {
             LocalDateTime fechaHora,
             EstadoCita estado,
             String motivo,
-            Serie serie,
             Empleado empleado,
             Enfermero enfermero
     ) {
         this.fechaHora = fechaHora;
         this.estado = estado;
         this.motivo = motivo;
-        this.serie = serie;
         this.empleado = empleado;
         this.enfermero = enfermero;
     }
@@ -73,7 +67,6 @@ public class Cita {
             LocalDateTime fechaHora,
             EstadoCita estado,
             String motivo,
-            Serie serie,
             Empleado empleado,
             Enfermero enfermero
     ) {
@@ -81,7 +74,6 @@ public class Cita {
         this.fechaHora = fechaHora;
         this.estado = estado;
         this.motivo = motivo;
-        this.serie = serie;
         this.empleado = empleado;
         this.enfermero = enfermero;
     }
@@ -101,10 +93,6 @@ public class Cita {
     public String getMotivo() {return motivo;}
 
     public void setMotivo(String motivo) {this.motivo = motivo;}
-
-    public Serie getSerie() {return serie;}
-
-    public void setSerie(Serie serie) {this.serie = serie;}
 
     public Empleado getEmpleado() {return empleado;}
 

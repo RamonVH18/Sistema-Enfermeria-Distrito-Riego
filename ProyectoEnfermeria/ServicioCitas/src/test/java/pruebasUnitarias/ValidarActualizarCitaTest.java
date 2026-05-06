@@ -1,8 +1,8 @@
 package pruebasUnitarias;
 
-import DAOs.CitaRepository;
-import DAOs.EmpleadoRepository;
-import DAOs.EnfermeroRepository;
+import repositorios.CitaRepository;
+import repositorios.EmpleadoRepository;
+import repositorios.EnfermeroRepository;
 import entidades.Cita;
 import entidades.Departamento;
 import entidades.DireccionEmpleado;
@@ -10,6 +10,7 @@ import entidades.Empleado;
 import entidades.Enfermero;
 import enums.EstadoCita;
 import enums.EstadoEmpleado;
+import enums.Genero;
 import horarioEnfermero.HorarioEnfermero;
 import interfaces.IServicioCitas;
 import java.time.LocalDate;
@@ -88,14 +89,13 @@ public class ValidarActualizarCitaTest {
                 NUEVA_FECHA_HORA_IDEAL.minusDays(7),
                 EstadoCita.PENDIENTE,
                 "Chequeo general",
-                null,
                 new Empleado(
                         1, "Leonardo ", "Flores", "Leyva",
                         LocalDate.of(1991, Month.JULY, 3),
                         "6441549274",
                         "GAMC850820HDFRRR05",
                         "Obregón",
-                        "Masculino",
+                        Genero.MASCULINO,
                         EstadoEmpleado.ACTIVO,
                         new Departamento(1, "Contaduría"),
                         new DireccionEmpleado(20, "Miguel Hidalgo", "Cajeme", 85286, "Obregón")
@@ -108,7 +108,7 @@ public class ValidarActualizarCitaTest {
                                 "6442548932",
                                 "RGHE850820HDFRRR09",
                                 "Obregón",
-                                "Pansexual",
+                                Genero.MASCULINO,
                                 EstadoEmpleado.ACTIVO,
                                 new Departamento(2, "Enfermería"),
                                 new DireccionEmpleado(88, "Agustín de Iturbide", "Valle Dorado", 85291, "Obregón")
@@ -191,7 +191,6 @@ public class ValidarActualizarCitaTest {
                  NUEVA_FECHA_HORA_IDEAL,
                  EstadoCita.PENDIENTE,
                  "Chequeo general",
-                 null,
                  new Empleado(),
                  new Enfermero()
          );
@@ -257,8 +256,7 @@ public class ValidarActualizarCitaTest {
                 citaOriginal.getIdCita(), 
                 NUEVA_FECHA_HORA_IDEAL, // Fecha y hora futura
                 citaOriginal.getEstado(),
-                citaOriginal.getMotivo(), 
-                citaOriginal.getSerie(), 
+                citaOriginal.getMotivo(),
                 citaOriginal.getEmpleado(), 
                 citaOriginal.getEnfermero()
         );
@@ -297,8 +295,7 @@ public class ValidarActualizarCitaTest {
                 citaOriginal.getIdCita(), 
                 citaOriginal.getFechaHora(), 
                 EstadoCita.CANCELADA, // Estado diferente de PENDIENTE
-                citaOriginal.getMotivo(), 
-                citaOriginal.getSerie(), 
+                citaOriginal.getMotivo(),
                 citaOriginal.getEmpleado(), 
                 citaOriginal.getEnfermero()
         );
@@ -341,8 +338,7 @@ public class ValidarActualizarCitaTest {
                 1, 
                 NUEVA_FECHA_HORA_IDEAL, 
                 citaOriginal.getEstado(), 
-                citaOriginal.getMotivo(), 
-                citaOriginal.getSerie(), 
+                citaOriginal.getMotivo(),
                 citaOriginal.getEmpleado(), 
                 citaOriginal.getEnfermero())
         );

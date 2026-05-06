@@ -1,8 +1,8 @@
 package pruebasUnitarias;
 
-import DAOs.CitaRepository;
-import DAOs.EmpleadoRepository;
-import DAOs.EnfermeroRepository;
+import repositorios.CitaRepository;
+import repositorios.EmpleadoRepository;
+import repositorios.EnfermeroRepository;
 import entidades.Cita;
 import entidades.Departamento;
 import entidades.DireccionEmpleado;
@@ -10,6 +10,7 @@ import entidades.Empleado;
 import entidades.Enfermero;
 import enums.EstadoCita;
 import enums.EstadoEmpleado;
+import enums.Genero;
 import horarioEnfermero.HorarioEnfermero;
 import interfaces.IServicioCitas;
 import java.time.LocalDate;
@@ -80,7 +81,7 @@ public class ValidarCrearCitaTest {
             "6441549274",
             "GAMC850820HDFRRR05", 
             "Obregón",
-            "Masculino",
+            Genero.MASCULINO,
             EstadoEmpleado.ACTIVO, 
             new Departamento(1, "Contaduría"),
             new DireccionEmpleado(20, "Miguel Hidalgo", "Cajeme", 85286, "Obregón")
@@ -96,7 +97,7 @@ public class ValidarCrearCitaTest {
                 "6442548932",
                 "RGHE850820HDFRRR09", 
                 "Obregón",
-                "Pansexual",
+                Genero.MASCULINO,
                 EstadoEmpleado.ACTIVO, 
                 new Departamento(2, "Enfermería"), 
                 new DireccionEmpleado(88, "Agustín de Iturbide", "Valle Dorado", 85291, "Obregón")
@@ -139,7 +140,7 @@ public class ValidarCrearCitaTest {
     @Test
     public void ncsc01(){
         // Cita existente
-        Cita citaExistente = new Cita(1, FECHA_HORA_IDEAL, EstadoCita.PENDIENTE, MOTIVO_IDEAL, null, empleadoFicticio, enfermeroFicticio);
+        Cita citaExistente = new Cita(1, FECHA_HORA_IDEAL, EstadoCita.PENDIENTE, MOTIVO_IDEAL, empleadoFicticio, enfermeroFicticio);
         
         // Omite las validaciones de negocio de empleadoRepository y enfermeroRepository
         when(enfermeroRepository.findById(cita.getIdEnfermero())).thenReturn(Optional.of(enfermeroFicticio));
@@ -244,7 +245,6 @@ public class ValidarCrearCitaTest {
                 FECHA_HORA_IDEAL, 
                 EstadoCita.PENDIENTE, 
                 MOTIVO_IDEAL, 
-                null, 
                 empleadoFicticio, 
                 enfermeroFicticio
         ));

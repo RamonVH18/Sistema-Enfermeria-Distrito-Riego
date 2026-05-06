@@ -1,4 +1,4 @@
-package DAOs;
+package repositorios;
 
 import entidades.Cita;
 import enums.EstadoCita;

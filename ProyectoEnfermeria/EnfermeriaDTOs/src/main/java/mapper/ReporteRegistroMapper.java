@@ -5,6 +5,8 @@ import entidades.Departamento;
 import entidades.Empleado;
 import entidades.ExpedienteMedico;
 import entidades.RegistroMedico;
+import java.time.LocalDate;
+import java.time.Period;
 
 /**
  *
@@ -12,7 +14,7 @@ import entidades.RegistroMedico;
  */
 public class ReporteRegistroMapper {
     
-    public ReporteRegistroDTO toDTO(RegistroMedico entity, Integer edad){
+    public static ReporteRegistroDTO toDTO(RegistroMedico entity){
         // DTO a entregar
         ReporteRegistroDTO dto = new ReporteRegistroDTO();
         // Expediente médico del empleado
@@ -26,10 +28,12 @@ public class ReporteRegistroMapper {
         Departamento departamento = empleado.getDepartamento();
         dto.setDepartamento((departamento == null) ? null : departamento.getNombre());
         
-        dto.setSexo(empleado.getGenero());
-        dto.setEdad(edad);
+        dto.setSexo(empleado.getGenero().toString());
         
-        Integer nss = (expediente == null) ? null : expediente.getNumeroSeguridadSocial();
+        LocalDate fechaNacimiento = empleado.getFechaNacimiento();
+        dto.setEdad(Period.between((fechaNacimiento == null) ? LocalDate.now() : fechaNacimiento, LocalDate.now()).getYears());
+        
+        Long nss = (expediente == null) ? null : expediente.getNumeroSeguridadSocial();
         dto.setNss(nss);
         
         // Información del registro médico del empleado

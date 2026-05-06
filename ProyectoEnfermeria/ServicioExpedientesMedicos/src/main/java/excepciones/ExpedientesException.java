@@ -1,8 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package exceptions;
+package excepciones;
 
 import org.springframework.http.HttpStatus;
 import webExceptions.BusinessException;
@@ -24,5 +20,4 @@ public class ExpedientesException extends BusinessException {
     public ExpedientesException(String mensaje, HttpStatus status, String codigo) {
         super(mensaje, status, codigo);
     }
-
 }

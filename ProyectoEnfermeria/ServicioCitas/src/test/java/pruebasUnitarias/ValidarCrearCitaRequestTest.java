@@ -1,8 +1,8 @@
 package pruebasUnitarias;
 
-import DAOs.CitaRepository;
-import DAOs.EmpleadoRepository;
-import DAOs.EnfermeroRepository;
+import repositorios.CitaRepository;
+import repositorios.EmpleadoRepository;
+import repositorios.EnfermeroRepository;
 import entidades.Cita;
 import entidades.Departamento;
 import entidades.DireccionEmpleado;
@@ -10,6 +10,7 @@ import entidades.Empleado;
 import entidades.Enfermero;
 import enums.EstadoCita;
 import enums.EstadoEmpleado;
+import enums.Genero;
 import horarioEnfermero.HorarioEnfermero;
 import interfaces.IServicioCitas;
 import java.time.DayOfWeek;
@@ -81,7 +82,7 @@ public class ValidarCrearCitaRequestTest {
             "6441549274",
             "GAMC850820HDFRRR05", 
             "Obregón",
-            "Masculino",
+            Genero.MASCULINO,
             EstadoEmpleado.ACTIVO, 
             new Departamento(1, "Contaduría"),
             new DireccionEmpleado(20, "Miguel Hidalgo", "Cajeme", 85286, "Obregón")
@@ -97,7 +98,7 @@ public class ValidarCrearCitaRequestTest {
                 "6442548932",
                 "RGHE850820HDFRRR09", 
                 "Obregón",
-                "Pansexual",
+                Genero.MASCULINO,
                 EstadoEmpleado.ACTIVO, 
                 new Departamento(2, "Enfermería"), 
                 new DireccionEmpleado(88, "Agustín de Iturbide", "Valle Dorado", 85291, "Obregón")
@@ -145,7 +146,7 @@ public class ValidarCrearCitaRequestTest {
         when(enfermeroRepository.findById(cita.getIdEnfermero())).thenReturn(Optional.of(enfermeroFicticio));
         when(empleadoRepository.findById(cita.getIdEmpleado())).thenReturn(Optional.of(empleadoFicticio));
         when(citaRepository.findByFechaHora(cita.getFechaHora())).thenReturn(Optional.empty());
-        when(citaRepository.save(any(Cita.class))).thenReturn(new Cita(1, FECHA_HORA_IDEAL, EstadoCita.PENDIENTE, MOTIVO_IDEAL, null, empleadoFicticio, enfermeroFicticio));
+        when(citaRepository.save(any(Cita.class))).thenReturn(new Cita(1, FECHA_HORA_IDEAL, EstadoCita.PENDIENTE, MOTIVO_IDEAL, empleadoFicticio, enfermeroFicticio));
         
     }
     /**

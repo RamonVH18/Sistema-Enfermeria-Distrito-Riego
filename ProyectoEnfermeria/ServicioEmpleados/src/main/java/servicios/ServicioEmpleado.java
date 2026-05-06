@@ -4,7 +4,7 @@
  */
 package servicios;
 
-import DAOs.EmpleadoRepository;
+import repositorios.EmpleadoRepository;
 import dtos.EmpleadoDTO;
 import entidades.Empleado;
 import interfaces.IServicioEmpleado;
@@ -51,15 +51,7 @@ public class ServicioEmpleado implements IServicioEmpleado {
         List<Empleado> entidades = empleadoRepository.findAll();
         return entidades.stream().map(entidad -> {
             EmpleadoDTO dto = EmpleadoMapper.toDTO(entidad);
-
-            // Seteamos el nombre consolidado
             dto.setNombres(entidad.getNombres() + " " + entidad.getApellidoPaterno());
-
-            // Cálculo y asignación correcta de la edad
-            if (entidad.getFechaNacimiento() != null) {
-                int edad = java.time.Period.between(entidad.getFechaNacimiento(), java.time.LocalDate.now()).getYears();
-               
-            }
             return dto;
         }).collect(java.util.stream.Collectors.toList());
     }

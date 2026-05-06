@@ -12,9 +12,7 @@ public class ExpedienteMedicoDTO {
     private Integer id;    
     private TipoSangre tipoSangre;    
     private Integer numeroSeguridadSocial;    
-    private Integer idEmpleado;    
-    private Set<AntecedenteExpedienteMedicoDTO> antecedentes;    
-    private Set<AtributoFisicoExpedienteMedicoDTO> atributosFisicos;    
+    private Integer idEmpleado;  
     private Set<DetalleExtraExpedienteMedicoDTO> detallesExtra;
 
     public ExpedienteMedicoDTO() {}
@@ -22,16 +20,12 @@ public class ExpedienteMedicoDTO {
     public ExpedienteMedicoDTO(
             TipoSangre tipoSangre, 
             Integer numeroSeguridadSocial, 
-            Integer idEmpleado, 
-            Set<AntecedenteExpedienteMedicoDTO> antecedentes, 
-            Set<AtributoFisicoExpedienteMedicoDTO> atributosFisicos, 
+            Integer idEmpleado,
             Set<DetalleExtraExpedienteMedicoDTO> detallesExtra
     ) {
         this.tipoSangre = tipoSangre;
         this.numeroSeguridadSocial = numeroSeguridadSocial;
         this.idEmpleado = idEmpleado;
-        this.antecedentes = antecedentes;
-        this.atributosFisicos = atributosFisicos;
         this.detallesExtra = detallesExtra;
     }
 
@@ -40,16 +34,12 @@ public class ExpedienteMedicoDTO {
             TipoSangre tipoSangre, 
             Integer numeroSeguridadSocial, 
             Integer idEmpleado, 
-            Set<AntecedenteExpedienteMedicoDTO> antecedentes, 
-            Set<AtributoFisicoExpedienteMedicoDTO> atributosFisicos, 
             Set<DetalleExtraExpedienteMedicoDTO> detallesExtra
     ) {
         this.id = id;
         this.tipoSangre = tipoSangre;
         this.numeroSeguridadSocial = numeroSeguridadSocial;
         this.idEmpleado = idEmpleado;
-        this.antecedentes = antecedentes;
-        this.atributosFisicos = atributosFisicos;
     }
     
     public Integer getId() {return id;}
@@ -60,10 +50,6 @@ public class ExpedienteMedicoDTO {
 
     public Integer getIdEmpleado() {return idEmpleado;}
 
-    public Set<AntecedenteExpedienteMedicoDTO> getAntecedentes() {return antecedentes;}
-
-    public Set<AtributoFisicoExpedienteMedicoDTO> getAtributosFisicos() {return atributosFisicos;}
-
     public Set<DetalleExtraExpedienteMedicoDTO> getDetallesExtra() {return detallesExtra;}
 
     public void setId(Integer id) {this.id = id;}
@@ -73,10 +59,6 @@ public class ExpedienteMedicoDTO {
     public void setNumeroSeguridadSocial(Integer numeroSeguridadSocial) {this.numeroSeguridadSocial = numeroSeguridadSocial;}
 
     public void setIdEmpleado(Integer idEmpleado) {this.idEmpleado = idEmpleado;}
-
-    public void setAntecedentes(Set<AntecedenteExpedienteMedicoDTO> antecedentes) {this.antecedentes = antecedentes;}
-
-    public void setAtributosFisicos(Set<AtributoFisicoExpedienteMedicoDTO> atributosFisicos) {this.atributosFisicos = atributosFisicos;}
 
     public void setDetallesExtra(Set<DetalleExtraExpedienteMedicoDTO> detallesExtra) {this.detallesExtra = detallesExtra;}
 }

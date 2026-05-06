@@ -4,7 +4,6 @@ import dtos.CitaDTO;
 import interfaces.IServicioCitas;
 import java.time.LocalDate;
 import java.util.List;
-import org.apache.catalina.connector.Response;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import request.CrearCitaRequest;
@@ -28,7 +27,7 @@ import response.CrearCitaResponse;
 @RequestMapping("/citas")
 public class CitasController {
 
-    private IServicioCitas servicioCitas;
+    private final IServicioCitas servicioCitas;
 
     public CitasController(IServicioCitas servicioCitas) {
         this.servicioCitas = servicioCitas;
@@ -65,10 +64,4 @@ public class CitasController {
         servicioCitas.completar(id);
         return ResponseEntity.noContent().build();
     }
-    
-//    @GetMapping("/buscar/paciente")  LOS LEONARDEARE A TODOS
-//    public ResponseEntity<List<CitaDTO>> buscarPorNombreCurp(@RequestParam String nombreCurp) {
-//        List<CitaDTO> citas = servicioCitas.buscarPorNombreCurpPacientePendiente(nombreCurp);
-//        return ResponseEntity.ok(citas);
-//    }
 }

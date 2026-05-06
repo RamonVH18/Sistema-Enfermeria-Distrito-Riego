@@ -8,12 +8,10 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
 @Configuration
-@EntityScan(basePackages = "entidades") 
+@EntityScan(basePackages = "entidades")
 @EnableJpaRepositories(basePackages = "DAOs")
 public class PersistenciaEnfermeriaApplication {
-
-	public static void main(String[] args) {
-		SpringApplication.run(PersistenciaEnfermeriaApplication.class, args);
-	}
-
+    public static void main(String[] args) {
+        SpringApplication.run(PersistenciaEnfermeriaApplication.class, args);
+    }
 }

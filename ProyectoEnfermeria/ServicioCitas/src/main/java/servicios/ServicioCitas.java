@@ -1,8 +1,8 @@
 package servicios;
 
-import DAOs.CitaRepository;
-import DAOs.EmpleadoRepository;
-import DAOs.EnfermeroRepository;
+import repositorios.CitaRepository;
+import repositorios.EmpleadoRepository;
+import repositorios.EnfermeroRepository;
 import dtos.CitaDTO;
 import entidades.Cita;
 import entidades.Empleado;

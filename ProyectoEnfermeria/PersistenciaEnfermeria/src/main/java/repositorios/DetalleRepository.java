@@ -1,4 +1,4 @@
-package DAOs;
+package repositorios;
 
 import entidades.Detalle;
 import org.springframework.data.jpa.repository.JpaRepository;
