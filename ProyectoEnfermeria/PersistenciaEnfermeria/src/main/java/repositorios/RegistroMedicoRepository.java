@@ -12,7 +12,7 @@ import org.springframework.data.jpa.repository.Query;
  */
 public interface RegistroMedicoRepository extends JpaRepository<RegistroMedico, Integer> {
     
-    public RegistroMedico findByExpedienteMedico(ExpedienteMedico expediente);
+    public RegistroMedico findFirstByExpedienteMedicoOrderByFechaCreacion(ExpedienteMedico expediente);
     
     @Query(value = """
         SELECT DISTINCT ON (id_expediente) * 

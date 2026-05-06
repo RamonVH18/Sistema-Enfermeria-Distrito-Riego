@@ -9,7 +9,7 @@ import response.DetalleResponse;
 
 /**
  *
- * @author Leonardo Flores Leyva
+ * @author Ramon Valencia Hernandez
  */
 public class DetalleExtraMapper {
 

@@ -58,7 +58,7 @@ public class ServicioExpedientes implements IServicioExpedientes{
     @Override
     public SignosVitalesResponse obtenerSignosVitalesEmpleado(Integer idExpediente) {
         ExpedienteMedico expediente = expedientesRepository.findById(idExpediente).get();
-        RegistroMedico registro = registroMedicoRepository.findByExpedienteMedico(expediente);
+        RegistroMedico registro = registroMedicoRepository.findFirstByExpedienteMedicoOrderByFechaCreacion(expediente);
         if (registro == null) {
             throw new ExpedientesException("No se encontro el registro medico.", HttpStatus.BAD_REQUEST, "400");
         }
@@ -76,13 +76,13 @@ public class ServicioExpedientes implements IServicioExpedientes{
     
     @Override
     public List<ReporteRegistroDTO> obtenerUltimoRegistroPacientes(){
-        // Lista a devolver
+        
         List<ReporteRegistroDTO> registrosMedicosDTO = new ArrayList<>();
-        // Consulta del último registro médico de cada empleado
+        
         List<RegistroMedico> registrosMedicos = registroMedicoRepository.findAllLastRecordEach();
         // Cada registro se mapea a su dto y se agrega a la lista
         registrosMedicos.stream().forEach(r -> {registrosMedicosDTO.add(ReporteRegistroMapper.toDTO(r));});
-        // Se regresa la lista de registros médicos
+
         return registrosMedicosDTO;
     }
 }
