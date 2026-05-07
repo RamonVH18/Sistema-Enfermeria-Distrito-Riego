@@ -17,12 +17,14 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import request.CrearCitaRequest;
 import request.IniciarSesionRequest;
 import response.CitaPendienteResponse;
 import response.CrearCitaResponse;
 import response.DatosEmpleadoResponse;
+import response.DetalleResponse;
 import response.EmpleadoOptionResponse;
 import response.UsuarioResponse;
 import response.SignosVitalesResponse;
@@ -220,6 +222,15 @@ public class ClienteApi {
                 .build();
         return handleResponse(client.sendAsync(request, HttpResponse.BodyHandlers.ofString()),
                 SignosVitalesResponse.class);
+    }
+    
+    public CompletableFuture<Map<String, List<DetalleResponse>>> obtenerAntecedentesEmpleado(Integer id) {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(BASE_URL + "/expedientes/antecedentes/" + id))
+                .GET()
+                .build();
+        return handleResponse(client.sendAsync(request, HttpResponse.BodyHandlers.ofString()),
+                new TypeReference<Map<String, List<DetalleResponse>>>(){});
     }
 
     private void validarRespuesta(HttpResponse<String> response) {

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<ScrollPane fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED" style="-fx-background-color: transparent; -fx-background: white;" 
+            xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <content>
+        <VBox spacing="20.0" style="-fx-background-color: white; -fx-padding: 30;">
+            
+            <Label text="Antecedentes Médicos" textFill="#0056b3">
+                <font>
+                    <Font name="System Bold" size="24.0" />
+                </font>
+                <VBox.margin>
+                    <Insets bottom="10.0" />
+                </VBox.margin>
+            </Label>
+
+            <VBox spacing="5.0">
+                <Label style="-fx-font-weight: bold; -fx-text-fill: #555;" text="Antecedentes Laborales:" />
+                <Label fx:id="lblLaboral" text="Cargando datos..." wrapText="true" />
+                <Separator />
+            </VBox>
+
+            <VBox spacing="5.0">
+                <Label style="-fx-font-weight: bold; -fx-text-fill: #555;" text="Historial Médico Familiar (Heredofamiliar):" />
+                <Label fx:id="lblHeredofamiliar" text="Cargando datos..." wrapText="true" />
+                <Separator />
+            </VBox>
+
+            <VBox spacing="5.0">
+                <Label style="-fx-font-weight: bold; -fx-text-fill: #555;" text="Condiciones Patológicas:" />
+                <Label fx:id="lblPatologico" text="Cargando datos..." wrapText="true" />
+                <Separator />
+            </VBox>
+
+            <VBox spacing="5.0">
+                <Label style="-fx-font-weight: bold; -fx-text-fill: #555;" text="Antecedentes No Patológicos:" />
+                <Label fx:id="lblNoPatologico" text="Cargando datos..." wrapText="true" />
+                <Separator />
+            </VBox>
+
+            <VBox spacing="5.0">
+                <Label style="-fx-font-weight: bold; -fx-text-fill: #555;" text="Historial de Amputaciones:" />
+                <Label fx:id="lblAmputacion" text="Cargando datos..." wrapText="true" />
+                <Separator />
+            </VBox>
+
+            <VBox spacing="5.0">
+                <Label style="-fx-font-weight: bold; -fx-text-fill: #555;" text="Antecedentes Gineco-Obstétricos:" />
+                <Label fx:id="lblGineco" text="Cargando datos..." wrapText="true" />
+                <Separator />
+            </VBox>
+
+            <VBox spacing="5.0">
+                <Label style="-fx-font-weight: bold; -fx-text-fill: #555;" text="Incapacidades Previas:" />
+                <Label fx:id="lblIncapacidad" text="Cargando datos..." wrapText="true" />
+                <Separator />
+            </VBox>
+
+        </VBox>
+    </content>
+</ScrollPane>

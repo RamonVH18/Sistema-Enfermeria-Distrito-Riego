@@ -35,10 +35,9 @@
 
     <!-- Barra de Navegación -->
     <HBox alignment="CENTER" spacing="20.0" styleClass="tab-container">
-        <Button prefWidth="150" styleClass="nav-button-active" text="Signos Vitales" />
-        <Button prefWidth="150" styleClass="nav-button" text="Antecedentes Medicos" />
-        <Button prefWidth="150" styleClass="nav-button" text="Sintomas y Diagnostico" />
-        <Button prefWidth="150" styleClass="nav-button" text="Plan de Tratamiento" />
+        <Button prefWidth="150" styleClass="nav-button-active" text="Signos Vitales" onAction="#abrirSignosVitales"/>
+        <Button prefWidth="150" styleClass="nav-button" text="Antecedentes Medicos" onAction="#abrirAntecedentes"/>
+        <Button prefWidth="150" styleClass="nav-button" text="Atributos Fisicos" onAction="#abrirAtributos"/>
     </HBox>
     
     <StackPane fx:id="contentArea" VBox.vgrow="ALWAYS">

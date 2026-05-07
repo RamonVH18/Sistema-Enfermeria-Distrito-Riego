@@ -66,7 +66,7 @@ public class ServicioExpedientes implements IServicioExpedientes{
     }
     
     @Override
-    public Map<String, List<DetalleResponse>> obtenerDetallesEmpleado(Integer idExpediente) {
+    public Map<String, List<DetalleResponse>> obtenerAntecedentesEmpleado(Integer idExpediente) {
         List<DetalleExtra> detalles = detalleExtraRepository.findByExpedienteYAntecedentes(idExpediente);
         if (detalles.isEmpty()) {
             throw new ExpedientesException("No se encontraron detalles medicos.", HttpStatus.BAD_REQUEST, "400");

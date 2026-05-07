@@ -9,6 +9,8 @@ request\CrearCitaRequest.class
 response\UsuarioResponse.class
 response\DatosEmpleadoResponse.class
 controladores\PantallaCitasController.class
+response\DetalleResponse.class
+clienteApi\ClienteApi$6.class
 controladores\AgendarCitaController.class
 controladores\IniciarSesionController.class
 response\EmpleadoHistoricoResponse.class

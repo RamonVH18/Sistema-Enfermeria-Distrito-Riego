@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<ScrollPane fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED" style="-fx-background-color: transparent; -fx-background: white;" 
+            xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <content>
+        <VBox spacing="20.0" style="-fx-background-color: white; -fx-padding: 30;">
+            
+            <Label text="Atributos Físicos (Examen Físico)" textFill="#28a745">
+                <font>
+                    <Font name="System Bold" size="24.0" />
+                </font>
+                <VBox.margin>
+                    <Insets bottom="10.0" />
+                </VBox.margin>
+            </Label>
+
+            <VBox spacing="5.0">
+                <Label style="-fx-font-weight: bold; -fx-text-fill: #555;" text="Agudeza Visual:" />
+                <Label fx:id="lblAgudezaVisual" text="Cargando datos..." wrapText="true" />
+                <Separator />
+            </VBox>
+
+            <VBox spacing="5.0">
+                <Label style="-fx-font-weight: bold; -fx-text-fill: #555;" text="Cabeza:" />
+                <Label fx:id="lblCabeza" text="Cargando datos..." wrapText="true" />
+                <Separator />
+            </VBox>
+
+            <VBox spacing="5.0">
+                <Label style="-fx-font-weight: bold; -fx-text-fill: #555;" text="Ojos:" />
+                <Label fx:id="lblOjos" text="Cargando datos..." wrapText="true" />
+                <Separator />
+            </VBox>
+
+            <VBox spacing="5.0">
+                <Label style="-fx-font-weight: bold; -fx-text-fill: #555;" text="Oídos:" />
+                <Label fx:id="lblOidos" text="Cargando datos..." wrapText="true" />
+                <Separator />
+            </VBox>
+
+            <VBox spacing="5.0">
+                <Label style="-fx-font-weight: bold; -fx-text-fill: #555;" text="Boca:" />
+                <Label fx:id="lblBoca" text="Cargando datos..." wrapText="true" />
+                <Separator />
+            </VBox>
+
+            <VBox spacing="5.0">
+                <Label style="-fx-font-weight: bold; -fx-text-fill: #555;" text="Cuello:" />
+                <Label fx:id="lblCuello" text="Cargando datos..." wrapText="true" />
+                <Separator />
+            </VBox>
+
+            <VBox spacing="5.0">
+                <Label style="-fx-font-weight: bold; -fx-text-fill: #555;" text="Área Precordial:" />
+                <Label fx:id="lblAreaPrecordia" text="Cargando datos..." wrapText="true" />
+                <Separator />
+            </VBox>
+
+            <VBox spacing="5.0">
+                <Label style="-fx-font-weight: bold; -fx-text-fill: #555;" text="Abdomen:" />
+                <Label fx:id="lblAbdomen" text="Cargando datos..." wrapText="true" />
+                <Separator />
+            </VBox>
+
+            <VBox spacing="5.0">
+                <Label style="-fx-font-weight: bold; -fx-text-fill: #555;" text="Columna Vertebral:" />
+                <Label fx:id="lblColumnaVertebral" text="Cargando datos..." wrapText="true" />
+                <Separator />
+            </VBox>
+
+            <VBox spacing="5.0">
+                <Label style="-fx-font-weight: bold; -fx-text-fill: #555;" text="Región Lumbar:" />
+                <Label fx:id="lblLumbar" text="Cargando datos..." wrapText="true" />
+                <Separator />
+            </VBox>
+
+            <VBox spacing="5.0">
+                <Label style="-fx-font-weight: bold; -fx-text-fill: #555;" text="Miembros Torácicos:" />
+                <Label fx:id="lblMiembrosToracicos" text="Cargando datos..." wrapText="true" />
+                <Separator />
+            </VBox>
+
+            <VBox spacing="5.0">
+                <Label style="-fx-font-weight: bold; -fx-text-fill: #555;" text="Miembros Pélvicos:" />
+                <Label fx:id="lblMiembrosPelvicos" text="Cargando datos..." wrapText="true" />
+                <Separator />
+            </VBox>
+
+        </VBox>
+    </content>
+</ScrollPane>

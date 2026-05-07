@@ -34,9 +34,9 @@ public class ExpedientesController {
         return ResponseEntity.ok(servicioExpediente.obtenerSignosVitalesEmpleado(id));
     }
     
-    @GetMapping("/detalles/{id}")
-    public ResponseEntity<Map<String, List<DetalleResponse>>> obtenerDetallesEmpleado(@PathVariable Integer id) {
-        return ResponseEntity.ok(servicioExpediente.obtenerDetallesEmpleado(id));
+    @GetMapping("/antecedentes/{id}")
+    public ResponseEntity<Map<String, List<DetalleResponse>>> obtenerAntecedentesEmpleado(@PathVariable Integer id) {
+        return ResponseEntity.ok(servicioExpediente.obtenerAntecedentesEmpleado(id));
     }
 
 }
