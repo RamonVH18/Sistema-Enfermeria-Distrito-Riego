@@ -1,6 +1,7 @@
 package entidades;
 
 import enums.TipoSangre;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -12,6 +13,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -34,13 +37,13 @@ public class ExpedienteMedico {
     private TipoSangre tipoSangre;
 
     @Column(name = "numero_seguridad_social", nullable = false, unique = true)
-    private Long numeroSeguridadSocial;
+    private String numeroSeguridadSocial;
 
     @OneToOne
     @JoinColumn(name = "id_empleado", nullable = false, unique = true)
     private Empleado empleado;
 
-    @OneToMany(mappedBy = "expedienteMedico")
+    @OneToMany(mappedBy = "expedienteMedico", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<DetalleExtra> detallesExtra;
 
     @OneToMany(mappedBy = "expedienteMedico")
@@ -50,22 +53,20 @@ public class ExpedienteMedico {
 
     public ExpedienteMedico(
             TipoSangre tipoSangre,
-            Long numeroSeguridadSocial,
-            Empleado empleado,
-            Set<DetalleExtra> detallesExtra,
-            List<RegistroMedico> registrosMedicos
+            String numeroSeguridadSocial,
+            Empleado empleado
     ) {
         this.tipoSangre = tipoSangre;
         this.numeroSeguridadSocial = numeroSeguridadSocial;
         this.empleado = empleado;
-        this.detallesExtra = detallesExtra;
-        this.registrosMedicos = registrosMedicos;
+        this.detallesExtra = new HashSet<>();
+        this.registrosMedicos = new ArrayList<>();
     }
 
     public ExpedienteMedico(
             Integer id,
             TipoSangre tipoSangre,
-            Long numeroSeguridadSocial,
+            String numeroSeguridadSocial,
             Empleado empleado,
             Set<DetalleExtra> detallesExtra,
             List<RegistroMedico> registrosMedicos
@@ -82,7 +83,7 @@ public class ExpedienteMedico {
 
     public TipoSangre getTipoSangre() {return tipoSangre;}
 
-    public Long getNumeroSeguridadSocial() {return numeroSeguridadSocial;}
+    public String getNumeroSeguridadSocial() {return numeroSeguridadSocial;}
 
     public Empleado getEmpleado() {return empleado;}
 
@@ -94,7 +95,7 @@ public class ExpedienteMedico {
 
     public void setTipoSangre(TipoSangre tipoSangre) {this.tipoSangre = tipoSangre;}
 
-    public void setNumeroSeguridadSocial(Long numeroSeguridadSocial) {
+    public void setNumeroSeguridadSocial(String numeroSeguridadSocial) {
         this.numeroSeguridadSocial = numeroSeguridadSocial;
     }
 

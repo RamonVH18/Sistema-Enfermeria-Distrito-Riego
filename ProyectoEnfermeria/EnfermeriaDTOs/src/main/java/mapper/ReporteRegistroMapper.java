@@ -33,7 +33,7 @@ public class ReporteRegistroMapper {
         LocalDate fechaNacimiento = empleado.getFechaNacimiento();
         dto.setEdad(Period.between((fechaNacimiento == null) ? LocalDate.now() : fechaNacimiento, LocalDate.now()).getYears());
 
-        Long nss = (expediente == null) ? null : expediente.getNumeroSeguridadSocial();
+        String nss = (expediente == null) ? null : expediente.getNumeroSeguridadSocial();
         dto.setNss(nss);
 
         // Información del registro médico del empleado

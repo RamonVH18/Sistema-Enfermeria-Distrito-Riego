@@ -12,7 +12,7 @@ public class ReporteRegistroDTO {
     private String departamento;
     private String sexo;
     private Integer edad;
-    private Long nss;
+    private String nss;
     private LocalDate fechaRegistro;
     private Float altura;
     private Float peso;
@@ -29,7 +29,7 @@ public class ReporteRegistroDTO {
             String departamento, 
             String sexo, 
             Integer edad, 
-            Long nss, 
+            String nss, 
             LocalDate fechaRegistro, 
             Float altura, 
             Float peso, 
@@ -60,7 +60,7 @@ public class ReporteRegistroDTO {
             String departamento, 
             String sexo, 
             Integer edad, 
-            Long nss, 
+            String nss, 
             LocalDate fechaRegistro, 
             Float altura, 
             Float peso, 
@@ -95,7 +95,7 @@ public class ReporteRegistroDTO {
 
     public Integer getEdad() {return edad;}
 
-    public Long getNss() {return nss;}
+    public String getNss() {return nss;}
 
     public LocalDate getFechaRegistro() {return fechaRegistro;}
 
@@ -123,7 +123,7 @@ public class ReporteRegistroDTO {
 
     public void setEdad(Integer edad) {this.edad = edad;}
 
-    public void setNss(Long nss) {this.nss = nss;}
+    public void setNss(String nss) {this.nss = nss;}
 
     public void setFechaRegistro(LocalDate fechaRegistro) {this.fechaRegistro = fechaRegistro;}
 

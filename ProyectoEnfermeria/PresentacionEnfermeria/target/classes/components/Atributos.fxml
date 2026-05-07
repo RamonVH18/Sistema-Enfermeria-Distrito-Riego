@@ -12,7 +12,7 @@
     <content>
         <VBox spacing="20.0" style="-fx-background-color: white; -fx-padding: 30;">
             
-            <Label text="Atributos Físicos (Examen Físico)" textFill="#28a745">
+            <Label text="Atributos Físicos" textFill="#28a745">
                 <font>
                     <Font name="System Bold" size="24.0" />
                 </font>

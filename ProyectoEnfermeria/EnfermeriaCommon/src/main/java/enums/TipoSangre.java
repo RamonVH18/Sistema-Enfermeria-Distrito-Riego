@@ -19,4 +19,17 @@ public enum TipoSangre {
     TipoSangre(String valor) {this.valor = valor;}
 
     public String getValor() {return valor;}
+    
+    public static TipoSangre desdeString(String valorBuscado) {
+        if (valorBuscado == null) return null;
+        
+        for (TipoSangre tipo : TipoSangre.values()) {
+            // Comparamos el valor interno (descripcion) con lo que recibimos
+            if (tipo.valor.equalsIgnoreCase(valorBuscado.trim())) {
+                return tipo;
+            }
+        }
+        // Si no lo encuentra, puedes lanzar error o devolver null
+        throw new IllegalArgumentException("No se encontró el tipo: " + valorBuscado);
+    }
 }
