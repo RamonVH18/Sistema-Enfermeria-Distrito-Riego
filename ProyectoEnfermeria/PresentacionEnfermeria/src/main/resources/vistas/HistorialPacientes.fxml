@@ -32,8 +32,13 @@
     </TableView>
 
     <!-- Botón de acción inferior -->
-    <HBox alignment="CENTER_RIGHT">
+    <HBox alignment="CENTER_RIGHT" spacing="15.0">
+        <Button text="+ Nuevo Expediente" prefHeight="40.0" prefWidth="200.0"
+                onAction="#registrarExpediente" styleClass="create-button" 
+                style="-fx-background-color: #27AE60; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;" />
+        
         <Button text="Ver Expediente Clínico" prefHeight="40.0" prefWidth="200.0"
-                onAction="#btnVerExpedienteAction" styleClass="view-button" />
+                onAction="#btnVerExpedienteAction" styleClass="view-button" 
+                style="-fx-background-color: #2C3E50; -fx-text-fill: white; -fx-cursor: hand;" />
     </HBox>
 </VBox>

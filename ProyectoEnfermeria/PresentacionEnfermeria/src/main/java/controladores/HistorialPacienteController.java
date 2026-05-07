@@ -2,6 +2,8 @@ package controladores;
 
 import clienteApi.ClienteApi;
 import java.io.IOException;
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
 import response.EmpleadoHistoricoResponse;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -85,6 +87,24 @@ public class HistorialPacienteController implements Initializable {
     @FXML
     private void btnVerExpedienteAction() {
         seleccionarPaciente();
+    }
+
+    @FXML
+    private void registrarExpediente() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/vistas/RegistrarExpediente.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Registrar Expediente Médico");
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.showAndWait();
+        } catch (IOException e) {
+            System.err.println("Error al abrir la ventana: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     private void configurarFiltro() {

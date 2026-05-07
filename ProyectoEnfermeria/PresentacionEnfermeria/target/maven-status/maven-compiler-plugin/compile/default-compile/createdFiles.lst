@@ -9,6 +9,7 @@ request\CrearCitaRequest.class
 response\UsuarioResponse.class
 response\DatosEmpleadoResponse.class
 controladores\PantallaCitasController.class
+controladores\RegistrarExpedienteController.class
 response\DetalleResponse.class
 clienteApi\ClienteApi$6.class
 controladores\AgendarCitaController.class
