@@ -11,7 +11,15 @@ import org.springframework.data.jpa.repository.Query;
  */
 public interface DetalleExtraRepository extends JpaRepository<DetalleExtra, Integer> {
 
-    @Query("SELECT d FROM DetalleExtra d WHERE d.expedienteMedico.id = :idExpediente")
-    public List<DetalleExtra> findByExpediente(Integer idExpediente);
+    /**
+     * Metodo que sirve para obtener todos los detalles extras que sean antecedentes de un expediente medico
+     * @param idExpediente
+     * @return 
+     */
+    @Query("SELECT de FROM DetalleExtra de "
+            + "JOIN de.detalle d "
+            + "WHERE de.expedienteMedico.id = :idExpediente "
+            + "AND d.categoria = 'ANTECEDENTE'")
+    public List<DetalleExtra> findByExpedienteYAntecedentes(Integer idExpediente);
 
 }
