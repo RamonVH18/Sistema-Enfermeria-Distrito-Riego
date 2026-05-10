@@ -6,7 +6,8 @@ import java.util.Map;
 import request.AgregarExpedienteRequest;
 import response.AgregarExpedienteResponse;
 import response.DatosEmpleadoResponse;
-import response.DetalleResponse;
+import response.AntecedenteResponse;
+import response.AtributoFisicoResponse;
 import response.SignosVitalesResponse;
 
 /**
@@ -22,8 +23,9 @@ public interface IServicioExpedientes {
     
     public SignosVitalesResponse obtenerSignosVitalesEmpleado(Integer idExpediente);
     
-    public Map<String, List<DetalleResponse>> obtenerAntecedentesEmpleado(Integer idExpediente);
+    public Map<String, List<AntecedenteResponse>> obtenerAntecedentesEmpleado(Integer idExpediente);
     
+    public Map<String, AtributoFisicoResponse> obtenerAtributosFisicosEmpleados(Integer idExpediente);
     
     public List<ReporteRegistroDTO> obtenerUltimoRegistroPacientes();
 }

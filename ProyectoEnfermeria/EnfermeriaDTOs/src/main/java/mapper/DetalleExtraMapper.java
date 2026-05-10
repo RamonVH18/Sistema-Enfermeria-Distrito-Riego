@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import response.DetalleResponse;
+import response.AntecedenteResponse;
 
 /**
  *
@@ -13,14 +13,14 @@ import response.DetalleResponse;
  */
 public class DetalleExtraMapper {
 
-    public static Map<String, List<DetalleResponse>> toDetalleResponseMap(List<DetalleExtra> detalles) {
-        Map<String, List<DetalleResponse>> map = new HashMap<>();
+    public static Map<String, List<AntecedenteResponse>> toDetalleResponseMap(List<DetalleExtra> detalles) {
+        Map<String, List<AntecedenteResponse>> map = new HashMap<>();
 
         for (DetalleExtra d : detalles) {
             String nombre = d.getDetalle().getNombreDetalle();
 
             // Creamos el DTO de respuesta para este detalle
-            DetalleResponse response = new DetalleResponse(d.getDetalle().getNombreDetalle(), d.getValor());
+            AntecedenteResponse response = new AntecedenteResponse(d.getDetalle().getNombreDetalle(), d.getValor());
 
             // Si la llave no existe, computeIfAbsent crea la lista vacía por nosotros
             map.computeIfAbsent(nombre, k -> new ArrayList<>()).add(response);

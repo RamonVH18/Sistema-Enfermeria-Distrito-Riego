@@ -15,7 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import request.AgregarExpedienteRequest;
 import response.AgregarExpedienteResponse;
 import response.DatosEmpleadoResponse;
-import response.DetalleResponse;
+import response.AntecedenteResponse;
+import response.AtributoFisicoResponse;
 import response.SignosVitalesResponse;
 
 /**
@@ -46,10 +47,14 @@ public class ExpedientesController {
     }
     
     @GetMapping("/antecedentes/{id}")
-    public ResponseEntity<Map<String, List<DetalleResponse>>> obtenerAntecedentesEmpleado(@PathVariable Integer id) {
+    public ResponseEntity<Map<String, List<AntecedenteResponse>>> obtenerAntecedentesEmpleado(@PathVariable Integer id) {
         return ResponseEntity.ok(servicioExpediente.obtenerAntecedentesEmpleado(id));
     }
     
+    @GetMapping("/atributos/{id}")
+    public ResponseEntity<Map<String, AtributoFisicoResponse>> obtenerAtributosFisicosEmpleados(@PathVariable Integer id) {
+        return ResponseEntity.ok(servicioExpediente.obtenerAtributosFisicosEmpleados(id));
+    }
     
 
 }

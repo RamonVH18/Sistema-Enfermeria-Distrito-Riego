@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+  <!-- Definición del Elemento Raíz -->
+  <xs:element name="AgudezaVisual">
+    <xs:complexType>
+      <xs:sequence>
+        <!-- Lista de Ojos (minOccurs=0 por si no hay datos, maxOccurs=unbounded para la lista) -->
+        <xs:element name="Ojo" type="OjoData" minOccurs="0" maxOccurs="unbounded"/>
+        <!-- Nota del examen -->
+        <xs:element name="nota" type="xs:string" minOccurs="0"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- Definición del tipo complejo para los datos del ojo -->
+  <xs:complexType name="OjoData">
+    <xs:sequence>
+      <xs:element name="lentes" type="xs:string" minOccurs="0"/>
+      <xs:element name="campoVisual" type="xs:string" minOccurs="0"/>
+      <xs:element name="visionCromatica" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+    <!-- El atributo tipo (DERECHO/IZQUIERDO) -->
+    <xs:attribute name="tipo" type="xs:string" use="optional"/>
+  </xs:complexType>
+
+</xs:schema>

@@ -9,6 +9,7 @@ import entidades.DetalleExtra;
 import entidades.Empleado;
 import entidades.ExpedienteMedico;
 import entidades.RegistroMedico;
+import enums.CategoriaDetalle;
 import enums.TipoSangre;
 import excepciones.ExpedientesException;
 import interfaces.IServicioExpedientes;
@@ -26,9 +27,11 @@ import repositorios.DetalleRepository;
 import repositorios.EmpleadoRepository;
 import request.AgregarExpedienteRequest;
 import request.AntecedentesRequest;
+import request.AtributosFisicosRequest;
 import response.AgregarExpedienteResponse;
 import response.DatosEmpleadoResponse;
-import response.DetalleResponse;
+import response.AntecedenteResponse;
+import response.AtributoFisicoResponse;
 import response.SignosVitalesResponse;
 
 /**
@@ -63,6 +66,8 @@ public class ServicioExpedientes implements IServicioExpedientes {
     @Override
     public AgregarExpedienteResponse agregarExpedienteEmpleado(AgregarExpedienteRequest exp) {
         List<AntecedentesRequest> antecedentes = exp.getAntecedentes();
+        List<AtributosFisicosRequest> atributos = exp.getAtributos();
+        
         Empleado empleado = empleadoRepository.getReferenceById(exp.getIdEmpleado());
         ExpedienteMedico expediente = new ExpedienteMedico(
                 TipoSangre.desdeString(exp.getTipoSangre()),
@@ -101,12 +106,21 @@ public class ServicioExpedientes implements IServicioExpedientes {
     }
 
     @Override
-    public Map<String, List<DetalleResponse>> obtenerAntecedentesEmpleado(Integer idExpediente) {
-        List<DetalleExtra> detalles = detalleExtraRepository.findByExpedienteYAntecedentes(idExpediente);
+    public Map<String, List<AntecedenteResponse>> obtenerAntecedentesEmpleado(Integer idExpediente) {
+        List<DetalleExtra> detalles = detalleExtraRepository.findByExpedienteYCategoria(idExpediente, CategoriaDetalle.ANTECEDENTE);
         if (detalles.isEmpty()) {
             throw new ExpedientesException("No se encontraron detalles medicos.", HttpStatus.BAD_REQUEST, "400");
         }
         return DetalleExtraMapper.toDetalleResponseMap(detalles);
+    }
+    
+    @Override
+    public Map<String, AtributoFisicoResponse> obtenerAtributosFisicosEmpleados(Integer idExpediente) {
+        List<DetalleExtra> detalles = detalleExtraRepository.findByExpedienteYCategoria(idExpediente, CategoriaDetalle.ATRIBUTO_FISICO);
+        if (detalles.isEmpty()) {
+            throw new ExpedientesException("No se encontraron detalles medicos.", HttpStatus.BAD_REQUEST, "400");
+        }
+        return AtributosFisicosMapper.toDetalleExtraResponse(detalles);
     }
 
     @Override

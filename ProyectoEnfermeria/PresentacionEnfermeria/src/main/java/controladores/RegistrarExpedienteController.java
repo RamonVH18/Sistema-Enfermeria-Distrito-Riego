@@ -8,6 +8,11 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 
 /**
  *
@@ -15,12 +20,26 @@ import javafx.fxml.Initializable;
  */
 public class RegistrarExpedienteController implements Initializable{
     
-    
+    @FXML
+    private ComboBox<String> cbEmpleado, cbTipoSangre, cbTipoAntecedente; 
+    @FXML
+    private TextField txtNss, txtDescripcion;
+    @FXML
+    private Button btnAgregar, btnGuardarExpediente;
+    @FXML
+    private TableView tblAntecedentes;
+    @FXML 
+    private TableColumn colTipo, colDescripcion, colAcciones;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        iniciarComboBoxes();
     }
-
+    
+    private void iniciarComboBoxes() {
+//        cbTipoSangre.
+    }
+    
     @FXML
     private void handleAgregarAntecedente() {
 //        String tipo = cbTipoAntecedente.getValue();

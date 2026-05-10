@@ -8,14 +8,14 @@ package response;
  *
  * @author Ramon Valencia
  */
-public class DetalleResponse {
+public class AntecedenteResponse {
     
     private String nombreDetalle;
     private String especificacion;
 
-    public DetalleResponse() {}
+    public AntecedenteResponse() {}
 
-    public DetalleResponse(String nombreDetalle, String especificacion) {
+    public AntecedenteResponse(String nombreDetalle, String especificacion) {
         this.nombreDetalle = nombreDetalle;
         this.especificacion = especificacion;
     }

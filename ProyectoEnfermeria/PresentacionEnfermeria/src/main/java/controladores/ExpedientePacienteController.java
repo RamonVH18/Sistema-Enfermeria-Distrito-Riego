@@ -129,13 +129,13 @@ public class ExpedientePacienteController implements Initializable {
     private void cargarAntecedentes() {
         clienteApi.obtenerAntecedentesEmpleado(empleadoActivo.getIdEmpleado()).thenAccept(antecedente -> {
             Platform.runLater(() -> {
-                lblLaboral.setText(procesarLista(antecedente.get("Laboral")));
-                lblHeredofamiliar.setText(procesarLista(antecedente.get("Heredofamiliar")));
-                lblPatologico.setText(procesarLista(antecedente.get("Patologico")));
-                lblNoPatologico.setText(procesarLista(antecedente.get("No_Patologico")));
-                lblAmputacion.setText(procesarLista(antecedente.get("Amputacion")));
-                lblGineco.setText(procesarLista(antecedente.get("Gineco_Obsterico")));
-                lblIncapacidad.setText(procesarLista(antecedente.get("Incapacidad")));
+                lblLaboral.setText(procesarLista(antecedente.get("LABORAL")));
+                lblHeredofamiliar.setText(procesarLista(antecedente.get("HEREDOFAMILIAR")));
+                lblPatologico.setText(procesarLista(antecedente.get("PATOLOGICO")));
+                lblNoPatologico.setText(procesarLista(antecedente.get("NO_PATOLOGICO")));
+                lblAmputacion.setText(procesarLista(antecedente.get("AMPUTACION")));
+                lblGineco.setText(procesarLista(antecedente.get("GINECO_OBSTERICO")));
+                lblIncapacidad.setText(procesarLista(antecedente.get("INCAPACIDAD")));
             });
         }).exceptionally(ex -> {
             Platform.runLater(() -> System.err.println("Error: " + ex.getMessage()));
