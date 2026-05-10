@@ -5,9 +5,9 @@
 package servicios;
 
 import AtributosFisicos.AgudezaVisual;
+import AtributosFisicos.AtributoBase;
 import entidades.DetalleExtra;
 import enums.AtributoFisico;
-import excepciones.ExpedientesException;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.Marshaller;
@@ -15,7 +15,6 @@ import jakarta.xml.bind.Unmarshaller;
 import java.io.File;
 import java.io.StringReader;
 import java.io.StringWriter;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,7 +34,8 @@ import response.AtributoFisicoResponse;
 public class AtributosFisicosMapper {
 
     private static final Map<AtributoFisico, Function<DetalleExtra, AtributoFisicoResponse>> xmlParser = Map.of(
-            AtributoFisico.AGUDEZA_VISUAL, d -> obtenerAgudezaVisual(d)
+            AtributoFisico.AGUDEZA_VISUAL,
+            AtributosFisicosMapper::obtenerAgudezaVisual
     );
 
     public static Map<String, AtributoFisicoResponse> toDetalleExtraResponse(List<DetalleExtra> atributos) {
@@ -43,7 +43,15 @@ public class AtributosFisicosMapper {
         AtributoFisico atributo;
         for (DetalleExtra a : atributos) {
             atributo = AtributoFisico.valueOf(a.getDetalle().getNombreDetalle());
-            map.put(atributo.toString(), xmlParser.get(atributo).apply(a));
+            Function<DetalleExtra, AtributoFisicoResponse> parser
+                    = xmlParser.getOrDefault(
+                            atributo,
+                            AtributosFisicosMapper::obtenerAtributo
+                    );
+            map.put(
+                    atributo.toString(),
+                    parser.apply(a)
+            );
 
         }
         return map;
@@ -72,13 +80,10 @@ public class AtributosFisicosMapper {
             Logger.getLogger(AtributosFisicosMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
-        
+
     }
 
     private static AtributoFisicoResponse obtenerAgudezaVisual(DetalleExtra d) {
-//        SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-//        Schema schema = sf.newSchema(new File("resources/validación_vista.xsd"));
-//        marshaller.setSchema(schema);
         try {
             // 1. Instanciar el contexto con la clase que creamos antes
             JAXBContext context = JAXBContext.newInstance(AgudezaVisual.class);
@@ -91,6 +96,23 @@ public class AtributosFisicosMapper {
             AgudezaVisual agudeza = (AgudezaVisual) unmarshaller.unmarshal(reader);
             return new AtributoFisicoResponse(agudeza.toMap());
 
+        } catch (JAXBException e) {
+            System.err.println("Error: El XML de la base está corrupto o no coincide con la clase.");
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static AtributoFisicoResponse obtenerAtributo(DetalleExtra d) {
+        try {
+            JAXBContext context = JAXBContext.newInstance(AtributoBase.class);
+
+            Unmarshaller unmarshaller = context.createUnmarshaller();
+
+            StringReader reader = new StringReader(d.getValor());
+
+            AtributoBase atributoBase = (AtributoBase) unmarshaller.unmarshal(reader);
+            return new AtributoFisicoResponse(atributoBase.toMap());
         } catch (JAXBException e) {
             System.err.println("Error: El XML de la base está corrupto o no coincide con la clase.");
             e.printStackTrace();

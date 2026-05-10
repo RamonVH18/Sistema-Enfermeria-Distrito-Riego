@@ -9,7 +9,6 @@ import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
-import jakarta.xml.bind.annotation.XmlTransient;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,7 +20,8 @@ import java.util.Map;
 @XmlRootElement(name = "AgudezaVisual") // Nodo raíz
 @XmlAccessorType(XmlAccessType.FIELD)
 public class AgudezaVisual {
-
+    
+    @XmlElement(name = "Ojo")
     private List<OjoData> ojos;
 
     private String nota;
