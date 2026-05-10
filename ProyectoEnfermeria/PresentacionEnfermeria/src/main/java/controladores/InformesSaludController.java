@@ -53,7 +53,8 @@ public class InformesSaludController implements Initializable {
 
                 ImageView imageView = new ImageView(imagenJavaFX);
                 imageView.setPreserveRatio(true);
-                imageView.setFitWidth(785);
+                imageView.setSmooth(true);
+                imageView.setFitWidth(pdfViewer.getWidth());
 
                 imageView.setStyle("-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.4), 10, 0, 0, 5);");
 

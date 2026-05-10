@@ -19,13 +19,6 @@
     -fx-padding: 15;
 }
 
-.side-panel-footer{
-    -fx-alignment: center;
-    -fx-column-halignment: center;
-    -fx-orientation: vertical;
-    -fx-vgap: 20;
-}
-
 #imagen-logo-container{
     -fx-alignment: center;
     -fx-padding: 10 0;
@@ -34,13 +27,13 @@
 .imagen-descripcion {
     -fx-text-fill: white;
     -fx-alignment: center;
-    -fx-font-size: 90%;
+    -fx-font-size: 125%;
 }
 
 .menu-button, .menu-button-active {
     -fx-background-color: #0556ac;
     -fx-text-fill: white;
-    -fx-font-size: 13px;
+    -fx-font-size: 125%;
     -fx-alignment: center-left;
     -fx-border-width: 0 0 1px 0;  /* Línea inferior */
     -fx-border-color: rgba(255,255,255,0.1);
@@ -51,10 +44,12 @@
 
 .logout-button{
     -fx-text-fill: white;
-    -fx-font-size: 130%;
+    -fx-font-size: 125%;
     -fx-background-color: #14a81c;
-    -fx-border-color: rgba(255,255,255,0.1);
+    -fx-border-color: rgba(255,255,255);
+    -fx-border-radius: 5;
     -fx-font-weight: bold;
+    -fx-cursor: hand;
 }
 
 .logout-button {
