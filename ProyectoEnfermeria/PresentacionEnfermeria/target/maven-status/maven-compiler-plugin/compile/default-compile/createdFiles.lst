@@ -10,12 +10,14 @@ response\UsuarioResponse.class
 response\DatosEmpleadoResponse.class
 controladores\PantallaCitasController.class
 controladores\RegistrarExpedienteController.class
+response\AtributoFisicoResponse.class
 response\DetalleResponse.class
 clienteApi\ClienteApi$6.class
 controladores\AgendarCitaController.class
 controladores\IniciarSesionController.class
 response\EmpleadoHistoricoResponse.class
 dtos\ReporteEmpleadosDTO.class
+clienteApi\ClienteApi$7.class
 response\CitaPendienteResponse.class
 response\CrearCitaResponse.class
 com\mycompany\presentacionenfermeria\App.class

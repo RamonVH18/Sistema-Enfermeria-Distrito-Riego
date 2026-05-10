@@ -59,7 +59,7 @@
 
             <VBox spacing="5.0">
                 <Label style="-fx-font-weight: bold; -fx-text-fill: #555;" text="Área Precordial:" />
-                <Label fx:id="lblAreaPrecordia" text="Cargando datos..." wrapText="true" />
+                <Label fx:id="lblAreaPrecordial" text="Cargando datos..." wrapText="true" />
                 <Separator />
             </VBox>
 

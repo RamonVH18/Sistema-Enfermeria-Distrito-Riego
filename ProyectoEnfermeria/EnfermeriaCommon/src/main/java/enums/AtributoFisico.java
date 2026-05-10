@@ -15,7 +15,7 @@ public enum AtributoFisico {
     BOCA,
     OIDOS,
     CUELLO,
-    AREA_PRECORDIA,
+    AREA_PRECORDIAL,
     ABDOMEN,
     COLUMNA_VERTEBRAL,
     LUMBAR,

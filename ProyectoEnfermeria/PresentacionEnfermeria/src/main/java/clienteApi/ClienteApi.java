@@ -21,6 +21,7 @@ import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import request.CrearCitaRequest;
 import request.IniciarSesionRequest;
+import response.AtributoFisicoResponse;
 import response.CitaPendienteResponse;
 import response.CrearCitaResponse;
 import response.DatosEmpleadoResponse;
@@ -231,6 +232,15 @@ public class ClienteApi {
                 .build();
         return handleResponse(client.sendAsync(request, HttpResponse.BodyHandlers.ofString()),
                 new TypeReference<Map<String, List<DetalleResponse>>>(){});
+    }
+    
+    public CompletableFuture<Map<String, AtributoFisicoResponse>> obtenerAtributosFisicosEmpleado(Integer id) {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(BASE_URL + "/expedientes/atributos/" + id))
+                .GET()
+                .build();
+        return handleResponse(client.sendAsync(request, HttpResponse.BodyHandlers.ofString()),
+                new TypeReference<Map<String, AtributoFisicoResponse>>(){});
     }
 
     private void validarRespuesta(HttpResponse<String> response) {

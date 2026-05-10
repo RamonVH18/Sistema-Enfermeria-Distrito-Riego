@@ -22,7 +22,7 @@ public class DetalleExtra implements Serializable {
     @Column(name = "id_detalle_extra")
     private Integer id;
 
-    @Column(nullable = false, length = 500)
+    @Column(nullable = false, length = 1500)
     private String valor;
 
     @ManyToOne(cascade = CascadeType.PERSIST) // Nos ahorra el crear el antecedente previamente

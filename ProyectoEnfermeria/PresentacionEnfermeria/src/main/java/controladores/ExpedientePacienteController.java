@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 import javafx.application.Platform;
@@ -21,6 +22,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.StackPane;
+import response.AtributoFisicoResponse;
 import response.DatosEmpleadoResponse;
 import response.DetalleResponse;
 import response.EmpleadoHistoricoResponse;
@@ -38,6 +40,8 @@ public class ExpedientePacienteController implements Initializable {
     private Label lblPresion, lblFrecCard, lblTemp, lblPeso, lblAltura, lblSaturacion, lblIMC;
     @FXML
     private Label lblLaboral, lblHeredofamiliar, lblPatologico, lblNoPatologico, lblAmputacion, lblGineco, lblIncapacidad;
+    @FXML
+    private Label lblAgudezaVisual, lblCabeza, lblOjos, lblBoca, lblOidos, lblCuello, lblAreaPrecordial, lblAbdomen, lblColumnaVertebral, lblLumbar, lblMiembrosToracicos, lblMiembrosPelvicos;
     @FXML
     private TextArea txtNotas;
     @FXML
@@ -92,7 +96,7 @@ public class ExpedientePacienteController implements Initializable {
                 cargarAntecedentes();
             }
             case "Atributos.fxml" -> {
-               cargarAtributos();
+                cargarAtributos();
             }
             default ->
                 throw new AssertionError();
@@ -129,34 +133,49 @@ public class ExpedientePacienteController implements Initializable {
     private void cargarAntecedentes() {
         clienteApi.obtenerAntecedentesEmpleado(empleadoActivo.getIdEmpleado()).thenAccept(antecedente -> {
             Platform.runLater(() -> {
-                lblLaboral.setText(procesarLista(antecedente.get("LABORAL")));
-                lblHeredofamiliar.setText(procesarLista(antecedente.get("HEREDOFAMILIAR")));
-                lblPatologico.setText(procesarLista(antecedente.get("PATOLOGICO")));
-                lblNoPatologico.setText(procesarLista(antecedente.get("NO_PATOLOGICO")));
-                lblAmputacion.setText(procesarLista(antecedente.get("AMPUTACION")));
-                lblGineco.setText(procesarLista(antecedente.get("GINECO_OBSTERICO")));
-                lblIncapacidad.setText(procesarLista(antecedente.get("INCAPACIDAD")));
+                lblLaboral.setText(procesarListaAntecedentes(antecedente.get("LABORAL")));
+                lblHeredofamiliar.setText(procesarListaAntecedentes(antecedente.get("HEREDOFAMILIAR")));
+                lblPatologico.setText(procesarListaAntecedentes(antecedente.get("PATOLOGICO")));
+                lblNoPatologico.setText(procesarListaAntecedentes(antecedente.get("NO_PATOLOGICO")));
+                lblAmputacion.setText(procesarListaAntecedentes(antecedente.get("AMPUTACION")));
+                lblGineco.setText(procesarListaAntecedentes(antecedente.get("GINECO_OBSTERICO")));
+                lblIncapacidad.setText(procesarListaAntecedentes(antecedente.get("INCAPACIDAD")));
             });
         }).exceptionally(ex -> {
             Platform.runLater(() -> System.err.println("Error: " + ex.getMessage()));
             return null;
         });
     }
-    
+
     @FXML
     private void abrirAtributos() {
         cargarStackPane("Atributos.fxml");
     }
-    
+
     private void cargarAtributos() {
-        
+        clienteApi.obtenerAtributosFisicosEmpleado(empleadoActivo.getIdEmpleado()).thenAccept(atributos -> {
+            Platform.runLater(() -> {
+                lblAgudezaVisual.setText(procesarAgudezaVisual(atributos.get("AGUDEZA_VISUAL")));
+                lblCabeza.setText(procesarMapaAtributos(atributos.get("CABEZA")));
+                lblOjos.setText(procesarMapaAtributos(atributos.get("OJOS")));
+                lblBoca.setText(procesarMapaAtributos(atributos.get("BOCA")));
+                lblOidos.setText(procesarMapaAtributos(atributos.get("OIDOS")));
+                lblCuello.setText(procesarMapaAtributos(atributos.get("CUELLO")));
+                lblAreaPrecordial.setText(procesarMapaAtributos(atributos.get("AREA_PRECORDIAL")));
+                lblAbdomen.setText(procesarMapaAtributos(atributos.get("ABDOMEN")));
+                lblColumnaVertebral.setText(procesarMapaAtributos(atributos.get("COLUMNA_VERTEBRAL")));
+                lblLumbar.setText(procesarMapaAtributos(atributos.get("LUMBAR")));
+                lblMiembrosToracicos.setText(procesarMapaAtributos(atributos.get("MIEMBROS_TORACICOS")));
+                lblMiembrosPelvicos.setText(procesarMapaAtributos(atributos.get("MIEMBROS_PELVICOS")));
+            });
+        });
     }
 
     /**
      * Método auxiliar para convertir la lista de detalles en un String legible
      * Si no hay datos, devuelve "N/A"
      */
-    private String procesarLista(List<DetalleResponse> lista) {
+    private String procesarListaAntecedentes(List<DetalleResponse> lista) {
         if (lista == null || lista.isEmpty()) {
             return "N/A";
         }
@@ -166,6 +185,54 @@ public class ExpedientePacienteController implements Initializable {
                 .map(DetalleResponse::getEspecificacion) // O el nombre del método que obtenga el texto en tu POJO
                 .filter(valor -> valor != null && !valor.isBlank())
                 .collect(Collectors.joining(", "));
+    }
+
+    private String procesarMapaAtributos(AtributoFisicoResponse atributo) {
+        if (atributo == null) {
+            return "Sin datos";
+        }
+        Map<String, Object> map = atributo.getPropiedades();
+        
+        if (map == null) {
+            return "Sin propiedades registradas";
+        }
+
+        StringBuilder sb = new StringBuilder();
+
+        // 2. Manejo genérico para el resto de las tablas
+        map.forEach((nombre, datos) -> {
+            if (!"tipo".equals(nombre) && datos instanceof Map) {
+                Map<String, String> valores = (Map<String, String>) datos;
+                String estado = valores.getOrDefault("estado", "N/A");
+                String nota = valores.getOrDefault("nota", "");
+
+                sb.append("• ").append(nombre).append(": ")
+                        .append(estado);
+
+                if (!nota.isEmpty()) {
+                    sb.append(" (").append(nota).append(")");
+                }
+                sb.append("\n");
+            }
+        });
+
+        return sb.toString().trim();
+    }
+
+    private String procesarAgudezaVisual(AtributoFisicoResponse atributo) {
+        StringBuilder sb = new StringBuilder();
+        Map<String, Object> prop = atributo.getPropiedades();
+        // Aquí accedes directamente a las llaves que ya conoces de tu JSON
+        Map<String, String> od = (Map<String, String>) prop.get("ojo_derecho");
+        Map<String, String> oi = (Map<String, String>) prop.get("ojo_izquierdo");
+
+        sb.append("Ojo Derecho:\n Lentes: ").append(od.get("lentes"))
+                .append(", Cromática: ").append(od.get("vision_cromatica"))
+                .append("\nOjo Izquierdo:\n Lentes: ").append(oi.get("lentes"))
+                .append(", Cromática: ").append(oi.get("vision_cromatica"))
+                .append("\nNota: ").append(prop.get("nota"));
+
+        return sb.toString();
     }
 
 }
