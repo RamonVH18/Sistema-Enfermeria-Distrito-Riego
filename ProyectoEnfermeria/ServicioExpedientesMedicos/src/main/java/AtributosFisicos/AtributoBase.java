@@ -4,6 +4,7 @@
  */
 package AtributosFisicos;
 
+import enums.AtributoFisico;
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlAttribute;
@@ -30,6 +31,27 @@ public class AtributoBase {
 
     public AtributoBase() {
         this.partes = new ArrayList<>();
+    }
+    
+    public AtributoBase(String tipo, List<ParteCuerpo> partes) {
+        this.tipo = tipo;
+        this.partes = partes;
+    }
+    
+    public static AtributoBase fromMap(Map<String, Object> map, AtributoFisico atributo) {
+        
+        String tipo = (String) map.get("tipo");
+        List<ParteCuerpo> partes = new ArrayList<>();
+        List<String> campos = atributo.getCampos();
+        for (String c: campos) {
+            ParteCuerpo p = new ParteCuerpo();
+            Map<String, String> m = (Map<String, String>) map.get(c);
+            p.setNombre(c);
+            p.setEstado(m.get("estado"));
+            p.setEstado(m.get("nota"));
+            partes.add(p);
+        }
+        return new AtributoBase(tipo, partes);
     }
 
     public List<ParteCuerpo> getPartes() {

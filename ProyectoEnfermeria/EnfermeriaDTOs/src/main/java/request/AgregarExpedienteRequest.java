@@ -5,6 +5,7 @@
 package request;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -16,7 +17,7 @@ public class AgregarExpedienteRequest {
     private String nss;
     private String TipoSangre;
     private List<AntecedentesRequest> antecedentes;
-    private List<AtributosFisicosRequest> atributos;
+    private Map<String, AtributosFisicosRequest> atributos;
 
     public AgregarExpedienteRequest() {
     }
@@ -53,15 +54,15 @@ public class AgregarExpedienteRequest {
         this.antecedentes = antecedentes;
     }
 
-    public List<AtributosFisicosRequest> getAtributos() {
+    public Map<String, AtributosFisicosRequest> getAtributos() {
         return atributos;
     }
 
-    public void setAtributos(List<AtributosFisicosRequest> atributos) {
+    public void setAtributos(Map<String, AtributosFisicosRequest> atributos) {
         this.atributos = atributos;
     }
 
-    public AgregarExpedienteRequest(Integer idEmpleado, String nss, String TipoSangre, List<AntecedentesRequest> antecedentes, List<AtributosFisicosRequest> atributos) {
+    public AgregarExpedienteRequest(Integer idEmpleado, String nss, String TipoSangre, List<AntecedentesRequest> antecedentes, Map<String, AtributosFisicosRequest> atributos) {
         this.idEmpleado = idEmpleado;
         this.nss = nss;
         this.TipoSangre = TipoSangre;

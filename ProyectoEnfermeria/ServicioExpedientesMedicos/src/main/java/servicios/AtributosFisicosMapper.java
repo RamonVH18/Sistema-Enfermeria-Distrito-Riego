@@ -56,15 +56,24 @@ public class AtributosFisicosMapper {
         }
         return map;
     }
-
-    public String guardarAgudezaVisual(AgudezaVisual agudeza, String nombreArchivo) {
+    
+    public static String convertirPropiedadesAXML(Map<String, Object> props, AtributoFisico tipoAtributo) {
+        if (tipoAtributo.equals(AtributoFisico.AGUDEZA_VISUAL)) {
+            AgudezaVisual agudezaVisual = AgudezaVisual.fromMap(props);
+            return generarXMLAgudezaVisual(agudezaVisual);
+        }
+        AtributoBase atributoBase = AtributoBase.fromMap(props, tipoAtributo);
+        return generarXmlAtributo(atributoBase);
+    }
+    
+    private static String generarXMLAgudezaVisual(AgudezaVisual agudeza) {
         try {
             JAXBContext context = JAXBContext.newInstance(AgudezaVisual.class);
             Marshaller marshaller = context.createMarshaller();
 
-            SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-            Schema schema = sf.newSchema(new File("ruta/a/tu/AgudezaVisual.xsd"));
-            marshaller.setSchema(schema);
+//            SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+//            Schema schema = sf.newSchema(new File("src/main/resources/xsd/AgudezaVisual.xsd"));
+//            marshaller.setSchema(schema);
 
             // No necesitamos que sea "bonito" (indentado) para la base de datos, 
             // así ahorramos espacio en el disco.
@@ -76,11 +85,11 @@ public class AtributosFisicosMapper {
             return sw.toString(); // Este es el String que irá al SQL
         } catch (JAXBException e) {
             throw new RuntimeException("Error al mapear el objeto: " + e.getMessage());
-        } catch (SAXException ex) {
+        } /*catch (SAXException ex) {
             Logger.getLogger(AtributosFisicosMapper.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
-
+        */
     }
 
     private static AtributoFisicoResponse obtenerAgudezaVisual(DetalleExtra d) {
@@ -119,5 +128,30 @@ public class AtributosFisicosMapper {
             return null;
         }
     }
+    
+    public static String generarXmlAtributo(AtributoBase atributo) {
+    try {
+        // 1. Crear el contexto con la clase base
+        JAXBContext context = JAXBContext.newInstance(AtributoBase.class);
 
+        // 2. Crear el Marshaller (el que "ordena" los datos hacia afuera)
+        Marshaller marshaller = context.createMarshaller();
+
+        // 3. Configuración (Opcional pero recomendada para que el XML sea legible)
+        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.FALSE);
+
+        // 4. El "destino" de los datos (un StringWriter en este caso)
+        StringWriter writer = new StringWriter();
+
+        // 5. El acto final: Convertir el objeto a XML
+        marshaller.marshal(atributo, writer);
+
+        return writer.toString();
+
+    } catch (JAXBException e) {
+        System.err.println("Error al serializar el objeto a XML");
+        e.printStackTrace();
+        return null;
+    }
+}
 }

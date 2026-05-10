@@ -4,11 +4,13 @@
  */
 package AtributosFisicos;
 
+import enums.AtributoFisico;
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlAttribute;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,6 +34,21 @@ public class AgudezaVisual {
     public AgudezaVisual(List<OjoData> ojos, String nota) {
         this.ojos = ojos;
         this.nota = nota;
+    }
+    
+    public static AgudezaVisual fromMap (Map<String, Object> map) {
+        List<OjoData> ojos = new ArrayList<>();
+        List<String> campos = AtributoFisico.AGUDEZA_VISUAL.getCampos();
+        for (String c: campos) {
+            OjoData o = new OjoData();
+            Map<String, String> m = (Map<String, String>) map.get(c);
+            o.setCampoVisual(m.get("campo_visual"));
+            o.setVisionCromatica(m.get("vision_cromatica"));
+            o.setLentes(m.get("lentes"));
+            o.setTipo(c.equals("ojo_derecho") ? "derecho" : "izquierdo");
+        }
+        String nota = (String) map.get("nota");
+        return new AgudezaVisual(ojos, nota);
     }
 
     public List<OjoData> getOjos() {

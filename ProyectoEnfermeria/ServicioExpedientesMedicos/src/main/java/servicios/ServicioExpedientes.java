@@ -9,6 +9,7 @@ import entidades.DetalleExtra;
 import entidades.Empleado;
 import entidades.ExpedienteMedico;
 import entidades.RegistroMedico;
+import enums.AtributoFisico;
 import enums.CategoriaDetalle;
 import enums.TipoSangre;
 import excepciones.ExpedientesException;
@@ -66,8 +67,7 @@ public class ServicioExpedientes implements IServicioExpedientes {
     @Override
     public AgregarExpedienteResponse agregarExpedienteEmpleado(AgregarExpedienteRequest exp) {
         List<AntecedentesRequest> antecedentes = exp.getAntecedentes();
-        List<AtributosFisicosRequest> atributos = exp.getAtributos();
-        
+        Map<String, AtributosFisicosRequest> atributos = exp.getAtributos();
         Empleado empleado = empleadoRepository.getReferenceById(exp.getIdEmpleado());
         ExpedienteMedico expediente = new ExpedienteMedico(
                 TipoSangre.desdeString(exp.getTipoSangre()),
@@ -77,9 +77,22 @@ public class ServicioExpedientes implements IServicioExpedientes {
         if (antecedentes != null) {
             for (AntecedentesRequest a : antecedentes) {
                 Detalle detalle = detalleRepository.getReferenceById(a.getIdDetalle());
-                
+
                 expediente.getDetallesExtra().add(
                         new DetalleExtra(a.getDetalle(), detalle, expediente));
+            }
+        }
+        if (antecedentes != null) {
+            for (AtributoFisico a : AtributoFisico.values()) {
+                AtributosFisicosRequest atributo = atributos.get(a.name());
+                if (atributo == null) {
+                    continue;
+                }
+                Detalle detalle = detalleRepository.getReferenceById(atributo.getIdDetalle());
+                String valor = AtributosFisicosMapper.convertirPropiedadesAXML(atributo.getPropiedades(), a);
+                expediente.getDetallesExtra().add(
+                        new DetalleExtra(valor, detalle, expediente)
+                );
             }
         }
         expediente = expedientesRepository.save(expediente);
@@ -113,7 +126,7 @@ public class ServicioExpedientes implements IServicioExpedientes {
         }
         return DetalleExtraMapper.toDetalleResponseMap(detalles);
     }
-    
+
     @Override
     public Map<String, AtributoFisicoResponse> obtenerAtributosFisicosEmpleados(Integer idExpediente) {
         List<DetalleExtra> detalles = detalleExtraRepository.findByExpedienteYCategoria(idExpediente, CategoriaDetalle.ATRIBUTO_FISICO);
