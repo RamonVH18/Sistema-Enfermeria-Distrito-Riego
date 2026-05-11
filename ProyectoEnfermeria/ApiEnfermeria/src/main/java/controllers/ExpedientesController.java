@@ -17,6 +17,7 @@ import response.AgregarExpedienteResponse;
 import response.DatosEmpleadoResponse;
 import response.AntecedenteResponse;
 import response.AtributoFisicoResponse;
+import response.ExpedienteConfigResponse;
 import response.SignosVitalesResponse;
 
 /**
@@ -54,6 +55,11 @@ public class ExpedientesController {
     @GetMapping("/atributos/{id}")
     public ResponseEntity<Map<String, AtributoFisicoResponse>> obtenerAtributosFisicosEmpleados(@PathVariable Integer id) {
         return ResponseEntity.ok(servicioExpediente.obtenerAtributosFisicosEmpleados(id));
+    }
+    
+    @GetMapping("/config")
+    public ResponseEntity<ExpedienteConfigResponse> obtenerInfoConfiguracionExpediente() {
+        return ResponseEntity.ok(servicioExpediente.obtenerInfoConfiguracionExpediente());
     }
     
 

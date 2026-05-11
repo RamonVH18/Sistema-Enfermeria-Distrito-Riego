@@ -16,6 +16,7 @@ import excepciones.ExpedientesException;
 import interfaces.IServicioExpedientes;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import mapper.DetalleExtraMapper;
@@ -33,6 +34,7 @@ import response.AgregarExpedienteResponse;
 import response.DatosEmpleadoResponse;
 import response.AntecedenteResponse;
 import response.AtributoFisicoResponse;
+import response.ExpedienteConfigResponse;
 import response.SignosVitalesResponse;
 
 /**
@@ -134,6 +136,31 @@ public class ServicioExpedientes implements IServicioExpedientes {
             throw new ExpedientesException("No se encontraron detalles medicos.", HttpStatus.BAD_REQUEST, "400");
         }
         return AtributosFisicosMapper.toDetalleExtraResponse(detalles);
+    }
+
+    @Override
+    public ExpedienteConfigResponse obtenerInfoConfiguracionExpediente() {
+
+        List<Detalle> antecedentes = detalleRepository.findByCategoria(CategoriaDetalle.ANTECEDENTE);
+        //Mapa de antecedentes
+        Map<String, Integer> ant = new HashMap<>();
+
+        for (Detalle d : antecedentes) {
+            ant.put(d.getNombreDetalle(), d.getId());
+        }
+        List<Detalle> atributos = detalleRepository.findByCategoria(CategoriaDetalle.ATRIBUTO_FISICO);
+        //Mapa de atributos
+        Map<String, Integer> atr = new HashMap<>();
+        for (Detalle d : atributos) {
+            atr.put(d.getNombreDetalle(), d.getId());
+        }
+
+        List<String> tiposSangre = new ArrayList<>();
+        for (TipoSangre t : TipoSangre.values()) {
+            tiposSangre.add(t.getValor());
+        }
+        
+        return new ExpedienteConfigResponse(ant, atr, tiposSangre);
     }
 
     @Override

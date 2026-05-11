@@ -8,6 +8,7 @@ import response.AgregarExpedienteResponse;
 import response.DatosEmpleadoResponse;
 import response.AntecedenteResponse;
 import response.AtributoFisicoResponse;
+import response.ExpedienteConfigResponse;
 import response.SignosVitalesResponse;
 
 /**
@@ -28,4 +29,6 @@ public interface IServicioExpedientes {
     public Map<String, AtributoFisicoResponse> obtenerAtributosFisicosEmpleados(Integer idExpediente);
     
     public List<ReporteRegistroDTO> obtenerUltimoRegistroPacientes();
+    
+    public ExpedienteConfigResponse obtenerInfoConfiguracionExpediente();
 }

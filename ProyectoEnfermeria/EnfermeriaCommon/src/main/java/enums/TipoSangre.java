@@ -32,4 +32,5 @@ public enum TipoSangre {
         // Si no lo encuentra, puedes lanzar error o devolver null
         throw new IllegalArgumentException("No se encontró el tipo: " + valorBuscado);
     }
+    
 }

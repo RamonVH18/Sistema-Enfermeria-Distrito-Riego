@@ -27,6 +27,7 @@ import response.CrearCitaResponse;
 import response.DatosEmpleadoResponse;
 import response.DetalleResponse;
 import response.EmpleadoOptionResponse;
+import response.ExpedienteConfigResponse;
 import response.UsuarioResponse;
 import response.SignosVitalesResponse;
 
@@ -241,6 +242,15 @@ public class ClienteApi {
                 .build();
         return handleResponse(client.sendAsync(request, HttpResponse.BodyHandlers.ofString()),
                 new TypeReference<Map<String, AtributoFisicoResponse>>(){});
+    }
+    
+    public CompletableFuture<ExpedienteConfigResponse> obtenerInfoConfiguracionExpediente() {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(BASE_URL + "/expedientes/config"))
+                .GET()
+                .build();
+        return handleResponse(client.sendAsync(request, HttpResponse.BodyHandlers.ofString()), 
+                ExpedienteConfigResponse.class);
     }
 
     private void validarRespuesta(HttpResponse<String> response) {
