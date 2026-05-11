@@ -4,6 +4,7 @@
  */
 package response;
 
+import dtos.EmpleadoSinExpedienteDTO;
 import java.util.List;
 import java.util.Map;
 
@@ -12,6 +13,8 @@ import java.util.Map;
  * @author Ramon Valencia
  */
 public class ExpedienteConfigResponse {
+    
+    private List<EmpleadoSinExpedienteDTO> empleado;
     
     private Map<String, Integer> antecedentes;
     
@@ -22,10 +25,19 @@ public class ExpedienteConfigResponse {
     public ExpedienteConfigResponse() {
     }
 
-    public ExpedienteConfigResponse(Map<String, Integer> antecedentes, Map<String, Integer> atributos, List<String> tiposSangre) {
+    public ExpedienteConfigResponse(List<EmpleadoSinExpedienteDTO> empleado, Map<String, Integer> antecedentes, Map<String, Integer> atributos, List<String> tiposSangre) {
+        this.empleado = empleado;
         this.antecedentes = antecedentes;
         this.atributos = atributos;
         this.tiposSangre = tiposSangre;
+    }
+
+    public List<EmpleadoSinExpedienteDTO> getEmpleado() {
+        return empleado;
+    }
+
+    public void setEmpleado(List<EmpleadoSinExpedienteDTO> empleado) {
+        this.empleado = empleado;
     }
 
     public Map<String, Integer> getAntecedentes() {

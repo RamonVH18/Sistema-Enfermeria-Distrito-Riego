@@ -7,6 +7,7 @@ clienteApi\ClienteApi.class
 response\EmpleadoOptionResponse.class
 request\CrearCitaRequest.class
 response\UsuarioResponse.class
+response\ExpedienteConfigResponse.class
 response\DatosEmpleadoResponse.class
 controladores\PantallaCitasController.class
 controladores\RegistrarExpedienteController.class
@@ -17,6 +18,7 @@ controladores\AgendarCitaController.class
 controladores\IniciarSesionController.class
 response\EmpleadoHistoricoResponse.class
 dtos\ReporteEmpleadosDTO.class
+controladores\RegistrarExpedienteController$1.class
 clienteApi\ClienteApi$7.class
 response\CitaPendienteResponse.class
 response\CrearCitaResponse.class
@@ -34,6 +36,7 @@ clienteApi\ClienteApi$1.class
 request\IniciarSesionRequest.class
 controladores\AgendarCitaController$1.class
 response\ExpedienteResponse.class
+dtos\EmpleadoSinExpedienteDTO.class
 response\EmpleadoResponse.class
 response\ReporteEmpleadosResponse.class
 utilerias\Utils.class

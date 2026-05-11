@@ -21,8 +21,10 @@ C:\Users\PC\Documents\GitHub\Sistema-Enfermeria-Distrito-Riego\ProyectoEnfermeri
 C:\Users\PC\Documents\GitHub\Sistema-Enfermeria-Distrito-Riego\ProyectoEnfermeria\PresentacionEnfermeria\src\main\java\request\IniciarSesionRequest.java
 C:\Users\PC\Documents\GitHub\Sistema-Enfermeria-Distrito-Riego\ProyectoEnfermeria\PresentacionEnfermeria\src\main\java\clienteApi\ClienteApi.java
 C:\Users\PC\Documents\GitHub\Sistema-Enfermeria-Distrito-Riego\ProyectoEnfermeria\PresentacionEnfermeria\src\main\java\response\DatosEmpleadoResponse.java
+C:\Users\PC\Documents\GitHub\Sistema-Enfermeria-Distrito-Riego\ProyectoEnfermeria\PresentacionEnfermeria\src\main\java\dtos\EmpleadoSinExpedienteDTO.java
 C:\Users\PC\Documents\GitHub\Sistema-Enfermeria-Distrito-Riego\ProyectoEnfermeria\PresentacionEnfermeria\src\main\java\controladores\InformesSaludController.java
 C:\Users\PC\Documents\GitHub\Sistema-Enfermeria-Distrito-Riego\ProyectoEnfermeria\PresentacionEnfermeria\src\main\java\response\AtributoFisicoResponse.java
+C:\Users\PC\Documents\GitHub\Sistema-Enfermeria-Distrito-Riego\ProyectoEnfermeria\PresentacionEnfermeria\src\main\java\response\ExpedienteConfigResponse.java
 C:\Users\PC\Documents\GitHub\Sistema-Enfermeria-Distrito-Riego\ProyectoEnfermeria\PresentacionEnfermeria\src\main\java\module-info.java
 C:\Users\PC\Documents\GitHub\Sistema-Enfermeria-Distrito-Riego\ProyectoEnfermeria\PresentacionEnfermeria\src\main\java\utilerias\ParentAware.java
 C:\Users\PC\Documents\GitHub\Sistema-Enfermeria-Distrito-Riego\ProyectoEnfermeria\PresentacionEnfermeria\src\main\java\response\CitaPendienteResponse.java

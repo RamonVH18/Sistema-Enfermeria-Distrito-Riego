@@ -1,5 +1,6 @@
 package servicios;
 
+import dtos.EmpleadoSinExpedienteDTO;
 import repositorios.DetalleExtraRepository;
 import repositorios.ExpedienteMedicoRepository;
 import repositorios.RegistroMedicoRepository;
@@ -154,13 +155,18 @@ public class ServicioExpedientes implements IServicioExpedientes {
         for (Detalle d : atributos) {
             atr.put(d.getNombreDetalle(), d.getId());
         }
-
+        
         List<String> tiposSangre = new ArrayList<>();
         for (TipoSangre t : TipoSangre.values()) {
             tiposSangre.add(t.getValor());
         }
         
-        return new ExpedienteConfigResponse(ant, atr, tiposSangre);
+        List<EmpleadoSinExpedienteDTO> empleadosSinExpediente = new ArrayList<>();
+        for (Empleado e : empleadoRepository.findEmpleadosSinExpediente()) {
+            empleadosSinExpediente.add(new EmpleadoSinExpedienteDTO(e.getId(), e.getNombreCompleto()));
+        }
+        
+        return new ExpedienteConfigResponse(empleadosSinExpediente, ant, atr, tiposSangre);
     }
 
     @Override
