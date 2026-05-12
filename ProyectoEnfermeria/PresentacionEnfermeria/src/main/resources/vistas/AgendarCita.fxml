@@ -1,49 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
-<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox fx:id="formContainer" spacing="15" prefWidth="500" styleClass="form-card" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controladores.AgendarCitaController">
+<VBox fx:id="formContainer" prefWidth="500" spacing="15" styleClass="form-card" stylesheets="@../styles/AgendarCita.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/25" fx:controller="controladores.AgendarCitaController">
     <padding>
-        <Insets top="30" right="40" bottom="30" left="40" />
+        <Insets bottom="30" left="40" right="40" top="30" />
     </padding>
 
-    <Label text="Agendar Nueva Cita" styleClass="form-title" alignment="CENTER" maxWidth="Infinity" />
+    <Label alignment="CENTER" maxWidth="Infinity" styleClass="form-title" text="Agendar Nueva Cita" />
 
     <VBox spacing="5">
-        <Label text="Nombre del Paciente" styleClass="form-label" />
-        <ComboBox fx:id="cbPaciente" editable="true" maxWidth="Infinity" />
+        <Label styleClass="form-label" text="Nombre del Paciente" />
+        <ComboBox id="nombre-paciente" fx:id="cbPaciente" editable="true" maxWidth="Infinity" />
     </VBox>
 
     <VBox spacing="5">
-        <Label text="ID del Empleado" styleClass="form-label"  />
-        <TextField fx:id="txtIdEmpleado" promptText="00000XXXXX" editable="false"/>
+        <Label styleClass="form-label" text="Fecha" />
+        <DatePicker id="fecha-picker" fx:id="dpFechaCita" maxWidth="Infinity" />
     </VBox>
 
     <VBox spacing="5">
-        <Label text="Fecha" styleClass="form-label" />
-        <DatePicker fx:id="dpFechaCita" maxWidth="Infinity" />
+        <Label styleClass="form-label" text="Hora" />
+        <ComboBox id="hora-picker" fx:id="cbHora" maxWidth="Infinity" promptText="Seleccione hora" />
     </VBox>
 
     <VBox spacing="5">
-        <Label text="Hora" styleClass="form-label" />
-        <ComboBox fx:id="cbHora" maxWidth="Infinity" promptText="Seleccione hora" />
+        <Label styleClass="form-label" text="Descripción de la cita" />
+        <TextArea fx:id="txtDescripcion" prefHeight="100" promptText="ej. Chequeo Rutinario" wrapText="true">
+         <font>
+            <Font size="14.0" />
+         </font></TextArea>
     </VBox>
 
-    <VBox spacing="5">
-        <Label text="Descripción de la cita" styleClass="form-label" />
-        <TextArea fx:id="txtDescripcion" prefHeight="100" wrapText="true" promptText="ej. Chequeo Rutinario" />
-    </VBox>
-
-    <HBox spacing="20" alignment="CENTER">
-        <Button text="Cancelar" fx:id="btnCancelar" styleClass="btn-cancel" />
-        <Button text="Agendar Cita" fx:id="btnAgendar" styleClass="btn-submit" onAction="#guardarCita"/>
+    <HBox alignment="CENTER" spacing="20">
+        <Button fx:id="btnCancelar" styleClass="btn-cancel" text="Cancelar" />
+        <Button fx:id="btnAgendar" onAction="#guardarCita" styleClass="btn-submit" text="Agendar Cita" />
     </HBox>
 </VBox>

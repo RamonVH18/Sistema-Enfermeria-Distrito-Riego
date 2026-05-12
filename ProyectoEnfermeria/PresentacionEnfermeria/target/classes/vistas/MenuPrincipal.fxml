@@ -54,7 +54,7 @@
                                 <Font name="Segoe UI" size="12.0" />
                             </font>
                         </Label>
-                        <Button fx:id="btnInicioSesion" mnemonicParsing="false" style="-fx-border-width: 0;" styleClass="logout-button" text="Iniciar Sesión" />
+                        <Button fx:id="btnInicioSesion" mnemonicParsing="false" onAction="#logout" style="-fx-border-width: 0;" styleClass="logout-button" text="Cerrar Sesión" />
                </children>
                <padding>
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />

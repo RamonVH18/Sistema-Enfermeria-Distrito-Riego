@@ -11,6 +11,7 @@
 ============================ */
 .iniciar-sesion-root {
     -fx-background-color: #f5f7fa;
+    -fx-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     -fx-padding: 40;
     -fx-spacing: 15;
     -fx-alignment: center;
@@ -25,13 +26,9 @@
     -fx-text-fill: #004d99;
 }
 
-/* ============================
-   Labels de campo
-============================ */
-.iniciar-sesion-root Label.campo {
-    -fx-font-size: 13px;
-    -fx-text-fill: #333333;
-    -fx-font-weight: normal;
+.iniciar-sesion-root Label.campo{
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
 }
 
 /* ============================
@@ -40,6 +37,7 @@
 .iniciar-sesion-root TextField,
 .iniciar-sesion-root PasswordField {
     -fx-pref-width: 250px;
+    -fx-font-size: 14px;
     -fx-padding: 8;
     -fx-background-radius: 5px;
     -fx-border-radius: 5px;
@@ -55,9 +53,6 @@
     -fx-font-weight: bold;
     -fx-padding: 8 20;
     -fx-background-radius: 5px;
+    -fx-font-size: 16px;
     -fx-cursor: hand;
-}
-
-.iniciar-sesion-root Button:hover {
-    -fx-background-color: #0056b3;
 }

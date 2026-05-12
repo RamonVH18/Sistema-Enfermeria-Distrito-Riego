@@ -18,7 +18,7 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/vistas/IniciarSesion.fxml"));
-        Scene scene = new Scene(root);
+        scene = new Scene(root);
 
         // Vinculamos el CSS
         scene.getStylesheets().add(getClass().getResource("/styles/menuprincipal.css").toExternalForm());

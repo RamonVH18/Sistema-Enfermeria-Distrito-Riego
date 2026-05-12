@@ -10,6 +10,7 @@
 
 #citasMainCointaner{
     -fx-background-color: white;
+    -fx-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 /* 2. Content Area Styles */
@@ -20,8 +21,6 @@
 /* 3. Calendar Card Styles */
 .calendar-card {
     -fx-background-color: white;
-    -fx-background-radius: 10px;
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 5); /* Sombra suave */
 }
 
 .calendar-month-title {
@@ -33,6 +32,7 @@
 /* Personalización profunda del DatePicker nativo */
 .calendar-control {
     -fx-background-color: transparent;
+    -fx-font-size: 16px;
 }
 .calendar-control > .date-picker-display-node {
     -fx-border-width: 0;
@@ -50,7 +50,7 @@
 }
 
 .agenda-date-title {
-    -fx-font-size: 14px;
+    -fx-font-size: 16px;
     -fx-font-weight: bold;
     -fx-text-fill: #333333;
 }
@@ -72,7 +72,12 @@
     -fx-background-color: #194C87;
     -fx-text-fill: white;
     -fx-font-weight: bold;
+    -fx-font-size: 14px;
     -fx-padding: 10 20;
     -fx-background-radius: 5px;
     -fx-cursor: hand;
+}
+
+#nueva-cita-btn{
+    -fx-background-color: rgb(3, 143, 29);
 }

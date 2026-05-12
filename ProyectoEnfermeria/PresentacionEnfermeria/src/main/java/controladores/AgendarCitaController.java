@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package controladores;
 
 import clienteApi.ClienteApi;
@@ -31,8 +27,6 @@ public class AgendarCitaController implements Initializable {
     //OBJETOS DEL STAGE
     @FXML
     private ComboBox<EmpleadoOptionResponse> cbPaciente;
-    @FXML
-    private TextField txtIdEmpleado;
     @FXML
     private DatePicker dpFechaCita;
     @FXML
@@ -82,15 +76,6 @@ public class AgendarCitaController implements Initializable {
             }
         });
 
-        // Se agrega un listener en el cbPaciente en caso de seleccionar un paciente el textField del Id debe cambiar.
-        cbPaciente.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-            if (newSelection != null) {
-                txtIdEmpleado.setText(String.valueOf(newSelection.getIdEmpleado()));
-            } else {
-                Platform.runLater(() -> txtIdEmpleado.clear());
-            }
-        });
-
         // Se agrega un listener que permitira que si escribes un nombre el combobox cambiara y solo mostrara los valores que coincidan con el regex
         cbPaciente.getEditor().textProperty().addListener((obs, oldVal, newVal) -> {
             String filtro = (newVal == null || newVal.trim().isEmpty()) ? "" : newVal;
@@ -110,9 +95,15 @@ public class AgendarCitaController implements Initializable {
     private void actualizarListaEmpleados(String filtro) {
         cliente.buscarEmpleadosPorFiltro(filtro).thenAccept(lista -> {
             Platform.runLater(() -> {
-                String currentText = cbPaciente.getEditor().getText();
+                TextField editor = cbPaciente.getEditor();
+                
+                String currentText = editor.getText();
+                
                 cbPaciente.getItems().setAll(lista);
-                cbPaciente.getEditor().setText(currentText);
+                
+                editor.setText(currentText);
+                editor.end();
+                
                 if (!lista.isEmpty() && !filtro.isEmpty()) {
                     cbPaciente.show();
                 } else if (filtro.isEmpty()) {

@@ -2,6 +2,7 @@
     -fx-background-color: white;
     -fx-background-radius: 10;
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 5);
+    -fx-font-family:    "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .form-title {
@@ -12,19 +13,28 @@
 
 .form-label {
     -fx-font-weight: bold;
+    -fx-font-size: 14px;
     -fx-text-fill: #333333;
 }
 
 .btn-submit {
     -fx-background-color: #0056b3;
     -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
     -fx-padding: 10 30;
     -fx-background-radius: 5;
 }
 
+#hora-picker, #fecha-picker, #nombre-paciente{
+    -fx-font-size:14px;
+}
+
 .btn-cancel {
-    -fx-background-color: #4d4d4d;
+    -fx-background-color: red;
     -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
     -fx-padding: 10 30;
     -fx-background-radius: 5;
 }

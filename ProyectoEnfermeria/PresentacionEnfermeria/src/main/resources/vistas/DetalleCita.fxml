@@ -9,17 +9,16 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="cardDetalles" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="500.0" spacing="20.0" styleClass="floating-details-card" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" 
-      fx:controller="controladores.DetallesCitaController">
+<VBox fx:id="cardDetalles" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="600.0" spacing="20.0" styleClass="floating-details-card" stylesheets="@../styles/DetalleCita.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controladores.DetallesCitaController">
    <children>
-      <VBox alignment="CENTER" spacing="5.0">
+      <VBox alignment="CENTER" spacing="5.0" VBox.vgrow="ALWAYS">
          <children>
             <Label text="Detalles de la Cita" textFill="#2c3e50">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
             </Label>
-            <Label text="Sistema de Enfermería / Distrito de Riego Río Yaqui" textFill="#7f8c8d" />
+            <Label text="Sistema de Enfermería / Distrito de Riego Río Yaqui" />
             <Separator prefWidth="200.0">
                <VBox.margin>
                   <Insets top="10.0" />
@@ -28,7 +27,7 @@
          </children>
       </VBox>
 
-      <VBox spacing="10.0">
+      <VBox alignment="CENTER_LEFT" spacing="10.0">
          <children>
             <Label styleClass="detail-field-title" text="Paciente" textFill="#7f8c8d">
                <font>
@@ -43,14 +42,14 @@
             
             <HBox spacing="15.0">
                <children>
-                  <VBox HBox.hgrow="ALWAYS">
+                  <VBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
                      <children>
                         <Label styleClass="detail-field-title" text="ID del Empleado" textFill="#7f8c8d" />
                         <Label fx:id="lblIdEmpleado" text="00000252525" textFill="#34495e" />
                      </children>
                   </VBox>
-                  <Separator orientation="VERTICAL" />
-                  <VBox HBox.hgrow="ALWAYS">
+                  <Separator orientation="VERTICAL" HBox.hgrow="ALWAYS" />
+                  <VBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
                      <children>
                         <Label styleClass="detail-field-title" text="Estado" textFill="#7f8c8d" />
                         <HBox alignment="CENTER_LEFT" spacing="5.0">
@@ -69,16 +68,16 @@
          </children>
       </VBox>
 
-      <HBox fillHeight="false" spacing="20.0">
+      <HBox spacing="15.0" VBox.vgrow="ALWAYS">
          <children>
-            <VBox HBox.hgrow="ALWAYS">
+            <VBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
                <children>
                   <Label styleClass="detail-field-title" text="Fecha" textFill="#7f8c8d" />
                   <Label fx:id="lblFecha" text="23/02/2026" textFill="#34495e" />
                </children>
             </VBox>
-            <Separator orientation="VERTICAL" />
-            <VBox HBox.hgrow="ALWAYS">
+            <Separator orientation="VERTICAL" HBox.hgrow="ALWAYS" />
+            <VBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
                <children>
                   <Label styleClass="detail-field-title" text="Hora" textFill="#7f8c8d" />
                   <Label fx:id="lblHora" text="8:00 AM" textFill="#34495e" />
@@ -87,27 +86,24 @@
          </children>
       </HBox>
 
-      <VBox spacing="10.0">
+      <VBox spacing="10.0" VBox.vgrow="ALWAYS">
          <children>
             <Label styleClass="detail-field-title" text="Descripción de la Cita" textFill="#7f8c8d" />
-            <TextArea fx:id="txtDescripcion" editable="false" prefHeight="100.0" promptText="Sin descripción" styleClass="detail-text-area" text="Paciente refiere dolor de garganta intenso desde ayer por la noche, acompañado de ligera dificultad para tragar. No reporta fiebre. Se programó para valoración inicial por enfermería." wrapText="true" />
+            <TextArea fx:id="txtDescripcion" editable="false" prefHeight="100.0" promptText="Sin descripción" styleClass="detail-text-area" text="Paciente refiere dolor de garganta intenso desde ayer por la noche, acompañado de ligera dificultad para tragar. No reporta fiebre. Se programó para valoración inicial por enfermería." wrapText="true" VBox.vgrow="ALWAYS" />
          </children>
       </VBox>
-      <Separator prefWidth="200.0">
+      <Separator prefWidth="200.0" VBox.vgrow="ALWAYS">
          <VBox.margin>
             <Insets top="10.0" />
          </VBox.margin>
       </Separator>
 
-      <HBox alignment="CENTER_RIGHT" spacing="10.0" styleClass="action-bar">
+      <HBox alignment="CENTER" spacing="10.0" styleClass="action-bar" VBox.vgrow="ALWAYS">
          <children>
-            <HBox spacing="10.0" HBox.hgrow="ALWAYS">
-               <children>
-                  <Button fx:id="btnCancelarCita" mnemonicParsing="false"  styleClass="btn-danger-outline" text="❌ Cancelar Cita" onAction="#cancelarCita"/>
-               </children>
-            </HBox>
-            <Button fx:id="btnMarcarAsistencia" mnemonicParsing="false"  styleClass="btn-primary" text="✅ Marcar Asistencia" onAction="#marcarAsistencia"/>
-            <Button fx:id="btnVolver" mnemonicParsing="false"  styleClass="btn-secondary" text="Volver" />
+            <Button fx:id="btnCancelarCita" mnemonicParsing="false" onAction="#cancelarCita" styleClass="btn-danger-outline" text="Cancelar Cita" />
+            <Button id="reagendar-btn" mnemonicParsing="false" text="Reagendar" />
+            <Button fx:id="btnMarcarAsistencia" mnemonicParsing="false" onAction="#marcarAsistencia" styleClass="btn-primary" text="Marcar Asistencia" />
+            <Button fx:id="btnVolver" mnemonicParsing="false" styleClass="btn-secondary" text="Volver" />
          </children>
          <VBox.margin>
             <Insets top="10.0" />
