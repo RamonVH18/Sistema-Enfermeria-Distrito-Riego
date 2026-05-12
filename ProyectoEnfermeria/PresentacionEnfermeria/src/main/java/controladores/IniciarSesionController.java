@@ -1,13 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
 package controladores;
 
 import clienteApi.ClienteApi;
 import java.io.IOException;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,6 +12,8 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import request.IniciarSesionRequest;
 
@@ -24,6 +21,7 @@ import request.IniciarSesionRequest;
  * FXML Controller class
  *
  * @author isaac
+ * @author Leonardo Flores Leyva
  */
 public class IniciarSesionController {
 
@@ -36,10 +34,10 @@ public class IniciarSesionController {
     @FXML
     private Button btnIniciarSesion;
 
-    ClienteApi cliente = new ClienteApi();
+    private final ClienteApi cliente = new ClienteApi();
 
     @FXML
-    private void handleLogin(ActionEvent event) {
+    private void handleLogin() {
         String email = txtEmail.getText();
         String password = txtPassword.getText();
 
@@ -60,10 +58,17 @@ public class IniciarSesionController {
             });
         }).exceptionally(ex -> {
             Platform.runLater(() -> {
-                mostrarAlerta("Error", "No se pudo iniciar sesión: " + ex.getMessage());
+                mostrarAlerta("Error", "No se pudo iniciar sesión. Correo o contraseña incorrectos.");
             });
             return null;
         });
+    }
+    
+    @FXML
+    private void enterLogin(KeyEvent event){
+        if(event.getCode() == KeyCode.ENTER){
+            handleLogin();
+        }
     }
 
     private void mostrarAlerta(String titulo, String mensaje) {
@@ -98,7 +103,6 @@ public class IniciarSesionController {
 
         } catch (IOException e) {
             System.err.println("Error al abrir la ventana de Nueva Cita: " + e.getMessage());
-            e.printStackTrace();
         }
     }
 }
