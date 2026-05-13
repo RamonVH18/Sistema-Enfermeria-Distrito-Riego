@@ -14,6 +14,7 @@ response\ReagendarCitaResponse.class
 request\AtributosFisicosRequest.class
 response\DatosEmpleadoResponse.class
 controladores\PantallaCitasController.class
+response\AgregarExpedienteResponse.class
 controladores\RegistrarExpedienteController.class
 response\AtributoFisicoResponse.class
 response\DetalleResponse.class
@@ -24,6 +25,7 @@ request\AntecedentesRequest.class
 controladores\RegistroAntecedentesController.class
 controladores\IniciarSesionController.class
 response\EmpleadoHistoricoResponse.class
+utilerias\SesionExpedientes.class
 clienteApi\ClienteApi$7.class
 response\CitaPendienteResponse.class
 response\CrearCitaResponse.class

@@ -1,5 +1,6 @@
 package clienteApi;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -18,8 +19,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
+import request.AgregarExpedienteRequest;
 import request.CrearCitaRequest;
 import request.IniciarSesionRequest;
+import response.AgregarExpedienteResponse;
 import response.AtributoFisicoResponse;
 import response.CitaPendienteResponse;
 import response.CrearCitaResponse;
@@ -250,6 +253,20 @@ public class ClienteApi {
                 .build();
         return handleResponse(client.sendAsync(request, HttpResponse.BodyHandlers.ofString()), 
                 ExpedienteConfigResponse.class);
+    }
+    
+    public CompletableFuture<AgregarExpedienteResponse>  agregarExpedienteEmpleado(AgregarExpedienteRequest agregarExpediente) {
+        try {
+            String json = mapper.writeValueAsString(agregarExpediente);
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(BASE_URL + "/expedientes"))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(json))
+                    .build();
+            return handleResponse(client.sendAsync(request, HttpResponse.BodyHandlers.ofString()), AgregarExpedienteResponse.class);
+        } catch (JsonProcessingException ex) {
+            return CompletableFuture.failedFuture(ex);
+        }
     }
 
     private void validarRespuesta(HttpResponse<String> response) {

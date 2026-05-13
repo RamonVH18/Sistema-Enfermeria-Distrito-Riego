@@ -70,4 +70,7 @@ public class AgregarExpedienteRequest {
         this.atributos = atributos;
     }
     
+    
+    
+    
 }

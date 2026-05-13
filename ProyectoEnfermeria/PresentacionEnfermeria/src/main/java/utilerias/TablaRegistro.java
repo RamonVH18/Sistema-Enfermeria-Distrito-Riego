@@ -4,15 +4,16 @@
  */
 package utilerias;
 
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleStringProperty;
+import java.util.HashMap;
+import java.util.Map;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxTableCell;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.VBox;
+import request.AntecedentesRequest;
+import response.AtributoFisicoResponse;
 
 /**
  *
@@ -20,8 +21,14 @@ import javafx.scene.layout.VBox;
  */
 public class TablaRegistro extends VBox {
 
+    private Label lblTitulo;
+
+    private Map<String, Object> mapa = new HashMap<>();
+
+    private ObservableList<RegistroAtributo> listaAtributo;
+
     public TablaRegistro(String titulo, String[] filas) {
-        Label lblTitulo = new Label(titulo);
+        lblTitulo = new Label(titulo);
         lblTitulo.setStyle("-fx-font-weight: bold;");
 
         TableView<RegistroAtributo> tableView = new TableView<>();
@@ -51,11 +58,11 @@ public class TablaRegistro extends VBox {
 
         tableView.getColumns().addAll(colElemento, colNormal, colAnormal, colNota);
 
-        ObservableList<RegistroAtributo> data = FXCollections.observableArrayList();
+        listaAtributo = FXCollections.observableArrayList();
         for (String f : filas) {
-            data.add(new RegistroAtributo(f));
+            listaAtributo.add(new RegistroAtributo(f));
         }
-        tableView.setItems(data);
+        tableView.setItems(listaAtributo);
         // Quitar espacio extra: 
         // Usamos -1 para que la tabla no tenga altura mínima extra
         tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
@@ -75,5 +82,22 @@ public class TablaRegistro extends VBox {
         this.setSpacing(5); // Espacio entre Label y Tabla
         this.getChildren().addAll(lblTitulo, tableView);
     }
-//    
+
+    public void crearMapa() {
+        mapa.clear();
+        for (RegistroAtributo r : listaAtributo) {
+            String estado = r.normalProperty().get() ? "NORMAL"
+                    : r.anormalProperty().get() ? "ANORMAL" : "SIN_EVALUAR";
+            Map<String, String> detalles = new HashMap<>();
+            detalles.put("estado", estado);
+            detalles.put("nota", r.notaProperty().get());
+            mapa.put(r.componenteProperty().get(), detalles);
+        }
+        mapa.put("tipo", lblTitulo);
+
+    }
+    
+    public Map<String, Object> getMapa() {
+        return mapa;
+    }
 }

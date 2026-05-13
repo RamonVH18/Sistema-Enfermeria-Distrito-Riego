@@ -42,7 +42,7 @@
 
     <HBox alignment="CENTER_RIGHT" spacing="15.0">
         <Button text="Cancelar" style="-fx-text-fill: #7F8C8D;" />
-        <Button fx:id="btnGuardarExpediente" text="Guardar Expediente" 
+        <Button fx:id="btnGuardarExpediente" text="Guardar Expediente" onAction="#guardarExpediente" 
                 style="-fx-background-color: #2C3E50; -fx-text-fill: white; -fx-font-weight: bold;" 
                 prefHeight="40.0" prefWidth="200.0" />
     </HBox>

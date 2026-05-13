@@ -1,10 +1,13 @@
 C:\Users\PC\Documents\GitHub\Sistema-Enfermeria-Distrito-Riego\ProyectoEnfermeria\PresentacionEnfermeria\src\main\java\com\mycompany\presentacionenfermeria\Main.java
 C:\Users\PC\Documents\GitHub\Sistema-Enfermeria-Distrito-Riego\ProyectoEnfermeria\PresentacionEnfermeria\src\main\java\response\SignosVitalesResponse.java
 C:\Users\PC\Documents\GitHub\Sistema-Enfermeria-Distrito-Riego\ProyectoEnfermeria\PresentacionEnfermeria\src\main\java\controladores\ReagendarCitaController.java
+C:\Users\PC\Documents\GitHub\Sistema-Enfermeria-Distrito-Riego\ProyectoEnfermeria\PresentacionEnfermeria\src\main\java\request\AntecedentesRequest.java
 C:\Users\PC\Documents\GitHub\Sistema-Enfermeria-Distrito-Riego\ProyectoEnfermeria\PresentacionEnfermeria\src\main\java\controladores\IniciarSesionController.java
 C:\Users\PC\Documents\GitHub\Sistema-Enfermeria-Distrito-Riego\ProyectoEnfermeria\PresentacionEnfermeria\src\main\java\response\DetalleResponse.java
+C:\Users\PC\Documents\GitHub\Sistema-Enfermeria-Distrito-Riego\ProyectoEnfermeria\PresentacionEnfermeria\src\main\java\response\AgregarExpedienteResponse.java
 C:\Users\PC\Documents\GitHub\Sistema-Enfermeria-Distrito-Riego\ProyectoEnfermeria\PresentacionEnfermeria\src\main\java\controladores\DetallesCitaController.java
 C:\Users\PC\Documents\GitHub\Sistema-Enfermeria-Distrito-Riego\ProyectoEnfermeria\PresentacionEnfermeria\src\main\java\com\mycompany\presentacionenfermeria\App.java
+C:\Users\PC\Documents\GitHub\Sistema-Enfermeria-Distrito-Riego\ProyectoEnfermeria\PresentacionEnfermeria\src\main\java\request\AtributosFisicosRequest.java
 C:\Users\PC\Documents\GitHub\Sistema-Enfermeria-Distrito-Riego\ProyectoEnfermeria\PresentacionEnfermeria\src\main\java\com\mycompany\presentacionenfermeria\PrimaryController.java
 C:\Users\PC\Documents\GitHub\Sistema-Enfermeria-Distrito-Riego\ProyectoEnfermeria\PresentacionEnfermeria\src\main\java\controladores\PantallaCitasController.java
 C:\Users\PC\Documents\GitHub\Sistema-Enfermeria-Distrito-Riego\ProyectoEnfermeria\PresentacionEnfermeria\src\main\java\utilerias\Utils.java
@@ -16,6 +19,7 @@ C:\Users\PC\Documents\GitHub\Sistema-Enfermeria-Distrito-Riego\ProyectoEnfermeri
 C:\Users\PC\Documents\GitHub\Sistema-Enfermeria-Distrito-Riego\ProyectoEnfermeria\PresentacionEnfermeria\src\main\java\response\UsuarioResponse.java
 C:\Users\PC\Documents\GitHub\Sistema-Enfermeria-Distrito-Riego\ProyectoEnfermeria\PresentacionEnfermeria\src\main\java\injector\ClienteApiInjector.java
 C:\Users\PC\Documents\GitHub\Sistema-Enfermeria-Distrito-Riego\ProyectoEnfermeria\PresentacionEnfermeria\src\main\java\controladores\ExpedientePacienteController.java
+C:\Users\PC\Documents\GitHub\Sistema-Enfermeria-Distrito-Riego\ProyectoEnfermeria\PresentacionEnfermeria\src\main\java\request\AgregarExpedienteRequest.java
 C:\Users\PC\Documents\GitHub\Sistema-Enfermeria-Distrito-Riego\ProyectoEnfermeria\PresentacionEnfermeria\src\main\java\response\EmpleadoOptionResponse.java
 C:\Users\PC\Documents\GitHub\Sistema-Enfermeria-Distrito-Riego\ProyectoEnfermeria\PresentacionEnfermeria\src\main\java\response\ReagendarCitaResponse.java
 C:\Users\PC\Documents\GitHub\Sistema-Enfermeria-Distrito-Riego\ProyectoEnfermeria\PresentacionEnfermeria\src\main\java\request\ReagendarCitaRequest.java
@@ -31,10 +35,14 @@ C:\Users\PC\Documents\GitHub\Sistema-Enfermeria-Distrito-Riego\ProyectoEnfermeri
 C:\Users\PC\Documents\GitHub\Sistema-Enfermeria-Distrito-Riego\ProyectoEnfermeria\PresentacionEnfermeria\src\main\java\controladores\InformesSaludController.java
 C:\Users\PC\Documents\GitHub\Sistema-Enfermeria-Distrito-Riego\ProyectoEnfermeria\PresentacionEnfermeria\src\main\java\response\AtributoFisicoResponse.java
 C:\Users\PC\Documents\GitHub\Sistema-Enfermeria-Distrito-Riego\ProyectoEnfermeria\PresentacionEnfermeria\src\main\java\response\ExpedienteConfigResponse.java
+C:\Users\PC\Documents\GitHub\Sistema-Enfermeria-Distrito-Riego\ProyectoEnfermeria\PresentacionEnfermeria\src\main\java\controladores\RegistroAntecedentesController.java
 C:\Users\PC\Documents\GitHub\Sistema-Enfermeria-Distrito-Riego\ProyectoEnfermeria\PresentacionEnfermeria\src\main\java\module-info.java
+C:\Users\PC\Documents\GitHub\Sistema-Enfermeria-Distrito-Riego\ProyectoEnfermeria\PresentacionEnfermeria\src\main\java\utilerias\RegistroAtributo.java
 C:\Users\PC\Documents\GitHub\Sistema-Enfermeria-Distrito-Riego\ProyectoEnfermeria\PresentacionEnfermeria\src\main\java\utilerias\ParentAware.java
 C:\Users\PC\Documents\GitHub\Sistema-Enfermeria-Distrito-Riego\ProyectoEnfermeria\PresentacionEnfermeria\src\main\java\response\CitaPendienteResponse.java
 C:\Users\PC\Documents\GitHub\Sistema-Enfermeria-Distrito-Riego\ProyectoEnfermeria\PresentacionEnfermeria\src\main\java\response\ExpedienteResponse.java
 C:\Users\PC\Documents\GitHub\Sistema-Enfermeria-Distrito-Riego\ProyectoEnfermeria\PresentacionEnfermeria\src\main\java\controladores\AgendarCitaController.java
 C:\Users\PC\Documents\GitHub\Sistema-Enfermeria-Distrito-Riego\ProyectoEnfermeria\PresentacionEnfermeria\src\main\java\controladores\OpcionesPacienteHistorialController.java
 C:\Users\PC\Documents\GitHub\Sistema-Enfermeria-Distrito-Riego\ProyectoEnfermeria\PresentacionEnfermeria\src\main\java\response\EmpleadoHistoricoResponse.java
+C:\Users\PC\Documents\GitHub\Sistema-Enfermeria-Distrito-Riego\ProyectoEnfermeria\PresentacionEnfermeria\src\main\java\utilerias\SesionExpedientes.java
+C:\Users\PC\Documents\GitHub\Sistema-Enfermeria-Distrito-Riego\ProyectoEnfermeria\PresentacionEnfermeria\src\main\java\utilerias\TablaRegistro.java

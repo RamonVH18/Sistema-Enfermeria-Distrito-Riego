@@ -22,8 +22,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.StringConverter;
+import request.AgregarExpedienteRequest;
 import request.AntecedentesRequest;
 import response.ExpedienteConfigResponse;
+import utilerias.SesionExpedientes;
 
 /**
  *
@@ -50,11 +52,15 @@ public class RegistroAntecedentesController implements Initializable{
 
     private ClienteApi clienteApi = new ClienteApi();
     private ExpedienteConfigResponse config;
+    private SesionExpedientes sesion;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         iniciarComboBoxes();
         iniciarTablaAntecedentes();
+        sesion = SesionExpedientes.getInstance();
+        sesion.inyectarControllerAntecedentes(this);
+        
     }
 
     
@@ -127,5 +133,13 @@ public class RegistroAntecedentesController implements Initializable{
         txtDescripcion.requestFocus();
     }
     
+    public AgregarExpedienteRequest obtenerDatos() {
+        AgregarExpedienteRequest agregarExpediente = new AgregarExpedienteRequest();
+        agregarExpediente.setAntecedentes(listaAntecedentes);
+        agregarExpediente.setNss(txtNss.getText());
+        agregarExpediente.setTipoSangre(cbTipoSangre.getValue());
+        agregarExpediente.setIdEmpleado(cbEmpleado.getValue().getIdEmpleado());
+        return agregarExpediente;
+    }
     
 }
