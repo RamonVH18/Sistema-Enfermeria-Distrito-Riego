@@ -28,8 +28,8 @@ public class MenuPrincipalController implements Initializable {
 
     private Parent panelPrincipal;
     private Parent panelCitas;
-    private Map<String, Node> pantallas = new HashMap<>();
-    private Map<String, Object> controladores = new HashMap<>();
+    private final Map<String, Node> pantallas = new HashMap<>();
+    private final Map<String, Object> controladores = new HashMap<>();
 
     /**
      * Initializes the controller class.

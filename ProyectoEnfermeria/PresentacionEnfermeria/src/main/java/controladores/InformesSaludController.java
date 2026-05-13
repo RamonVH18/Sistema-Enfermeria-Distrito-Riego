@@ -61,7 +61,7 @@ public class InformesSaludController implements Initializable {
                 contenedor.getChildren().add(imageView);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            mostrarAlerta("ERROR", "No pudo renderizarse el reporte. Comuníquese con su departamento de sistemas.", Alert.AlertType.ERROR);
         }
     }
 
@@ -75,14 +75,16 @@ public class InformesSaludController implements Initializable {
                     contenedorPaginas.setAlignment(Pos.CENTER);
                     contenedorPaginas.setSpacing(10);
                     contenedorPaginas.setPadding(new Insets(10));
+                    contenedorPaginas.setFillWidth(true);
 
                     ScrollPane scrollPane = new ScrollPane(contenedorPaginas);
                     scrollPane.setFitToWidth(true);
+                    scrollPane.setFitToHeight(true);
                     scrollPane.setStyle("-fx-background-color: #525659;");
 
                     renderizarPDF(contenedorPaginas, pdf);
                     Button btnGuardar = new Button("Guardar Reporte");
-                    btnGuardar.setStyle("-fx-font-size: 14px; -fx-cursor: hand;");
+                    btnGuardar.setStyle("-fx-font-size: 14px; -fx-cursor: hand; -fx-background-color: black; -fx-text-fill: white;");
                     btnGuardar.setOnAction(e -> guardarArchivo(pdf));
 
                     HBox topBar = new HBox(btnGuardar);
@@ -95,15 +97,11 @@ public class InformesSaludController implements Initializable {
                 });
             });
         } catch (Exception e) {
-            Alert alerta = new Alert(Alert.AlertType.ERROR);
-            alerta.setTitle("ERROR");
-            alerta.setContentText("Error: " + e.getMessage());
-            alerta.show();
+            mostrarAlerta("ERROR", "Error: " + e.getMessage(), Alert.AlertType.ERROR);
         }
     }
 
     private void guardarArchivo(byte[] pdf) {
-
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Guardar Reporte");
         // Filtro para que solo permita guardar como .pdf
@@ -127,5 +125,22 @@ public class InformesSaludController implements Initializable {
                 alerta.show();
             }
         }
+    }
+    
+    /**
+     * Metodo Auxiliar para mostrar una ventana
+     *
+     * @param titulo
+     * @param mensaje
+     * @param tipo
+     */
+    private void mostrarAlerta(String titulo, String mensaje, Alert.AlertType tipo) {
+        Platform.runLater(() -> {
+            Alert alerta = new Alert(tipo);
+            alerta.setTitle(titulo);
+            alerta.setHeaderText(null);
+            alerta.setContentText(mensaje);
+            alerta.showAndWait();
+       });
     }
 }

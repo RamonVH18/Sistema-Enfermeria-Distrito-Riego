@@ -42,6 +42,7 @@ public class PantallaCitasController implements Initializable {
     private final int CITAS_POR_PAGINA = 5;
 
     private List<CitaPendienteResponse> citasPendientes = new ArrayList<>();
+    
     private final ClienteApi cliente = new ClienteApi();
 
     /**
@@ -89,7 +90,6 @@ public class PantallaCitasController implements Initializable {
                 generarPaginador();
             });
         });
-
     }
 
     /**
@@ -98,9 +98,8 @@ public class PantallaCitasController implements Initializable {
      */
     public void generarPaginador() {
         Platform.runLater(() -> {
-
             paginadorCitas.setPageCount(0);
-            paginadorCitas.setPageFactory(null); // Limpia la fábrica anterior
+            paginadorCitas.setPageFactory(null);
 
             // Si no hay citas pendientes, entonces el paginador solo muestra un mensaje en medio
             if (citasPendientes == null || citasPendientes.isEmpty()) {
@@ -146,7 +145,6 @@ public class PantallaCitasController implements Initializable {
      * @return
      */
     private VBox crearCardIndividual(CitaPendienteResponse cita) {
-
         VBox card = new VBox(5);
         card.getStyleClass().add("cita-item-card");
         card.setStyle("-fx-background-color: white; -fx-border-color: #ddd; -fx-border-radius: 8; -fx-cursor: hand;");
@@ -168,7 +166,6 @@ public class PantallaCitasController implements Initializable {
             cargarDetalleCita(citaSeleccionada);
 
         });
-
         return card;
     }
 
@@ -197,7 +194,6 @@ public class PantallaCitasController implements Initializable {
 
         } catch (IOException e) {
             mostrarAlerta("Error", "Hubo un error al mostrar los detalles de esta cita. Contacte con Servicio Tecnico", Alert.AlertType.ERROR);
-            e.printStackTrace();
         }
     }
 
@@ -225,7 +221,8 @@ public class PantallaCitasController implements Initializable {
             stage.show();
 
         } catch (IOException e) {
-            mostrarAlerta("Error", "Hubo un error al abrir la pantalla de Nueva Cita. Contacte con Servicio Tecnico", Alert.AlertType.ERROR);
+            mostrarAlerta("Error", "Hubo un error al abrir la pantalla de Nueva Cita. Contacte con el departamento de sistemas.", Alert.AlertType.ERROR);
+            System.out.println(e.getMessage());
         }
     }
 

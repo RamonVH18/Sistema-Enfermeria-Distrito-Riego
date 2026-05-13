@@ -9,21 +9,24 @@
 
 <VBox fx:id="panelInformes" prefWidth="885.0" spacing="20.0" style="-fx-fill-width: true;" styleClass="report-container" stylesheets="@../styles/InformesSalud.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controladores.InformesSaludController">
     <children>
-        <VBox spacing="5.0" style="-fx-alignment: center-left; -fx-padding: 20; -fx-pref-height: 120px;" styleClass="titulo">
+        <VBox alignment="CENTER_LEFT" spacing="5.0" style="-fx-alignment: center-left; -fx-padding: 20;" styleClass="titulo" VBox.vgrow="NEVER">
             <children>
                 <Label styleClass="report-title" text="Reporte de Estado de Salud de Empleados" />
                 <Label style="-fx-wrap-text: true;" styleClass="report-subtitle" text="Haga click en el botón correspondiente para generar el reporte de salud de los empleados. En dicho reporte se podrá visualizar el estado actual de cada uno de los empleados del distrito." />
             </children>
             <padding>
-                <Insets bottom="10.0" left="20.0" right="20.0" top="20.0" />
+                <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
             </padding>
         </VBox>
-      <BorderPane id="pdfViewer" fx:id="pdfViewer" prefHeight="540.0" prefWidth="805.0" style="-fx-pref-height: 540px;" />
+        <BorderPane id="pdfViewer" fx:id="pdfViewer" style="-fx-pref-height: 540px;" VBox.vgrow="ALWAYS" />
         
-        <HBox alignment="CENTER" prefHeight="80.0" style="-fx-pref-height: 108px;">
+        <HBox alignment="CENTER" VBox.vgrow="NEVER">
             <children>
                 <Button fx:id="btnGenerarReporte" mnemonicParsing="false" onAction="#handleGenerarReporte" styleClass="generate-report-button" text="Generar Reporte" />
             </children>
+            <padding>
+                <Insets bottom="30.0" top="30.0" />
+            </padding>
         </HBox>
     </children>
 </VBox>

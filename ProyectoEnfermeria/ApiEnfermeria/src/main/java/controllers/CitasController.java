@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import request.ActualizarCitaRequest;
+import response.ActualizarCitaResponse;
 import response.CitaPendienteResponse;
 import response.CrearCitaResponse;
 
@@ -51,6 +53,12 @@ public class CitasController {
     @GetMapping("/{id}")
     public ResponseEntity<CitaDTO> obtenerPorId(@PathVariable Integer id) {
         return ResponseEntity.ok(servicioCitas.obtenerPorId(id));
+    }
+    
+    @PostMapping("/actualizar")
+    public ResponseEntity<ActualizarCitaResponse> reagendarCita(@RequestBody ActualizarCitaRequest request){
+        ActualizarCitaResponse response = servicioCitas.actualizar(request);
+        return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
     }
     
     @PatchMapping("/{id}/cancelar")

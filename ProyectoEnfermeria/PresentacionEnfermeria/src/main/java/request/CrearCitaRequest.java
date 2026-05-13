@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package request;
 
 import java.time.LocalDateTime;
@@ -52,5 +48,4 @@ public class CrearCitaRequest {
     public void setIdEmpleado(Integer idEmpleado) {this.idEmpleado = idEmpleado;}
 
     public void setIdEnfermero(Integer idEnfermero) {this.idEnfermero = idEnfermero;}
-
 }

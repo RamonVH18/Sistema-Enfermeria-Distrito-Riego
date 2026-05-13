@@ -32,7 +32,7 @@ public class ReportesController {
 
     @Autowired
     private IServicioExpedientes servicioExpediente;
-
+    
     @GetMapping("/salud")
     public void obtenerReporteSalud(HttpServletResponse response) throws IOException {
         response.setContentType("application/pdf");

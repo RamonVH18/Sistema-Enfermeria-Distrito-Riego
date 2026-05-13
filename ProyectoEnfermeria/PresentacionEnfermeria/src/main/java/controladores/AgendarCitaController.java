@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import request.CrearCitaRequest;
 import response.EmpleadoOptionResponse;
+import utilerias.HorarioEnfermero;
 
 /**
  *
@@ -34,9 +35,8 @@ public class AgendarCitaController implements Initializable {
     @FXML
     private TextArea txtDescripcion;
 
-    //CONSTANTES
-    private LocalTime HORA_INICIO = LocalTime.of(8, 0); // 8:00 AM
-    private LocalTime HORA_FIN = LocalTime.of(16, 0);   // 4:00 PM
+    private final LocalTime HORA_INICIO = HorarioEnfermero.HORA_INICIO;
+    private final LocalTime HORA_FIN = HorarioEnfermero.HORA_FIN;
 
     private ClienteApi cliente;
     private PantallaCitasController controller;
@@ -52,11 +52,11 @@ public class AgendarCitaController implements Initializable {
         cliente = new ClienteApi();
         crearComboBox();
 
-        while (HORA_INICIO.isBefore(HORA_FIN.plusSeconds(1))) {
-            cbHora.getItems().add(HORA_INICIO);
-            HORA_INICIO = HORA_INICIO.plusMinutes(15);
+        LocalTime hora = HORA_INICIO;
+        while (hora.isBefore(HORA_FIN)) {
+            cbHora.getItems().add(hora);
+            hora = hora.plusMinutes(15);
         }
-
     }
 
     /**
@@ -96,14 +96,14 @@ public class AgendarCitaController implements Initializable {
         cliente.buscarEmpleadosPorFiltro(filtro).thenAccept(lista -> {
             Platform.runLater(() -> {
                 TextField editor = cbPaciente.getEditor();
-                
+
                 String currentText = editor.getText();
-                
+
                 cbPaciente.getItems().setAll(lista);
-                
+
                 editor.setText(currentText);
                 editor.end();
-                
+
                 if (!lista.isEmpty() && !filtro.isEmpty()) {
                     cbPaciente.show();
                 } else if (filtro.isEmpty()) {
@@ -135,6 +135,11 @@ public class AgendarCitaController implements Initializable {
                         return null;
                     });
         }
+    }
+
+    @FXML
+    private void cancelar() {
+        cerrarVentana();
     }
 
     /**

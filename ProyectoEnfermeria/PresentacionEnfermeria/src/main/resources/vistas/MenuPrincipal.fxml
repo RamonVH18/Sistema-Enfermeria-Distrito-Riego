@@ -19,21 +19,21 @@
                         <Insets />
                     </VBox.margin>
                     <children>
-                          <ImageView id="imagen-logo" fitWidth="150.0" preserveRatio="true">
-                              <image>
-                                  <Image url="@../images/logo.png" />
-                              </image>
-                          </ImageView>
-                  <VBox alignment="CENTER">
-                     <children>
-                              <Label alignment="CENTER" contentDisplay="CENTER" styleClass="imagen-descripcion" text="Distrito de Riego del Río Yaqui" textAlignment="CENTER" textFill="WHITE" wrapText="true">
-                                  <font>
-                                      <Font name="System Italic" size="12.0" />
-                                  </font>
-                              </Label>
-                              <Label alignment="CENTER" styleClass="imagen-descripcion" text="Sistema de Enfermeria" wrapText="true" />
-                     </children>
-                  </VBox>
+                        <ImageView id="imagen-logo" fitWidth="150.0" preserveRatio="true">
+                            <image>
+                                <Image url="@../images/logo.png" />
+                            </image>
+                        </ImageView>
+                        <VBox alignment="CENTER">
+                            <children>
+                                <Label alignment="CENTER" contentDisplay="CENTER" styleClass="imagen-descripcion" text="Distrito de Riego del Río Yaqui" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                                    <font>
+                                        <Font name="System Italic" size="12.0" />
+                                    </font>
+                                </Label>
+                                <Label alignment="CENTER" styleClass="imagen-descripcion" text="Sistema de Enfermeria" wrapText="true" />
+                            </children>
+                        </VBox>
                     </children>
                 </VBox>
                 <VBox id="button-container" alignment="CENTER" spacing="30.0" VBox.vgrow="ALWAYS">
@@ -43,23 +43,23 @@
                         <Button fx:id="btnHistorialPacientes" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#mostrarHistorial" styleClass="menu-button" text="Historial de Pacientes" VBox.vgrow="ALWAYS" />
                         <Button fx:id="btnInformesSalud" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#mostrarInformes" styleClass="menu-button" text="Informes de Salud" VBox.vgrow="ALWAYS" />
                     </children>
-               <padding>
-                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-               </padding>
+                    <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                    </padding>
                 </VBox>
-            <VBox alignment="CENTER" spacing="20.0" VBox.vgrow="ALWAYS">
-               <children>
+                <VBox alignment="CENTER" spacing="20.0" VBox.vgrow="ALWAYS">
+                    <children>
                         <Label fx:id="lblNombreEnfermero" style="-fx-font-size: 125%;" text="Enfermero" textFill="WHITE">
                             <font>
                                 <Font name="Segoe UI" size="12.0" />
                             </font>
                         </Label>
                         <Button fx:id="btnInicioSesion" mnemonicParsing="false" onAction="#logout" style="-fx-border-width: 0;" styleClass="logout-button" text="Cerrar Sesión" />
-               </children>
-               <padding>
-                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-               </padding>
-            </VBox>
+                    </children>
+                    <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                    </padding>
+                </VBox>
             </children>
             <padding>
                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

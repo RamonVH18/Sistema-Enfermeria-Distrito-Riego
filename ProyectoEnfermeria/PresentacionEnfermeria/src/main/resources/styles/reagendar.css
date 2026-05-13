@@ -1,0 +1,43 @@
+#contenedor{
+    -fx-background-color: white;
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 5);
+    -fx-font-family:    "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#titulo{
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-padding: 0 0 20 0;
+}
+
+.label-titulo{
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-text-fill: #333333;
+}
+
+.label{
+    -fx-font-size: 14px;
+    -fx-text-fill: #333333;  
+}
+
+#fecha, #hora{
+    -fx-font-size:14px;
+}
+
+.btn{
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 10 30;
+    -fx-background-radius: 5;
+}
+
+#cancelar{
+    -fx-background-color: red;
+}
+
+#reagendar{
+    -fx-background-color: #0056b3;
+}

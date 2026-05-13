@@ -18,44 +18,44 @@
             </padding>
             
             <VBox fx:id="agendaCard" prefWidth="400.0" styleClass="agenda-card" HBox.hgrow="ALWAYS">
-            <HBox prefHeight="100.0" prefWidth="200.0" styleClass="calendar-card" VBox.vgrow="NEVER">
-               <children>
-                  <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="30.0" HBox.hgrow="ALWAYS">
-                     <children>
-                            <Label styleClass="calendar-month-title" text="Calendario" />
+                <HBox prefHeight="100.0" prefWidth="200.0" styleClass="calendar-card" VBox.vgrow="NEVER">
+                    <children>
+                        <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="30.0" HBox.hgrow="ALWAYS">
+                            <children>
+                                <Label styleClass="calendar-month-title" text="Calendario" />
                             
-                            <DatePicker fx:id="datePicker" editable="false" showWeekNumbers="true" styleClass="calendar-control" />
+                                <DatePicker fx:id="datePicker" editable="false" showWeekNumbers="true" styleClass="calendar-control" />
                             
-                                  <Button fx:id="btnReset" maxWidth="Infinity" onAction="#handleReset" styleClass="new-cita-button" text="Reiniciar" />
-                     </children>
-                  </HBox>
+                                <Button fx:id="btnReset" maxWidth="Infinity" onAction="#handleReset" styleClass="new-cita-button" text="Reiniciar" />
+                            </children>
+                        </HBox>
                       
-                      <HBox alignment="CENTER_LEFT" styleClass="agenda-footer" HBox.hgrow="NEVER">
-                          <Button id="nueva-cita-btn" fx:id="btnNuevaCita" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#handleNuevaCita" styleClass="new-cita-button" text="Nueva Cita" />
-                     <padding>
-                        <Insets left="30.0" right="30.0" />
-                     </padding>
-                      </HBox>
-               </children>
-               <padding>
-                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-               </padding>
-            </HBox>
-            <VBox prefHeight="200.0" prefWidth="100.0" spacing="30.0" VBox.vgrow="ALWAYS">
-               <children>
+                        <HBox alignment="CENTER_LEFT" styleClass="agenda-footer" HBox.hgrow="NEVER">
+                            <Button id="nueva-cita-btn" fx:id="btnNuevaCita" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#handleNuevaCita" styleClass="new-cita-button" text="Nueva Cita" />
+                            <padding>
+                                <Insets left="30.0" right="30.0" />
+                            </padding>
+                        </HBox>
+                    </children>
+                    <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                    </padding>
+                </HBox>
+                <VBox prefHeight="200.0" prefWidth="100.0" spacing="30.0" VBox.vgrow="ALWAYS">
+                    <children>
       
-                      <Label fx:id="lblFechaSeleccionada" styleClass="agenda-date-title" text="Citas pendientes:">
-                          <VBox.margin>
-                              <Insets bottom="10.0" />
-                          </VBox.margin>
-                      </Label>
+                        <Label fx:id="lblFechaSeleccionada" styleClass="agenda-date-title" text="Citas pendientes:">
+                            <VBox.margin>
+                                <Insets bottom="10.0" />
+                            </VBox.margin>
+                        </Label>
                       
-                      <Pagination fx:id="paginadorCitas" VBox.vgrow="ALWAYS" />
-               </children>
-               <padding>
-                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-               </padding>
-            </VBox>
+                        <Pagination fx:id="paginadorCitas" VBox.vgrow="ALWAYS" />
+                    </children>
+                    <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                    </padding>
+                </VBox>
             </VBox> 
         </HBox> 
     </StackPane> 
