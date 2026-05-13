@@ -27,6 +27,7 @@ response\EmpleadoHistoricoResponse.class
 clienteApi\ClienteApi$7.class
 response\CitaPendienteResponse.class
 response\CrearCitaResponse.class
+utilerias\TablaRegistro.class
 com\mycompany\presentacionenfermeria\App.class
 utilerias\HorarioEnfermero.class
 controladores\RegistroAntecedentesController$1.class
@@ -39,6 +40,7 @@ module-info.class
 response\SignosVitalesResponse.class
 controladores\ExpedientePacienteController.class
 com\mycompany\presentacionenfermeria\Main.class
+utilerias\RegistroAtributo.class
 com\mycompany\presentacionenfermeria\SecondaryController.class
 clienteApi\ClienteApi$1.class
 request\IniciarSesionRequest.class
