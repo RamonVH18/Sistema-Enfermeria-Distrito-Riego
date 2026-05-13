@@ -3,12 +3,13 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.Text?>
 
-<VBox spacing="20.0" style="-fx-background-color: #F8F9FA;" 
-      xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controladores.RegistrarExpedienteController">
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" 
+      fx:controller="controladores.RegistrarExpedienteController" 
+      style="-fx-background-color: #F8F9FA;" spacing="15.0">
+    
     <padding>
-        <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
 
     <HBox alignment="CENTER_LEFT" spacing="15.0">
@@ -20,58 +21,29 @@
 
     <Separator />
 
-    <VBox spacing="10.0" style="-fx-background-color: white; -fx-padding: 20; -fx-background-radius: 8; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 10, 0, 0, 5);">
-        <Label style="-fx-font-weight: bold; -fx-text-fill: #34495E;" text="Selección de Empleado" />
-        <ComboBox fx:id="cbEmpleado" maxWidth="Infinity" promptText="Buscar por nombre o número de empleado (Ej: 102 - Juan Pérez)" style="-fx-background-color: #FFFFFF; -fx-border-color: #DCDDE1; -fx-border-radius: 5;" />
-    </VBox>
+    <TabPane fx:id="mainTabPane" VBox.vgrow="ALWAYS" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+            <Tab text="Antecedentes">
+                <content>
+                    <fx:include source="/components/RegistroAntecedentes.fxml" />
+                </content>
+            </Tab>
 
-    <HBox spacing="20.0">
-        <VBox spacing="15.0" style="-fx-background-color: white; -fx-padding: 20; -fx-background-radius: 8; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 10, 0, 0, 5);" HBox.hgrow="ALWAYS">
-            <Label style="-fx-font-weight: bold; -fx-text-fill: #34495E;" text="Información General" />
-            <GridPane hgap="15.0" vgap="10.0">
-                <columnConstraints>
-                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                </columnConstraints>
-                <rowConstraints>
-                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    <RowConstraints minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
-                </rowConstraints>
-                <children>
-                    <Label text="Tipo de Sangre" />
-                    <Label text="NSS (Seguro Social)" GridPane.columnIndex="1" />
-                    <ComboBox fx:id="cbTipoSangre" maxWidth="Infinity" GridPane.rowIndex="1" />
-                    <TextField fx:id="txtNss" promptText="Ej: 75849775523" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                </children>
-            </GridPane>
-        </VBox>
-
-        <VBox spacing="15.0" style="-fx-background-color: white; -fx-padding: 20; -fx-background-radius: 8; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 10, 0, 0, 5);" HBox.hgrow="ALWAYS">
-            <Label style="-fx-font-weight: bold; -fx-text-fill: #34495E;" text="Nuevo Antecedente" />
-            <HBox spacing="10.0">
-                <ComboBox fx:id="cbTipoAntecedente" prefWidth="150.0" promptText="Tipo" />
-                <TextField fx:id="txtDescripcion" promptText="Descripción detallada..." HBox.hgrow="ALWAYS" />
-                <Button fx:id="btnAgregar" onAction="#handleAgregarAntecedente" style="-fx-background-color: #27AE60; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;" text="+ Agregar" />
-            </HBox>
-        </VBox>
-    </HBox>
-
-    <VBox spacing="10.0" VBox.vgrow="ALWAYS">
-        <Label style="-fx-font-weight: bold; -fx-text-fill: #34495E;" text="Historial Agregado para el Registro Actual" />
-        <TableView fx:id="tblAntecedentes" style="-fx-background-radius: 5; -fx-border-radius: 5;" VBox.vgrow="ALWAYS">
-            <columns>
-                <TableColumn fx:id="colTipo" prefWidth="200.0" text="Tipo de Antecedente" />
-                <TableColumn fx:id="colDescripcion" prefWidth="500.0" text="Descripción del Antecedente" />
-                <TableColumn fx:id="colAcciones" prefWidth="100.0" text="Acción" />
-            </columns>
-            <columnResizePolicy>
-                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-            </columnResizePolicy>
-        </TableView>
-    </VBox>
+            <Tab text="Exploración Física">
+                <content>
+                    <ScrollPane fitToWidth="true" style="-fx-background-color: transparent;">
+                        <VBox fx:id="contenedorExploracion" spacing="20" style="-fx-padding: 20;">
+                        </VBox>
+                    </ScrollPane>
+                </content>
+            </Tab>
+        </tabs>
+    </TabPane>
 
     <HBox alignment="CENTER_RIGHT" spacing="15.0">
-        <Button style="-fx-background-color: transparent; -fx-text-fill: #7F8C8D;" text="Cancelar" />
-        <Button fx:id="btnGuardarExpediente" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #2C3E50; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px; -fx-background-radius: 5; -fx-cursor: hand;" text="Guardar Expediente" />
+        <Button text="Cancelar" style="-fx-text-fill: #7F8C8D;" />
+        <Button fx:id="btnGuardarExpediente" text="Guardar Expediente" 
+                style="-fx-background-color: #2C3E50; -fx-text-fill: white; -fx-font-weight: bold;" 
+                prefHeight="40.0" prefWidth="200.0" />
     </HBox>
 </VBox>

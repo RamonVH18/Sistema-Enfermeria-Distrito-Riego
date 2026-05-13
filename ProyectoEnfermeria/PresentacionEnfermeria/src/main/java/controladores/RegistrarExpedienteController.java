@@ -6,100 +6,32 @@ package controladores;
 
 import clienteApi.ClienteApi;
 import dtos.EmpleadoSinExpedienteDTO;
+import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.util.StringConverter;
+
 
 /**
  *
  * @author Ramon Valencia
  */
 public class RegistrarExpedienteController implements Initializable {
-
-    @FXML
-    private ComboBox<EmpleadoSinExpedienteDTO> cbEmpleado;
-    private ComboBox<String> cbTipoSangre, cbTipoAntecedente;
-    @FXML
-    private TextField txtNss, txtDescripcion;
-    @FXML
-    private Button btnAgregar, btnGuardarExpediente;
-    @FXML
-    private TableView tblAntecedentes;
-    @FXML
-    private TableColumn colTipo, colDescripcion, colAcciones;
-
-    private ClienteApi clienteApi = new ClienteApi();
+    
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        iniciarComboBoxes();
+
     }
 
-    private void iniciarComboBoxes() {
-        clienteApi.obtenerInfoConfiguracionExpediente().thenAccept(info -> {
-        Platform.runLater(() -> {
-            // 1. Cargamos los items
-            cbEmpleado.setItems(FXCollections.observableArrayList(info.getEmpleado()));
 
-            // 2. Configuramos el conversor
-            cbEmpleado.setConverter(new StringConverter<EmpleadoSinExpedienteDTO>() {
-                @Override
-                public String toString(EmpleadoSinExpedienteDTO empleado) {
-                    return (empleado != null) ? empleado.getNombreEmpleado() : "";
-                }
-
-                @Override
-                public EmpleadoSinExpedienteDTO fromString(String string) {
-                    // Corregido: antes decía EmpleadoSinExpedienteDTODTO
-                    return null; 
-                }
-            });
-            
-            cbTipoSangre.setItems(FXCollections.observableArrayList(info.getTiposSangre()));
-            
-            cbTipoAntecedente.setItems(FXCollections.observableArrayList(info.getAntecedentes().keySet()));
-        });
-    }).exceptionally(ex -> {
-        // Tip: Siempre maneja el error si el API falla para que no se quede la pantalla "congelada"
-        ex.printStackTrace();
-        return null;
-    });
-    }
-
-    @FXML
-    private void handleAgregarAntecedente() {
-//        String tipo = cbTipoAntecedente.getValue();
-//        String desc = txtDescripcion.getText().trim();
-//
-//        // 1. Validar campos obligatorios
-//        if (tipo == null || desc.isEmpty()) {
-//            mostrarAlerta("Campos incompletos", "Por favor seleccione un tipo y escriba una descripción.");
-//            return;
-//        }
-//
-//        // 2. Validar duplicados (UX)
-//        boolean duplicado = listaObservable.stream()
-//                .anyMatch(a -> a.getTipo().equals(tipo) && a.getDescripcion().equalsIgnoreCase(desc));
-//
-//        if (duplicado) {
-//            mostrarAlerta("Dato duplicado", "Este antecedente ya ha sido agregado a la lista inferior.");
-//            return;
-//        }
-//
-//        // 3. Agregar a la tabla
-//        listaObservable.add(new AntecedenteDTO(tipo, desc));
-//
-//        // 4. Limpiar campos para nueva entrada rápida
-//        txtDescripcion.clear();
-//        txtDescripcion.requestFocus();
-    }
 }
